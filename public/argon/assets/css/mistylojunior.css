@@ -1,0 +1,21 @@
+.caja{
+    margin-bottom: 10px ;
+    height:100%;
+    width:100%;
+    border:2px solid black;
+
+}
+
+.contenido{
+	padding: 0px 5px 15px 5px;
+    width: 80px;
+    font-size:15px;
+    margin-top:-22px !important;
+    margin-left:7px;
+    background:white;
+}
+
+.cent-ico-radio{
+    padding: 10px 15px 15px !important
+}
+
