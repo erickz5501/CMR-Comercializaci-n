@@ -3,61 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\ClientesModel;
 
 class ClientesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
-    {
-        return view('listas.clientes');
+    {   
+        $clientes = ClientesModel::all();
+        //dd($cliente);
+        return view('listas.clientes', compact('clientes'));
     }
-    public function interesados()
-    {
-        return view('listas.lista_interesados');
+    public function detalle_cliente($id_cliente){
+        $det_cliente = ClientesModel::where('idclientes', $id_cliente)->first();
+
+        return view('componentes.clientes.modal_detalle_cliente', compact('det_cliente'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function interesados(){
+        $interesados = ClientesModel::all();
+        return view('listas.lista_interesados', compact('interesados'));
+    }
+    public function detalle_interesado($id_interesado){
+        $det_interesado = ClientesModel::where('idclientes', $id_interesado)->first();
+        //dd($det_interesado);
+        return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
+    }
+    
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //

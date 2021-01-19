@@ -11,138 +11,143 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button"href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle"></i> Agregar Cliente</a>
+            <a type="button"href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModal"><i class="fas fa-plus-circle"></i> Agregar Cliente</a>
         </div>
         </div>
     </div>
 
     <!-- ================================= MODAL ================================= -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-                        <div class="modal-content">
-                        <!-- ================================= MODAL TITULO ================================= -->
-                        <div class="modal-header">
-                            <center style="text-align: -webkit-center !important;">
-                            <h5 class="modal-title" id="exampleModalLabel">Agregar cliente</h5>
-                            </center>
+    <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal" role="document" id="cliente_modal">
+            <!-- Contenido del modal /  -->
+        </div>
+    </div>
+    <!-- FIN-MODAL -->
 
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+     <!-- ================================= MODAL Registro ================================= -->
+     <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+          <div class="modal-content">
+            <!-- ================================= MODAL TITULO ================================= -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                        <!-- ================================= MODAL CUERPO ================================= -->
-                        <div class="modal-body">
-                            <div class="row col-12">
-                                <div class="card-body mb-12 col-12">
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="nombre_razon_social_input">Nombres/Razon social</label>
-                                                <input type="text" class="form-control" id="nombre_razon_social_input" placeholder="Erick">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="nombre_comercial_input">Apellidos/Nombre comercial</label>
-                                                <input type="text" class="form-control" id="nombre_comercial_input" placeholder="Zumaeta">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="tipoPersonaSelect">Giro de negocio</label>
-                                                <select class="form-control" id="tipoPersonaSelect">
-                                                <option>Ventas</option>
-                                                <option>Empresa</option>
-                                                <option>Otro</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="tipoPersonaSelect">Tipo persona</label>
-                                                <select class="form-control" id="tipoPersonaSelect">
-                                                <option>Natural</option>
-                                                <option>Juridica</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="tipodocSelect">Tipo documento</label>
-                                                <select class="form-control" id="tipodocSelect">
-                                                <option>DNI</option>
-                                                <option>RUC</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="numDocumentoInput">Numero documento</label>
-                                                <input type="number" class="form-control" id="numDocumentoInput" placeholder="76858587">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput1">Correo 1 </label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput2">Correo 2 </label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example2.com">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlInput3">Correo 3 </label>
-                                                <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example3.com">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="number-empresa-input">Telefono empresa</label>
-                                                <input class="form-control" type="number" value="987654321" id="number-empresa-input">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="number-contacto-input">Telefono contacto</label>
-                                                <input class="form-control" type="number" value="987654321" id="number-contacto-input">
-                                            </div>
-                                        </div>
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <label for="number-otro-input">Telefono otro</label>
-                                                <input class="form-control" type="number" value="987654321" id="number-otro-input">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </div>               
+            <!-- ================================= MODAL CUERPO ================================= -->
+            <div class="modal-body">
+                <div class="row col-12">
+                    <div class="card-body mb-12 col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="nombre_razon_social_input">Nombres/Razon social</label>
+                                    <input type="text" class="form-control" id="nombre_razon_social_input" placeholder="Erick">
+                                </div>
                             </div>
-                            <!-- ================================= FIN-CUADRO-BRODER ================================= -->
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="nombre_comercial_input">Apellidos/Nombre comercial</label>
+                                    <input type="text" class="form-control" id="nombre_comercial_input" placeholder="Zumaeta">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="tipoPersonaSelect">Giro de negocio</label>
+                                    <select class="form-control" id="tipoPersonaSelect">
+                                    <option>Ventas</option>
+                                    <option>Empresa</option>
+                                    <option>Otro</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <!-- FIN-MODAL-BODY -->
+                    
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="tipoPersonaSelect">Tipo persona</label>
+                                    <select class="form-control" id="tipoPersonaSelect">
+                                    <option>Natural</option>
+                                    <option>Juridica</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="tipodocSelect">Tipo documento</label>
+                                    <select class="form-control" id="tipodocSelect">
+                                    <option>DNI</option>
+                                    <option>RUC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="numDocumentoInput">Numero documento</label>
+                                    <input type="number" class="form-control" id="numDocumentoInput" placeholder="76858587">
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Correo 1 </label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput2">Correo 2 </label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example2.com">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput3">Correo 3 </label>
+                                    <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example3.com">
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="number-empresa-input">Telefono empresa</label>
+                                    <input class="form-control" type="number" value="987654321" id="number-empresa-input">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="number-contacto-input">Telefono contacto</label>
+                                    <input class="form-control" type="number" value="987654321" id="number-contacto-input">
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="number-otro-input">Telefono otro</label>
+                                    <input class="form-control" type="number" value="987654321" id="number-otro-input">
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div> 
+                </div>
+              <!-- ================================= FIN-CUADRO-BRODER ================================= -->
+            </div>
+            <!-- FIN-MODAL-BODY -->
 
-                        <!-- MODAL FOOTER -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary">Guardar producto</button>
-                        </div>
-                        <!-- FIN-MODAL-FOOTER -->
-                        </div>
-                    </div>
+            <!-- MODAL FOOTER -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Guardar producto</button>
+            </div>
+            <!-- FIN-MODAL-FOOTER -->
+          </div>
+        </div>
     </div>
     <!-- FIN-MODAL -->
 
@@ -160,100 +165,32 @@
                     </tr>
                 </thead>
                 <tbody class="list">
-                    <tr>
-                        <td>Natural</td>
-                        <td>Erick Daniel</td>
-                        <td>Zumaeta Diaz</td>
-                        <td>923666379</td>
-                        <td>erick@gmail</td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
 
-                    <tr>
-                        <td>Natural</td>
-                        <td>Samir Fabian</td>
-                        <td>Zumaeta Diaz</td>
-                        <td>923666379</td>
-                        <td>samir@gmail</td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td>Natural</td>
-                        <td>Zujey Merly</td>
-                        <td>Zumaeta Diaz</td>
-                        <td>923666379</td>
-                        <td>zujey@gmail.com</td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td>Natural</td>
-                        <td>Alicia Marisol</td>
-                        <td>Diaz Espejo</td>
-                        <td>923666379</td>
-                        <td>alicia@gmail.com</td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td>Natural</td>
-                        <td>Roque Pasion</td>
-                        <td>Zumaeta Marin</td>
-                        <td>923666379</td>
-                        <td>roque@gmail.com</td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
+                    @forelse ($clientes as $cliente)
+                    @if($cliente->tipo_persona == 2)
+                        <tr>
+                            <td>{{ $cliente->tipo_documento}}</td>
+                            <td>{{ $cliente->nombres_razon_social}}</td>
+                            <td>{{ $cliente->apellidos_nombre_comercial}}</td>
+                            <td>{{ $cliente->telefono_empresa}}</td>
+                            <td>{{ $cliente->correo_1}}</td>
+                            <td>
+                                <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
+                                    <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
+                                </button>
+                                <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >
+                                    <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+                                </button>
+                                <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
+                                    <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
+                                </button>
+                            </td>
+                        </tr>
+                    @endif
+                        
+                    @empty
+                        
+                    @endforelse
                     <tr class='noSearch hide'>
                         <td colspan="5"></td>
                     </tr>
@@ -266,6 +203,7 @@
     <div class="card-footer py-4">
 
     </div>
+
 @endsection
 
 <script language="javascript">
@@ -316,6 +254,10 @@
         }
     }
 </script>
+
+@section('js')
+    <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
+@endsection
 
 <style>
     #datos tr.noSearch {background:White;font-size:0.8em;}

@@ -46,9 +46,11 @@ Route::get('/dashboard', "DashboardController@index")
 
 Route::get('/dashboard/listas/interesados', "ClientesController@interesados")
             ->name('listas.lista_interesados');
+Route::get('/dashboard/listas/interesados/{id_interesado}', "ClientesController@detalle_interesado");
 
 Route::get('/dashboard/listas/clientes', "ClientesController@index")
-            ->name('listas.clientes');
+            ->name('clientes');
+Route::get('/dashboard/listas/clientes/{id_cliente}', "ClientesController@detalle_cliente");
 
 Route::get('/dashboard/listas/historial', "HistorialController@index")
             ->name('listas/historial');

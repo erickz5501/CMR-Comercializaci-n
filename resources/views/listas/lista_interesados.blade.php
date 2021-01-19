@@ -12,23 +12,28 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
+            <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModal"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
         </div>
         </div>
     </div>
 
     <!-- ================================= MODAL ================================= -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ModalDetalleInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal" role="document" id="interesado_modal">
+            
+        </div>
+    </div>
+    <!-- FIN-MODAL -->
+
+     <!-- ================================= MODAL Registro ================================= -->
+     <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-            <div class="modal-content">
+          <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
-                <center style="text-align: -webkit-center !important;">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar interesado</h5>
-                </center>
-
+                <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
@@ -60,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -87,7 +92,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -108,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
@@ -129,19 +134,20 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        
+                    </div> 
                 </div>
-                <!-- ================================= FIN-CUADRO-BRODER ================================= -->
+              <!-- ================================= FIN-CUADRO-BRODER ================================= -->
             </div>
             <!-- FIN-MODAL-BODY -->
 
             <!-- MODAL FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar producto</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-primary">Guardar producto</button>
             </div>
             <!-- FIN-MODAL-FOOTER -->
-            </div>
+          </div>
         </div>
     </div>
     <!-- FIN-MODAL -->
@@ -151,144 +157,40 @@
             <table class="table align-items-center" id="datos">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col" class="sort" data-sort="budget">Budget</th>
-                        <th scope="col" class="sort" data-sort="status">Status</th>
-                        <th scope="col" class="sort" data-sort="completion">Completion</th>
-                        <th scope="col">Opciones</th>
+                        <th>Tipo Persona</th>
+                        <th>Nombre/Razon Social</th>
+                        <th>Apellidos/Nombre comercial</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody class="list">
-                    <tr>
-                        <td class="budget">
-                            Erick
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <i class="bg-info"></i>
-                                <span class="status">on schedule</span>
-                            </span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="completion mr-2">90%</span>
-                                <div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td class="budget">
-                            Samir
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <i class="bg-info"></i>
-                                <span class="status">on schedule</span>
-                            </span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="completion mr-2">90%</span>
-                                <div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td class="budget">
-                            Roque
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <i class="bg-info"></i>
-                                <span class="status">on schedule</span>
-                            </span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="completion mr-2">90%</span>
-                                <div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
-
-                    <tr>
-                        <td class="budget">
-                            Marisol
-                        </td>
-                        <td>
-                            <span class="badge badge-dot mr-4">
-                                <i class="bg-info"></i>
-                                <span class="status">on schedule</span>
-                            </span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="completion mr-2">90%</span>
-                                <div>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                            </button>
-                            <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                            </button>
-                        </td>   
-                    </tr>
+                    @forelse ($interesados as $interesado)
+                    @if($interesado->tipo_persona == 1)
+                        <tr>
+                            <td>{{ $interesado->tipo_documento}}</td>
+                            <td>{{ $interesado->nombres_razon_social}}</td>
+                            <td>{{ $interesado->apellidos_nombre_comercial}}</td>
+                            <td>{{ $interesado->telefono_empresa}}</td>
+                            <td>{{ $interesado->correo_1}}</td>
+                            <td>
+                                <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
+                                    <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
+                                </button>
+                                <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal_interesado({{ $interesado->idclientes }})" >
+                                    <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+                                </button>
+                                <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
+                                    <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
+                                </button>
+                            </td>
+                        </tr>
+                    @endif
+                        
+                    @empty
+                        
+                    @endforelse
 
                     <tr class='noSearch hide'>
                         <td colspan="5"></td>
@@ -354,6 +256,10 @@
         }
     }
 </script>
+
+@section('js')
+    <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
+@endsection
 
 <style>
     #datos tr.noSearch {background:White;font-size:0.8em;}
