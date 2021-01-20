@@ -162,6 +162,7 @@
                         <th>Apellidos/Nombre comercial</th>
                         <th>Telefono</th>
                         <th>Correo</th>
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -174,6 +175,7 @@
                             <td>{{ $interesado->apellidos_nombre_comercial}}</td>
                             <td>{{ $interesado->telefono_empresa}}</td>
                             <td>{{ $interesado->correo_1}}</td>
+                            <td>activo</td>
                             <td>
                                 <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
                                     <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
@@ -181,7 +183,7 @@
                                 <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal_interesado({{ $interesado->idclientes }})" >
                                     <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                                 </button>
-                                <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
+                                <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="confirm">
                                     <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
                                 </button>
                             </td>

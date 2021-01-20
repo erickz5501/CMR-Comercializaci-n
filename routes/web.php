@@ -44,13 +44,27 @@ Route::redirect('/login', '/main');
 Route::get('/dashboard', "DashboardController@index")
             ->name('dashboard.dashboard');
 
+// ........... ::: RUTA LISTAR INTERESADOS :::: .....................
 Route::get('/dashboard/listas/interesados', "ClientesController@interesados")
             ->name('listas.lista_interesados');
 Route::get('/dashboard/listas/interesados/{id_interesado}', "ClientesController@detalle_interesado");
 
+// .......... ::::: RUTA LISTAR CLIENTES ::: .............
 Route::get('/dashboard/listas/clientes', "ClientesController@index")
             ->name('clientes');
+Route::get('/dashboard/listas/clientes/lista', "ClientesController@indexLista");
 Route::get('/dashboard/listas/clientes/{id_cliente}', "ClientesController@detalle_cliente");
+
+// .......... ::::: RUTA GUARDAR CLIENTES ::: .............
+Route::post('/dashboard/guardar/clientes', 'ClientesController@create');
 
 Route::get('/dashboard/listas/historial', "HistorialController@index")
             ->name('listas/historial');
+// ........... ::::: LISTAR GIRO DE NEGOCIO :::::...............
+Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");
+
+// // ........... ::::: LISTAR TIPO PERSONA :::::...............
+// Route::get('/dashboard/listas/tipopersona', "GiroNegocioController@index");
+
+// // ........... ::::: LISTAR TIPO DOCUMENTO :::::...............
+// Route::get('/dashboard/listas/tipodoc', "GiroNegocioController@index");

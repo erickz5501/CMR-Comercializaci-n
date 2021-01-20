@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\GiroNegocioModel;
 
 class GiroNegocioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $g_negocio = GiroNegocioModel::get();
+
+        return json_encode($g_negocio);
     }
 
     /**
