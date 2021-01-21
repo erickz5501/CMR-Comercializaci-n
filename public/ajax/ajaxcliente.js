@@ -1,15 +1,17 @@
 function init(){
     lista_clientes();
-
+    // ..................... .::::: DATOS DEL FORMULARIO PARA "EDITAR O AGREGAR" ::::::::. .............
     $("#formulario_cliente").on("submit", function(e) {
         guardar_cliente(e);
     });
 
+    // ...................... .:::: LISTAR SELECT 2 "GIRO DE NEGOCIO" ::::. ......................
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
     // lista_select2('/dashboard/listas/tipopersona', 'tipoPersona', null);
     // lista_select2('/dashboard/listas/tipodoc', 'tipoDocumento', null);
 }
 
+// ......................... :::: GUARDAR Y EDITAR "CLIENTE" :::::: .............................
 function guardar_cliente(e) {
 
     crud_guardar_editar(
@@ -25,7 +27,7 @@ function guardar_cliente(e) {
 }
 
 
-// Funciones para mostar los modals //
+// .................. :::: Funciones para "mostar" los modals :::: ....................
 function mostrar_modal(id){
     $("#ModalDetalle").modal('show');
 
@@ -41,9 +43,9 @@ function mostrar_modal_interesado(id){
         $("#interesado_modal").html(data);
     });
 }
-// .........................//
 
-function limpiar_cliente(){ //Para limipar los campos despues de registrar un cliente
+// ......................... ::::::: LIMPIAR FORMULARIO CLIENTE :::::: ..............................
+function limpiar_cliente(){ //Para limpIar los campos despues de registrar un cliente
     $('#nombre_razon_social_input').val();
     $('#nombre_comercial_input').val();
     $('#select_modal_tipoPersona').val();
@@ -57,37 +59,19 @@ function limpiar_cliente(){ //Para limipar los campos despues de registrar un cl
     $('#number_otro_input').val();
 }
 
+// ............................. ::::::: LISTAR TABLA CLIENTES ::::::: .................................
 function lista_clientes(){
     $.get('/dashboard/listas/clientes/lista', function (data){
         $("#lista_clientes").html(data);
     });
 }
 
-function desactivar_cliente(){
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Desactivado!',
-            'Your file has been deleted.',
-            'success'
-          )
-        }else{
-            Swal.fire(
-                'Cancelado!',
-                'Se cancelo esta accion',
-                'error'
-            )
-        }
-      })
-    
+function desactivar_cliente(idclientes) {
+    crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes() }, function(){ console.log('Eror') });
+}
+
+function activar_cliente(idclientes) {
+    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_clientes() }, function(){ console.log('Eror') });
 }
 
 init();

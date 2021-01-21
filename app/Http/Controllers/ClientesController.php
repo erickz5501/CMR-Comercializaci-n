@@ -10,12 +10,12 @@ use App\Http\Requests\UserGeneralRequest;
 class ClientesController extends Controller
 {
     public function index()
-    {   
+    {
         //dd($cliente);
         return view('listas.clientes');
     }
     public function indexLista()
-    {   
+    {
         $clientes = ClientesModel::where('tipo_persona', 2)->get();
         //dd($cliente);
         return view('componentes.clientes.tabla_cliente', compact('clientes'));
@@ -35,7 +35,7 @@ class ClientesController extends Controller
         //dd($det_interesado);
         return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
     }
-    
+
     public function create(UserGeneralRequest $request)
     {
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
@@ -50,44 +50,47 @@ class ClientesController extends Controller
         $number_empresa_input           = $request->input('number_empresa_input');
         $number_contacto_input          = $request->input('number_contacto_input');
         $number_otro_input              = $request->input('number_otro_input');
-        
+
         //dd($number_otro_input);
     //     $todo =[
-    //     'tipo_documento' => $tipoDocSelect, 
-    //     'nro_documento' => $numDocumentoInput, 
-    //     'nombres_razon_social' => $nombre_razon_social_input, 
+    //     'tipo_documento' => $tipoDocSelect,
+    //     'nro_documento' => $numDocumentoInput,
+    //     'nombres_razon_social' => $nombre_razon_social_input,
     //     'apellidos_nombre_comercial' => $nombre_comercial_input,
     //     'correo_1' => $InputCorreo1,
     //     'correo_2' => $InputCorreo2,
-    //     'correo_3' => $InputCorreo3, 
-    //     'telefono_empresa' => $number_empresa_input, 
-    //     'telefono_contacto' => $number_contacto_input, 
-    //     'telefono_otro' => $number_otro_input, 
+    //     'correo_3' => $InputCorreo3,
+    //     'telefono_empresa' => $number_empresa_input,
+    //     'telefono_contacto' => $number_contacto_input,
+    //     'telefono_otro' => $number_otro_input,
     //     'idgiro_negocio' => $GiroNegocioSelect,
     //     'tipo_persona' => $tipoPersonaSelect
     // ];
         // return json_encode($todo);
 
         $usuario = ClientesModel::create(
-            ['tipo_documento' => $tipoDocSelect, 
-            'nro_documento' => $numDocumentoInput, 
-            'nombres_razon_social' => $nombre_razon_social_input, 
+            ['tipo_documento' => $tipoDocSelect,
+            'nro_documento' => $numDocumentoInput,
+            'nombres_razon_social' => $nombre_razon_social_input,
             'apellidos_nombre_comercial' => $nombre_comercial_input,
             'correo_1' => $InputCorreo1,
             'correo_2' => $InputCorreo2,
-            'correo_3' => $InputCorreo3, 
-            'telefono_empresa' => $number_empresa_input, 
-            'telefono_contacto' => $number_contacto_input, 
-            'telefono_otro' => $number_otro_input, 
+            'correo_3' => $InputCorreo3,
+            'telefono_empresa' => $number_empresa_input,
+            'telefono_contacto' => $number_contacto_input,
+            'telefono_otro' => $number_otro_input,
             'idgiro_negocio' => $GiroNegocioSelect,
             'tipo_persona' => $tipoPersonaSelect
             ]);
             return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
     }
-    
-    public function edit($id)
+
+    public function editar_cliente($idcliente)
     {
-        //
+        // $clientes = ClientesModel::where('tipo_persona', 2)->get();
+        $usuario = ClientesModel::where('idcliente', $idcliente)->get();
+        return json_encode(['total' => count($usuario), 'cliente' => $usuario]);
+        // return json_encode(['horarios' => $horarios]);
     }
 
     public function update(Request $request, $id)
@@ -98,5 +101,22 @@ class ClientesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function desactivar($idclientes)
+    {
+        $usuario = ClientesModel::where('idclientes', $idclientes)->first();
+        $usuario->estado = 1;
+        $usuario->save();
+        return json_encode(['status' => true, 'message' => 'Se ha desactivado el Cliente']);
+    }
+
+    public function activar($idclientes)
+    {
+        $usuario = ClientesModel::where('idclientes', $idclientes)->first();
+        $usuario->estado = 0;
+        $usuario->save();
+        return json_encode(['status' => true, 'message' => 'Se ha desactivado el Cliente']);
+
     }
 }
