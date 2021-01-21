@@ -71,6 +71,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
         }
     });
     $("#registroModal").modal('hide');
+    lista_clientes();
 }
 
 
@@ -83,9 +84,11 @@ function lista_select2(url, nombre_modulo, id) {
         $.each(data, function (i, item) {
 
             var option = '<option  value="' + item.idgiro_negocio + '">' + item.nombre + '</option>';
-            $('#select_modal_' + nombre_modulo).append(option);
 
+            $('#select_modal_' + nombre_modulo).append(option);
         });
+
+
 
         if (id) {
             $("#select_modal_" + nombre_modulo).val(id).trigger('change');
@@ -104,4 +107,90 @@ function sw_success(txt = 'Exito', timer = 2000) {
         timer: timer,
         icon: "success"
     });
+}
+function sw_cancelar(txt = 'Se canceló', timer = 2000) {
+    Swal.fire({
+        title: txt,
+        // text: txt,
+        timer: timer,
+        icon: "info"
+    });
+}
+
+function sw_error(txt = 'Error', timer = 2000) {
+    Swal.fire({
+        title: "Error",
+        text: txt,
+        timer: timer,
+        icon: "error"
+    });
+}
+// ............................ :::::::: DESACTIVAR CLIENTE :::::::: ................................
+function crud_desactivar(url, callback_true, callback_false) {
+    Swal.fire({
+            title: "¿Deseas desactivar este registro?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f34770",
+            confirmButtonText: "Si, desactivar",
+            cancelButtonText: "No, cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+    }).then((result) => {
+        if (result.value) {
+            $.get(url, function (data, status) {
+                data = JSON.parse(data);
+                if (data.status) {
+                    sw_success("Se desactivó");
+                    if (callback_true) {
+                        callback_true();
+                    }
+                } else {
+                    sw_error("Error en desactivar");
+                    if (callback_false) {
+                        callback_false();
+                    }
+                }
+
+            });
+
+        }else if ( result.dismiss ) {
+            sw_cancelar();
+        }
+    });
+}
+
+// ........................... :::::: ACTIVAR CLIENTE ::::::: .........................
+function crud_activar(url, callback_true, callback_false) {
+    Swal.fire({
+        title: "¿Deseas activar este registro?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#42d697",
+        // cancelButtonColor: "#f34770",
+        confirmButtonText: "Si, activar",
+        cancelButtonText: "No, cancelar",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }).then((result) => {
+        if (result.value) {
+            $.get(url, function (data, status) {
+                data = JSON.parse(data);
+                if (data.status) {
+                    sw_success("Se desactivó");
+                    if (callback_true) {
+                        callback_true();
+                    }
+                } else {
+                    sw_error("Error en desactivar");
+                    if (callback_false) {
+                        callback_false();
+                    }
+                }
+
+            });
+        }else if ( result.dismiss ) {
+            sw_cancelar();
+        }
+    })
 }
