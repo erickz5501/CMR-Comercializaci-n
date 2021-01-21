@@ -179,8 +179,7 @@
 @endsection
 
 <script language="javascript">
-    function doSearch()
-    {
+    function doSearch(){
         const tableReg = document.getElementById('datos');
         const searchText = document.getElementById('searchTerm').value.toLowerCase();
         let total = 0;
