@@ -46,8 +46,15 @@ Route::get('/dashboard', "DashboardController@index")
 
 // ........... ::: RUTA LISTAR INTERESADOS :::: .....................
 Route::get('/dashboard/listas/interesados', "ClientesController@interesados")
-            ->name('listas.lista_interesados');
+            ->name('interesados');
+Route::get('/dashboard/listas/interesados/lista', "ClientesController@indexListaInteresado");
 Route::get('/dashboard/listas/interesados/{id_interesado}', "ClientesController@detalle_interesado");
+
+// .......... ::::: RUTA GUARDAR INTERESADOS ::: .............
+Route::post('/dashboard/guardar/interesados', 'ClientesController@createInteresados');
+
+// ........... ::::: DESACTIVAR INTERESADO :::::...............
+Route::get('/dashboard/interesado/desactivar/{idclientes}', "ClientesController@desactivarInteresado");
 
 // .......... ::::: RUTA LISTAR CLIENTES ::: .............
 Route::get('/dashboard/listas/clientes', "ClientesController@index")

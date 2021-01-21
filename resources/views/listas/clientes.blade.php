@@ -6,9 +6,6 @@
                 <input class="form-control" placeholder="Buscar cliente..." type="text" id="searchTerm" onkeyup="doSearch()" />
             </form>
         </div>
-        <div class="col-4 text-right">
-            <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModal"><i class="fas fa-plus-circle"></i> Agregar Cliente</a>
-        </div>
     </div>
 </div>
 
@@ -213,6 +210,11 @@
                 </tr>
             </thead>
             <tbody class="list" id="lista_clientes"></tbody>
+            <tfoot>
+                <div class="col-md-12 text-center">
+                    <ul class="pagination pagination-lg pager" id="clientes_page"></ul>
+                </div>
+            </tfoot>
         </table>
     </div>
 </div>
@@ -270,6 +272,7 @@
 </script>
 
 @section('js')
+<script src="{{ asset('funciones/tabla.js')}}"></script>
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
 @endsection
@@ -289,4 +292,9 @@
     .red {
         color: Red;
     }
+    
+    .linea-oculta{
+        display: none;
+    }
+
 </style>

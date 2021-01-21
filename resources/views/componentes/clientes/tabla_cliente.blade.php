@@ -20,7 +20,7 @@
                 <span class="badge badge-success badge-lg">Activo</span>
             </td>
             <td>
-                <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" data-toggle="modal" data-target="#registroModal">
+                <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})" >
                     <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                 </button>
                 {{-- <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
@@ -41,7 +41,7 @@
                 <span class="badge badge-danger badge-lg">Inactivo</span>
             </td>
             <td>
-                <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" data-toggle="modal" data-target="#registroModal">
+                <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})">
                     <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                 </button>
                 <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >

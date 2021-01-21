@@ -2,7 +2,7 @@
     <!-- ================================= MODAL TITULO ================================= -->
     <div class="modal-header">
         <center style="text-align: -webkit-center !important;">
-        <h5 class="modal-title" id="exampleModalLabel">Agregar cliente</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Detalles del cliente</h5>
         </center>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

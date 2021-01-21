@@ -1,8 +1,13 @@
 function init(){
     lista_clientes();
+    lista_interesados();
     // ..................... .::::: DATOS DEL FORMULARIO PARA "EDITAR O AGREGAR" ::::::::. .............
     $("#formulario_cliente").on("submit", function(e) {
         guardar_cliente(e);
+    });
+
+    $("#formulario_interesado").on("submit", function(e){
+        guardar_interesado(e);
     });
 
     // ...................... .:::: LISTAR SELECT 2 "GIRO DE NEGOCIO" ::::. ......................
@@ -24,6 +29,18 @@ function guardar_cliente(e) {
     );
 
     $("#registroModal").modal('hide');
+}
+
+function guardar_interesado(e){
+    crud_guardar_editar(
+        e,
+        '/dashboard/guardar/interesados',
+        'interesado',
+        function(){ limpiar_interesado(); },
+        function(){ lista_interesados(); },
+        function(){ console.log('Console Error'); }
+    );
+    $("#registroModalInteresado").modal('hide');
 }
 
 
@@ -59,6 +76,20 @@ function limpiar_cliente(){ //Para limpIar los campos despues de registrar un cl
     $('#number_otro_input').val();
 }
 
+function limpiar_interesado(){ //Para limpIar los campos despues de registrar un cliente
+    $('#nombre_razon_social_input').val();
+    $('#nombre_comercial_input').val();
+    $('#select_modal_tipoPersona').val();
+    $('#select_modal_tipoDocumento').val();
+    $('#numDocumentoInput').val();
+    $('#InputCorreo1').val();
+    $('#InputCorreo2').val();
+    $('#InputCorreo3').val();
+    $('#number_empresa_input').val();
+    $('#number_contacto_input').val();
+    $('#number_otro_input').val();
+}
+
 // ............................. ::::::: LISTAR TABLA CLIENTES ::::::: .................................
 function lista_clientes(){
     $.get('/dashboard/listas/clientes/lista', function (data){
@@ -66,12 +97,58 @@ function lista_clientes(){
     });
 }
 
+function lista_interesados(){
+    $.get('/dashboard/listas/interesados/lista', function(data){
+        $("#lista_interesados").html(data);
+    });
+}
+
 function desactivar_cliente(idclientes) {
-    crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes() }, function(){ console.log('Eror') });
+    crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
 }
 
 function activar_cliente(idclientes) {
-    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_clientes() }, function(){ console.log('Eror') });
+    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_clientes();lista_interesados(); }, function(){ console.log('Eror') });
+}
+// ........................:::::::: LISTA UN DATOS PARA EDITAR CLIENTE :::::: ..........................
+function mostrar_one_cliente(idclientes){
+    $("#registroModal").modal('show');
+    $.get('/dashboard/clientes/editar/'+idclientes , function (data){
+        data = JSON.parse(data);
+        //console.log(data.cliente['nombres_razon_social']);  
+        $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
+        $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        $('#numDocumentoInput').val(data.cliente['nro_documento']);
+        $('#InputCorreo1').val(data.cliente['correo_1']);
+        $('#InputCorreo2').val(data.cliente['correo_2']);
+        $('#InputCorreo3').val(data.cliente['correo_3']);
+        $('#number_empresa_input').val(data.cliente['telefono_empresa']);
+        $('#number_contacto_input').val(data.cliente['telefono_contacto']);
+        $('#number_otro_input').val(data.cliente['telefono_otro']);
+        $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']);
+        if (data.cliente['idgiro_negocio']) {
+            $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']).trigger('change');
+        }else{
+            $('#select_modal_giroNegocio').val(null).trigger('change');
+        }
+
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        if (data.cliente['tipo_persona']) {
+            $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
+        }else{
+            $('#select_modal_tipoPersona').val(null).trigger('change');
+        }
+
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        if (data.cliente['tipo_documento']) {
+            $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
+        }else{
+            $('#select_modal_tipoDocumento').val(null).trigger('change');
+        }
+        
+    });
 }
 
 init();

@@ -12,7 +12,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModal"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
+            <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalInteresado"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
         </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <!-- FIN-MODAL -->
 
      <!-- ================================= MODAL Registro ================================= -->
-     <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal fade" id="registroModalInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
           <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
@@ -38,114 +38,164 @@
             </div>
 
             <!-- ================================= MODAL CUERPO ================================= -->
+            <form id="formulario_interesado" method="POST">
+            @csrf            
             <div class="modal-body">
-                <div class="row col-12">
-                    <div class="card-body mb-12 col-12">
+                <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
+                    <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
                         <div class="row">
                             <div class="col-4">
+                                <label for="nombre_razon_social_input">Nombres/Razon social</label>
                                 <div class="form-group">
-                                    <label for="nombre_razon_social_input">Nombres/Razon social</label>
-                                    <input type="text" class="form-control" id="nombre_razon_social_input" placeholder="Erick">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" required />
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="nombre_comercial_input">Apellidos/Nombre comercial</label>
-                                    <input type="text" class="form-control" id="nombre_comercial_input" placeholder="Zumaeta">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" required />
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="tipoPersonaSelect">Giro de negocio</label>
-                                    <select class="form-control" id="tipoPersonaSelect">
-                                    <option>Ventas</option>
-                                    <option>Empresa</option>
-                                    <option>Otro</option>
+                                    <label for="select_modal_giroNegocio">Giro de negocio</label>
+                                    <select class="form-control" data-toggle="select" id="select_modal_giroNegocio" name="select_modal_giroNegocio">
+                                        {{-- AQUI VAN LOS "OPTIONS" --}}
                                     </select>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="tipoPersonaSelect">Tipo persona</label>
-                                    <select class="form-control" id="tipoPersonaSelect">
-                                    <option>Natural</option>
-                                    <option>Juridica</option>
+                                    <label for="select_modal_tipoPersona">Tipo persona</label>
+                                    <select class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select">
+                                        <option>Seleccione</option>
+                                        <option value="1">Interesado</option>
+                                        <option value="2">Cliente</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="tipodocSelect">Tipo documento</label>
-                                    <select class="form-control" id="tipodocSelect">
-                                    <option>DNI</option>
-                                    <option>RUC</option>
+                                    <label for="select_modal_tipoDocumento">Tipo documento</label>
+                                    <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select">
+                                        <option>Seleccione</option>
+                                        <option value="3">DNI</option>
+                                        <option value="6">RUC</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="numDocumentoInput">Numero documento</label>
-                                    <input type="number" class="form-control" id="numDocumentoInput" placeholder="76858587">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                        </div>
+                                        <input type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="76858587" required />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Correo 1 </label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" required />
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="exampleFormControlInput2">Correo 2 </label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="name@example2.com">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="InputCorreo2" name="InputCorreo2" placeholder="name@example2.com" />
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="exampleFormControlInput3">Correo 3 </label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput3" placeholder="name@example3.com">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        </div>
+                                        <input type="email" class="form-control" id="InputCorreo3" name="InputCorreo3" placeholder="name@example3.com" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="number-empresa-input">Telefono empresa</label>
-                                    <input class="form-control" type="number" value="987654321" id="number-empresa-input">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" required />
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="number-contacto-input">Telefono contacto</label>
-                                    <input class="form-control" type="number" value="987654321" id="number-contacto-input">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                                        </div>
+                                        <input class="form-control" type="number" id="number_contacto_input" name="number_contacto_input" required />
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="number-otro-input">Telefono otro</label>
-                                    <input class="form-control" type="number" value="987654321" id="number-otro-input">
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone-square"></i></span>
+                                        </div>
+                                        <input class="form-control" type="number" id="number_otro_input" name="number_otro_input" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        
-                    </div> 
+                    </div>
                 </div>
-              <!-- ================================= FIN-CUADRO-BRODER ================================= -->
-            </div>
-            <!-- FIN-MODAL-BODY -->
 
-            <!-- MODAL FOOTER -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary">Guardar producto</button>
+                <!-- ================================= FIN-CUADRO-BRODER ================================= -->
             </div>
+                <!-- FIN-MODAL-BODY -->
+
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar Interesado</button>
+                </div>
+            </form>
             <!-- FIN-MODAL-FOOTER -->
           </div>
         </div>
@@ -157,7 +207,8 @@
             <table class="table align-items-center" id="datos">
                 <thead class="thead-light">
                     <tr>
-                        <th>Tipo Persona</th>
+                        <th>#</th>
+                        <th>Tipo Doc.</th>
                         <th>Nombre/Razon Social</th>
                         <th>Apellidos/Nombre comercial</th>
                         <th>Telefono</th>
@@ -166,38 +217,7 @@
                         <th>Opciones</th>
                     </tr>
                 </thead>
-                <tbody class="list">
-                    @forelse ($interesados as $interesado)
-                    @if($interesado->tipo_persona == 1)
-                        <tr>
-                            <td>{{ $interesado->tipo_documento}}</td>
-                            <td>{{ $interesado->nombres_razon_social}}</td>
-                            <td>{{ $interesado->apellidos_nombre_comercial}}</td>
-                            <td>{{ $interesado->telefono_empresa}}</td>
-                            <td>{{ $interesado->correo_1}}</td>
-                            <td>activo</td>
-                            <td>
-                                <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
-                                    <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                </button>
-                                <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal_interesado({{ $interesado->idclientes }})" >
-                                    <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                </button>
-                                <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="confirm">
-                                    <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                </button>
-                            </td>
-                        </tr>
-                    @endif
-                        
-                    @empty
-                        
-                    @endforelse
-
-                    <tr class='noSearch hide'>
-                        <td colspan="5"></td>
-                    </tr>
-                    
+                <tbody class="list" id="lista_interesados">
                 </tbody>
             </table>
         </div>
@@ -260,6 +280,7 @@
 </script>
 
 @section('js')
+    <script src="{{ asset('funciones/crud.js')}}"></script>
     <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
 @endsection
 
