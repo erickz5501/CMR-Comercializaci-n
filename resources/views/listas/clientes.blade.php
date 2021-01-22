@@ -210,11 +210,6 @@
                 </tr>
             </thead>
             <tbody class="list" id="lista_clientes"></tbody>
-            <tfoot>
-                <div class="col-md-12 text-center">
-                    <ul class="pagination pagination-lg pager" id="clientes_page"></ul>
-                </div>
-            </tfoot>
         </table>
     </div>
 </div>
@@ -291,10 +286,6 @@
     }
     .red {
         color: Red;
-    }
-    
-    .linea-oculta{
-        display: none;
     }
 
 </style>

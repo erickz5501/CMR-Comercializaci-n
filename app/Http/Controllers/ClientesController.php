@@ -15,6 +15,7 @@ class ClientesController extends Controller
         //dd($cliente);
         return view('listas.clientes');
     }
+    
     public function indexLista()
     {
         $clientes = ClientesModel::where('tipo_persona', 2)->get();
@@ -36,6 +37,7 @@ class ClientesController extends Controller
     public function interesados(){
         return view('listas.lista_interesados');
     }
+
     public function detalle_interesado($id_interesado){
         $det_interesado = ClientesModel::where('idclientes', $id_interesado)->first();
         //dd($det_interesado);
@@ -105,8 +107,7 @@ class ClientesController extends Controller
             return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
     }
 
-    public function editar_cliente($idcliente)
-    {
+    public function editar_cliente($idcliente){
         // $clientes = ClientesModel::where('tipo_persona', 2)->get();
         $usuario = ClientesModel::where('idclientes', $idcliente)->first();
         return json_encode(['cliente' => $usuario]);

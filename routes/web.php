@@ -56,6 +56,9 @@ Route::post('/dashboard/guardar/interesados', 'ClientesController@createInteresa
 // ........... ::::: DESACTIVAR INTERESADO :::::...............
 Route::get('/dashboard/interesado/desactivar/{idclientes}', "ClientesController@desactivarInteresado");
 
+// .......... ::::: RUTA EDITAR INTERESADOS ::: .............
+Route::get('/dashboard/interesado/editar/{idcliente}', 'ClientesController@editar_cliente');
+
 // .......... ::::: RUTA LISTAR CLIENTES ::: .............
 Route::get('/dashboard/listas/clientes', "ClientesController@index")
             ->name('clientes');
@@ -75,8 +78,11 @@ Route::get('/dashboard/cliente/activar/{idclientes}', "ClientesController@activa
 Route::get('/dashboard/cliente/desactivar/{idclientes}', "ClientesController@desactivar");
 
 // .......... :::::: LISTAR HISTORIA DEL COMPLETADO :::: ................
-Route::get('/dashboard/listas/historial', "HistorialController@index")
-            ->name('listas/historial');
+Route::get('/dashboard/listas/historial', "HistorialController@index")->name('historial');
+Route::get('/dashboard/listas/historial/lista', "HistorialController@indexLista");
+
+Route::get('/ver/historial/detalle/{idhist}', "HistorialController@DetalleHistorial");
+
 // ........... ::::: LISTAR GIRO DE NEGOCIO :::::...............
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");
 

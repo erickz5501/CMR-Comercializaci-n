@@ -147,6 +147,46 @@ function mostrar_one_cliente(idclientes){
         }else{
             $('#select_modal_tipoDocumento').val(null).trigger('change');
         }
+             
+    });
+}
+
+function mostrar_one_interesado(idclientes){
+    $("#registroModalInteresado").modal('show');
+    $.get('/dashboard/clientes/editar/'+idclientes , function (data){
+        data = JSON.parse(data);
+        //console.log(data.cliente['nombres_razon_social']);  
+        $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
+        $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        $('#numDocumentoInput').val(data.cliente['nro_documento']);
+        $('#InputCorreo1').val(data.cliente['correo_1']);
+        $('#InputCorreo2').val(data.cliente['correo_2']);
+        $('#InputCorreo3').val(data.cliente['correo_3']);
+        $('#number_empresa_input').val(data.cliente['telefono_empresa']);
+        $('#number_contacto_input').val(data.cliente['telefono_contacto']);
+        $('#number_otro_input').val(data.cliente['telefono_otro']);
+        $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']);
+        if (data.cliente['idgiro_negocio']) {
+            $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']).trigger('change');
+        }else{
+            $('#select_modal_giroNegocio').val(null).trigger('change');
+        }
+
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        if (data.cliente['tipo_persona']) {
+            $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
+        }else{
+            $('#select_modal_tipoPersona').val(null).trigger('change');
+        }
+
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        if (data.cliente['tipo_documento']) {
+            $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
+        }else{
+            $('#select_modal_tipoDocumento').val(null).trigger('change');
+        }
         
     });
 }

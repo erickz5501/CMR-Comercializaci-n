@@ -306,114 +306,17 @@
                     <table class="table align-items-center" id="datos">
                         <thead class="thead-light">
                             <tr>
+                                <th>N°</th>
                                 <th>Tipo Persona</th>
-                                <th>Nombre/Razon Social</th>
-                                <th>Apellidos/Nombre comercial</th>
-                                <th>Telefono</th>
-                                <th>Correo</th>
+                                <th>Perona contacto</th>
+                                <th>Det.llamada</th>
+                                <th>Fecha llamada</th>
+                                <th>Calificación</th>
+                                <th>Estado</th>
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                        <tbody class="list">
-                            <tr>
-                                <td>Natural</td>
-                                <td>Erick Daniel</td>
-                                <td>Zumaeta Diaz</td>
-                                <td>923666379</td>
-                                <td>erick@gmail</td>
-                                <td>
-                                    <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                        <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                    </button>
-                                </td>   
-                            </tr>
-        
-                            <tr>
-                                <td>Natural</td>
-                                <td>Samir Fabian</td>
-                                <td>Zumaeta Diaz</td>
-                                <td>923666379</td>
-                                <td>samir@gmail</td>
-                                <td>
-                                    <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                        <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                    </button>
-                                </td>   
-                            </tr>
-        
-                            <tr>
-                                <td>Natural</td>
-                                <td>Zujey Merly</td>
-                                <td>Zumaeta Diaz</td>
-                                <td>923666379</td>
-                                <td>zujey@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                        <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                    </button>
-                                </td>   
-                            </tr>
-        
-                            <tr>
-                                <td>Natural</td>
-                                <td>Alicia Marisol</td>
-                                <td>Diaz Espejo</td>
-                                <td>923666379</td>
-                                <td>alicia@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                        <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                    </button>
-                                </td>   
-                            </tr>
-        
-                            <tr>
-                                <td>Natural</td>
-                                <td>Roque Pasion</td>
-                                <td>Zumaeta Marin</td>
-                                <td>923666379</td>
-                                <td>roque@gmail.com</td>
-                                <td>
-                                    <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-info" type="button" data-toggle="modal" data-target="#exampleModal">
-                                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                                    </button>
-                                    <button class="btn btn-icon btn-danger" type="button" data-toggle="sweet-alert" data-sweet-alert="warning">
-                                        <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
-                                    </button>
-                                </td>   
-                            </tr>
-                            <tr class='noSearch hide'>
-                                <td colspan="5"></td>
-                            </tr>
-                            
-                        </tbody>
+                        <tbody class="list" id="lista_historial"></tbody>
                     </table>
                 </div>
             </div>
@@ -421,6 +324,10 @@
             <div class="card-footer py-4">
 
             </div>            
+@endsection
+
+@section('js')
+<script src="{{ asset('ajax/ajaxhistorial.js') }}"></script>
 @endsection
 
 <script language="javascript">
