@@ -17,7 +17,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
             console.log(datos);
             if (datos.status) {
                 sw_success(datos.message);
-                limpiar_form(nombre_modulo, callback_limpiar);
+                //limpiar_form(nombre_modulo, callback_limpiar);
                 if (callback_true) {
                     callback_true();
                 }
@@ -67,7 +67,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
         },
         error: function (jqXhr) {
 
-            comprobar_errores(jqXhr, nombre_modulo);
+            //comprobar_errores(jqXhr, nombre_modulo);
         }
     });
     $("#registroModal").modal('hide');
@@ -83,7 +83,7 @@ function lista_select2(url, nombre_modulo, id) {
 
         $.each(data, function (i, item) {
 
-            var option = '<option  value="' + item.idgiro_negocio + '">' + item.nombre + '</option>';
+            var option = '<option style="color: black !important; font-weight: bold !important;" value="' + item.idgiro_negocio + '">' + item.nombre + '</option>';
 
             $('#select_modal_' + nombre_modulo).append(option);
         });

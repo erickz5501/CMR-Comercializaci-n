@@ -18,10 +18,6 @@ Route::get('/', function () {
     return view('main');
 });
 
-// Route::get('/main', function () {
-//     return view('main');
-// });
-
 Route::get('/index', function () {
     return view('login');
 });
@@ -41,47 +37,49 @@ Route::get('/dashboard/perfil', function () {
 Route::redirect('/login', '/main');
 
 //-------Rutas por controlador----------//
-Route::get('/dashboard', "DashboardController@index")
-            ->name('dashboard.dashboard');
+Route::get('/dashboard', "DashboardController@index") ->name('dashboard.dashboard');
 
-// ........... ::: RUTA LISTAR INTERESADOS :::: .....................
-Route::get('/dashboard/listas/interesados', "ClientesController@interesados")
-            ->name('interesados');
-Route::get('/dashboard/listas/interesados/lista', "ClientesController@indexListaInteresado");
-Route::get('/dashboard/listas/interesados/{id_interesado}', "ClientesController@detalle_interesado");
+// ..........:: RUTAS INTERESADOS ::............//
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    //MUESTRA LA VISTA
+    Route::get('/listas/interesados', 'clientes\ClientesController@interesados');
+    //MUESTRA LOS DATOS EN UNA TABLA
+    Route::get('/listas/interesados/lista', "clientes\ClientesController@indexListaInteresado");
+    //MUESTRA DETTALE DE INTERESADO EN UN MODAL
+    Route::get('/listas/interesados/{id_interesado}', "clientes\ClientesController@detalle_interesado");
+    //CREA UN REGISTRO DE INTERESADO
+    Route::post('/guardar/interesados', 'clientes\ClientesController@createInteresados');
+    //DESACTIVAR Y ACTIVAR UN INTERESADO
+    Route::get('/interesado/desactivar/{idclientes}', "clientes\ClientesController@desactivarInteresado");
 
-// .......... ::::: RUTA GUARDAR INTERESADOS ::: .............
-Route::post('/dashboard/guardar/interesados', 'ClientesController@createInteresados');
+    Route::get('/dashboard/interesado/editar', 'clientes\ClientesController@editarCliente');
+});
 
-// ........... ::::: DESACTIVAR INTERESADO :::::...............
-Route::get('/dashboard/interesado/desactivar/{idclientes}', "ClientesController@desactivarInteresado");
+//........... ::RUTAS CLIENTES:: ............//
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    // MUESTRA LA VISTA DE CLIENTES
+    Route::get('/listas/clientes', "clientes\ClientesController@index");
+    // MIESTRA LISTA DE CLIENTES EN UNA TABLA
+    Route::get('/listas/clientes/lista', "clientes\ClientesController@indexLista");
+    // MUESTRA MODAL DETALLE DE CLIENTE
+    Route::get('/listas/clientes/{id_cliente}', "clientes\ClientesController@detalle_cliente");
+    // MUESTRA DATOS DE UN CLIENTE PAARA EDITAR
+    Route::get('/mostrar/clientes/{id_cliente}', "clientes\ClientesController@detalle_cliente_one");
+    // EDITA LOS DATOS DE UN CLIENTE
+    Route::post('/editar/clientes', 'clientes\ClientesController@editarCliente');
+    //ACTIVA UN CLIENTE
+    Route::get('/cliente/activar/{idclientes}', "clientes\ClientesController@activar");
+    //DESACTIVA UN CLIENTE
+    Route::get('/cliente/desactivar/{idclientes}', "clientes\ClientesController@desactivar");
+});
 
-// .......... ::::: RUTA EDITAR INTERESADOS ::: .............
-Route::get('/dashboard/interesado/editar/{idcliente}', 'ClientesController@editar_cliente');
+// .......... :::::: RUTAS HISTORIAL DEL COMPLETADO :::: ................
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    Route::get('/listas/historial', "historial\HistorialController@index");
+    Route::get('/listas/historial/lista', "historial\HistorialController@indexLista");    
+});
+Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 
-// .......... ::::: RUTA LISTAR CLIENTES ::: .............
-Route::get('/dashboard/listas/clientes', "ClientesController@index")
-            ->name('clientes');
-Route::get('/dashboard/listas/clientes/lista', "ClientesController@indexLista");
-Route::get('/dashboard/listas/clientes/{id_cliente}', "ClientesController@detalle_cliente");
-
-// .......... ::::: RUTA GUARDAR CLIENTES ::: .............
-Route::post('/dashboard/guardar/clientes', 'ClientesController@create');
-
-// .......... ::::: RUTA EDITAR CLIENTES ::: .............
-Route::get('/dashboard/clientes/editar/{idcliente}', 'ClientesController@editar_cliente');
-
-// ........... ::::: ACTIVAR CLIENTE :::::...............
-Route::get('/dashboard/cliente/activar/{idclientes}', "ClientesController@activar");
-
-// ........... ::::: DESACTIVAR CLIENTE :::::...............
-Route::get('/dashboard/cliente/desactivar/{idclientes}', "ClientesController@desactivar");
-
-// .......... :::::: LISTAR HISTORIA DEL COMPLETADO :::: ................
-Route::get('/dashboard/listas/historial', "HistorialController@index")->name('historial');
-Route::get('/dashboard/listas/historial/lista', "HistorialController@indexLista");
-
-Route::get('/ver/historial/detalle/{idhist}', "HistorialController@DetalleHistorial");
 
 // ........... ::::: LISTAR GIRO DE NEGOCIO :::::...............
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");

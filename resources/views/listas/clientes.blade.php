@@ -30,9 +30,11 @@
             </div>
 
             <!-- ================================= MODAL CUERPO ================================= -->
-            <form id="formulario_cliente" method="POST">
+            <form id="formulario_cliente" >
                 @csrf
                 <div class="modal-body">
+                    {{-- input ID oculto --}}
+                    <input type="hidden" id="idclientes" name="idclientes" />
                     <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
                         <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
                             <div class="row">
@@ -43,7 +45,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" required />
                                         </div>
                                     </div>
                                 </div>
@@ -54,14 +56,14 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" required />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="select_modal_giroNegocio">Giro de negocio</label>
-                                        <select class="form-control" data-toggle="select" id="select_modal_giroNegocio" name="select_modal_giroNegocio">
+                                        <select class="form-control" data-toggle="select" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
                                             {{-- AQUI VAN LOS "OPTIONS" --}}
                                         </select>
                                     </div>
@@ -72,17 +74,17 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="select_modal_tipoPersona">Tipo persona</label>
-                                        <select class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select">
+                                        <select  class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
                                             <option>Seleccione</option>
-                                            <option value="1">Interesado</option>
-                                            <option value="2">Cliente</option>
+                                            <option value="1" style="color: black !important; font-weight: bold !important;">Interesado</option>
+                                            <option value="2" style="color: black !important; font-weight: bold !important;">Cliente</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="select_modal_tipoDocumento">Tipo documento</label>
-                                        <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select">
+                                        <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select" required>
                                             <option>Seleccione</option>
                                             <option value="3">DNI</option>
                                             <option value="6">RUC</option>
@@ -96,7 +98,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                             </div>
-                                            <input type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="76858587" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="76858587" required />
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +112,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" required />
                                         </div>
                                     </div>
                                 </div>
@@ -122,7 +124,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" id="InputCorreo2" name="InputCorreo2" placeholder="name@example2.com" />
+                                            <input style="color: black !important; font-weight: bold !important;" type="email" class="form-control" id="InputCorreo2" name="InputCorreo2" placeholder="name@example2.com" />
                                         </div>
                                     </div>
                                 </div>
@@ -134,7 +136,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
                                             </div>
-                                            <input type="email" class="form-control" id="InputCorreo3" name="InputCorreo3" placeholder="name@example3.com" />
+                                            <input style="color: black !important; font-weight: bold !important;" type="email" class="form-control" id="InputCorreo3" name="InputCorreo3" placeholder="name@example3.com" />
                                         </div>
                                     </div>
                                 </div>
@@ -148,7 +150,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" required />
+                                            <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" required />
                                         </div>
                                     </div>
                                 </div>
@@ -159,7 +161,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                             </div>
-                                            <input class="form-control" type="number" id="number_contacto_input" name="number_contacto_input" required />
+                                            <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_contacto_input" name="number_contacto_input" required />
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +172,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone-square"></i></span>
                                             </div>
-                                            <input class="form-control" type="number" id="number_otro_input" name="number_otro_input" />
+                                            <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_otro_input" name="number_otro_input" />
                                         </div>
                                     </div>
                                 </div>

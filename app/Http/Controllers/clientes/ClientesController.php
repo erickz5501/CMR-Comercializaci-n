@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\clientes;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\ClientesModel;
-use App\Http\Requests\UserGeneralRequest;
 use App\Http\Requests\InteresadoRequest;
+use App\Http\Requests\UserGeneralRequest;
 
 class ClientesController extends Controller
 {
@@ -34,6 +34,12 @@ class ClientesController extends Controller
         return view('componentes.clientes.modal_detalle_cliente', compact('det_cliente'));
     }
 
+    public function detalle_cliente_one($id_cliente){
+        $det_cliente = ClientesModel::where('idclientes', $id_cliente)->first();
+
+        return json_encode(['cliente' => $det_cliente]);
+    }
+
     public function interesados(){
         return view('listas.lista_interesados');
     }
@@ -44,7 +50,8 @@ class ClientesController extends Controller
         return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
     }
 
-    public function createInteresados(InteresadoRequest $request){
+    public function createInteresados(InteresadoRequest $request){//CREA UN REGISTRO DE INTERESADO
+        $idclientes                     = $request->input('idclientes');
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
         $GiroNegocioSelect              = $request->input('select_modal_giroNegocio');
@@ -57,26 +64,73 @@ class ClientesController extends Controller
         $number_empresa_input           = $request->input('number_empresa_input');
         $number_contacto_input          = $request->input('number_contacto_input');
         $number_otro_input              = $request->input('number_otro_input');
+    //     $b = [
+    //         'idclientes' => $idclientes,
+    //         'tipo_documento' => $tipoDocSelect,
+    //     'nro_documento' => $numDocumentoInput,
+    //     'nombres_razon_social' => $nombre_razon_social_input,
+    //     'apellidos_nombre_comercial' => $nombre_comercial_input,
+    //     'correo_1' => $InputCorreo1,
+    //     'correo_2' => $InputCorreo2,
+    //     'correo_3' => $InputCorreo3,
+    //     'telefono_empresa' => $number_empresa_input,
+    //     'telefono_contacto' => $number_contacto_input,
+    //     'telefono_otro' => $number_otro_input,
+    //     'idgiro_negocio' => $GiroNegocioSelect,
+    //     'tipo_persona' => $tipoPersonaSelect
+    // ];
+         //dd($idclientes);
 
-        $usuario = ClientesModel::create(
-            ['tipo_documento' => $tipoDocSelect,
-            'nro_documento' => $numDocumentoInput,
-            'nombres_razon_social' => $nombre_razon_social_input,
-            'apellidos_nombre_comercial' => $nombre_comercial_input,
-            'correo_1' => $InputCorreo1,
-            'correo_2' => $InputCorreo2,
-            'correo_3' => $InputCorreo3,
-            'telefono_empresa' => $number_empresa_input,
-            'telefono_contacto' => $number_contacto_input,
-            'telefono_otro' => $number_otro_input,
-            'idgiro_negocio' => $GiroNegocioSelect,
-            'tipo_persona' => $tipoPersonaSelect
-            ]);
-            
-            return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
+        if ( $idclientes != "") {
+
+            $interesado = ClientesModel::find($idclientes);
+
+            try {
+                $interesado->tipo_documento = $tipoDocSelect;
+                $interesado->nro_documento = $numDocumentoInput;
+                $interesado->nombres_razon_social = $nombre_razon_social_input;
+                $interesado->apellidos_nombre_comercial = $nombre_comercial_input;
+                $interesado->correo_1 = $InputCorreo1;
+                $interesado->correo_2 = $InputCorreo2;
+                $interesado->correo_3 = $InputCorreo3;
+                $interesado->telefono_empresa = $number_empresa_input;
+                $interesado->telefono_contacto = $number_contacto_input;
+                $interesado->telefono_otro = $number_otro_input;
+                $interesado->idgiro_negocio = $GiroNegocioSelect;
+                $interesado->tipo_persona = $tipoPersonaSelect;
+
+                $interesado->save();
+            }
+            catch(Exception $e){
+                return json_encode($e->getMessage());
+            }
+                
+                
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
+
+        }else{
+            $usuario = ClientesModel::create(
+                ['tipo_documento' => $tipoDocSelect,
+                'nro_documento' => $numDocumentoInput,
+                'nombres_razon_social' => $nombre_razon_social_input,
+                'apellidos_nombre_comercial' => $nombre_comercial_input,
+                'correo_1' => $InputCorreo1,
+                'correo_2' => $InputCorreo2,
+                'correo_3' => $InputCorreo3,
+                'telefono_empresa' => $number_empresa_input,
+                'telefono_contacto' => $number_contacto_input,
+                'telefono_otro' => $number_otro_input,
+                'idgiro_negocio' => $GiroNegocioSelect,
+                'tipo_persona' => $tipoPersonaSelect
+                ]);
+                
+                return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
+        }
+
     }
 
-    public function create(UserGeneralRequest $request){
+    public function editarCliente(UserGeneralRequest $request){
+        $idclientes                     = $request->input('idclientes');
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
         $GiroNegocioSelect              = $request->input('select_modal_giroNegocio');
@@ -89,22 +143,32 @@ class ClientesController extends Controller
         $number_empresa_input           = $request->input('number_empresa_input');
         $number_contacto_input          = $request->input('number_contacto_input');
         $number_otro_input              = $request->input('number_otro_input');
+
+    $usuario = ClientesModel::find($idclientes);
+
+    try {
+        $usuario->tipo_documento = $tipoDocSelect;
+        $usuario->nro_documento = $numDocumentoInput;
+        $usuario->nombres_razon_social = $nombre_razon_social_input;
+        $usuario->apellidos_nombre_comercial = $nombre_comercial_input;
+        $usuario->correo_1 = $InputCorreo1;
+        $usuario->correo_2 = $InputCorreo2;
+        $usuario->correo_3 = $InputCorreo3;
+        $usuario->telefono_empresa = $number_empresa_input;
+        $usuario->telefono_contacto = $number_contacto_input;
+        $usuario->telefono_otro = $number_otro_input;
+        $usuario->idgiro_negocio = $GiroNegocioSelect;
+        $usuario->tipo_persona = $tipoPersonaSelect;
+
+        $usuario->save();
+    }
+    catch(Exception $e){
+        return json_encode($e->getMessage());
+    }
         
-        $usuario = ClientesModel::create(
-            ['tipo_documento' => $tipoDocSelect,
-            'nro_documento' => $numDocumentoInput,
-            'nombres_razon_social' => $nombre_razon_social_input,
-            'apellidos_nombre_comercial' => $nombre_comercial_input,
-            'correo_1' => $InputCorreo1,
-            'correo_2' => $InputCorreo2,
-            'correo_3' => $InputCorreo3,
-            'telefono_empresa' => $number_empresa_input,
-            'telefono_contacto' => $number_contacto_input,
-            'telefono_otro' => $number_otro_input,
-            'idgiro_negocio' => $GiroNegocioSelect,
-            'tipo_persona' => $tipoPersonaSelect
-            ]);
-            return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
+        
+    return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
+
     }
 
     public function editar_cliente($idcliente){

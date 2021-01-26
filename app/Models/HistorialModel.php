@@ -18,4 +18,5 @@ class HistorialModel extends Model
     public function MediosModel(){
         return $this->belongsTo('App\Models\MediosModel', 'idmedios', 'idmedios');
     }
+    
 }

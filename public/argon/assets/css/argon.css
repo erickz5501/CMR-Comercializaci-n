@@ -29922,7 +29922,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 
     transition: all .15s cubic-bezier(.68, -.55, .265, 1.55); 
 
-    color: #8898aa;
+    color: black;
+    /* font-weight: bold ; */
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     background-color: #fff;
@@ -29952,6 +29953,8 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
 .select2-container--default .select2-selection--multiple:focus,
 .select2-container--default .select2-search--dropdown .select2-search__field:focus
 {
+    color: black;
+    font-weight: bold ;
     color: #8898aa;
     border-color: #5e72e4;
     outline: 0;
