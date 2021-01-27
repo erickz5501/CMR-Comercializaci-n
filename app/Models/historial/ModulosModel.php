@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\historial;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MediosModel extends Model
+class ModulosModel extends Model
 {
-    protected $table = 'medios';
-    protected $primaryKey = 'idmedios';
+    protected $table = 'modulos';
+    protected $primaryKey = 'idmodulos';
     protected $fillable = ['nombre', 'estado'];
 }

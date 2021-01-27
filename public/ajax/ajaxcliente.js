@@ -108,8 +108,8 @@ function lista_interesados(){
 }
 
 function desactivar_cliente(idclientes) {
-    crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
-}
+        crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
+    }
 
 function activar_cliente(idclientes) {
     crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_clientes();lista_interesados(); }, function(){ console.log('Eror') });
@@ -155,6 +155,10 @@ function mostrar_one_cliente(idclientes){
         }
              
     });
+}
+
+function añadirLicencia(){
+    alert("Esta opcion esta en proceso de desarrollo xD");
 }
 
 init();

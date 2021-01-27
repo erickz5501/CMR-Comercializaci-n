@@ -77,12 +77,18 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/listas/historial', "historial\HistorialController@index");
     Route::get('/listas/historial/lista', "historial\HistorialController@indexLista");    
+    Route::post('/guardar/registro', "historial\HistorialController@createHistorial");  
+    Route::get('/listas/registro/{idregistro}', "historial\HistorialController@det_Registro"); 
 });
 Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 
 
-// ........... ::::: LISTAR GIRO DE NEGOCIO :::::...............
+// ........... ::::: LISTAR SELECTS :::::...............
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");
+Route::get('/dashboard/listas/modulos', "historial\HistorialController@indexModulos");
+Route::get('/dashboard/listas/medios', "historial\HistorialController@indexMedios");
+Route::get('/dashboard/listas/eventos', "historial\HistorialController@indexEventos");
+Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
 // // ........... ::::: LISTAR TIPO PERSONA :::::...............
 // Route::get('/dashboard/listas/tipopersona', "GiroNegocioController@index");

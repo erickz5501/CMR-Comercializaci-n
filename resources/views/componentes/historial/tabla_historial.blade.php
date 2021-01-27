@@ -22,12 +22,8 @@
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
                     
-                    <button class="btn btn-icon btn-info" type="button">
+                    <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal({{ $registro->idhistorial_comercializacion }});">
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                    </button>
-                    
-                    <button type="button" class="btn btn-youtube btn-icon-only" >
-                        <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                     </button>
                 </td>
             @else
@@ -38,21 +34,16 @@
                     <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only">
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
+
                     <button class="btn btn-icon btn-info" type="button" >
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                    </button>
-                    {{-- <button class="btn btn-icon btn-success" type="button" onclick="activar_cliente({{ $cliente->idclientes }});"   >
-                        <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
-                    </button> --}}
-                    <button type="button" class="btn btn-slack btn-icon-only">
-                        <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
                     </button>
                 </td>
             @endif
         </tr>
     @endforeach
     <tr class='noSearch hide'>
-        <td colspan="5"></td>
+        <td colspan="7"></td>
     </tr>
 @else
 <tr>

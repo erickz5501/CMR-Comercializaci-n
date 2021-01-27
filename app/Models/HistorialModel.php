@@ -9,7 +9,7 @@ class HistorialModel extends Model
 {
     protected $table          = 'historial_comercializacion';
     protected $primaryKey     = 'idhistorial_comercializacion';
-    protected $fillable       = ['idmodulos', 'idmedios', 'users_id', 'detalle_llamada', 'ideventos', 'fecha_evento', 'descripcion_evento', 'idpersonal', 
+    protected $fillable       = ['persona_contacto','idmodulos', 'idmedios', 'users_id', 'detalle_llamada', 'ideventos', 'fecha_evento', 'descripcion_evento', 'idpersonal', 
                                 'calificacion_encuesta', 'solucion_temporal', 'idcotizacion', 'observaciones', 'conclusiones'];
 
     public function ModulosModel(){

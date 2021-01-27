@@ -20,21 +20,23 @@
                 <span class="badge badge-success badge-lg">Activo</span>
             </td>
             <td>
-                <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})" >
-                    <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                </button>
-                {{-- <button class="btn btn-icon btn-warning" type="button" data-toggle="modal" data-target="#registroModal">
-                    <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
-                </button> --}}
-                <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >
-                    <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
-                </button>
-                {{-- <button class="btn btn-icon btn-danger" type="button" onclick="desactivar_cliente({{ $cliente->idclientes }});"   >
-                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
-                </button> --}}
-                <button type="button" class="btn btn-youtube btn-icon-only" onclick="desactivar_cliente({{ $cliente->idclientes }});">
-                    <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
-                </button>
+                {{-- <div  class="btn-group" role="group" aria-label="Basic mixed styles example"> --}}
+                    <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})" >
+                        <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
+                    </button>
+                    
+                    <button class="btn btn-icon-only btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >
+                        <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
+                    </button>
+                
+                    <button type="button" class="btn btn-youtube btn-icon-only" onclick="desactivar_cliente({{ $cliente->idclientes }});">
+                        <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
+                    </button>
+
+                    <button type="button" class="btn btn-success btn-icon-only" onclick="añadirLicencia();">
+                        <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
+                    </button>
+                {{-- </div> --}}
             </td>
         @else
             <td>
@@ -44,7 +46,7 @@
                 <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})">
                     <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                 </button>
-                <button class="btn btn-icon btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >
+                <button class="btn btn-icon-only btn-info" type="button" onclick="mostrar_modal({{ $cliente->idclientes }})" >
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                 </button>
                 {{-- <button class="btn btn-icon btn-success" type="button" onclick="activar_cliente({{ $cliente->idclientes }});"   >

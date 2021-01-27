@@ -49,14 +49,6 @@
                 </div>
                 <div class="row">
                     <div class="col-6">
-                        <h4>Tipo persona: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->tipo_persona}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
                         <h4>N° documento: </h4>
                     </div>
                     <div class="col-6">
@@ -120,8 +112,8 @@
 
     <!-- MODAL FOOTER -->
     <div class="modal-footer">
+        <button type="button" class="btn btn-success">Ver licencias</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Guardar producto</button>
     </div>
     <!-- FIN-MODAL-FOOTER -->
     </div>

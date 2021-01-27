@@ -14,7 +14,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
         processData: false,
         success: function (datos) {
             datos = JSON.parse(datos);
-            console.log(datos);
+            //console.log(datos);
             if (datos.status) {
                 sw_success(datos.message);
                 //limpiar_form(nombre_modulo, callback_limpiar);
@@ -70,8 +70,8 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
             //comprobar_errores(jqXhr, nombre_modulo);
         }
     });
-    $("#registroModal").modal('hide');
-    lista_clientes();
+    //$("#registroModal").modal('hide');
+    
 }
 
 
@@ -83,7 +83,7 @@ function lista_select2(url, nombre_modulo, id) {
 
         $.each(data, function (i, item) {
 
-            var option = '<option style="color: black !important; font-weight: bold !important;" value="' + item.idgiro_negocio + '">' + item.nombre + '</option>';
+            var option = '<option style="color: black !important; font-weight: bold !important;" value="' + item.id + '">' + item.nombre + '</option>';
 
             $('#select_modal_' + nombre_modulo).append(option);
         });
