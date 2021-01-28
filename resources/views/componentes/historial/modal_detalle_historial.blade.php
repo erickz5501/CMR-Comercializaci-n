@@ -101,7 +101,7 @@
                     <div class="col-4">
                         <div class="form-group">
                             <label for="calificacionSelect">Cotización</label><br>
-                            <button type="button" class="btn btn-secondary">Ver Doc.</button>
+                            <button type="button" class="btn btn-secondary">Ver  Doc.</button>
                         </div>
                     </div>
                 </div>

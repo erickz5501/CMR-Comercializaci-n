@@ -13,10 +13,10 @@ class HistorialModel extends Model
                                 'calificacion_encuesta', 'solucion_temporal', 'idcotizacion', 'observaciones', 'conclusiones'];
 
     public function ModulosModel(){
-        return $this->belongsTo('App\Models\ModulosModel', 'idmodulos', 'idmodulos');
+        return $this->belongsTo('App\Models\historial\ModulosModel', 'idmodulos', 'idmodulos');
     }
     public function MediosModel(){
-        return $this->belongsTo('App\Models\MediosModel', 'idmedios', 'idmedios');
+        return $this->belongsTo('App\Models\historial\MediosModel', 'idmedios', 'idmedios');
     }
     
 }

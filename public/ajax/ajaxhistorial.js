@@ -22,11 +22,62 @@ function guardar_historial(e){
         e,
         '/dashboard/guardar/registro',
         'historial',
-        //function(){ limpiar_historial(); },
+        function(){ limpiar_historial(); },
         function(){ lista_historial(); },
         function(){ console.log('Console Error'); }
     );
     $("#registroModal").modal('hide');
+}
+
+function mostrar_one_registro(idregistro){
+    $("#registroModal").modal('show');
+    $.get('/dashboard/mostrar/registro/' + idregistro, function(data){
+        data = JSON.parse(data);
+        console.log(data.registro);
+        $('#idhistorial_comercializacion').val(data.registro['idhistorial_comercializacion']);
+        $('#persona_contacto_input').val(data.registro['persona_contacto']);
+
+        if (data.registro['idmodulos']) {
+            $('#select_modal_modulos').val(data.registro['idmodulos']).trigger('change');
+        }else{
+            $('#select_modal_modulos').val(null).trigger('change');
+        }
+
+        if (data.registro['idmedios']) {
+            $('#select_modal_medios').val(data.registro['idmedios']).trigger('change');
+        }else{
+            $('#select_modal_medios').val(null).trigger('change');
+        }
+
+        $('#llamadaDetTextarea').val(data.registro['detalle_llamada']);
+
+        if (data.registro['ideventos']) {
+            $('#select_modal_eventos').val(data.registro['ideventos']).trigger('change');
+        }else{
+            $('#select_modal_eventos').val(null).trigger('change');
+        }
+
+        $('#example_date_input').val(data.registro['fecha_evento']);
+        $('#eventoTextarea').val(data.registro['descripcion_evento']);
+
+        if (data.registro['idpersonal']) {
+            $('#select_modal_personal').val(data.registro['idpersonal']).trigger('change');
+        }else{
+            $('#select_modal_personal').val(null).trigger('change');
+        }
+
+        if (data.registro['calificacion_encuesta']) {
+            $('#calificacionSelect').val(data.registro['calificacion_encuesta']).trigger('change');
+        }else{
+            $('#calificacionSelect').val(null).trigger('change');
+        }
+
+        $('#solucionInput').val(data.registro['solucion_temporal']);
+        $('#observacionesTextarea').val(data.registro['observaciones']);
+        $('#conclusionesTextarea').val(data.registro['conclusiones']);
+
+
+    })
 }
 
 function limpiar_historial(){ //Para limpIar los campos despues de registrar 
@@ -45,8 +96,7 @@ function limpiar_historial(){ //Para limpIar los campos despues de registrar
     $('#conclusionesTextarea').val("");
 }
 
-function doSearch()
-    {
+function doSearch(){
         const tableReg = document.getElementById('datos');
         const searchText = document.getElementById('searchTerm').value.toLowerCase();
         let total = 0;

@@ -67,6 +67,11 @@ class HistorialController extends Controller
         //return json_encode($det_registro);
     }
 
+    public function det_registro_one($idregistro){
+        $det_registro = HistorialModel::where('idhistorial_comercializacion', $idregistro)->first();
+        return json_encode(['registro' => $det_registro]);
+    }
+
     public function createHistorial(HistorialRequest $request)
     {
         $idhistorial_comercializacion       = $request->input('idhistorial_comercializacion');
@@ -83,14 +88,41 @@ class HistorialController extends Controller
         $solucionInput                      = $request->input('solucionInput');
         $observacionesTextarea              = $request->input('observacionesTextarea');
         $conclusionesTextarea               = $request->input('conclusionesTextarea');
+        //$user                               = 2;
+        if ($idhistorial_comercializacion != "") {
+            $registro = HistorialModel::find($idhistorial_comercializacion);
+            //dd($registro);
 
-        if ($idhistorial_comercializacion =! "") {
-            # code...
+            try {
+                $registro->persona_contacto = $persona_contacto_input;
+                $registro->idmodulos = $select_modal_modulos;
+                $registro->idmedios = $select_modal_medios;
+                $registro->detalle_llamada = $llamadaDetTextarea;
+                $registro->ideventos = $select_modal_eventos;
+                $registro->fecha_evento = $example_date_input;
+                $registro->descripcion_evento = $eventoTextarea;
+                $registro->idpersonal = $select_modal_personal;
+                $registro->calificacion_encuesta = $calificacionSelect;
+                $registro->solucion_temporal = $solucionInput;
+                $registro->idcotizacion = $idcotizacion;
+                $registro->observaciones = $observacionesTextarea;
+                $registro->conclusiones = $conclusionesTextarea;
+
+                $registro->save();
+            }
+            catch(Exception $e){
+                return json_encode($e->getMessage());
+            }
+                  
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
+            //-----------//
+            
         } else {
             $registro = HistorialModel::create(
                 ['persona_contacto' => $persona_contacto_input,
                 'idmodulos' => $select_modal_modulos,
                 'idmedios ' => $select_modal_medios,
+                //'users_id ' => $user,
                 'detalle_llamada' => $llamadaDetTextarea,
                 'ideventos' => $select_modal_eventos,
                 'fecha_evento' => $example_date_input,
@@ -102,7 +134,7 @@ class HistorialController extends Controller
                 'observaciones' => $observacionesTextarea,
                 'conclusiones' => $conclusionesTextarea]);
             //dd($persona_contacto_input);
-            return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro su registro']);
         }
         
     }

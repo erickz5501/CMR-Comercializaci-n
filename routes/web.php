@@ -79,6 +79,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/listas/historial/lista', "historial\HistorialController@indexLista");    
     Route::post('/guardar/registro', "historial\HistorialController@createHistorial");  
     Route::get('/listas/registro/{idregistro}', "historial\HistorialController@det_Registro"); 
+    Route::get('/mostrar/registro/{idregistro}', "historial\HistorialController@det_registro_one"); 
 });
 Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 

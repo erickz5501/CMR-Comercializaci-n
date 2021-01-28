@@ -8,7 +8,6 @@
   <link rel="icon" href="{{ asset('/argon/assets/img/brand/favicon.png')}}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <link rel="stylesheet" href="//cdn.datatables.net/plug-ins/1.10.16/i18n/Spanish.json">
   <!-- Icons -->
   <link rel="stylesheet" href="{{ asset('/argon/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
   <link rel="stylesheet" href="{{ asset('/argon/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">

@@ -5,7 +5,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
     $("#div_barra_progress_" + nombre_modulo).show();
 
     var formData = new FormData($("#formulario_" + nombre_modulo)[0]);
-    console.log(formData);
+    //console.log(formData);
     $.ajax({
         url: url,
         type: "POST",
