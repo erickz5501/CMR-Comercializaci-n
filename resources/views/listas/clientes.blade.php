@@ -9,10 +9,131 @@
     </div>
 </div>
 
-<!-- ================================= MODAL ================================= -->
+<!-- ================================= MODAL Detalle================================= -->
 <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal" role="document" id="cliente_modal">
         <!-- Contenido del modal /  -->
+    </div>
+</div>
+<!-- FIN-MODAL -->
+
+<!-- ================================= MODAL Licencia ================================= -->
+<div class="modal fade" id="ModalRegistroLicencia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="modal_licencia">
+        <div class="modal-content">
+            <!-- ================================= MODAL TITULO ================================= -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Licencia de Empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                </button>
+            </div>
+
+            <!-- ================================= MODAL CUERPO ================================= -->
+            <form id="" >
+                @csrf
+                <div class="modal-body">
+                    {{-- input ID oculto --}}
+                    <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
+                        <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Nombre de la empresa</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_empresa" name="nombre_empresa" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">RUC</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="ruc_empresa" name="ruc_empresa" placeholder="10764292915" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Representante Legal  </label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="representante_legal" name="representante_legal" placeholder="Roque Zumaeta" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Correo Electronico</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="email" id="correo_empresa" name="correo_empresa" placeholder="ejemplo@gmail.com" required>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Telefono</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="telefono_empresa" name="telefono_empresa" placeholder="923666379" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Direccion</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="direccion_empresa" name="direccion_empresa" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="select_modal_modulos-input">Software</label>
+                                        <select style="color: black !important; font-weight: bold !important;" name="select_modal_software" id="select_modal_software" class="form-control multi_select" data-toggle="select" required>
+                                            <option value="">CeaConta</option>
+                                            <option value="">CeaFinanzas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="select_modal_modulos-input">Periodo</label>
+                                        <select style="color: black !important; font-weight: bold !important;" name="select_modal_periodo" id="select_modal_periodo" class="form-control multi_select" data-toggle="select" required>
+                                            <option value="">Perido 1</option>
+                                            <option value="">Periodo 2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="persona-contacto-input" class="form-control-label">Cantidad</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="cantidad_input" name="cantidad_input" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="example-date-input" class="form-control-label">Fecha inicion</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2021-01-29" id="fecha_inicio_date" name="fecha_inicio_date" required>
+                                    </div>  
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="example-date-input" class="form-control-label">Fecha fin</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2022-01-29" id="fecha_fin_date" name="fecha_fin_date" required>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ================================= FIN-CUADRO-BRODER ================================= -->
+                </div>
+                <!-- FIN-MODAL-BODY -->
+
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
+                    <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Generar Licencia</button>
+                </div>
+            </form>
+            <!-- FIN-MODAL-FOOTER -->
+        </div>
     </div>
 </div>
 <!-- FIN-MODAL -->

@@ -14,6 +14,7 @@
     <div class="modal-body">
         <div class="row col-12">
           <div class="mb-12 col-12">
+              
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -40,68 +41,70 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <label for="example-date-input" class="form-control-label">Detalle llamada: </label>
+                    <div class="col">
+                        <p>{{ $det_registro->detalle_llamada}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="example-date-input" class="form-control-label">Detalle evento: </label>
+                    <div class="col">
+                        <p>
+                            @if ($det_registro->descripcion_evento == "")
+                                Ninguno
+                            @else
+                                {{$det_registro->descripcion_evento}} 
+                            @endif
+                            
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="example-date-input" class="form-control-label">Solucion Temporal: </label>
+                    <div class="col">
+                        <p>{{$det_registro->solucion_temporal}}  </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="example-date-input" class="form-control-label">Observaciones: </label>
+                    <div class="col">
+                        <p>{{$det_registro->observaciones}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="example-date-input" class="form-control-label">Conclusiones: </label>
+                    <div class="col">
+                        <p>{{$det_registro->conclusiones}} </p>
+                    </div>
+                </div>
               
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
                             <label for="example-date-input" class="form-control-label">Fecha evento</label>
-                            <input class="form-control" type="date" value="{{$det_registro->fecha_evento}}" id="example-date-input" readonly>
+                            <p>{{$det_registro->fecha_evento}}</p>
                         </div>                                    
                     </div>
-                    <div class="col-8">
-                        <div class="form-group">
-                            <label for="llamadaDetTextarea">Detalle llamada</label>
-                            <textarea class="form-control" id="llamadaDetTextarea" rows="3" disabled> {{ $det_registro->detalle_llamada}} </textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="eventoTextarea">Detalle evento</label>
-                            <textarea class="form-control" id="eventoTextarea" rows="3" disabled> {{$det_registro->descripcion_evento}} </textarea>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="personalInput">Personal</label>
-                            <p> {{$det_registro->idpersonal}} </p>
-                        </div>
+                            <label for="example-date-input" class="form-control-label">Personal </label>
+                            <p>{{$det_registro->idpersonal}}</p>
+                        </div>                                    
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label for="solucionInput">Solución temporal</label>
-                            <p> {{$det_registro->solucion_temporal}} </p>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="form-group">
-                            <label for="calificacionSelect">Calificacion</label>
-                            <p> {{$det_registro->calificacion_encuesta}} </p>
-                        </div>
+                            <label for="example-date-input" class="form-control-label">Calificacion </label>
+                            <p>{{$det_registro->calificacion_encuesta}} estrellas</p>
+                        </div>                                    
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="observacionesTextarea">Observaciones</label>
-                            <textarea class="form-control" id="observacionesTextarea" rows="3" disabled> {{$det_registro->observaciones}} </textarea>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="conclusionesTextarea">Conclusiones</label>
-                            <textarea class="form-control" id="conclusionesTextarea" rows="3" disabled> {{$det_registro->conclusiones}} </textarea>
-                        </div>
-                    </div>
-                </div>  
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
                             <label for="calificacionSelect">Cotización</label><br>
-                            <button type="button" class="btn btn-secondary">Ver  Doc.</button>
+                            <button type="button" class="btn btn-info">Ver  Doc.</button>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
 
             <!-- ================================= MODAL Detalle ================================= -->
             <div class="modal fade" id="detalle_registro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-xl" role="document" id="modal_registro">
+                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="modal_registro">
                     {{-- Contenido del modal --}}
                   </div>
             </div>

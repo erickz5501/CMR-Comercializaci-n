@@ -19,55 +19,74 @@
           
           <div class="col-md-2">
             <h4 class="text-primary">
-                            Tareas realizadas
+              Tareas realizadas
             </h4>
             <div class="checklist-item checklist-item-primary my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">Modelo base de datos</h5>
-                            </div>
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Modelo base de datos</h5>
+              </div>
             </div>
             <div class="checklist-item checklist-item-primary my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">Interfaz lista de interesados</h5>
-                            </div>
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Interfaz lista de interesados</h5>
+              </div>
             </div>
             <div class="checklist-item checklist-item-primary my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">interfaz registro de interesados</h5>
-                            </div>
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">interfaz registro de interesados</h5>
+              </div>
+            </div>           
+            <div class="checklist-item checklist-item-primary my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Crear conexión a Base de Datos</h5>
+              </div>
+            </div>           
+            <div class="checklist-item checklist-item-primary my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Interfaz de listado de Historial</h5>
+              </div>
+            </div>           
+            <div class="checklist-item checklist-item-primary my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Interfaz registro de Historial</h5>
+              </div>
+            </div>           
+            <div class="checklist-item checklist-item-primary my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Crear Modelos</h5>
+              </div>
             </div>           
           </div>
 
           <div class="col-md-2">
-                        <h4 class="text-danger">
-                            Tareas pendientes
-                        </h4>
-                        <div class="checklist-item checklist-item-danger my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">Interfaz de listado de Historial</h5>
-                            </div>
-                        </div>
-                        <div class="checklist-item checklist-item-danger my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">Interfaz registro de Historial</h5>
-                            </div>
-                        </div>
-                        <div class="checklist-item checklist-item-danger my-1">
-                            <div class="checklist-info">
-                              <h5 class="checklist-title mb-0">Crear Modelos</h5>
-                            </div>
-                        </div>
-                        <div class="checklist-item checklist-item-danger my-1">
-                          <div class="checklist-info">
-                            <h5 class="checklist-title mb-0">Crear Controladores</h5>
-                          </div>
-                        </div>
-                        <div class="checklist-item checklist-item-danger my-1">
-                          <div class="checklist-info">
-                            <h5 class="checklist-title mb-0">Crear conexión a Base de Datos</h5>
-                          </div>
-                        </div>
-                        
+            <h4 class="text-danger">
+                Tareas pendientes
+            </h4>
+            <div class="checklist-item checklist-item-danger my-1">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Diseño interfaz Login</h5>
+                </div>
+            </div>
+            <div class="checklist-item checklist-item-danger my-1">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Diseño interfaz Register</h5>
+                </div>
+            </div>
+            <div class="checklist-item checklist-item-danger my-1">
+                <div class="checklist-info">
+                  <h5 class="checklist-title mb-0">Generar licencias de producto</h5>
+                </div>
+            </div>
+            <div class="checklist-item checklist-item-danger my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Crear Controladores</h5>
+              </div>
+            </div>
+            <div class="checklist-item checklist-item-danger my-1">
+              <div class="checklist-info">
+                <h5 class="checklist-title mb-0">Crud Historial</h5>
+              </div>
+            </div>                
           </div>
         </div>
       </div>

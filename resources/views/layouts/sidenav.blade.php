@@ -2,7 +2,7 @@
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header  d-flex  align-items-center">
-      <a class="navbar-brand" href="{{ url('/')}}">
+      <a class="navbar-brand" href="{{ url('/dashboard')}}">
         <img src="/argon/assets/img/brand/logo_cea.svg" class="navbar-brand-img" alt="..." style="max-height: 3rem;">
       </a>
       <div class=" ml-auto ">
@@ -25,14 +25,14 @@
 
           <li class="nav-item">
             <a href="{{ url('/dashboard/listas/clientes')}}" class="nav-link">
-              <i class="ni ni-ui-04 text-info"></i>
+              <i class="fas fa-user-check"></i>
               <span class="sidenav-normal"> Clientes </span>
             </a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
-              <i class="ni ni-ui-04 text-info"></i>
+              <i class="fas fa-user-friends"></i>
               <span class="nav-link-text">Interesados</span>
             </a>
             <div class="collapse" id="navbar-components">

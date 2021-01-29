@@ -33,7 +33,7 @@ function mostrar_one_registro(idregistro){
     $("#registroModal").modal('show');
     $.get('/dashboard/mostrar/registro/' + idregistro, function(data){
         data = JSON.parse(data);
-        console.log(data.registro);
+        //console.log(data.registro);
         $('#idhistorial_comercializacion').val(data.registro['idhistorial_comercializacion']);
         $('#persona_contacto_input').val(data.registro['persona_contacto']);
 
@@ -75,8 +75,6 @@ function mostrar_one_registro(idregistro){
         $('#solucionInput').val(data.registro['solucion_temporal']);
         $('#observacionesTextarea').val(data.registro['observaciones']);
         $('#conclusionesTextarea').val(data.registro['conclusiones']);
-
-
     })
 }
 
@@ -147,6 +145,16 @@ function mostrar_modal(id){
     $.get('/dashboard/listas/registro/'+id, function(data){
         $('#modal_registro').html(data);
     })
+}
+
+function registrar_historial(){
+    $("#registroModal").modal('show');
+}
+
+function mostrar_regHistorial(){
+    
+    $("#ModalDetalleHistorial").modal('show');
+    $("#historial_reg_modal").modal('show');
 }
 
 init();

@@ -158,7 +158,7 @@ function mostrar_one_cliente(idclientes){
 }
 
 function añadirLicencia(){
-    alert("Esta opcion esta en proceso de desarrollo xD");
+    $("#ModalRegistroLicencia").modal('show');
 }
 
 init();
