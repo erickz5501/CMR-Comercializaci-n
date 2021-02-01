@@ -64,22 +64,6 @@ class ClientesController extends Controller
         $number_empresa_input           = $request->input('number_empresa_input');
         $number_contacto_input          = $request->input('number_contacto_input');
         $number_otro_input              = $request->input('number_otro_input');
-    //     $b = [
-    //         'idclientes' => $idclientes,
-    //         'tipo_documento' => $tipoDocSelect,
-    //     'nro_documento' => $numDocumentoInput,
-    //     'nombres_razon_social' => $nombre_razon_social_input,
-    //     'apellidos_nombre_comercial' => $nombre_comercial_input,
-    //     'correo_1' => $InputCorreo1,
-    //     'correo_2' => $InputCorreo2,
-    //     'correo_3' => $InputCorreo3,
-    //     'telefono_empresa' => $number_empresa_input,
-    //     'telefono_contacto' => $number_contacto_input,
-    //     'telefono_otro' => $number_otro_input,
-    //     'idgiro_negocio' => $GiroNegocioSelect,
-    //     'tipo_persona' => $tipoPersonaSelect
-    // ];
-         //dd($idclientes);
 
         if ( $idclientes != "") {
 
@@ -186,7 +170,6 @@ class ClientesController extends Controller
         return json_encode(['status' => true, 'message' => 'Se ha desactivado el Cliente']);
     }
 
-    
     public function activar($idclientes)
     {
         $usuario = ClientesModel::where('idclientes', $idclientes)->first();
@@ -203,4 +186,9 @@ class ClientesController extends Controller
         $usuario->save();
         return json_encode(['status' => true, 'message' => 'Se ha desactivado el interesado']);
     }
+
+    public function historialInteresado(){
+        return view('listas\interesados\detalle_historial_interesado');
+    }
+
 }

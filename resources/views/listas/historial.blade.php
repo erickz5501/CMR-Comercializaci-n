@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title', 'Historial de comercialización')
-@section('pagina', 'Historial')
+@section('pagina', 'DASHBOARD')
 @section('content')
             <div class="card-header">
                 <div class="row align-items-center">
@@ -9,9 +9,9 @@
                             <input class="form-control" placeholder="Buscar registro..." type="text" id="searchTerm" onkeyup="doSearch()">
                         </form>
                     </div>
-                    <div class="col-4 text-right">
+                    {{-- <div class="col-4 text-right">
                         <a type="button" href="#" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModal"><i class="fas fa-plus-circle"></i> Agregar registro</a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

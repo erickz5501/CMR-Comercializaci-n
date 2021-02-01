@@ -20,7 +20,7 @@
                     <span class="badge badge-success badge-lg">Activo</span>
                 </td>
                 <td>
-                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="mostrar_one_cliente({{ $interesado->idclientes }})">
+                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="mostrar_one_interesado({{ $interesado->idclientes }})">
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
                     <button class="btn btn-icon-only btn-info" type="button" onclick="mostrar_modal_interesado({{ $interesado->idclientes }})">
@@ -32,7 +32,7 @@
                     <button class="btn btn-default btn-icon-only" type="button" onclick="registrar_historial();">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                     </button>
-                    <button class="btn btn-secondary btn-icon-only" type="button" onclick="mostrar_regHistorial();">
+                    <button class="btn btn-secondary btn-icon-only" type="button" onclick="mostrar_regHistorial( {{$interesado->idclientes}} );">
                         <span class="btn-inner--icon"><i class="fas fa-book"></i></span>
                     </button>
                 </td>

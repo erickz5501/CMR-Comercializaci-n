@@ -13,7 +13,7 @@
                     <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                 </button>
 
-                <button class="btn btn-icon-only btn-info" type="button" onclick="mostrar_modal({{ $registro->idhistorial_comercializacion }});">
+                <button class="btn btn-icon-only btn-info" type="button" onclick="mostrar_modalRegistro({{ $registro->idhistorial_comercializacion }});">
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                 </button>
             </td>

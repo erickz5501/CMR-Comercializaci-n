@@ -21,7 +21,7 @@
             </td>
             <td>
                 {{-- <div  class="btn-group" role="group" aria-label="Basic mixed styles example"> --}}
-                    <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})" >
+                    <button style="background-color: #e8875d !important;" type="button" class="btn btn-google-plus btn-icon-only" onclick="mostrar_one_cliente({{ $cliente->idclientes }})">
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
                     
@@ -33,7 +33,7 @@
                         <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                     </button>
 
-                    <button type="button" class="btn btn-success btn-icon-only" onclick="añadirLicencia();">
+                    <button type="button" class="btn btn-success btn-icon-only" onclick="añadirLicencia( {{ $cliente->idclientes}} );">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                     </button>
                 {{-- </div> --}}

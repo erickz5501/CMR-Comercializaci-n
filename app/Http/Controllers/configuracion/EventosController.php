@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class EventosController extends Controller
 {
@@ -13,7 +14,7 @@ class EventosController extends Controller
      */
     public function index()
     {
-        //
+        return view('configuracion.eventos');
     }
 
     /**

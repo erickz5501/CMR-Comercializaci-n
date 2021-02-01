@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
-
-class UsersController extends Controller
+use App\Http\Controllers\Controller;
+class MediosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        return view('configuracion.medios');
     }
 
     /**

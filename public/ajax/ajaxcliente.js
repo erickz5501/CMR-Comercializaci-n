@@ -12,6 +12,7 @@ function init(){
 
     // ...................... .:::: LISTAR SELECT 2 "GIRO DE NEGOCIO" ::::. ......................
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
+    lista_select2('/dashboard/listas/modulos', 'software', null);
     // lista_select2('/dashboard/listas/tipopersona', 'tipoPersona', null);
     // lista_select2('/dashboard/listas/tipodoc', 'tipoDocumento', null);
 }
@@ -117,10 +118,10 @@ function activar_cliente(idclientes) {
 // ........................:::::::: LISTA UN DATOS PARA EDITAR CLIENTE :::::: ..........................
 function mostrar_one_cliente(idclientes){
     $("#registroModal").modal('show');
-    $("#registroModalInteresado").modal('show');
+    //$("#registroModalInteresado").modal('show');
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
-        console.log(data.cliente);  
+        //console.log(data.cliente);  
         $('#idclientes').val(data.cliente['idclientes']);
         $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
         $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
@@ -139,26 +140,74 @@ function mostrar_one_cliente(idclientes){
         }else{
             $('#select_modal_giroNegocio').val(null).trigger('change');
         }
-
+        
         $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
         if (data.cliente['tipo_persona']) {
             $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
         }else{
             $('#select_modal_tipoPersona').val(null).trigger('change');
         }
-
+        
         $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
         if (data.cliente['tipo_documento']) {
             $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
         }else{
             $('#select_modal_tipoDocumento').val(null).trigger('change');
         }
-             
+        
     });
 }
 
-function añadirLicencia(){
+function mostrar_one_interesado(idclientes){
+    $("#registroModalInteresado").modal('show');
+    $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
+        data = JSON.parse(data);
+        //console.log(data.cliente);  
+        $('#idclientes').val(data.cliente['idclientes']);
+        $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
+        $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        $('#numDocumentoInput').val(data.cliente['nro_documento']);
+        $('#InputCorreo1').val(data.cliente['correo_1']);
+        $('#InputCorreo2').val(data.cliente['correo_2']);
+        $('#InputCorreo3').val(data.cliente['correo_3']);
+        $('#number_empresa_input').val(data.cliente['telefono_empresa']);
+        $('#number_contacto_input').val(data.cliente['telefono_contacto']);
+        $('#number_otro_input').val(data.cliente['telefono_otro']);
+        $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']);
+        if (data.cliente['idgiro_negocio']) {
+            $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']).trigger('change');
+        }else{
+            $('#select_modal_giroNegocio').val(null).trigger('change');
+        }
+        
+        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
+        if (data.cliente['tipo_persona']) {
+            $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
+        }else{
+            $('#select_modal_tipoPersona').val(null).trigger('change');
+        }
+        
+        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
+        if (data.cliente['tipo_documento']) {
+            $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
+        }else{
+            $('#select_modal_tipoDocumento').val(null).trigger('change');
+        }
+        
+    });
+}
+
+function añadirLicencia(idcliente){
     $("#ModalRegistroLicencia").modal('show');
+    $.get('/dashboard/mostrar/clientes/'+idcliente, function(data){
+        data = JSON.parse(data);
+        $('#nombre_empresa').val(data.cliente['nombres_razon_social']);
+        $('#ruc_empresa').val(data.cliente['nro_documento']);
+        $('#correo_empresa').val(data.cliente['correo_1']);
+        $('#telefono_empresa').val(data.cliente['telefono_empresa']);
+    });
 }
 
 init();

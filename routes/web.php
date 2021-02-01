@@ -53,6 +53,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/interesado/desactivar/{idclientes}', "clientes\ClientesController@desactivarInteresado");
 
     Route::get('/dashboard/interesado/editar', 'clientes\ClientesController@editarCliente');
+    // Detalle historial interesado
+    Route::get('/interesado/historial', 'clientes\ClientesController@historialInteresado');
 });
 
 //........... ::RUTAS CLIENTES:: ............//
@@ -83,6 +85,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 });
 Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    Route::get('/configuracion/eventos', "configuracion\EventosController@index");
+    Route::get('/configuracion/medios', "configuracion\MediosController@index");
+    Route::get('/configuracion/personal', "configuracion\PersonalController@index");
+    Route::get('/configuracion/modulos', "configuracion\ModulosController@index");
+    Route::get('/configuracion/users', "configuracion\UsersController@index");
+});
 
 // ........... ::::: LISTAR SELECTS :::::...............
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");

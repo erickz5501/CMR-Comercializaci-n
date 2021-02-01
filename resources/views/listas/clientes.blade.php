@@ -39,54 +39,57 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">Nombre de la empresa</label>
-                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_empresa" name="nombre_empresa" placeholder="" required>
+                                        <label for="nombre_empresa" class="form-control-label">Nombre de la empresa</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_empresa" name="nombre_empresa" readonly>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">RUC</label>
-                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="ruc_empresa" name="ruc_empresa" placeholder="10764292915" required>
+                                        <label for="ruc_empresa" class="form-control-label">RUC</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="ruc_empresa" name="ruc_empresa"  readonly>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">Representante Legal  </label>
+                                        <label for="representante_legal" class="form-control-label">Representante Legal  </label>
                                         <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="representante_legal" name="representante_legal" placeholder="Roque Zumaeta" required>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">Correo Electronico</label>
-                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="email" id="correo_empresa" name="correo_empresa" placeholder="ejemplo@gmail.com" required>
+                                        <label for="correo_empresa" class="form-control-label">Correo Electronico</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="email" id="correo_empresa" name="correo_empresa" readonly>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">Telefono</label>
-                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="telefono_empresa" name="telefono_empresa" placeholder="923666379" required>
+                                        <label for="telefono_empresa" class="form-control-label">Telefono</label>
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="telefono_empresa" name="telefono_empresa" readonly >
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
-                                        <label for="persona-contacto-input" class="form-control-label">Direccion</label>
+                                        <label for="direccion_empresa" class="form-control-label">Direccion</label>
                                         <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="direccion_empresa" name="direccion_empresa" placeholder="" required>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="select_modal_modulos-input">Software</label>
                                         <select style="color: black !important; font-weight: bold !important;" name="select_modal_software" id="select_modal_software" class="form-control multi_select" data-toggle="select" required>
-                                            <option value="">CeaConta</option>
-                                            <option value="">CeaFinanzas</option>
+                                            {{-- Aqi van las opciones de modulos --}}
                                         </select>
                                     </div>
                                 </div>
@@ -106,6 +109,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col">
                                     <div class="form-group">
@@ -120,6 +124,7 @@
                                     </div>  
                                 </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- ================================= FIN-CUADRO-BRODER ================================= -->
@@ -393,6 +398,7 @@
 <script src="{{ asset('funciones/tabla.js')}}"></script>
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
+<script src="{{ asset('ajax/ajaxhistorial.js') }}"></script>
 @endsection
 
 <style>

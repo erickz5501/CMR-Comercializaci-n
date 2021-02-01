@@ -140,7 +140,7 @@ function doSearch(){
         }
 }
 
-function mostrar_modal(id){
+function mostrar_modalRegistro(id){
     $('#detalle_registro').modal('show');
     $.get('/dashboard/listas/registro/'+id, function(data){
         $('#modal_registro').html(data);
@@ -148,13 +148,17 @@ function mostrar_modal(id){
 }
 
 function registrar_historial(){
+    limpiar_historial();
     $("#registroModal").modal('show');
 }
 
-function mostrar_regHistorial(){
-    
-    $("#ModalDetalleHistorial").modal('show');
-    $("#historial_reg_modal").modal('show');
+function mostrar_regHistorial(idregistro){
+    //alert('Hola');
+    location.href = "http://127.0.0.1:8000/dashboard/listas/historial";
+}
+
+function generarDocumento(){
+    alert('Esta opcion esta en desarrollo');
 }
 
 init();

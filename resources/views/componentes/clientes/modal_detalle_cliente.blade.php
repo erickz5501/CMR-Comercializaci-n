@@ -113,7 +113,7 @@
     <!-- MODAL FOOTER -->
     <div class="modal-footer">
         <button type="button" class="btn btn-success">Ver licencias</button>
-        <button type="button" class="btn btn-success">Ver Historial</button>
+        <button type="button" class="btn btn-success" onclick="mostrar_regHistorial( {{ $det_cliente->idclientes }} )">Ver Historial</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     </div>
     <!-- FIN-MODAL-FOOTER -->

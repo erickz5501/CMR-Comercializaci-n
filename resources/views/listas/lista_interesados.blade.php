@@ -31,7 +31,7 @@
           <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Interesado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
                 </button>
@@ -312,7 +312,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="calificacionSelect">Cotización</label><br>
-                                        <button type="button" class="btn btn-secondary">Generar Doc.</button>
+                                        <button type="button" class="btn btn-secondary" onclick=" generarDocumento(); ">Generar Doc.</button>
                                     </div>
                                 </div>
                             </div>
@@ -354,7 +354,6 @@
             
         </div>
     </div>
-
 
     <div class="table-responsive">
         <div>
