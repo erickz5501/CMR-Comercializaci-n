@@ -9,5 +9,5 @@ class PersonalModel extends Model
 {
     protected $table = 'personal';
     protected $primaryKey = 'idpersonal';
-    protected $fillable = ['email', 'nombre', 'apellidos', 'estado'];
+    protected $fillable = ['nombres', 'apellidos', 'estado'];
 }

@@ -50,7 +50,7 @@ class ClientesController extends Controller
         return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
     }
 
-    public function createInteresados(InteresadoRequest $request){//CREA UN REGISTRO DE INTERESADO
+    public function createInteresados(InteresadoRequest $request){ //CREA UN REGISTRO DE INTERESADO
         $idclientes                     = $request->input('idclientes');
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
@@ -128,30 +128,30 @@ class ClientesController extends Controller
         $number_contacto_input          = $request->input('number_contacto_input');
         $number_otro_input              = $request->input('number_otro_input');
 
-    $usuario = ClientesModel::find($idclientes);
+        $usuario = ClientesModel::find($idclientes);
 
-    try {
-        $usuario->tipo_documento = $tipoDocSelect;
-        $usuario->nro_documento = $numDocumentoInput;
-        $usuario->nombres_razon_social = $nombre_razon_social_input;
-        $usuario->apellidos_nombre_comercial = $nombre_comercial_input;
-        $usuario->correo_1 = $InputCorreo1;
-        $usuario->correo_2 = $InputCorreo2;
-        $usuario->correo_3 = $InputCorreo3;
-        $usuario->telefono_empresa = $number_empresa_input;
-        $usuario->telefono_contacto = $number_contacto_input;
-        $usuario->telefono_otro = $number_otro_input;
-        $usuario->idgiro_negocio = $GiroNegocioSelect;
-        $usuario->tipo_persona = $tipoPersonaSelect;
+        try {
+            $usuario->tipo_documento = $tipoDocSelect;
+            $usuario->nro_documento = $numDocumentoInput;
+            $usuario->nombres_razon_social = $nombre_razon_social_input;
+            $usuario->apellidos_nombre_comercial = $nombre_comercial_input;
+            $usuario->correo_1 = $InputCorreo1;
+            $usuario->correo_2 = $InputCorreo2;
+            $usuario->correo_3 = $InputCorreo3;
+            $usuario->telefono_empresa = $number_empresa_input;
+            $usuario->telefono_contacto = $number_contacto_input;
+            $usuario->telefono_otro = $number_otro_input;
+            $usuario->idgiro_negocio = $GiroNegocioSelect;
+            $usuario->tipo_persona = $tipoPersonaSelect;
 
-        $usuario->save();
-    }
-    catch(Exception $e){
-        return json_encode($e->getMessage());
-    }
+            $usuario->save();
+        }
+        catch(Exception $e){
+            return json_encode($e->getMessage());
+        }
+            
         
-        
-    return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
+        return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
 
     }
 
@@ -175,7 +175,7 @@ class ClientesController extends Controller
         $usuario = ClientesModel::where('idclientes', $idclientes)->first();
         $usuario->estado = 0;
         $usuario->save();
-        return json_encode(['status' => true, 'message' => 'Se ha desactivado el Cliente']);
+        return json_encode(['status' => true, 'message' => 'Se ha activado el Cliente']);
         
     }
     

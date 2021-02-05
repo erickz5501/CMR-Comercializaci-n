@@ -4,6 +4,8 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\historial\MediosModel;
+use App\Http\Requests\MediosRequest;
 class MediosController extends Controller
 {
     /**
@@ -16,69 +18,58 @@ class MediosController extends Controller
         return view('configuracion.medios');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function indexLista(){
+        $medios = MediosModel::get();
+        //return json_encode($eventos);
+        return view('componentes.configuracion.tabla_medios', compact('medios'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function activar($idmedios){
+        $medio = MediosModel::where('idmedios', $idmedios)->first();
+        $medio->estado = 0;
+        $medio->save();
+        return json_encode(['status' => true, 'message' => 'Se ah activado el medio']);
+    }
+    
+    public function desactivar($idmedios){
+        $medio = MediosModel::where('idmedios', $idmedios)->first();
+        $medio->estado = 1;
+        $medio->save();
+        return json_encode(['status' => true, 'message' => 'Se ah desactivado el medio']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function createMedio(MediosRequest $request){
+        $idmedios                = $request->input('idmedios');
+        $nombre_input             = $request->input('nombre_input');
+       
+        if ($idmedios != "") {
+            $medio = MediosModel::find($idmedios);
+
+            try{
+                $medio->nombre = $nombre_input;
+
+                $medio->save();
+            }
+            catch(Exception $e){
+                return json_encode($e->getMessage());
+            }
+
+            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el medio']);
+            
+        } else {
+            $medio = MediosModel::create(
+                [
+                'nombre' => $nombre_input,
+                ]);
+            
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el medio']);
+        }
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function DetalleMedio($idmedios){
+        $det_medio = MediosModel::where('idmedios', $idmedios)->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return json_encode(['medio' => $det_medio]);
     }
 }

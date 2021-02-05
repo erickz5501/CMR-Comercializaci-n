@@ -20,7 +20,6 @@ class HistorialController extends Controller
      */
     public function index()
     {   
-        
         return view('listas.historial');
     }
 

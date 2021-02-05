@@ -85,11 +85,31 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 });
 Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 
+// .......... :::::: RUTAS CONFIGURACION DEL COMPLETADO :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/configuracion/eventos', "configuracion\EventosController@index");
+    Route::get('/configuracion/eventos/lista', "configuracion\EventosController@indexLista");
+    Route::get('/evento/activar/{ideventos}', "configuracion\EventosController@activar");
+    Route::get('/evento/desactivar/{ideventos}', "configuracion\EventosController@desactivar");
+    Route::post('/evento/guardar', "configuracion\EventosController@createEvento");
+    Route::get('/mostrar/evento/{ideventos}', "configuracion\EventosController@DetalleEvento");
+    
     Route::get('/configuracion/medios', "configuracion\MediosController@index");
+    Route::get('/configuracion/medios/lista', "configuracion\MediosController@indexLista");
+    Route::get('/medio/activar/{idmedios}', "configuracion\MediosController@activar");
+    Route::get('/medio/desactivar/{idmedios}', "configuracion\MediosController@desactivar");
+    Route::post('/medio/guardar', "configuracion\MediosController@createMedio");
+    Route::get('/mostrar/medio/{idmedios}', "configuracion\MediosController@DetalleMedio");
+
     Route::get('/configuracion/personal', "configuracion\PersonalController@index");
+    Route::get('/configuracion/personal/lista', "configuracion\PersonalController@indexLista");
+    Route::get('/personal/activar/{idpersonal}', "configuracion\PersonalController@activar");
+    Route::get('/personal/desactivar/{idpersonal}', "configuracion\PersonalController@desactivar");
+    Route::post('/personal/guardar', "configuracion\PersonalController@createPersonal");
+    Route::get('/mostrar/personal/{idpersonal}', "configuracion\PersonalController@DetallePersonal");
+
     Route::get('/configuracion/modulos', "configuracion\ModulosController@index");
+
     Route::get('/configuracion/users', "configuracion\UsersController@index");
 });
 
