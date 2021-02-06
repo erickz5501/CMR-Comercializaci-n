@@ -109,8 +109,18 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/mostrar/personal/{idpersonal}', "configuracion\PersonalController@DetallePersonal");
 
     Route::get('/configuracion/modulos', "configuracion\ModulosController@index");
+    Route::get('/configuracion/modulos/lista', "configuracion\ModulosController@indexLista");
+    Route::get('/modulos/activar/{idmodulos}', "configuracion\ModulosController@activar");
+    Route::get('/modulos/desactivar/{idmodulos}', "configuracion\ModulosController@desactivar");
+    Route::post('/modulos/guardar', "configuracion\ModulosController@createModulos");
+    Route::get('/mostrar/modulo/{idmodulos}', "configuracion\ModulosController@DetalleModulo");
 
     Route::get('/configuracion/users', "configuracion\UsersController@index");
+    Route::get('/configuracion/users/lista', "configuracion\UsersController@indexLista");
+    Route::get('/users/activar/{idusers}', "configuracion\UsersController@activar");
+    Route::get('/users/desactivar/{idusers}', "configuracion\UsersController@desactivar");
+    Route::post('/users/guardar', "configuracion\UsersController@createUsers");
+    Route::get('/mostrar/user/{idusers}', "configuracion\UsersController@DetalleUser");
 });
 
 // ........... ::::: LISTAR SELECTS :::::...............
