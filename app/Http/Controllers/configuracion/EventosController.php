@@ -20,6 +20,13 @@ class EventosController extends Controller
         return view('componentes.configuracion.tabla_eventos', compact('eventos'));
     }
 
+    public function indexEventos()
+    {
+        $eventos = EventosModel::select('ideventos as id', 'nombre as nombre')->get();
+
+        return json_encode($eventos);
+    }
+
     public function activar($ideventos){
         $evento = EventosModel::where('ideventos', $ideventos)->first();
         $evento->estado = 0;

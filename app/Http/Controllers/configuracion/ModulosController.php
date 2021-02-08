@@ -20,6 +20,13 @@ class ModulosController extends Controller
         return view('componentes.configuracion.tabla_modulos', compact('modulos'));
     }
 
+    public function indexModulos()
+    {
+        $modulos = ModulosModel::select('idmodulos as id', 'nombre as nombre')->get();
+
+        return json_encode($modulos);
+    }
+
     public function activar($idmodulos){
         $modulo = ModulosModel::where('idmodulos', $idmodulos)->first();
         $modulo->estado = 0;

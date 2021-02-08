@@ -125,11 +125,15 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 
 // ........... ::::: LISTAR SELECTS :::::...............
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");
-Route::get('/dashboard/listas/modulos', "historial\HistorialController@indexModulos");
-Route::get('/dashboard/listas/medios', "historial\HistorialController@indexMedios");
-Route::get('/dashboard/listas/eventos', "historial\HistorialController@indexEventos");
-Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
+Route::get('/dashboard/listas/modulos', "configuracion\ModulosController@indexModulos");
+Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedios");
+Route::get('/dashboard/listas/eventos', "configuracion\EventosController@indexEventos");
+// Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
+// ........... ::::: RUTAS :::::...............
+Route::get('/dashboard/comercializacion', "ComercializacionController@index");
+Route::get('/dashboard/actualizaciones', "ActualizacionesController@index");
+Route::get('/dashboard/reclamos', "ReclamosController@index");
 // // ........... ::::: LISTAR TIPO PERSONA :::::...............
 // Route::get('/dashboard/listas/tipopersona', "GiroNegocioController@index");
 

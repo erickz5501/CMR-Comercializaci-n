@@ -24,6 +24,13 @@ class MediosController extends Controller
         return view('componentes.configuracion.tabla_medios', compact('medios'));
     }
 
+    public function indexMedios()
+    {
+        $medios = MediosModel::select('idmedios as id', 'nombre as nombre')->get();
+
+        return json_encode($medios);
+    }
+
     public function activar($idmedios){
         $medio = MediosModel::where('idmedios', $idmedios)->first();
         $medio->estado = 0;

@@ -24,41 +24,29 @@
         <ul class="navbar-nav">
 
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('/dashboard/listas/historial')}}" >
-              <i class="fas fa-home text-blue"></i>
-              <span class="nav-link-text">Dashboard</span>
+            <a class="nav-link" href="{{ url('/dashboard/comercializacion') }} " >
+              <i class="fas fa-cash-register"></i>
+              <span class="nav-link-text">Comercialización</span>
             </a>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
-              <i class="fas fa-list-alt text-purple"></i>
-              <span class="nav-link-text">Listas</span>
+            <a class="nav-link" href="{{ url('/dashboard/reclamos') }} " >
+              <i class="far fa-address-book"></i>
+              <span class="nav-link-text">Reclamos</span>
             </a>
-            <div class="collapse" id="navbar-components">
-              <ul class="nav nav-sm flex-column">
-                <li class="nav-item">
-                  <a href="{{ url('/dashboard/listas/interesados')}}" class="nav-link">
-                    <span class="sidenav-mini-icon"> L </span>
-                    <span class="sidenav-normal"> interesados </span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ url('/dashboard/listas/clientes')}}" class="nav-link">
-                    <span class="sidenav-mini-icon"> C </span>
-                    <span class="sidenav-normal"> Clientes </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
-
           <li class="nav-item">
-            <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
+            <a class="nav-link" href="{{ url('/dashboard/actualizaciones') }} " >
+              <i class="far fa-arrow-alt-circle-up"></i>
+              <span class="nav-link-text">Actualizaciones</span>
+            </a>
+          </li>     
+          <li class="nav-item">
+            <a class="nav-link" href="#navbar-component" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
               <i class="fas fa-cogs"></i>
               <span class="nav-link-text">Configuración</span>
             </a>
-            <div class="collapse" id="navbar-components">
+            <div class="collapse" id="navbar-component">
               <ul class="nav nav-sm flex-column">
                 <li class="nav-item">
                   <a href=" {{ url('/dashboard/configuracion/eventos') }} " class="nav-link">
@@ -94,6 +82,35 @@
             </div>
           </li>
 
+          {{-- <li class="nav-item">
+            <a class="nav-link" href="{{ url('/dashboard/listas/historial')}}" >
+              <i class="fas fa-home text-blue"></i>
+              <span class="nav-link-text">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
+              <i class="fas fa-list-alt text-purple"></i>
+              <span class="nav-link-text">Listas</span>
+            </a>
+            <div class="collapse" id="navbar-components">
+              <ul class="nav nav-sm flex-column">
+                <li class="nav-item">
+                  <a href="{{ url('/dashboard/listas/interesados')}}" class="nav-link">
+                    <span class="sidenav-mini-icon"> L </span>
+                    <span class="sidenav-normal"> interesados </span>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('/dashboard/listas/clientes')}}" class="nav-link">
+                    <span class="sidenav-mini-icon"> C </span>
+                    <span class="sidenav-normal"> Clientes </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li> --}}
         </ul>
       </div>
     </div>
