@@ -23,6 +23,14 @@ class ClientesController extends Controller
         return view('componentes.clientes.tabla_cliente', compact('clientes'));
     }
     
+    public function indexClientes()
+    {
+        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->get();
+
+        return json_encode($clientes);
+    }
+
+
     public function indexListaInteresado(){
         $interesados = ClientesModel::where('tipo_persona', 1)->get();
         return view('componentes.interesados.tabla_interesados', compact('interesados'));

@@ -38,8 +38,14 @@
 
                         <div class="row">
                             <div class="col-10">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
+                                </div> --}}
+                                <div class="form-group">
+                                    <label for="select_modal_medios">Cliente</label>
+                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
+                                        <option selected="selected" value="0">Cliente</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -187,9 +193,10 @@
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Nickname</th>
+                    <th>Persona contacto</th>
+                    <th>Fecha compromiso</th>
+                    <th>Fecha solucion</th>
+                    <th>Estado</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -198,53 +205,10 @@
     </div>
 </div>
 
-<div class="card-footer py-4"></div>
 @endsection
 
-<script language="javascript">
-    function doSearch(){
-        const tableReg = document.getElementById('datos');
-        const searchText = document.getElementById('searchTerm').value.toLowerCase();
-        let total = 0;
-
-        // Recorremos todas las filas con contenido de la tabla
-        for (let i = 1; i < tableReg.rows.length; i++) {
-            // Si el td tiene la clase "noSearch" no se busca en su cntenido
-            if (tableReg.rows[i].classList.contains("noSearch")) {
-                continue;
-            }
-
-            let found = false;
-            const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
-            // Recorremos todas las celdas
-            for (let j = 0; j < cellsOfRow.length && !found; j++) {
-                const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-                // Buscamos el texto en el contenido de la celda
-                if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
-                    found = true;
-                    total++;
-                }
-            }
-            if (found) {
-                tableReg.rows[i].style.display = "";
-            } else {
-                // si no ha encontrado ninguna coincidencia, esconde la
-                // fila de la tabla
-                tableReg.rows[i].style.display = "none";
-            }
-        }
-
-        // mostramos las coincidencias
-        const lastTR = tableReg.rows[tableReg.rows.length - 1];
-        const td = lastTR.querySelector("td");
-        lastTR.classList.remove("hide", "red");
-        if (searchText == "") {
-            lastTR.classList.add("hide");
-        } else if (total) {
-            td.innerHTML = "Se ha encontrado " + total + " coincidencia" + (total > 1 ? "s" : "");
-        } else {
-            lastTR.classList.add("red");
-            td.innerHTML = "No se han encontrado coincidencias";
-        }
-    }
-</script>
+@section('js')
+<script src="{{ asset('funciones/crud.js')}}"></script>
+<script src="{{ asset('ajax/ajaxreclamos.js')}}"></script>
+@endsection
+<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">

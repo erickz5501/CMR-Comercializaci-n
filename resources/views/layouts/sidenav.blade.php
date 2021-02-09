@@ -87,7 +87,7 @@
               <i class="fas fa-home text-blue"></i>
               <span class="nav-link-text">Dashboard</span>
             </a>
-          </li>
+          </li> --}}
 
           <li class="nav-item">
             <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
@@ -110,7 +110,7 @@
                 </li>
               </ul>
             </div>
-          </li> --}}
+          </li>
         </ul>
       </div>
     </div>

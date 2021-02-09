@@ -122,18 +122,33 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/users/guardar', "configuracion\UsersController@createUsers");
     Route::get('/mostrar/user/{idusers}', "configuracion\UsersController@DetalleUser");
 });
+// .......... :::::: RUTAS COMERCIALIZACION DEL COMPLETADO :::: ................
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    route::get('/comercializacion', "ComercializacionController@index");
+    Route::get('/comercializacion/lista', "ComercializacionController@indexLista");
+    Route::post('/comercializacion/guardar', "ComercializacionController@createComercio");
+});
+// .......... :::::: RUTAS  ACTUALIZACIONES DEL COMPLETADO :::: ................
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    route::get('/actualizaciones',"ActualizacionesController@index");
+    route::get('/actualizaciones/lista',"ActualizacionesController@indexLista");
+    
+});
+// .......... :::::: RUTAS RECLAMOS DEL COMPLETADO :::: ................
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    route::get('/reclamos', "ReclamosController@index");
+    Route::get('/reclamos/lista', "ReclamosController@indexLista");
+});
 
 // ........... ::::: LISTAR SELECTS :::::...............
-Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@index");
+Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@indexGiroNegocio");
 Route::get('/dashboard/listas/modulos', "configuracion\ModulosController@indexModulos");
 Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedios");
 Route::get('/dashboard/listas/eventos', "configuracion\EventosController@indexEventos");
+Route::get('/dashboard/listas/personal', "configuracion\PersonalController@indexPersonal");
+Route::get('/dashboard/listas/cliente', "clientes\ClientesController@indexClientes");
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
-// ........... ::::: RUTAS :::::...............
-Route::get('/dashboard/comercializacion', "ComercializacionController@index");
-Route::get('/dashboard/actualizaciones', "ActualizacionesController@index");
-Route::get('/dashboard/reclamos', "ReclamosController@index");
 // // ........... ::::: LISTAR TIPO PERSONA :::::...............
 // Route::get('/dashboard/listas/tipopersona', "GiroNegocioController@index");
 

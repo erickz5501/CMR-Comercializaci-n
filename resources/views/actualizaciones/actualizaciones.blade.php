@@ -43,8 +43,14 @@
 
                         <div class="row">
                             <div class="col-10">
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
+                                </div> --}}
+                                <div class="form-group">
+                                    <label for="select_modal_medios">Cliente</label>
+                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
+                                        <option selected="selected" value="0">Cliente</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -533,21 +539,23 @@
 </div>
 <!-- FIN-MODAL -->
 
-
 <div class="table-responsive">
     <div>
         <table class="table align-items-center" id="datos">
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Nickname</th>
-                    <th colspan="2">Opciones</th>
+                    <th>Tipo</th>
+                    <th>Version</th>
+                    <th>Tiempo</th>
+                    <th>estado</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
-            <tbody class="list" id="lista_actualizaciones"></tbody>
-            <tr>
+            <tbody class="list" id="lista_actualizaciones">
+            
+            </tbody>
+            {{-- <tr>
                 <th scope="row">
                     1
                 </th>
@@ -561,14 +569,21 @@
                     Vper
                 </td>
                 <td>
+                    <span class="badge badge-success badge-lg">Activo</span>
+                </td>
+                <td>
                     <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalListaActualizaciones"><i class="fas fa-plus-circle"></i> Act</a>
                     <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalCliente"><i class="fas fa-plus-circle"></i> Clc</a>
                 </td>
                 
-            </tr> 
+            </tr>  --}}
         </table>
     </div>
 </div>
-
-<div class="card-footer py-4"></div>
 @endsection
+
+@section('js')
+<script src="{{ asset('funciones/crud.js')}}"></script>
+<script src="{{ asset('ajax/ajaxactualizaciones.js')}}"></script>
+@endsection
+<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">

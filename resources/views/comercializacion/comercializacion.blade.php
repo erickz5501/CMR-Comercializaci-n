@@ -32,155 +32,176 @@
         <form id="formulario_comercializacion">
             @csrf
             <div class="modal-body">
-                {{-- input ID oculto --}}
-                <input type="hidden" id="idhistorial_comercializacion" name="idhistorial_comercializacion" />
-                <input type="hidden" id="idcotizacion" name="idcotizacion" value="3" />
-                <div class="row col-12">
-                    <div class="card-body mb-12 col-12 border">
-
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
+                <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
+                    {{-- input ID oculto --}}
+                    <input type="hidden" id="idcomercializacion" name="idcomercializacion"/>
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                     <h5 class="mb-0">Parte #1</h5>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-success">Agregar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_contacto_input" name="persona_contacto_input" placeholder="Persona Contacto" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="">Actividad</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="actividad_input" name="actividad_input" placeholder="Actividad" required>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="select_modal_medios">Medios</label>
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="select" required>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                     <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                {{-- <div class="form-group">
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
+                                                </div> --}}
+                                                <div class="form-group">
+                                                    <label for="select_modal_medios">Cliente</label>
+                                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
+                                                        <option selected="selected" value="0">Cliente</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-success">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     
-                                    </select>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_contacto_input" name="persona_contacto_input" placeholder="Persona Contacto" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                         <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Actividad</label>
+                                                    <input style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" type="text" id="actividad_input" name="actividad_input" placeholder="Actividad" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_medios">Medios</label>
+                                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="select" required>
+                                                        <option selected="selected" value="0">Medios</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_modulos-input">Modulos</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_atencion_input" name="persona_atencion_input" placeholder="Persona Atencion" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="llamadaDetTextarea">Detalle llamada</label>
+                                                    <textarea class="form-control" id="llamadaDetTextarea" name="llamadaDetTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="select_modal_modulos-input">Modulos</label>
-                                    <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
-                                        
-                                    </select>
+                            <div class="card">
+                                <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h5 class="mb-0">Parte #2</h5>
                                 </div>
-                            </div>
-                        </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="eventosSelect">Evento</label>
+                                                    <select class="form-control" id="select_modal_eventos" name="select_modal_eventos" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="example-date-input" class="form-control-label">Fecha evento</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="example_date_input" name="example_date_input" required>
+                                                </div>                                    
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="eventoTextarea">Detalle evento</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="evento_input" name="evento_input" placeholder="Detalle evento" required>
+                                                    {{-- <textarea class="form-control" id="eventoTextarea" name="eventoTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea> --}}
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_atencion_input" name="persona_atencion_input" placeholder="Persona Atencion" required>
-                                </div>
-                            </div>
-                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="personalInput">Personal</label>
+                                                    <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
+                                                        
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="calificacionSelect">Calificacion</label>
+                                                    <select class="form-control" id="calificacionSelect" name="calificacionSelect" style="color: black !important; font-weight: bold !important;">
+                                                    <option value="1">1 estrella</option>
+                                                    <option value="2">2 estrella</option>
+                                                    <option value="3">3 estrella</option>
+                                                    <option value="4">4 estrella</option>
+                                                    <option value="5">5 estrella</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="eventoTextarea">Avance</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="avance_input" name="avance_input" placeholder="Detalle evento" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="eventoTextarea">Por Cobrar</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="cobrar_input" name="cobrar_input" placeholder="Detalle evento" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="row">
+                                            <form>
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
+                                                    <label class="custom-file-label" for="customFileLang">Select file</label>
+                                                </div>
+                                            </form>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="llamadaDetTextarea">Detalle llamada</label>
-                                    <textarea class="form-control" id="llamadaDetTextarea" name="llamadaDetTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for=""></label>
+                                                    <textarea class="form-control" id="conclusionessTextarea" name="conclusionessTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Observaciones</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="eventosSelect">Evento</label>
-                                    <select class="form-control" id="select_modal_eventos" name="select_modal_eventos" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="example-date-input" class="form-control-label">Fecha evento</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="example_date_input" name="example_date_input" required>
-                                </div>                                    
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="eventoTextarea">Detalle evento</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="evento_input" name="evento_input" placeholder="Detalle evento" required>
-                                    {{-- <textarea class="form-control" id="eventoTextarea" name="eventoTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea> --}}
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="personalInput">Personal</label>
-                                    <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="calificacionSelect">Calificacion</label>
-                                    <select class="form-control" id="calificacionSelect" name="calificacionSelect" style="color: black !important; font-weight: bold !important;">
-                                    <option value="1">1 estrella</option>
-                                    <option value="2">2 estrella</option>
-                                    <option value="3">3 estrella</option>
-                                    <option value="4">4 estrella</option>
-                                    <option value="5">5 estrella</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="eventoTextarea">Avance</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="avance_input" name="avance_input" placeholder="Detalle evento" required>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="eventoTextarea">Por Cobrar</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="cobrar_input" name="cobrar_input" placeholder="Detalle evento" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <form>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                                    <label class="custom-file-label" for="customFileLang">Select file</label>
-                                </div>
-                            </form>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for=""></label>
-                                    <textarea class="form-control" id="conclusionessTextarea" name="conclusionessTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Observaciones</textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->
             </div>
@@ -204,9 +225,11 @@
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
-                    <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Nickname</th>
+                    <th>Persona Contacto</th>
+                    <th>Actividad</th>
+                    <th>Fecha evento</th>
+                    <th>Calificacion</th>
+                    <th>Estado</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
@@ -214,60 +237,11 @@
         </table>
     </div>
 </div>
-
-<div class="card-footer py-4"></div>
     
 @endsection
-
-<script language="javascript">
-    function doSearch(){
-        const tableReg = document.getElementById('datos');
-        const searchText = document.getElementById('searchTerm').value.toLowerCase();
-        let total = 0;
-
-        // Recorremos todas las filas con contenido de la tabla
-        for (let i = 1; i < tableReg.rows.length; i++) {
-            // Si el td tiene la clase "noSearch" no se busca en su cntenido
-            if (tableReg.rows[i].classList.contains("noSearch")) {
-                continue;
-            }
-
-            let found = false;
-            const cellsOfRow = tableReg.rows[i].getElementsByTagName("td");
-            // Recorremos todas las celdas
-            for (let j = 0; j < cellsOfRow.length && !found; j++) {
-                const compareWith = cellsOfRow[j].innerHTML.toLowerCase();
-                // Buscamos el texto en el contenido de la celda
-                if (searchText.length == 0 || compareWith.indexOf(searchText) > -1) {
-                    found = true;
-                    total++;
-                }
-            }
-            if (found) {
-                tableReg.rows[i].style.display = "";
-            } else {
-                // si no ha encontrado ninguna coincidencia, esconde la
-                // fila de la tabla
-                tableReg.rows[i].style.display = "none";
-            }
-        }
-
-        // mostramos las coincidencias
-        const lastTR = tableReg.rows[tableReg.rows.length - 1];
-        const td = lastTR.querySelector("td");
-        lastTR.classList.remove("hide", "red");
-        if (searchText == "") {
-            lastTR.classList.add("hide");
-        } else if (total) {
-            td.innerHTML = "Se ha encontrado " + total + " coincidencia" + (total > 1 ? "s" : "");
-        } else {
-            lastTR.classList.add("red");
-            td.innerHTML = "No se han encontrado coincidencias";
-        }
-    }
-</script>
 
 @section('js')
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
 @endsection
+<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">                 

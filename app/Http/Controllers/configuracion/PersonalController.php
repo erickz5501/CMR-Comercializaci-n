@@ -19,6 +19,13 @@ class PersonalController extends Controller
         return view('componentes.configuracion.tabla_personal', compact('personal'));
     }
 
+    public function indexPersonal()
+    {
+        $personal = PersonalModel::select('idpersonal as id', 'nombres as nombre')->get();
+
+        return json_encode($personal);
+    }
+
     public function activar($idpersonal){
         $personal = PersonalModel::where('idpersonal', $idpersonal)->first();
         $personal->estado = 0;
