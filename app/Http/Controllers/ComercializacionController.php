@@ -20,6 +20,101 @@ class ComercializacionController extends Controller
 
     public function createComercio(ComercializacionRequest $request){
 
+        $idcomercializacion             = $request->input('idcomercializacion');
+        $idusers                        = 2;
+        $select_modal_clientes          = $request->input('select_modal_clientes');
+        $persona_contacto_input         = $request->input('persona_contacto_input');
+        $actividad_input                = $request->input('actividad_input');
+        $select_modal_medios            = $request->input('select_modal_medios');
+        $select_modal_modulos           = $request->input('select_modal_modulos');//Este campo no esta en la tabla comercializacion
+        $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
+        $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
+        $select_modal_eventos           = $request->input('select_modal_eventos');
+        $example_date_input             = $request->input('example_date_input');//fecha evento 
+        $evento_input                   = $request->input('evento_input');
+        $select_modal_personal          = $request->input('select_modal_personal');
+        $calificacionSelect             = $request->input('calificacionSelect');
+        $avance_input                   = $request->input('avance_input');
+        $cobrar_input                   = $request->input('cobrar_input');
+        $conclusionessTextarea          = $request->input('conclusionessTextarea');
+
+        if ($idcomercializacion != "") {
+            $registro = ComercializacionModel::find($idcomercializacion);
+
+            try{
+                $registro->idusers              = $idusers;
+                $registro->idclientes           = $select_modal_clientes;
+                $registro->persona_contacto     = $persona_contacto_input;
+                $registro->actividad            = $actividad_input;
+                $registro->idmedios             = $select_modal_medios;
+                $registro->detalla_llamada      = $llamadaDetTextarea;
+                $registro->ideventos            = $select_modal_eventos;
+                $registro->fecha_evento         = $example_date_input;
+                $registro->descripcion_evento   = $evento_input;
+                $registro->idpersonal           = $select_modal_personal;
+                $registro->calificacion         = $calificacionSelect;
+                $registro->avance               = $avance_input;
+                $registro->por_cobrar           = $cobrar_input;
+                $registro->observacion          = $conclusionessTextarea;
+
+                $registro->save();
+            }
+            catch(Exception $e){
+                return json_encode($e->getMessage());
+            }
+
+            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el evento']);
+            
+        } else {
+            $registro = ComercializacionModel::create(
+                [
+                'idusers' => $idusers,
+                'idclientes' => $select_modal_clientes,
+                'persona_contacto' => $persona_contacto_input,
+                'actividad' => $actividad_input,
+                'idmedios' => $select_modal_medios,
+                'detalla_llamada' => $llamadaDetTextarea,
+                'ideventos' => $select_modal_eventos,
+                'fecha_evento' => $example_date_input,
+                'descripcion_evento' => $evento_input,
+                'idpersonal' => $select_modal_personal,
+                'calificacion' => $calificacionSelect,
+                'avance' => $avance_input,
+                'por_cobrar' => $cobrar_input,
+                'observacion' => $conclusionessTextarea
+                ]);
+
+            
+            return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
+        }
+        
+
+    }
+
+    public function activar($idcomercializacion){
+        $registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        $registro->estado = 0;
+        $registro->save();
+        return json_encode(['status' => true, 'message' => 'Se ah activado el registro']);
     }
     
+    public function desactivar($idcomercializacion){
+        $registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        $registro->estado = 1;
+        $registro->save();
+        return json_encode(['status' => true, 'message' => 'Se ah desactivado el registro']);
+    }
+
+    public function DetalleRegistro($idcomercializacion){
+        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+
+        return json_encode(['registro' => $det_registro]);
+    }
+
+    public function detalle_registro($idcomercializacion){
+        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        //var_dump($det_registro);
+        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro'));
+    }
+
 }

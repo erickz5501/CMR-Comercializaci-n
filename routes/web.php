@@ -127,6 +127,12 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/comercializacion', "ComercializacionController@index");
     Route::get('/comercializacion/lista', "ComercializacionController@indexLista");
     Route::post('/comercializacion/guardar', "ComercializacionController@createComercio");
+    Route::get('/comercializacion/desactivar/{idcomercializacion}', "ComercializacionController@desactivar");
+    Route::get('/comercializacion/activar/{idcomercializacion}', "ComercializacionController@activar");
+    Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");
+    Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");
+    
+    
 });
 // .......... :::::: RUTAS  ACTUALIZACIONES DEL COMPLETADO :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){

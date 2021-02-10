@@ -12,10 +12,20 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalComercializacion"><i class="fas fa-plus-circle"></i> Agregar registro</a>
+            <a type="button" href="#" onclick="limpiar_comercializacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalComercializacion"><i class="fas fa-plus-circle"></i> Agregar registro</a>
         </div>
     </div>
 </div>
+
+<!-- ================================= MODAL Detalle================================= -->
+<div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document" id="registro_modal">
+        <!-- Contenido del modal /  -->
+        
+    </div>
+</div>
+<!-- FIN-MODAL -->
+
 <!-- ================================= MODAL Registro ================================= -->
 <div class="modal fade" id="registroModalComercializacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -29,19 +39,22 @@
         </div>
 
         <!-- ================================= MODAL CUERPO ================================= -->
-        <form id="formulario_comercializacion">
+        <form id="formulario_comercializacion" novalidate>
             @csrf
             <div class="modal-body">
-                <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
-                    {{-- input ID oculto --}}
-                    <input type="hidden" id="idcomercializacion" name="idcomercializacion"/>
+                {{-- input ID oculto --}}
+                <input type="hidden" id="idcomercializacion" name="idcomercializacion"/>
+                <input type="hidden" id="idusers" name="idusers" value="2"/>
+                <div class="row col-12">
+                    
+                    <div class="card-body mb-12 col-12">
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                     <h5 class="mb-0">Parte #1</h5>
+                                    <h5 class="mb-0">Collapsible Group Item #1</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                     <div class="card-body">
+                                    <div class="card-body">
                                         <div class="row">
                                             <div class="col-10">
                                                 {{-- <div class="form-group">
@@ -60,7 +73,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+                
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -68,8 +81,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                         <div class="row">
+                
+                                        <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="">Actividad</label>
@@ -93,7 +106,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+                
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -101,7 +114,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+                
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
@@ -113,9 +126,10 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="card">
                                 <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <h5 class="mb-0">Parte #2</h5>
+                                    <h5 class="mb-0">Collapsible Group Item #2</h5>
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -142,7 +156,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -153,7 +167,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
+                
                                         <div class="row">
                                             <div class="col-4">
                                                 <div class="form-group">
@@ -180,16 +194,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    
-                                        <div class="row">
-                                            <form>
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                                                    <label class="custom-file-label" for="customFileLang">Select file</label>
-                                                </div>
-                                            </form>
-                                        </div>
-
+                                        
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
@@ -198,10 +203,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        {{-- No deja enviar el formulario --}}
+                        {{-- <div class="row">
+                            <form>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
+                                    <label class="custom-file-label" for="customFileLang">Select file</label>
+                                </div>
+                            </form>
+                        </div> --}}
+                    </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->
             </div>
@@ -210,7 +226,7 @@
             <!-- MODAL FOOTER -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
-                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar cliente</button>
+                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
             </div>
         </form>
         <!-- FIN-MODAL-FOOTER -->

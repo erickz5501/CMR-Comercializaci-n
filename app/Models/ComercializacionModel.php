@@ -9,6 +9,6 @@ class ComercializacionModel extends Model
 {
     protected $table = 'comercializacion';
     protected $primaryKey = 'idcomercializacion';
-    protected $fillable = ['idclientes', 'persona_contacto', 'activiad', 'idmedios', 'idusers', 'detalle_llamada', 'ideventos', 
+    protected $fillable = ['idclientes', 'persona_contacto', 'actividad', 'idmedios', 'idusers', 'detalle_llamada', 'ideventos', 
                             'fecha_evento', 'descripcion_evento', 'idpersonal', 'calificacion', 'avance', 'por_cobrar', 'observacion', 'estado'];
 }
