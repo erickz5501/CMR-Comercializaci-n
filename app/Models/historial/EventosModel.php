@@ -10,4 +10,8 @@ class EventosModel extends Model
     protected $table = 'eventos';
     protected $primaryKey = 'ideventos';
     protected $fillable = ['nombre', 'descrripcion', 'estado'];
+
+    public function comercializacion(){
+        return $this->belongsTo('App\Models\ComercializacionModel', 'ideventos');
+    }
 }

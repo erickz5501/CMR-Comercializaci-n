@@ -112,8 +112,8 @@ class ComercializacionController extends Controller
     }
 
     public function detalle_registro($idcomercializacion){
-        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-        //var_dump($det_registro);
+        $det_registro = ComercializacionModel::with('clientes', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
+        //return json_encode(['registro'=>$det_registro]);
         return view('comercializacion.modal_detalle_comercializacion', compact('det_registro'));
     }
 

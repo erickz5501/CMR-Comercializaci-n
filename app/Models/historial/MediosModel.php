@@ -10,4 +10,9 @@ class MediosModel extends Model
     protected $table = 'medios';
     protected $primaryKey = 'idmedios';
     protected $fillable = ['nombre', 'estado'];
+
+    public function comercializacion(){
+        return $this->belongsTo('App\Models\ComercializacionModel', 'idmedios');
+    }
+
 }

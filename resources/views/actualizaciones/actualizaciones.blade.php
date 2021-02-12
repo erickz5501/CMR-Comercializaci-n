@@ -35,11 +35,11 @@
         <!-- ================================= MODAL CUERPO ================================= -->
         <form id="formulario_actualizacion">
             @csrf
-            <div class="modal-body">
+            <div class="modal-body"style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
                 <input type="hidden" id="idhistorial_comercializacion" name="idhistorial_comercializacion" />
                 <div class="row col-12">
-                    <div class="card-body mb-12 col-12">
+                    <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
 
                         <div class="row">
                             <div class="col-10">

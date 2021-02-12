@@ -34,24 +34,24 @@
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
             </button>
         </div>
 
         <!-- ================================= MODAL CUERPO ================================= -->
         <form id="formulario_comercializacion" novalidate>
             @csrf
-            <div class="modal-body">
+            <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
                 <input type="hidden" id="idcomercializacion" name="idcomercializacion"/>
                 <input type="hidden" id="idusers" name="idusers" value="2"/>
                 <div class="row col-12">
                     
-                    <div class="card-body mb-12 col-12">
+                    <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <h5 class="mb-0">Collapsible Group Item #1</h5>
+                                    <h5 class="mb-0">#1</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -129,7 +129,7 @@
 
                             <div class="card">
                                 <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <h5 class="mb-0">Collapsible Group Item #2</h5>
+                                    <h5 class="mb-0">#2</h5>
                                 </div>
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -224,7 +224,7 @@
             <!-- FIN-MODAL-BODY -->
 
             <!-- MODAL FOOTER -->
-            <div class="modal-footer">
+            <div class="modal-footer" style="padding-right: 1.5rem !important"">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
                 <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
             </div>

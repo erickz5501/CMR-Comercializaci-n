@@ -10,26 +10,22 @@ use App\Http\Requests\UserGeneralRequest;
 
 class ClientesController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         //dd($cliente);
         return view('listas.clientes');
     }
     
-    public function indexLista()
-    {
+    public function indexLista(){
         $clientes = ClientesModel::where('tipo_persona', 2)->get();
         //dd($cliente);
         return view('componentes.clientes.tabla_cliente', compact('clientes'));
     }
     
-    public function indexClientes()
-    {
+    public function indexClientes(){
         $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->get();
 
         return json_encode($clientes);
     }
-
 
     public function indexListaInteresado(){
         $interesados = ClientesModel::where('tipo_persona', 1)->get();
@@ -38,6 +34,9 @@ class ClientesController extends Controller
 
     public function detalle_cliente($id_cliente){
         $det_cliente = ClientesModel::where('idclientes', $id_cliente)->first();
+        // $det_cliente->each(function($det_cliente){
+        //     $det_cliente->gironegocio;
+        // });
 
         return view('componentes.clientes.modal_detalle_cliente', compact('det_cliente'));
     }
@@ -53,8 +52,10 @@ class ClientesController extends Controller
     }
 
     public function detalle_interesado($id_interesado){
-        $det_interesado = ClientesModel::where('idclientes', $id_interesado)->first();
-        //dd($det_interesado);
+        $det_interesado = ClientesModel::with('gironegocio')->where('idclientes', $id_interesado)->first();
+
+        //return json_encode(['interesado'=>$det_interesado]);
+       
         return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
     }
 

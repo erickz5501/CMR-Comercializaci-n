@@ -13,6 +13,11 @@ class ClientesModel extends Model
                             'correo_3', 'telefono_empresa', 'telefono_contacto', 'telefono_otro', 'tipo_persona', 'estado'];
 
     public function gironegocio(){
-        return $this->hasOne('App\Models\GiroNegocioModel', 'idgiro_negocio');
-    }                  
+        return $this->hasOne('App\Models\GiroNegocioModel', 'idgiro_negocio', 'idgiro_negocio');
+    }
+    
+    public function comercializacion(){
+        return $this->belongsTo('App\Models\ComercializacionModel', 'idclientes');
+    }
+
 }

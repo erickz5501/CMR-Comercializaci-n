@@ -40,12 +40,12 @@
         <!-- ================================= MODAL CUERPO ================================= -->
         <form id="formulario_reclamo">
             @csrf
-            <div class="modal-body">
+            <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
                 <input type="hidden" id="idreclamos" name="idreclamos" />
                 <div class="row col-12">
-                    <div class="card-body mb-12 col-12"  style="padding: 0px; margin-left: 0px !important;" >
-                        <div class="border" style="margin-bottom: 5px; padding: 10px; border-radius: 5px;">
+                    <div class="card-body mb-12 col-12"  style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important" >
+                        
                             <div class="row">
                                 <div class="col-10">
                                     {{-- <div class="form-group">
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-4">
                                     <div class="form-group">
@@ -179,7 +179,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>    
                     </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->

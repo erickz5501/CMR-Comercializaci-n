@@ -18,23 +18,23 @@
 
 <!-- ================================= MODAL Registro ================================= -->
 <div class="modal fade" id="registroModalEvento" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                    <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red"></i> </span>
                 </button>
             </div>
 
             <!-- ================================= MODAL CUERPO ================================= -->
             <form id="formulario_evento" >
                 @csrf
-                <div class="modal-body">
+                <div class="modal-body" >
                     {{-- input ID oculto --}}
                     <input type="hidden" id="ideventos" name="ideventos" />
-                    <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
+                    <div class="card-body mb-12 col-12" style="padding: 0px; margin: 0px !important; padding-top: 0px !important; padding-bottom:0px !important;">
                         
                         <div class="row">
                             <div class="col">

@@ -18,13 +18,13 @@
 
 <!-- ================================= MODAL Registro ================================= -->
 <div class="modal fade" id="registroModalPersonal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar Personal</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                    <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red"></i> </span>
                 </button>
             </div>
 

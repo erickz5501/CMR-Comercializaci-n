@@ -11,15 +11,15 @@
     </div>
 
     <!-- ================================= MODAL CUERPO ================================= -->
-    <div class="modal-body">
+    <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
         <div class="row col-12">
-            <div class="card-body mb-12 col-12">
+            <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 <div class="row">
                     <div class="col-6">
                         <h4>Cliente: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_registro->idclientes}}</p>
+                        <p>{{ $det_registro->clientes->nombres_razon_social}}</p>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         <h4>Medio: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_registro->idmedios}}</p>
+                        <p>{{ $det_registro->medio->nombre}}</p>
                     </div>
                 </div>
 
@@ -64,7 +64,7 @@
                         <h4>Eventos: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_registro->ideventos}}</p>
+                        <p>{{ $det_registro->evento->nombre}}</p>
                     </div>
                 </div>
 
@@ -91,7 +91,7 @@
                         <h4>Personal Encargado: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_registro->idpersonal}}</p>
+                        <p>{{ $det_registro->personal->nombres}}</p>
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
                         <h4>Calificacion: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_registro->calificacion}}</p>
+                        <p>{{ $det_registro->calificacion}} estrellas</p>
                     </div>
                 </div>  
 

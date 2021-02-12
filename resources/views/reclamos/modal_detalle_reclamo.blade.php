@@ -11,9 +11,9 @@
     </div>
 
     <!-- ================================= MODAL CUERPO ================================= -->
-    <div class="modal-body">
+    <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
         <div class="row col-12">
-            <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;" >
+            <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important" >
                     <div class="row">
                         <div class="col-6">
                             <h4>Cliente: </h4>
