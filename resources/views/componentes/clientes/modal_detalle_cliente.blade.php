@@ -44,7 +44,7 @@
                         <h4>Giro de negocio: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_cliente->idgiro_negocio}}</p>
+                        <p>{{ $det_cliente->gironegocio->nombre}}</p>
                     </div>
                 </div>
                 <div class="row">

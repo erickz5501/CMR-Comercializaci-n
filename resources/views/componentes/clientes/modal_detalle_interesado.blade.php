@@ -44,17 +44,17 @@
                         <h4>Giro de negocio: </h4>
                     </div>
                     <div class="col-6">
-                        <p>{{ $det_interesado->idgiro_negocio}}</p>
+                        <p>{{ $det_interesado->gironegocio->nombre}}</p>
                     </div>
                 </div>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-6">
                         <h4>Tipo persona: </h4>
                     </div>
                     <div class="col-6">
                         <p>{{ $det_interesado->tipo_persona}}</p>
                     </div>
-                </div>
+                </div> --}}
                 <div class="row">
                     <div class="col-6">
                         <h4>N° documento: </h4>
