@@ -25,25 +25,25 @@
 
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/dashboard/comercializacion') }} " >
-              <i class="fas fa-cash-register"></i>
+              <i class="fas fa-cash-register text-pink"></i>
               <span class="nav-link-text">Comercialización</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/dashboard/reclamos') }} " >
-              <i class="far fa-address-book"></i>
+              <i class="far fa-address-book text-green"></i>
               <span class="nav-link-text">Reclamos</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ url('/dashboard/actualizaciones') }} " >
-              <i class="far fa-arrow-alt-circle-up"></i>
+              <i class="far fa-arrow-alt-circle-up text-orange"></i>
               <span class="nav-link-text">Actualizaciones</span>
             </a>
           </li>     
           <li class="nav-item">
             <a class="nav-link" href="#navbar-component" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
-              <i class="fas fa-cogs"></i>
+              <i class="fas fa-cogs text-blue"></i>
               <span class="nav-link-text">Configuración</span>
             </a>
             <div class="collapse" id="navbar-component">

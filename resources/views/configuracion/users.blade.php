@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalusers"><i class="fas fa-plus-circle"></i> Agregar usuario</a>
+            <a type="button" href="#" onclick="limpiar_users();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalusers"><i class="fas fa-plus-circle"></i> Agregar usuario</a>
         </div>
     </div>
 </div>

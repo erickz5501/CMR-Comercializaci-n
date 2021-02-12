@@ -33,9 +33,9 @@
                         <span class="btn-inner--icon"><i class="fas fa-trash-alt"></i></span>
                     </button>
 
-                    <button type="button" class="btn btn-success btn-icon-only" onclick="añadirLicencia( {{ $cliente->idclientes}} );">
+                    {{-- <button type="button" class="btn btn-success btn-icon-only" onclick="añadirLicencia( {{ $cliente->idclientes}} );">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
-                    </button>
+                    </button> --}}
                 {{-- </div> --}}
             </td>
         @else

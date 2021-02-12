@@ -29,12 +29,12 @@
                     <button class="btn btn-youtube btn-icon-only" type="button" onclick="desactivar_cliente({{ $interesado->idclientes }})">
                         <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
                     </button>
-                    <button class="btn btn-default btn-icon-only" type="button" onclick="registrar_historial();">
+                    {{-- <button class="btn btn-default btn-icon-only" type="button" onclick="registrar_historial();">
                         <span class="btn-inner--icon"><i class="fas fa-plus"></i></span>
                     </button>
                     <button class="btn btn-secondary btn-icon-only" type="button" onclick="mostrar_regHistorial( {{$interesado->idclientes}} );">
                         <span class="btn-inner--icon"><i class="fas fa-book"></i></span>
-                    </button>
+                    </button> --}}
                 </td>
 
             @else

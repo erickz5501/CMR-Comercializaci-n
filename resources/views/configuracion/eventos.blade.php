@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalEvento"><i class="fas fa-plus-circle"></i> Agregar evento</a>
+            <a type="button" href="#" onclick="limpiar_evento();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalEvento"><i class="fas fa-plus-circle"></i> Agregar evento</a>
         </div>
     </div>
 </div>

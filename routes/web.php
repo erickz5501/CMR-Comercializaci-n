@@ -129,8 +129,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/comercializacion/guardar', "ComercializacionController@createComercio");
     Route::get('/comercializacion/desactivar/{idcomercializacion}', "ComercializacionController@desactivar");
     Route::get('/comercializacion/activar/{idcomercializacion}', "ComercializacionController@activar");
-    Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");
-    Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");
+    Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");//editar el registro
+    Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");//para ver el registro
     
     
 });
@@ -144,6 +144,12 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/reclamos', "ReclamosController@index");
     Route::get('/reclamos/lista', "ReclamosController@indexLista");
+    Route::post('/reclamo/guardar', "ReclamosController@createReclamo");
+    Route::get('/reclamos/desactivar/{idreclamos}', "ReclamosController@desactivar");
+    Route::get('/reclamos/activar/{idreclamos}', "ReclamosController@activar");
+    Route::get('/mostrar/reclamo/{idreclamos}', "ReclamosController@DetalleReclamo");//Para editar el reclamo
+    Route::get('/lista/reclamo/{idreclamos}', "ReclamosController@detalle_reclamo");
+
 });
 
 // ........... ::::: LISTAR SELECTS :::::...............
