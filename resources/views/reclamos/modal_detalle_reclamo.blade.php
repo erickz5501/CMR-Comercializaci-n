@@ -19,7 +19,7 @@
                             <h4>Cliente: </h4>
                         </div>
                         <div class="col-6">
-                            <p>{{ $det_reclamo->idclientes}}</p>
+                            <p>{{ $det_reclamo->clientes->nombres_razon_social}}</p>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                             <h4>Medio: </h4>
                         </div>
                         <div class="col-6">
-                            <p>{{ $det_reclamo->idmedios}}</p>
+                            <p>{{ $det_reclamo->medio->nombre}}</p>
                         </div>
                     </div>   
 
@@ -55,7 +55,7 @@
                             <h4>Modulos: </h4>
                         </div>
                         <div class="col-6">
-                            <p>{{ $det_reclamo->idmodulos}}</p>
+                            <p>{{ $det_reclamo->modulo->nombre}}</p>
                         </div>
                     </div>   
 
@@ -100,7 +100,7 @@
                             <h4>Personal encargado: </h4>
                         </div>
                         <div class="col-6">
-                            <p>{{ $det_reclamo->idpersonal}}</p>
+                            <p>{{ $det_reclamo->personal->nombres}}</p>
                         </div>
                     </div>   
 

@@ -63,6 +63,11 @@ function mostrar_one_registro(idregistro){
         }else{
             $('#select_modal_clientes').val(null).trigger('change');
         }
+        if (data.modulo['idmodulos']) {
+            $('#select_modal_modulos').val(data.modulo['idmodulos']).trigger('change');
+        }else{
+            $('#select_modal_modulos').val(null).trigger('change');
+        }
         if (data.registro['idmedios']) {
             $('#select_modal_medios').val(data.registro['idmedios']).trigger('change');
         }else{

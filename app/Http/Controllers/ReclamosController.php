@@ -119,8 +119,8 @@ class ReclamosController extends Controller
     }
 
     public function detalle_reclamo($idreclamo){
-        $det_reclamo = ReclamosModel::where('idreclamos', $idreclamo)->first();
-        //var_dump($det_registro);
+        $det_reclamo = ReclamosModel::with('clientes', 'medio', 'evento', 'personal', 'modulo')->where('idreclamos', $idreclamo)->first();
+        //dd($det_reclamo);
         return view('reclamos.modal_detalle_reclamo', compact('det_reclamo'));
     }
 

@@ -22,7 +22,7 @@ class ClientesController extends Controller
     }
     
     public function indexClientes(){
-        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->get();
+        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('tipo_persona', 2)->get();
 
         return json_encode($clientes);
     }

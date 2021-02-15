@@ -39,7 +39,7 @@
         </div>
 
         <!-- ================================= MODAL CUERPO ================================= -->
-        <form id="formulario_comercializacion" novalidate>
+        <form id="formulario_comercializacion">
             @csrf
             <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
@@ -57,9 +57,6 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-10">
-                                                {{-- <div class="form-group">
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
-                                                </div> --}}
                                                 <div class="form-group">
                                                     <label for="select_modal_medios">Cliente</label>
                                                     <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
@@ -69,9 +66,24 @@
                                             </div>
                                             <div class="col-2">
                                                 <div class="form-group">
+                                                    <label for="" style="color: white">.</label><br>
                                                     <button type="button" class="btn btn-success">Agregar</button>
                                                 </div>
                                             </div>
+
+                                            {{-- <div class="col-12">
+                                                <div class="form-group">
+                                                    <div class="input-group mb-3">
+                                                        <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
+                                                            <option selected="selected" value="0">Cliente</option>
+                                                        </select>
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> --}}
+
                                         </div>
                 
                                         <div class="row">
@@ -100,7 +112,7 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="select_modal_modulos-input">Modulos</label>
-                                                    <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
+                                                    <select style="color: black !important; font-weight: bold !important;" multiple name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
                                                         
                                                     </select>
                                                 </div>
@@ -156,7 +168,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                
+                                        
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="">Numero Cotizacion</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="numero_cotizacion" name="numero_cotizacion" placeholder="123456" required>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
@@ -198,7 +219,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for=""></label>
+                                                    <label for="">Observaciones</label>
                                                     <textarea class="form-control" id="conclusionessTextarea" name="conclusionessTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Observaciones</textarea>
                                                 </div>
                                             </div>
@@ -208,15 +229,14 @@
                             </div>
                         </div>
 
-                        {{-- No deja enviar el formulario --}}
+                        
                         {{-- <div class="row">
-                            <form>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                                    <label class="custom-file-label" for="customFileLang">Select file</label>
-                                </div>
-                            </form>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="customFileLang" lang="en">
+                                 <label class="custom-file-label" for="customFileLang">Select file</label>
+                            </div>
                         </div> --}}
+
                     </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->
@@ -225,7 +245,6 @@
 
             <!-- MODAL FOOTER -->
             <div class="modal-footer" style="padding-right: 1.5rem !important"">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
                 <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
             </div>
         </form>

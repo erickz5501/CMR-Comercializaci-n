@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ComercializacionModel;
+use App\Models\comercializacion\ModuloComercializacionModel;
 use App\Http\Requests\ComercializacionRequest;
 class ComercializacionController extends Controller
 {
@@ -40,6 +41,7 @@ class ComercializacionController extends Controller
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
+            $modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion )->first();
 
             try{
                 $registro->idusers              = $idusers;
@@ -56,8 +58,10 @@ class ComercializacionController extends Controller
                 $registro->avance               = $avance_input;
                 $registro->por_cobrar           = $cobrar_input;
                 $registro->observacion          = $conclusionessTextarea;
+                $modulo->idmodulos              =$select_modal_modulos;
 
                 $registro->save();
+                $modulo->save();
             }
             catch(Exception $e){
                 return json_encode($e->getMessage());
@@ -83,7 +87,17 @@ class ComercializacionController extends Controller
                 'por_cobrar' => $cobrar_input,
                 'observacion' => $conclusionessTextarea
                 ]);
-
+            //Registro en la tabla modulo_comercializacion
+            $registros = ComercializacionModel::all();
+            $ultimo_registro = $registros->last();
+            $ultimo_registro = json_encode($ultimo_registro);
+            $ultimo_registro = json_decode($ultimo_registro);
+            //dd($ultimo_registro);
+            
+            $modulo_comercializacion = ModuloComercializacionModel::create([
+                'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                'idmodulos' => $select_modal_modulos
+            ]);
             
             return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
         }
@@ -107,8 +121,9 @@ class ComercializacionController extends Controller
 
     public function DetalleRegistro($idcomercializacion){
         $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-
-        return json_encode(['registro' => $det_registro]);
+        $det_modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo ]);
+        //return json_encode(['modulo'=> $det_modulo]);
     }
 
     public function detalle_registro($idcomercializacion){
