@@ -352,21 +352,4 @@
 <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
 <script src="{{ asset('ajax/ajaxhistorial.js') }}"></script>
 @endsection
-
-<style>
-    #datos tr.noSearch {
-        background: White;
-        font-size: 0.8em;
-    }
-    #datos tr.noSearch td {
-        padding-top: 10px;
-        text-align: right;
-    }
-    .hide {
-        display: none;
-    }
-    .red {
-        color: Red;
-    }
-
-</style>
+<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">

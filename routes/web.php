@@ -138,6 +138,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/actualizaciones',"ActualizacionesController@index");
     route::get('/actualizaciones/lista',"ActualizacionesController@indexLista");
+    Route::post('/actualizacion/guardar', "ActualizacionesController@createActualizacion");
+    Route::get('/actualizacion/desactivar/{idactualizacion}', "ActualizacionesController@desactivar");
+    Route::get('/actualizacion/activar/{idactualizacion}', "ActualizacionesController@activar");
     
 });
 // .......... :::::: RUTAS RECLAMOS DEL COMPLETADO :::: ................

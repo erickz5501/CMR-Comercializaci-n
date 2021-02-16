@@ -18,7 +18,7 @@
                     <button class="btn btn-icon-only btn-info" type="button" onclick="">
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                     </button>
-                    <button class="btn btn-youtube btn-icon-only" type="button" onclick="">
+                    <button class="btn btn-youtube btn-icon-only" type="button" onclick="desactivar_actualizacion({{ $actualizacion->idactualizaciones }});">
                         <span class="btn-inner--icon"><i class="far fa-trash-alt"></i></span>
                     </button>
                 </td>
@@ -34,7 +34,7 @@
                     <button class="btn btn-icon-only btn-info" type="button" onclick="">
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                     </button>
-                    <button type="button" class="btn btn-slack btn-icon-only" onclick="">
+                    <button type="button" class="btn btn-slack btn-icon-only" onclick="activar_actualizacion({{ $actualizacion->idactualizaciones }});">
                         <span class="btn-inner--icon"><i class="fas fa-check"></i></span>
                     </button>
                 </td>

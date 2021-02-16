@@ -8,6 +8,7 @@ function init(){
 }
 
 function lista_personal(){
+    $("#lista_personal").html('<div id="loader"></div>');
     $.get('/dashboard/configuracion/personal/lista', function (data){
         $("#lista_personal").html(data);
     });

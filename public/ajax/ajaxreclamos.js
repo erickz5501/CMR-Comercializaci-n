@@ -78,6 +78,7 @@ function detalle_reclamo(idreclamo){
 }
 
 function lista_reclamos(){
+    $("#lista_reclamos").html('<div id="loader"></div>');
     $.get('/dashboard/reclamos/lista', function (data){
         $("#lista_reclamos").html(data);
     });

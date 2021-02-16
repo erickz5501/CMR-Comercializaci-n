@@ -6,6 +6,7 @@ function init(){
 }
 
 function lista_eventos(){
+    $("#lista_eventos").html('<div id="loader"></div>');
     $.get('/dashboard/configuracion/eventos/lista', function (data){
         $("#lista_eventos").html(data);
     });

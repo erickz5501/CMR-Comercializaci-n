@@ -97,12 +97,14 @@ function limpiar_interesado(){ //Para limpIar los campos despues de registrar un
 
 // ............................. ::::::: LISTAR TABLA CLIENTES ::::::: .................................
 function lista_clientes(){
+    $("#lista_clientes").html('<div id="loader"></div>');
     $.get('/dashboard/listas/clientes/lista', function (data){
         $("#lista_clientes").html(data);
     });
 }
 
 function lista_interesados(){
+    $("#lista_interesados").html('<div id="loader"></div>');
     $.get('/dashboard/listas/interesados/lista', function(data){
         $("#lista_interesados").html(data);
     });

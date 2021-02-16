@@ -33,6 +33,7 @@ class ComercializacionController extends Controller
         $select_modal_eventos           = $request->input('select_modal_eventos');
         $example_date_input             = $request->input('example_date_input');//fecha evento 
         $evento_input                   = $request->input('evento_input');
+        $numero_cotizacion              = $request->input('numero_cotizacion');
         $select_modal_personal          = $request->input('select_modal_personal');
         $calificacionSelect             = $request->input('calificacionSelect');
         $avance_input                   = $request->input('avance_input');
@@ -53,12 +54,13 @@ class ComercializacionController extends Controller
                 $registro->ideventos            = $select_modal_eventos;
                 $registro->fecha_evento         = $example_date_input;
                 $registro->descripcion_evento   = $evento_input;
+                $registro->nro_cotizacion       = $numero_cotizacion;
                 $registro->idpersonal           = $select_modal_personal;
                 $registro->calificacion         = $calificacionSelect;
                 $registro->avance               = $avance_input;
                 $registro->por_cobrar           = $cobrar_input;
                 $registro->observacion          = $conclusionessTextarea;
-                $modulo->idmodulos              =$select_modal_modulos;
+                $modulo->idmodulos              = $select_modal_modulos;
 
                 $registro->save();
                 $modulo->save();
@@ -81,6 +83,7 @@ class ComercializacionController extends Controller
                 'ideventos' => $select_modal_eventos,
                 'fecha_evento' => $example_date_input,
                 'descripcion_evento' => $evento_input,
+                'nro_cotizacion' => $numero_cotizacion,
                 'idpersonal' => $select_modal_personal,
                 'calificacion' => $calificacionSelect,
                 'avance' => $avance_input,

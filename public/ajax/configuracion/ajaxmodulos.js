@@ -7,6 +7,7 @@ function init(){
 }
 
 function lista_modulos(){
+    $("#lista_modulos").html('<div id="loader"></div>');
     $.get('/dashboard/configuracion/modulos/lista', function (data){
         $("#lista_modulos").html(data);
     });

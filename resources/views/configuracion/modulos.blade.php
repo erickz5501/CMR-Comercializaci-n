@@ -7,7 +7,7 @@
     <div class="row align-items-center">
         <div class="col-8">
             <form>
-                <input class="form-control" placeholder="Buscar evento..." type="text" id="searchTerm" onkeyup="doSearch()" />
+                <input class="form-control" placeholder="Buscar modulo..." type="text" id="searchTerm" onkeyup="doSearch()" />
             </form>
         </div>
         <div class="col-4 text-right">

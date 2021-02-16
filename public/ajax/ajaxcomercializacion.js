@@ -15,6 +15,7 @@ function init(){
 }
 
 function lista_comercializacion(){
+    $("#lista_comercializacion").html('<div id="loader"></div>');
     $.get('/dashboard/comercializacion/lista', function (data){
         $("#lista_comercializacion").html(data);
     });
@@ -55,9 +56,10 @@ function mostrar_one_registro(idregistro){
         $('#llamadaDetTextarea').val(data.registro['detalla_llamada']);
         $('#example_date_input').val(data.registro['fecha_evento']);
         $('#evento_input').val(data.registro['descripcion_evento']);
+        $('#numero_cotizacion').val(data.registro['nro_cotizacion']);
         $('#avance_input').val(data.registro['avance']);
         $('#cobrar_input').val(data.registro['por_cobrar']);
-        $('#conclusionessTextarea').val(data.registro['observaciones']);
+        $('#conclusionessTextarea').val(data.registro['observacion']);
         if (data.registro['idclientes']) {
             $('#select_modal_clientes').val(data.registro['idclientes']).trigger('change');
         }else{

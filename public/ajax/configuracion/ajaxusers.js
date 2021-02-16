@@ -7,6 +7,7 @@ function init(){
 }
 
 function lista_users(){
+    $("#lista_users").html('<div id="loader"></div>');
     $.get('/dashboard/configuracion/users/lista', function (data){
         $("#lista_users").html(data);
     });

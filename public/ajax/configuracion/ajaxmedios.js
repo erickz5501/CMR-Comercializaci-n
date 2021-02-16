@@ -8,6 +8,8 @@ function init(){
 }
 
 function lista_medios(){
+    $("#lista_medios").html('<div id="loader"></div>');
+
     $.get('/dashboard/configuracion/medios/lista', function (data){
         $("#lista_medios").html(data);
     });

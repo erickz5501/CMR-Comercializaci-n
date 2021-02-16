@@ -6,7 +6,7 @@
     <div class="row align-items-center">
         <div class="col-8">
             <form>
-                <input class="form-control" placeholder="Buscar evento..." type="text" id="searchTerm" onkeyup="doSearch()" />
+                <input class="form-control" placeholder="Buscar actualización..." type="text" id="searchTerm" onkeyup="doSearch()" />
             </form>
         </div>
         <div class="col-4 text-right">
@@ -37,7 +37,7 @@
             @csrf
             <div class="modal-body"style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
-                <input type="hidden" id="idhistorial_comercializacion" name="idhistorial_comercializacion" />
+                <input type="hidden" id="idactualizaciones" name="idactualizaciones" />
                 <div class="row col-12">
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
 

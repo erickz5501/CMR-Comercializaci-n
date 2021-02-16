@@ -8,7 +8,7 @@
     <div class="row align-items-center">
         <div class="col-8">
             <form>
-                <input class="form-control" placeholder="Buscar evento..." type="text" id="searchTerm" onkeyup="doSearch()" />
+                <input class="form-control" placeholder="Buscar registro..." type="text" id="searchTerm" onkeyup="doSearch()" />
             </form>
         </div>
         <div class="col-4 text-right">
@@ -19,7 +19,7 @@
 
 <!-- ================================= MODAL Detalle================================= -->
 <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document" id="registro_modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="registro_modal">
         <!-- Contenido del modal /  -->
         
     </div>
@@ -278,5 +278,6 @@
 @section('js')
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
+
 @endsection
-<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">                 
+<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">
