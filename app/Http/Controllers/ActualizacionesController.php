@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ActualizacionesModel;
 use App\Http\Requests\ActualizacionesRequest;
+use App\Models\ComprasModel;
+
 class ActualizacionesController extends Controller
 {
     public function index(){
@@ -36,15 +38,15 @@ class ActualizacionesController extends Controller
     public function createActualizacion(ActualizacionesRequest $request){
         $idactualizaciones                  = $request->input('idactualizaciones');
         $select_modal_clientes              = $request->input('select_modal_clientes');
-        $select_modal_modulos               = $request->input('select_modal_modulos');//Este campo no esta en la tabla comercializacion
+        $select_modal_modulos               = $request->input('select_modal_modulos');
         $select_modal_cotizacion            = $request->input('select_modal_cotizacion');
-        $date_input                         = $request->input('date_input');
+        $fecha_cotizacion                   = $request->input('fecha_cotizacion');
         $nro_contrato_input                 = $request->input('nro_contrato_input');
-        $nro_factura_input                  = $request->input('nro_factura_input');//Este campo no esta en la tabla comercializacion
+        $nro_factura_input                  = $request->input('nro_factura_input');
         $cant_licencias_input               = $request->input('cant_licencias_input');
-        $date_input2                        = $request->input('date_input2');
-        $date_input3                        = $request->input('date_input3');//fecha evento 
-        $date_input4                        = $request->input('date_input4');
+        $fecha_instalacion                  = $request->input('fecha_instalacion');
+        $fecha_entrega                      = $request->input('fecha_entrega');
+        $fecha_renovacion                   = $request->input('fecha_renovacion');
         $licencia_input                     = $request->input('licencia_input');
         $select_modal_tipo                  = $request->input('select_modal_tipo');
         $select_modal_version               = $request->input('select_modal_version');
@@ -53,10 +55,23 @@ class ActualizacionesController extends Controller
         $precio_input                       = $request->input('precio_input');
         $acto_input                         = $request->input('acto_input');
         $salida_input                       = $request->input('salida_input');
-        $date_input5                        = $request->input('date_input5');
-        $date_input6                        = $request->input('date_input6');
-        $date_input7                        = $request->input('date_input7');
+        $fecha_instalacion_actualizacion    = $request->input('fecha_instalacion_actualizacion');
+        $fecha_entrega_actualizacion        = $request->input('fecha_entrega_actualizacion');
+        $fecha_fin_actualizacion            = $request->input('fecha_fin_actualizacion');
         $procedimientoTextarea              = $request->input('procedimientoTextarea');
+
+        if ($idactualizaciones != "") {
+            # code...
+        } else {
+            $actualizacion = ActualizacionesModel::create([
+                ''
+            ]);
+            $compra = ComprasModel::create([
+
+            ]);
+        }
+        
+
     }
 
 }

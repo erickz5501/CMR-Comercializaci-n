@@ -131,7 +131,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/comercializacion/activar/{idcomercializacion}', "ComercializacionController@activar");
     Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");//editar el registro
     Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");//para ver el registro
-    
+
+    Route::post('/cotizacion/guardar', "ComercializacionController@createCotizacion");
     
 });
 // .......... :::::: RUTAS  ACTUALIZACIONES DEL COMPLETADO :::: ................
@@ -156,6 +157,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 });
 
 // ........... ::::: LISTAR SELECTS :::::...............
+
+Route::get('/dashboard/listas/cotizacion', "ComercializacionController@indexCotizacion");
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@indexGiroNegocio");
 Route::get('/dashboard/listas/modulos', "configuracion\ModulosController@indexModulos");
 Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedios");

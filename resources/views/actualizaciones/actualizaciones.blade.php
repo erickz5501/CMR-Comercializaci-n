@@ -40,167 +40,208 @@
                 <input type="hidden" id="idactualizaciones" name="idactualizaciones" />
                 <div class="row col-12">
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
-
-                        <div class="row">
-                            <div class="col-10">
-                                {{-- <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
-                                </div> --}}
-                                <div class="form-group">
-                                    <label for="select_modal_medios">Cliente</label>
-                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
-                                        <option selected="selected" value="0">Cliente</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-success">Agregar</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
-                                        <option>Modulos</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion" data-toggle="select" required>
-                                        <option>Cotizacion</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input" name="date_input" required>
-                                </div>
-                            </div>
-                        </div>
                         
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nro_contrato_input" name="nro_contrato_input" placeholder="Nro Contrato" >
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h5 class="mb-0">#Compras</h5>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                {{-- <div class="form-group">
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
+                                                </div> --}}
+                                                <div class="form-group">
+                                                    <label for="select_modal_medios">Cliente</label>
+                                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
+                                                        <option selected="selected" value="0">Cliente</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="" style="color: white">.</label><br>
+                                                    <button type="button" class="btn btn-success">Agregar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Modulo</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
+                                                        <option>Modulos</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Cotizacion</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion" data-toggle="select" required>
+                                                        <option>Cotizacion</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Fecha cotizacion</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_cotizacion" name="fecha_cotizacion" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Nro. contrato</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nro_contrato_input" name="nro_contrato_input" placeholder="Nro Contrato" >
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Nro. factura</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="nro_factura_input" name="nro_factura_input" placeholder="Nro factura" >
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Cantidad licencias</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="cant_licencias_input" name="cant_licencias_input" placeholder="Cantidad licencias" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Fecha instalacion</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_instalacion" name="fecha_instalacion" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Fecha entrega</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_entrega" name="fecha_entrega" required>
+                                                </div>fecha_entrega
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label for="">Fecha renovacion</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_renovacion" name="fecha_renovacion" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="nro_factura_input" name="nro_factura_input" placeholder="Nro factura" >
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="cant_licencias_input" name="cant_licencias_input" placeholder="Cantidad licencias" >
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input2" name="date_input2" required>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input3" name="date_input3" required>
-                                </div>                      
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input4" name="date_input4" required>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-10">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="licencia_input" name="licencia_input" placeholder="Buscar persona" >
+                            <div class="card">
+                                <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <h5 class="mb-0">#Actualizaciones</h5>
                                 </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-success">Generar</button>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipo" name="select_modal_tipo" data-toggle="select" required>
-                                        <option>Tipo</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_version" name="select_modal_version" data-toggle="select" required>
-                                        <option>Version</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tiempo_licencia" name="select_modal_tiempo_licencia" data-toggle="select" required>
-                                        <option>Tiempo Licencia</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="licencias_cantidad_input" name="licencias_cantidad_input" placeholder="Cantidad Licencia" >
-                                </div>
-                            </div>
-                        </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <div class="form-group">
+                                                    <label for="">Codigo licencia</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="licencia_input" name="licencia_input" placeholder="Buscar persona" >
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-success">Generar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Tipo</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipo" name="select_modal_tipo" data-toggle="select" required>
+                                                        <option>Tipo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Version</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_version" name="select_modal_version" data-toggle="select" required>
+                                                        <option>Version</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Tipo licencia</label>
+                                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tiempo_licencia" name="select_modal_tiempo_licencia" data-toggle="select" required>
+                                                        <option>Tiempo Licencia</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Cantidad licencia</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="licencias_cantidad_input" name="licencias_cantidad_input" placeholder="Cantidad Licencia" >
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="precio_input" name="precio_input" placeholder="Precio" >
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="acto_input" name="acto_input" placeholder="Acto" >
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="salida_input" name="salida_input" placeholder="Salida" >
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input5" name="date_input5" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input6" name="date_input6" required>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="date_input7" name="date_input7" required>
-                                </div>
-                            </div>
-                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Precio</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="precio_input" name="precio_input" placeholder="Precio" >
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Acta</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="acto_input" name="acto_input" placeholder="Acto" >
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Saldo</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="salida_input" name="salida_input" placeholder="Salida" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Fecha instalacion</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_instalacion_actualizacion" name="fecha_instalacion_actualizacion" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">fecha entrega</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_entrega_actualizacion" name="fecha_entrega_actualizacion" required>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="">Fecha fin</label>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_fin_actualizacion" name="fecha_fin_actualizacion" required>
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for=""></label>
-                                    <textarea class="form-control" id="procedimientoTextarea" name="procedimientoTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Procedimiento</textarea>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for=""></label>
+                                                    <textarea class="form-control" id="procedimientoTextarea" name="procedimientoTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Procedimiento</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

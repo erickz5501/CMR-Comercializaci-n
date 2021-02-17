@@ -12,10 +12,10 @@
                     <span class="badge badge-success badge-lg">Activo</span>
                 </td>
                 <td>
-                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="">
+                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="editar_actualizacion( {{ $actualizacion->idactualizacion }} );">
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
-                    <button class="btn btn-icon-only btn-info" type="button" onclick="">
+                    <button class="btn btn-icon-only btn-info" type="button" onclick="detalle_actualizacion({{ $actualizacion->idactualizacion }});">
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                     </button>
                     <button class="btn btn-youtube btn-icon-only" type="button" onclick="desactivar_actualizacion({{ $actualizacion->idactualizaciones }});">
@@ -28,10 +28,10 @@
                     <span class="badge badge-danger badge-lg">Inactivo</span>
                 </td>
                 <td>
-                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="">
+                    <button class="btn btn-google-plus btn-icon-only" style="background-color: #e8875d !important;" type="button" onclick="editar_actualizacion( {{ $actualizacion->idactualizacion }} );">
                         <span class="btn-inner--icon"><i class="fas fa-pencil-alt"></i></span>
                     </button>
-                    <button class="btn btn-icon-only btn-info" type="button" onclick="">
+                    <button class="btn btn-icon-only btn-info" type="button" onclick="detalle_actualizacion({{ $actualizacion->idactualizacion }});">
                         <span class="btn-inner--icon"><i class="fas fa-eye"></i></span>
                     </button>
                     <button type="button" class="btn btn-slack btn-icon-only" onclick="activar_actualizacion({{ $actualizacion->idactualizaciones }});">

@@ -170,12 +170,22 @@
                                         </div>
                                         
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-10">
                                                 <div class="form-group">
-                                                    <label for="">Numero Cotizacion</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="numero_cotizacion" name="numero_cotizacion" placeholder="123456" required>
+                                                    <label for="">Cotizacion</label>
+                                                    <select class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
+                                                        
+                                                    </select>
+                                                    {{-- <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="numero_cotizacion" name="numero_cotizacion" placeholder="123456" required> --}}
                                                 </div>
                                             </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="" style="color: white">.</label><br>
+                                                    <a type="button" href="#" class="btn btn btn-success" data-toggle="modal" data-target="#registroModalCotizacion">Agregar</a>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <div class="row">
@@ -229,14 +239,6 @@
                             </div>
                         </div>
 
-                        
-                        {{-- <div class="row">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFileLang" lang="en">
-                                 <label class="custom-file-label" for="customFileLang">Select file</label>
-                            </div>
-                        </div> --}}
-
                     </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->
@@ -246,6 +248,59 @@
             <!-- MODAL FOOTER -->
             <div class="modal-footer" style="padding-right: 1.5rem !important"">
                 <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
+            </div>
+        </form>
+        <!-- FIN-MODAL-FOOTER -->
+      </div>
+    </div>
+</div>
+<!-- FIN-MODAL -->
+
+<!-- ================================= MODAL Registro COTIZACION================================= -->
+<div class="modal fade border" id="registroModalCotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal" role="document">
+      <div class="modal-content">
+        <!-- ================================= MODAL TITULO ================================= -->
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar cotizacion</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
+            </button>
+        </div>
+
+        <!-- ================================= MODAL CUERPO ================================= -->
+        <form id="formulario_cotizacion">
+            @csrf
+            <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
+                {{-- input ID oculto --}}
+                <input type="hidden" id="idcotizaciones" name="idcotizaciones"/>
+                <div class="row col-12">
+                    <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Nombre</label>
+                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_cotizacion" name="nombre_cotizacion" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Ruta</label>
+                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="ruta_cotizacion" name="ruta_cotizacion" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- ================================= FIN-CUADRO-BRODER ================================= -->
+            </div>
+            <!-- FIN-MODAL-BODY -->
+
+            <!-- MODAL FOOTER -->
+            <div class="modal-footer" style="padding-right: 1.5rem !important"">
+                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar cotizaion</button>
             </div>
         </form>
         <!-- FIN-MODAL-FOOTER -->
