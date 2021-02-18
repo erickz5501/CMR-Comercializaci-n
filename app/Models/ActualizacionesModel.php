@@ -12,5 +12,7 @@ class ActualizacionesModel extends Model
     protected $fillable = ['idcompras', 'tipo', 'version', 'tiempo_licencia', 'cantidad_licencia', 'precio', 'acta', 
                             'salido', 'fecha_instalacion', 'fecha_entrega', 'fecha_fin', 'procedimiento', 'estado'];
 
-    // public
+    public function compras(){
+        return $this->hasOne('App\Models\ComprasModel', 'idcompras', 'idcompras');
+    }
 }

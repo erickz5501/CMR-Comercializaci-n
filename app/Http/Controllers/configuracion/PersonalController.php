@@ -21,7 +21,7 @@ class PersonalController extends Controller
 
     public function indexPersonal()
     {
-        $personal = PersonalModel::select('idpersonal as id', 'nombres as nombre')->get();
+        $personal = PersonalModel::select('idpersonal as id', 'nombres as nombre')->where('estado', 0)->get();
 
         return json_encode($personal);
     }

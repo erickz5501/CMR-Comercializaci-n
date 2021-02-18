@@ -15,7 +15,7 @@ class ComercializacionModel extends Model
         'actividad', 
         'idmedios', 
         'idusers', 
-        'detalle_llamada', 
+        'detalla_llamada', 
         'ideventos', 
         'fecha_evento', 
         'descripcion_evento',

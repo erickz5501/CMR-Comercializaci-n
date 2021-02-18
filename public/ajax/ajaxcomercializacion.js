@@ -2,10 +2,12 @@ function init(){
 
     $("#formulario_comercializacion").on("submit", function(e) {
         guardar_registro(e);
+        
     });
 
     $("#formulario_cotizacion").on("submit", function(e) {
         guardar_cotizacion(e);
+        lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     });
 
     lista_comercializacion();
@@ -73,14 +75,14 @@ function mostrar_one_registro(idregistro){
         $('#llamadaDetTextarea').val(data.registro['detalla_llamada']);
         $('#example_date_input').val(data.registro['fecha_evento']);
         $('#evento_input').val(data.registro['descripcion_evento']);
-        
         $('#avance_input').val(data.registro['avance']);
         $('#cobrar_input').val(data.registro['por_cobrar']);
         $('#conclusionessTextarea').val(data.registro['observacion']);
-        if (data.registro['nro_cotizacion']) {
-            $('#select_modal_cotizacion').val(data.registro['nro_cotizacion']).trigger('change');
+
+        if (data.cotizacion['idcotizaciones']) {
+            $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
         }else{
-            $('#select_modal_clientes').val(null).trigger('change');
+            $('#select_modal_cotizacion').val(null).trigger('change');
         }
         if (data.registro['idclientes']) {
             $('#select_modal_clientes').val(data.registro['idclientes']).trigger('change');

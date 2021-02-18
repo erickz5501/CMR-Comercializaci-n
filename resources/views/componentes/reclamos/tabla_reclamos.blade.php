@@ -3,6 +3,7 @@
     @foreach ($reclamos as $count => $reclamo)
         <tr>
             <td>{{ $count+1 }}</td>
+            <td>{{ $reclamo->clientes->nombres_razon_social}}</td>
             <td>{{ $reclamo->persona_contacto}}</td>
             <td>{{ $reclamo->fecha_compromiso}}</td>
             <td>{{ $reclamo->fecha_solucion}}</td>

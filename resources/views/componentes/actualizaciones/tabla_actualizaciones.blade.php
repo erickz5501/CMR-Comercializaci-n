@@ -3,10 +3,11 @@
     @foreach ($actualizaciones as $count => $actualizacion)
         <tr>
             <td>{{ $count+1 }}</td>
+            <td>{{ $actualizacion->compras->idclientes }}</td>
             <td>{{ $actualizacion->tipo}}</td>
             <td>{{ $actualizacion->version}}</td>
             <td>{{ $actualizacion->tiempo_licencia}}</td>
-
+            <td>{{ $actualizacion->compras->fecha_instalacion }}</td>
             @if ($actualizacion->estado == 0)
                 <td>
                     <span class="badge badge-success badge-lg">Activo</span>

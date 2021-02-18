@@ -38,6 +38,7 @@
             <div class="modal-body"style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
                 <input type="hidden" id="idactualizaciones" name="idactualizaciones" />
+                <input type="hidden" id="idcompras" name="idcompras" />
                 <div class="row col-12">
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                         
@@ -125,7 +126,7 @@
                                                 <div class="form-group">
                                                     <label for="">Fecha entrega</label>
                                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_entrega" name="fecha_entrega" required>
-                                                </div>fecha_entrega
+                                                </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
@@ -163,7 +164,7 @@
                                                 <div class="form-group">
                                                     <label for="">Tipo</label>
                                                     <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipo" name="select_modal_tipo" data-toggle="select" required>
-                                                        <option>Tipo</option>
+                                                        <option value="1">Tipo</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -171,7 +172,7 @@
                                                 <div class="form-group">
                                                     <label for="">Version</label>
                                                     <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_version" name="select_modal_version" data-toggle="select" required>
-                                                        <option>Version</option>
+                                                        <option value="1">Version</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -179,7 +180,7 @@
                                                 <div class="form-group">
                                                     <label for="">Tipo licencia</label>
                                                     <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tiempo_licencia" name="select_modal_tiempo_licencia" data-toggle="select" required>
-                                                        <option>Tiempo Licencia</option>
+                                                        <option value="1">Tiempo Licencia</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -586,9 +587,11 @@
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
+                    <th>Cliente</th>
                     <th>Tipo</th>
                     <th>Version</th>
                     <th>Tiempo</th>
+                    <th>fecha instalacion</th>
                     <th>estado</th>
                     <th>Opciones</th>
                 </tr>

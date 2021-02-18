@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ComercializacionModel;
 use App\Models\CotizacionesModel;
+use App\Models\CotizacionComercializacionModel;
 use App\Models\comercializacion\ModuloComercializacionModel;
 use App\Http\Requests\ComercializacionRequest;
 use App\Http\Requests\CotizacionRequest;
@@ -41,7 +42,7 @@ class ComercializacionController extends Controller
         $select_modal_eventos           = $request->input('select_modal_eventos');
         $example_date_input             = $request->input('example_date_input');//fecha evento 
         $evento_input                   = $request->input('evento_input');
-        $select_modal_cotizacion              = $request->input('select_modal_cotizacion');
+        $select_modal_cotizacion        = $request->input('select_modal_cotizacion');
         $select_modal_personal          = $request->input('select_modal_personal');
         $calificacionSelect             = $request->input('calificacionSelect');
         $avance_input                   = $request->input('avance_input');
@@ -62,7 +63,7 @@ class ComercializacionController extends Controller
                 $registro->ideventos            = $select_modal_eventos;
                 $registro->fecha_evento         = $example_date_input;
                 $registro->descripcion_evento   = $evento_input;
-                $registro->nro_cotizacion       = $select_modal_cotizacion;
+                //$registro->nro_cotizacion       = $select_modal_cotizacion;
                 $registro->idpersonal           = $select_modal_personal;
                 $registro->calificacion         = $calificacionSelect;
                 $registro->avance               = $avance_input;
@@ -91,7 +92,7 @@ class ComercializacionController extends Controller
                 'ideventos' => $select_modal_eventos,
                 'fecha_evento' => $example_date_input,
                 'descripcion_evento' => $evento_input,
-                'nro_cotizacion' => $select_modal_cotizacion,
+                // 'nro_cotizacion' => $select_modal_cotizacion,
                 'idpersonal' => $select_modal_personal,
                 'calificacion' => $calificacionSelect,
                 'avance' => $avance_input,
@@ -108,6 +109,11 @@ class ComercializacionController extends Controller
             $modulo_comercializacion = ModuloComercializacionModel::create([
                 'idcomercializacion' => $ultimo_registro->idcomercializacion,
                 'idmodulos' => $select_modal_modulos
+            ]);
+
+            $cotizacion_comercializacion = CotizacionComercializacionModel::create([
+                'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                'idcotizaciones' => $select_modal_cotizacion
             ]);
             
             return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
@@ -146,7 +152,8 @@ class ComercializacionController extends Controller
     public function DetalleRegistro($idcomercializacion){
         $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
         $det_modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-        return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo ]);
+        $cotizacion = CotizacionComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo, 'cotizacion'=>$cotizacion]);
         //return json_encode(['modulo'=> $det_modulo]);
     }
 

@@ -14,7 +14,7 @@ class ReclamosController extends Controller
 
     public function indexLista()
     {
-        $reclamos = ReclamosModel::get();
+        $reclamos = ReclamosModel::with('clientes')->get();
         //return json_encode($comercio);
         return view('componentes.reclamos.tabla_reclamos', compact('reclamos'));
     }

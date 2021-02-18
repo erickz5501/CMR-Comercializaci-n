@@ -1,7 +1,15 @@
 function init(){
+
+    $("#formulario_actualizacion").on("submit", function(e) {
+        guardar_actualizacion(e);
+        
+    });
+
     lista_actualizaciones();
+
     lista_select2('/dashboard/listas/cliente', 'clientes', null);
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
+    lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
 
 }
 
@@ -19,6 +27,20 @@ function desactivar_actualizacion(idactualizacion){
 
 function activar_actualizacion(idactualizacion){
     crud_activar('/dashboard/actualizacion/activar/' + idactualizacion , function(){ lista_actualizaciones(); }, function(){ console.log('Eror') });
+}
+
+function guardar_actualizacion(e) {
+
+    crud_guardar_editar(
+        e,
+        '/dashboard/actualizacion/guardar',
+        'actualizacion',
+        function(){ limpiar_formulario(); },
+        function(){ lista_actualizaciones(); },
+        function(){ console.log('Console Error'); }
+    );
+
+    $("#registroModalActualizaciones").modal('hide');
 }
 
 function detalle_actualizacion(idactualizacion){

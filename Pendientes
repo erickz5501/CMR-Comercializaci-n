@@ -1,0 +1,22 @@
+Actualizaciones:
+    Editar la actualizacion
+    Ver el detalle de la actualizacion
+    Crear la funcion generar licencia
+    ¿De donde saca los datos los campos de tipo, version, tiempo?
+    Mostrar mas datos en la tabla principal
+
+Reclamos:
+    Guardar la opcion de "¿reclamo procede?"
+    Mostrar un registro por cliente y tener una opcion que deje ver todo los reclamos de ese cliente
+
+Comercializacion:
+    Registrar usuario que creo el registro(idusers)
+    Subir archivos a la web(ahora solo sube texto plano)
+
+General:
+    Hacer login funcional
+    Guardar datos del logueado
+    Hacer funcionales los botones de agregar cliente
+    Validar de forma mas efectiva los formularios
+    Mejorar las vistas al ver detalle de un registro
+ 

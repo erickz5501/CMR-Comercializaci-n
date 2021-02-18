@@ -28,6 +28,7 @@
   <script src="{{ asset('/argon/assets/vendor/dropzone/dist/min/dropzone.min.js')}}"></script>
   <script src="{{ asset('/argon/assets/vendor/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js')}}"></script>
   <script src={{ asset('/argon/assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script type="text/javascript">
     $(function() {
       $('#datetimepicker1').datetimepicker({

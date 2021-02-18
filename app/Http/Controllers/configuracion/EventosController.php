@@ -22,7 +22,7 @@ class EventosController extends Controller
 
     public function indexEventos()
     {
-        $eventos = EventosModel::select('ideventos as id', 'nombre as nombre')->get();
+        $eventos = EventosModel::select('ideventos as id', 'nombre as nombre')->where('estado', 0)->get();
 
         return json_encode($eventos);
     }

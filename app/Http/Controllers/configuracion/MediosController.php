@@ -26,7 +26,7 @@ class MediosController extends Controller
 
     public function indexMedios()
     {
-        $medios = MediosModel::select('idmedios as id', 'nombre as nombre')->get();
+        $medios = MediosModel::select('idmedios as id', 'nombre as nombre')->where('estado', 0)->get();
 
         return json_encode($medios);
     }

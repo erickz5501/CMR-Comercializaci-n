@@ -22,7 +22,7 @@ class ModulosController extends Controller
 
     public function indexModulos()
     {
-        $modulos = ModulosModel::select('idmodulos as id', 'nombre as nombre')->get();
+        $modulos = ModulosModel::select('idmodulos as id', 'nombre as nombre')->where('estado', 0)->get();
 
         return json_encode($modulos);
     }

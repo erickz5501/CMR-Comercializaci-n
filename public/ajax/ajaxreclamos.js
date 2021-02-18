@@ -18,7 +18,7 @@ function guardar_reclamo(e) {
         e,
         '/dashboard/reclamo/guardar',
         'reclamo',
-        //function(){ limpiar_comercializacion(); },
+        function(){ limpiar_reclamo(); },
         function(){ lista_reclamos(); },
         function(){ console.log('Console Error'); }
     );
@@ -75,6 +75,15 @@ function detalle_reclamo(idreclamo){
             }
             
         });
+}
+
+function limpiar_reclamo(){
+    document.getElementById("formulario_reclamo").reset();
+    $('#select_modal_clientes').val(null).trigger('change');
+    $('#select_modal_medios').val(null).trigger('change');
+    $('#select_modal_modulos').val(null).trigger('change');
+    // $('#select_modal_eventos').val(null).trigger('change');
+    $('#select_modal_personal_responsable').val(null).trigger('change');
 }
 
 function lista_reclamos(){
