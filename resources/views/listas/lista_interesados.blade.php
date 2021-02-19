@@ -19,7 +19,7 @@
 
     <!-- ================================= MODAL det interesado ================================= -->
     <div class="modal fade" id="ModalDetalleInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal" role="document" id="interesado_modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="interesado_modal">
             
         </div>
     </div>
@@ -33,7 +33,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar Interesado</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                    <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
                 </button>
             </div>
 
@@ -195,8 +195,7 @@
 
                 <!-- MODAL FOOTER -->
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-primary">Guardar Interesado</button>
+                <button type="submit" class="btn btn-success"> <i class="far fa-save"> </i> Guardar Interesado</button>
                 </div>
             </form>
             <!-- FIN-MODAL-FOOTER -->

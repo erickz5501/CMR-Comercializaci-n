@@ -11,7 +11,7 @@
 
 <!-- ================================= MODAL Detalle================================= -->
 <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document" id="cliente_modal">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="cliente_modal">
         <!-- Contenido del modal /  -->
     </div>
 </div>
@@ -151,7 +151,7 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true"> <i class="far fa-times-circle"></i> </span>
+                    <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
                 </button>
             </div>
 
@@ -312,7 +312,6 @@
 
                 <!-- MODAL FOOTER -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
                     <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar cliente</button>
                 </div>
             </form>

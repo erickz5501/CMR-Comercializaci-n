@@ -70,7 +70,6 @@
 
                 <!-- MODAL FOOTER -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times-circle"> </i> Cerrar</button>
                     <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar personal</button>
                 </div>
             </form>

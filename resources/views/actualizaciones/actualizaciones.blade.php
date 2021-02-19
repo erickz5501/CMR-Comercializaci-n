@@ -20,6 +20,7 @@
         </div> --}}
     </div>
 </div>
+
 <!-- ================================= MODAL Registro ================================= -->
 <div class="modal fade" id="registroModalActualizaciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
@@ -50,10 +51,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-10">
-                                                {{-- <div class="form-group">
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
-                                                </div> --}}
+                                            {{-- <div class="col-10">
                                                 <div class="form-group">
                                                     <label for="select_modal_medios">Cliente</label>
                                                     <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
@@ -65,6 +63,18 @@
                                                 <div class="form-group">
                                                     <label for="" style="color: white">.</label><br>
                                                     <button type="button" class="btn btn-success">Agregar</button>
+                                                </div>
+                                            </div> --}}
+                                            <div class="col-12">
+                                                <div class="input-group form-group" id="">
+                                                    <select class="form-control" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
+                                                        
+                                                    </select>
+                                                    <span class="input-group-addon input-group-append">
+                                                        <button class="btn btn-success" type="button" id="button-addon2">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +99,7 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="">Fecha cotizacion</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_cotizacion" name="fecha_cotizacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_cotizacion" name="fecha_cotizacion" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -119,19 +129,19 @@
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="">Fecha instalacion</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_instalacion" name="fecha_instalacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_instalacion" name="fecha_instalacion" required>
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="">Fecha entrega</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_entrega" name="fecha_entrega" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_entrega" name="fecha_entrega" required>
                                                 </div>
                                             </div>
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="">Fecha renovacion</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_renovacion" name="fecha_renovacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_renovacion" name="fecha_renovacion" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +212,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="">Acta</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="acto_input" name="acto_input" placeholder="Acto" >
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="acto_input" name="acto_input" placeholder="Acto" >
                                                 </div>
                                             </div>
                                             <div class="col">
@@ -217,19 +227,19 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="">Fecha instalacion</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_instalacion_actualizacion" name="fecha_instalacion_actualizacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_instalacion_actualizacion" name="fecha_instalacion_actualizacion" required>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="">fecha entrega</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_entrega_actualizacion" name="fecha_entrega_actualizacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_entrega_actualizacion" name="fecha_entrega_actualizacion" required>
                                                 </div>
                                             </div>
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="">Fecha fin</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="fecha_fin_actualizacion" name="fecha_fin_actualizacion" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" id="fecha_fin_actualizacion" name="fecha_fin_actualizacion" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -591,6 +601,7 @@
                     <th>Tipo</th>
                     <th>Version</th>
                     <th>Tiempo</th>
+                    <th>Cotizacion</th>
                     <th>fecha instalacion</th>
                     <th>estado</th>
                     <th>Opciones</th>

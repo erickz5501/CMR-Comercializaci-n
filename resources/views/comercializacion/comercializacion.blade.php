@@ -56,7 +56,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-10">
+                                            {{-- <div class="col-10">
                                                 <div class="form-group">
                                                     <label for="select_modal_medios">Cliente</label>
                                                     <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
@@ -69,26 +69,25 @@
                                                     <label for="" style="color: white">.</label><br>
                                                     <button type="button" class="btn btn-success">Agregar</button>
                                                 </div>
-                                            </div>
-
-                                            {{-- <div class="col-12">
-                                                <div class="form-group">
-                                                    <div class="input-group mb-3">
-                                                        <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
-                                                            <option selected="selected" value="0">Cliente</option>
-                                                        </select>
-                                                        <div class="input-group-append">
-                                                            <button type="button" class="btn btn-success"><i class="fas fa-plus"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </div> --}}
-
+                                            <div class="col-12">
+                                                <div class="input-group form-group" id="">
+                                                    <select class="form-control" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
+                                                        
+                                                    </select>
+                                                    <span class="input-group-addon input-group-append">
+                                                        <button class="btn btn-success" type="button" id="button-addon2">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                 
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
+                                                    <label for="">Persona contacto</label>
                                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_contacto_input" name="persona_contacto_input" placeholder="Persona Contacto" required>
                                                 </div>
                                             </div>
@@ -182,7 +181,7 @@
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="" style="color: white">.</label><br>
-                                                    <a type="button" href="#" class="btn btn btn-success" data-toggle="modal" data-target="#registroModalCotizacion">Agregar</a>
+                                                    <a type="button" href="#" class="btn btn btn-success" onclick="limpiar_cotizacion();" data-toggle="modal" data-target="#registroModalCotizacion">Agregar</a>
                                                 </div>
                                             </div>
 
@@ -238,7 +237,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             <!-- ================================= FIN-CUADRO-BRODER ================================= -->
@@ -246,7 +244,7 @@
             <!-- FIN-MODAL-BODY -->
 
             <!-- MODAL FOOTER -->
-            <div class="modal-footer" style="padding-right: 1.5rem !important"">
+            <div class="modal-footer" style="padding-right: 1.5rem !important;">
                 <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
             </div>
         </form>

@@ -53,10 +53,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-10">
-                                                {{-- <div class="form-group">
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_buscar_input" name="persona_buscar_input" placeholder="Buscar persona" >
-                                                </div> --}}
+                                            {{-- <div class="col-10">
                                                 <div class="form-group">
                                                     <label for="select_modal_medios">Cliente</label>
                                                     <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_clientes" name="select_modal_clientes" data-toggle="select" required>
@@ -68,6 +65,18 @@
                                                 <div class="form-group">
                                                     <label for="">.</label><br>
                                                     <button type="button" class="btn btn-success">Agregar</button>
+                                                </div>
+                                            </div> --}}
+                                            <div class="col-12">
+                                                <div class="input-group form-group" id="">
+                                                    <select class="form-control" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
+                                                        
+                                                    </select>
+                                                    <span class="input-group-addon input-group-append">
+                                                        <button class="btn btn-success" type="button" id="button-addon2">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>

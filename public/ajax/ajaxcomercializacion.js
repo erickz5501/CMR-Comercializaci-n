@@ -40,6 +40,12 @@ function guardar_cotizacion(e){
     $("#registroModalCotizacion").modal('hide');
 }
 
+function limpiar_cotizacion(){
+    $('#idcotizaciones').val("");
+    $('#nombre_cotizacion').val("");
+    $('#ruta_cotizacion').val("");
+}
+
 function guardar_registro(e) {
 
     crud_guardar_editar(
@@ -133,6 +139,7 @@ function limpiar_comercializacion(){
     $('#avance_input').val("");
     $('#cobrar_input').val("");
     $('#conclusionessTextarea').val("");
+    $('#select_modal_cotizacion').val(null).trigger('change');
     $('#select_modal_clientes').val(null).trigger('change');
     $('#select_modal_medios').val(null).trigger('change');
     $('#select_modal_modulos').val(null).trigger('change');

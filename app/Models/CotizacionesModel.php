@@ -10,4 +10,8 @@ class CotizacionesModel extends Model
     protected $table = 'cotizaciones';
     protected $primaryKey = 'idcotizaciones';
     protected $fillable = ['nombre', 'ruta', 'estado'];
+
+    public function ComprasModel(){
+        return $this->belongsTo('App\Models\ComprasModel', 'idcompras');
+    }
 }

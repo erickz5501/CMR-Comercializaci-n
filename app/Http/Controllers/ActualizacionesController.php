@@ -15,9 +15,8 @@ class ActualizacionesController extends Controller
         return view('actualizaciones.actualizaciones');
     }
 
-    public function indexLista()
-    {
-        $actualizaciones = ActualizacionesModel::with('compras')->get();
+    public function indexLista(){
+        $actualizaciones = ComprasModel::with('actualizaciones', 'clientes', 'cotizacion')->get();
         
         //return json_encode($actualizaciones);
         return view('componentes.actualizaciones.tabla_actualizaciones', compact('actualizaciones'));
@@ -108,6 +107,12 @@ class ActualizacionesController extends Controller
             ]);
             return json_encode(['status' => true, 'message' => 'Éxito se registro la actualizacion']);
         }
+    }
+
+    public function detalle_actualizacion($idactualizacion){
+        $det_actualizacion = ComprasModel::with('actualizaciones', 'clientes', 'cotizacion')->where('idcompras', $idactualizacion)->first();
+        return json_encode($det_actualizacion);
+        ///return view('actualizaciones.modal_detalle_comercializacion', compact('det_actualizacion'));
     }
 
 }

@@ -6,105 +6,128 @@
         </center>
 
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true"><i class="far fa-times-circle" style="color: red;"></i></span>
         </button>
     </div>
 
     <!-- ================================= MODAL CUERPO ================================= -->
-    <div class="modal-body">
+    <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
         <div class="row col-12">
-            <div class="card-body mb-12 col-12">
-                <div class="row">
-                    <div class="col-6">
-                        @if ($det_cliente->tipo_documento == 1)
-                        <h4>Nombres: </h4>
-                        @else
-                        <h4>Razon Social: </h4>
-                        @endif           
+            <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
+                <div class="accordion" id="accordionExampleDet">
+                    <div class="card">
+                        <div class="card-header" id="headingOneDet" data-toggle="collapse" data-target="#collapseOneDet" aria-expanded="true" aria-controls="collapseOneDet">
+                            <h5 class="mb-0">#1</h5>
+                        </div>
+                        <div id="collapseOneDet" class="collapse show" aria-labelledby="headingOneDet" data-parent="#accordionExampleDet">
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="media pt-1 pb-2 border-bottom">
+                                        <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-muted">Nombre:</span>
+                                            <span class="d-block text-heading font-size-sm">{{ $det_cliente->nombres_razon_social }}</span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-1 pb-2 border-bottom">
+                                        <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-muted">Apellido:</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                    {{ $det_cliente->apellidos_nombre_comercial }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-1 pb-2 border-bottom">
+                                        <i class="fas fa-chart-line font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-muted">Giro negocio</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                    {{ $det_cliente->gironegocio->nombre }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-1 pb-2 border-bottom">
+                                        <i class="fas fa-id-card font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-muted">N° documento</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                    {{ $det_cliente->nro_documento }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->nombres_razon_social}}</p>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        @if ($det_cliente->tipo_documento == 1)
-                        <h4>Apellidos: </h4>
-                        @else
-                        <h4>Nombre Comercial: </h4>
-                        @endif
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->apellidos_nombre_comercial}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Giro de negocio: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->gironegocio->nombre}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>N° documento: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->nro_documento}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Correo 1: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->correo_1}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Correo 2: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->correo_2}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Correo 3: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->correo_3}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Telefono empresa: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->telefono_empresa}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Telefono contanto: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->telefono_contacto}}</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <h4>Telefono otro: </h4>
-                    </div>
-                    <div class="col-6">
-                        <p>{{ $det_cliente->telefono_otro}}</p>
+                    <div class="card">
+                        <div class="card-header" id="headingTwoDet" data-toggle="collapse" data-target="#collapseTwoDet" aria-expanded="false" aria-controls="collapseTwoDet">
+                            <h5 class="mb-0">#2</h5>
+                        </div>
+                        <div id="collapseTwoDet" class="collapse" aria-labelledby="headingTwoDet" data-parent="#accordionExampleDet">
+                            <div class="card-body">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-envelope font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Correo 1</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{ $det_cliente->correo_1 }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-envelope font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Correo 2 </span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{  $det_cliente->correo_2 }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-envelope font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Correo 3</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{  $det_cliente->correo_3 }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-phone-alt font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Telefono empresa</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{ $det_cliente->telefono_empresa }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-phone-alt font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Telefono contacto</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{  $det_cliente->telefono_contacto }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-2m pb-3 border-bottom">
+                                        <i class="fas fa-phone-alt font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Telefono otro</span>
+                                            <span class="d-block text-heading font-size-sm">
+                                                {{  $det_cliente->telefono_otro }}
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-                          
         </div>
         <!-- ================================= FIN-CUADRO-BRODER ================================= -->
     </div>
@@ -114,7 +137,6 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-success">Ver licencias</button>
         <button type="button" class="btn btn-success" onclick="mostrar_regHistorial( {{ $det_cliente->idclientes }} )">Ver Historial</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
     </div>
     <!-- FIN-MODAL-FOOTER -->
     </div>

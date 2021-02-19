@@ -15,4 +15,8 @@ class ActualizacionesModel extends Model
     public function compras(){
         return $this->hasOne('App\Models\ComprasModel', 'idcompras', 'idcompras');
     }
+
+    public function ComprasModel(){
+        return $this->belongsTo('App\Models\ComprasModel', 'idcompras');
+    }
 }

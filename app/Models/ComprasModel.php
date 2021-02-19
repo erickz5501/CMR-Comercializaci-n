@@ -15,4 +15,16 @@ class ComprasModel extends Model
     public function ActualizacionModel(){
         return $this->belongsTo('App\Models\ActualizacionesModel', 'idcompras');
     }
+
+    public function actualizaciones(){
+        return $this->hasOne('App\Models\ActualizacionesModel', 'idcompras', 'idcompras');
+    }
+
+    public function clientes(){
+        return $this->hasOne('App\Models\ClientesModel', 'idclientes', 'idclientes');
+    }
+
+    public function cotizacion(){
+        return $this->hasOne('App\Models\CotizacionesModel', 'idcotizaciones', 'idcotizaciones');
+    }
 }

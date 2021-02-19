@@ -142,6 +142,8 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/actualizacion/guardar', "ActualizacionesController@createActualizacion");
     Route::get('/actualizacion/desactivar/{idactualizacion}', "ActualizacionesController@desactivar");
     Route::get('/actualizacion/activar/{idactualizacion}', "ActualizacionesController@activar");
+    Route::get('/lista/actualizacion/{idactualizacion}', "ActualizacionesController@detalle_actualizacion");
+
     
 });
 // .......... :::::: RUTAS RECLAMOS DEL COMPLETADO :::: ................

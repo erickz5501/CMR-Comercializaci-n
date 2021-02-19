@@ -21,8 +21,8 @@ function lista_actualizaciones(){
     });
 }
 
-function desactivar_actualizacion(idactualizacion){
-    crud_desactivar('/dashboard/actualizacion/desactivar/' + idactualizacion , function(){ lista_actualizaciones(); }, function(){ console.log('Eror') });
+function desactivar_actualizacion(idactualizaciones){
+    crud_desactivar('/dashboard/actualizacion/desactivar/' + idactualizaciones , function(){ lista_actualizaciones(); }, function(){ console.log('Eror') });
 }
 
 function activar_actualizacion(idactualizacion){
@@ -75,6 +75,14 @@ function limpiar_formulario(){
     $('#select_modal_tipo').val(null).trigger('change');
     $('#select_modal_version').val(null).trigger('change');
     $('#select_modal_tiempo_licencia').val(null).trigger('change');
+}
+
+function generar_licencia(){//Generar la licencia del producto
+    var caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ2346789";
+    var contraseña = "";
+
+    for (i=0; i<20; i++) contraseña +=caracteres.charAt(Math.floor(Math.random()*caracteres.length)); 
+       console.log(contraseña)
 }
 
 init();
