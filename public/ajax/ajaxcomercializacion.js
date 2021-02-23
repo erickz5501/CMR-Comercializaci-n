@@ -10,8 +10,13 @@ function init(){
         lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     });
 
+    $("#formulario_interesado").on("submit", function(e){
+        guardar_interesado(e);
+    });
+
     lista_comercializacion();
 
+    lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
     lista_select2('/dashboard/listas/medios', 'medios', null);
     lista_select2('/dashboard/listas/eventos', 'eventos', null);
@@ -19,6 +24,35 @@ function init(){
     lista_select2('/dashboard/listas/cliente', 'clientes', null);
     lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
 
+}
+
+function guardar_interesado(e){
+    crud_guardar_editar(
+        e,
+        '/dashboard/guardar/interesados',
+        'interesado',
+        function(){ limpiar_interesado(); },
+        //function(){ lista_interesados(); },
+        function(){ lista_select2('/dashboard/listas/cliente', 'clientes', null); },
+        function(){ console.log('Console Error'); }
+    );
+    $("#registroModalInteresado").modal('hide');
+}
+
+function limpiar_interesado(){ //Para limpIar los campos despues de registrar un cliente
+    $('#idclientes').val("");
+    $('#nombre_razon_social_input').val("");
+    $('#nombre_comercial_input').val("");
+    $('#numDocumentoInput').val("");
+    $('#InputCorreo1').val("");
+    $('#InputCorreo2').val("");
+    $('#InputCorreo3').val("");
+    $('#number_empresa_input').val("");
+    $('#number_contacto_input').val("");
+    $('#number_otro_input').val("");
+    $('#select_modal_giroNegocio').val(null).trigger('change');
+    $('#select_modal_tipoPersona').val("Seleccione").trigger('change');
+    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
 }
 
 function lista_comercializacion(){
@@ -145,6 +179,61 @@ function limpiar_comercializacion(){
     $('#select_modal_modulos').val(null).trigger('change');
     $('#select_modal_eventos').val(null).trigger('change');
     $('#select_modal_personal').val(null).trigger('change');
+}
+
+//Funciones para agregar los modulos con la cantidad de licencias xD
+
+function add_detalle() {
+
+    let idmodulo            = $("#select_modal_modulos").val();
+    let modulo_txt          = $("#select_modal_modulos option:selected").text();
+    let cant_licencias      = $("#cant_licencias").val();
+    let id                  = _id();
+
+    console.log(idmodulo);
+    console.log(cant_licencias);
+
+    if (validar_detalle(idmodulo, cant_licencias)) {
+
+        let tr_detalle = _tr('detalle_modulos', id, 
+                     _td( modulo_txt + _input_a('modulo', idmodulo) ) +
+                     _td( _input_n_edit('licencias', roundTwo(cant_licencias) ) ) +
+                     _td( _btn_eliminar(id, 'eliminar_detalle_modulo') )
+         );
+
+        $("#tabla_detalle_modulos").append(tr_detalle);
+    }
+
+}
+
+function validar_detalle(idmodulo, cant_licencias) {//aegura que no registre un modulo que ya existe
+    // idturno no debe repertirser
+    let flat_idturno = false;
+    let flat_cant_licencias = false;
+
+    if (cant_licencias) {
+        flat_cant_licencias = true;
+        $("#cant_licencias").removeClass("is-invalid");
+    }else{
+        Toast.fire({
+            type: 'error',
+            title: 'Cantidad invalida'
+          })
+
+        $("#cant_licencias").addClass("is-invalid");
+    }
+
+    if (!_validate_exist_array(idmodulo)) {
+        flat_idturno = true;
+    }else{
+        Swal.fire({
+            title: "Ya existe este modulo",
+            timer: 2000,
+            type: "error"
+        });
+    }
+
+    return flat_idturno && flat_cant_licencias;
 }
 
 init();

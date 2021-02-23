@@ -32,6 +32,15 @@
                                             </div>
                                         </li>
                                         <li class="media pt-1 pb-2 border-bottom">
+                                            <i class="fas fa-laptop-code font-size-lg mt-2 mb-0 text-primary"></i>
+                                            <div class="media-body pl-3">
+                                                <span class="font-size-ms text-muted">Modulos:</span>
+                                                <span class="d-block text-heading font-size-sm">
+                                                        {{ $det_modulo->modulo->nombre }}
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <li class="media pt-1 pb-2 border-bottom">
                                             <i class="fas fa-male font-size-lg mt-2 mb-0 text-primary"></i>
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-muted">Persona contacto:</span>

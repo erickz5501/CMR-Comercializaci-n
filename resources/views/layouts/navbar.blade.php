@@ -61,7 +61,7 @@
             </a>
           </li>
           <li class="nav-item d-none d-lg-block ml-lg-4">
-            <a href="{{ url('/dashboard')}}" target="_blank" class="btn btn-neutral btn-icon">
+            <a href="{{ url('/dashboard/comercializacion')}}" target="_blank" class="btn btn-neutral btn-icon">
               <span class="btn-inner--icon">
                 <i class="fas fa-shopping-cart mr-2"></i>
               </span>

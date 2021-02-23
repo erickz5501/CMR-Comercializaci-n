@@ -22,9 +22,15 @@ class ClientesController extends Controller
     }
     
     public function indexClientes(){
-        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('tipo_persona', 2)->get();
+        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('estado', 0)->get();
 
         return json_encode($clientes);
+    }
+
+    public function indexInteresado(){
+        $interesados = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('tipo_persona', 1)->get();
+
+        return json_encode($interesados);
     }
 
     public function indexListaInteresado(){

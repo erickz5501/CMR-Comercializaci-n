@@ -167,6 +167,7 @@ Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedi
 Route::get('/dashboard/listas/eventos', "configuracion\EventosController@indexEventos");
 Route::get('/dashboard/listas/personal', "configuracion\PersonalController@indexPersonal");
 Route::get('/dashboard/listas/cliente', "clientes\ClientesController@indexClientes");
+Route::get('/dashboard/listas/interesado', "clientes\ClientesController@indexInteresado");
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
 // // ........... ::::: LISTAR TIPO PERSONA :::::...............
