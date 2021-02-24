@@ -67,8 +67,8 @@ function guardar_cotizacion(e){
         e,
         '/dashboard/cotizacion/guardar',
         'cotizacion',
-        //function(){ limpiar_comercializacion(); },
-        
+        function(){ limpiar_comercializacion(); },
+        function(){ lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null); },
         function(){ console.log('Console Error'); }
     );
     $("#registroModalCotizacion").modal('hide');
@@ -198,7 +198,7 @@ function add_detalle() {
         let tr_detalle = _tr('detalle_modulos', id, 
                      _td( modulo_txt + _input_a('modulo', idmodulo) ) +
                      _td( _input_n_edit('licencias', roundTwo(cant_licencias) ) ) +
-                     _td( _btn_eliminar(id, 'eliminar_detalle_modulo') )
+                     _td( _btn_eliminar(id, 'eliminar_tr') )
          );
 
         $("#tabla_detalle_modulos").append(tr_detalle);
@@ -227,6 +227,7 @@ function validar_detalle(idmodulo, cant_licencias) {//aegura que no registre un 
         flat_idturno = true;
     }else{
         Swal.fire({
+            icon: "error",
             title: "Ya existe este modulo",
             timer: 2000,
             type: "error"

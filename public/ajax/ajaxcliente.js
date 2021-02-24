@@ -79,7 +79,7 @@ function limpiar_cliente(){ //Para limpIar los campos despues de registrar un cl
     $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
 }
 
-function limpiar_interesado(){ //Para limpIar los campos despues de registrar un cliente
+function limpiar_interesado(){ //Para limpIar los campos despues de registrar un interesado
     $('#idclientes').val("");
     $('#nombre_razon_social_input').val("");
     $('#nombre_comercial_input').val("");
@@ -90,8 +90,8 @@ function limpiar_interesado(){ //Para limpIar los campos despues de registrar un
     $('#number_empresa_input').val("");
     $('#number_contacto_input').val("");
     $('#number_otro_input').val("");
+    //$('#select_modal_tipoPersona').val("2");
     $('#select_modal_giroNegocio').val(null).trigger('change');
-    $('#select_modal_tipoPersona').val("Seleccione").trigger('change');
     $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
 }
 

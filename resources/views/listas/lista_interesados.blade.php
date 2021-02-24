@@ -44,6 +44,8 @@
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
                         {{-- input ID oculto --}}
                         <input type="hidden" id="idclientes" name="idclientes" />
+                        <input type="hidden" id="select_modal_tipoPersona" name="select_modal_tipoPersona" value="1"/>  
+
                         <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
                             
                             <div class="form-row">
@@ -80,7 +82,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <div class="form-group">
                                         <label for="select_modal_tipoPersona">Tipo persona</label>
                                         <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required>
@@ -89,7 +91,7 @@
                                             <option value="2">Cliente</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="select_modal_tipoDocumento">Tipo documento</label>

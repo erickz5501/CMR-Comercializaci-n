@@ -557,6 +557,7 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('funciones/create.js')}}"></script>
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
 

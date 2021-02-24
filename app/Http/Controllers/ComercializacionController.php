@@ -36,7 +36,8 @@ class ComercializacionController extends Controller
         $persona_contacto_input         = $request->input('persona_contacto_input');
         $actividad_input                = $request->input('actividad_input');
         $select_modal_medios            = $request->input('select_modal_medios');
-        $select_modal_modulos           = $request->input('select_modal_modulos');//Este campo no esta en la tabla comercializacion
+        $select_modal_modulos           = $request->toArray('tr_id');
+        //$select_modal_modulos           = $request->input('select_modal_modulos');//Este campo no esta en la tabla comercializacion
         $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
         $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
         $select_modal_eventos           = $request->input('select_modal_eventos');
@@ -48,6 +49,12 @@ class ComercializacionController extends Controller
         $avance_input                   = $request->input('avance_input');
         $cobrar_input                   = $request->input('cobrar_input');
         $conclusionessTextarea          = $request->input('conclusionessTextarea');
+
+        $ver_error = [        
+            'select_modal_modulos' => $select_modal_modulos,           
+        ];          
+
+        return json_encode($ver_error);
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
@@ -106,11 +113,13 @@ class ComercializacionController extends Controller
             $ultimo_registro = json_decode($ultimo_registro);
             //dd($ultimo_registro);
             
-            $modulo_comercializacion = ModuloComercializacionModel::create([
-                'idcomercializacion' => $ultimo_registro->idcomercializacion,
-                'idmodulos' => $select_modal_modulos
-            ]);
-
+            //foreach ($variable as $key => $value) {
+                $modulo_comercializacion = ModuloComercializacionModel::create([
+                    'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                    'idmodulos' => $select_modal_modulos
+                ]);    
+            //}
+            
             $cotizacion_comercializacion = CotizacionComercializacionModel::create([
                 'idcomercializacion' => $ultimo_registro->idcomercializacion,
                 'idcotizaciones' => $select_modal_cotizacion

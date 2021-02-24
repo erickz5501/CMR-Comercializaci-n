@@ -240,3 +240,31 @@ function doSearch(){
         td.innerHTML = "No se han encontrado coincidencias";
     }
 }
+
+
+/****************************************************** */
+/****************************************************** */
+/****************************************************** */
+
+// Funciones
+
+function formatText(icon) {
+    return $('<span><i class="' + icon.text + '"></i> ' + icon.text + '</span>');
+};
+
+function formatLabel(icon) {
+    return $('<span class="label ' + icon.text + '"> ' + icon.text + ' </span>');
+};
+
+
+//Redondear 2 decimales (1.56 = 1.60, 1.52 = 1.50)
+function roundTwo(num) {
+    // return Number(+(Math.round(num + "e+1") + "e-1")).toFixed(2);
+
+    return parseFloat(num).toFixed(2);
+}
+
+
+function unique_id() {
+    return parseInt(Math.round(new Date().getTime() + (Math.random() * 100)));
+}
