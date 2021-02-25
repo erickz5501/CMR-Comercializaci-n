@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ComercializacionModel;
+use App\Models\CorrelativoModel;
 use App\Models\CotizacionesModel;
 use App\Models\CotizacionComercializacionModel;
 use App\Models\comercializacion\ModuloComercializacionModel;
@@ -132,14 +134,38 @@ class ComercializacionController extends Controller
     public function createCotizacion(CotizacionRequest $request){
         $idcotizaciones             = $request->input('idcotizaciones');
         $nombre_cotizacion          = $request->input('nombre_cotizacion');
-        $ruta_cotizacion            = $request->input('ruta_cotizacion');
+        $ruta_cotizacion            = $request->file('ruta_cotizacion');
+        $archivo                    = $_FILES["ruta_cotizacion"];
+        //$nombre_archivo             = $ruta_cotizacion->getClientOriginalName(); //obenemos el nombre del archivo
+
+        //dd($archivo);
 
         $cotizacion = CotizacionesModel::create([
             'nombre' => $nombre_cotizacion,
             'ruta' => $ruta_cotizacion
         ]);
+        
+        move_uploaded_file($archivo["tmp_name"], "storage/uploads/".$archivo["name"]   );
 
         return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion']);
+    }
+
+    //generamos el codigo de la cotizacion
+    public function generar_correlativo($increment = true){
+        $correlativo = CorrelativoModel::first();
+
+        //$nro_cotizacion = $correlativo;
+        // $nro_cotizacion->serie              = $correlativo->serie;
+        // $nro_cotizacion->correlativo        = sprintf("%03d", $correlativo->correlativo);
+        // $nro_cotizacion->year               = Carbon::now()->format('Y');
+        $nro_cotizacion = $correlativo->serie . '-' . sprintf("%03d", $correlativo->correlativo) . '-' . Carbon::now()->format('Y');
+
+        if ($increment) {
+            $correlativo->correlativo++;
+            $correlativo->save();
+        }
+
+        return $nro_cotizacion;
     }
 
     public function activar($idcomercializacion){

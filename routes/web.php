@@ -132,6 +132,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");//editar el registro
     Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");//para ver el registro
 
+    Route::get('/cotizacion/generar', "ComercializacionController@generar_correlativo");
     Route::post('/cotizacion/guardar', "ComercializacionController@createCotizacion");
     
 });

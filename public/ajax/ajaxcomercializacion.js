@@ -182,6 +182,27 @@ function limpiar_comercializacion(){
     $('#select_modal_personal').val(null).trigger('change');
 }
 
+function validar_pdf(){
+    //validamos que el archivo a subir sea un pdf
+    var fileInput = document.getElementById('ruta_cotizacion');
+    var filePath = fileInput.value;
+    extensiones_permitidas = new Array(".pdf");
+    mi_error = "";
+
+    extension = (filePath.substring(filePath.lastIndexOf("."))).toLowerCase();//Obtiene la extension del archivo a subir
+    //alert(extension);
+
+    if (extension == ".pdf") {
+        alert('Archivo permitido');
+        return true;
+    } else {
+        alert('Este archivo tiene la extension: ' + extension + '. Por favor subir un documento .pdf');
+        $('#ruta_cotizacion').val("");
+        return false;
+    }
+
+}
+
 //Funciones para agregar los modulos con la cantidad de licencias xD
 
 function add_detalle() { //crea una fila con el nombre del modulo y la cantidad de licencias

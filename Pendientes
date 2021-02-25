@@ -10,6 +10,8 @@ Reclamos:
     Mostrar un registro por cliente y tener una opcion que deje ver todo los reclamos de ese cliente
 
 Comercializacion:
+    Generar un codigo de cotizacion al crear una cotizacion
+    Ver seguimiento de cliente/interesado
     Registrar usuario que creo el registro(idusers)
     Hacer un buscador en el select de clientes y/o interesados
     despues de crear un interesado, seleccionar automaticamente el interesado agregado

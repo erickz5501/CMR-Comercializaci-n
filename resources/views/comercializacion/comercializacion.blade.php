@@ -312,7 +312,7 @@
         </div>
 
         <!-- ================================= MODAL CUERPO ================================= -->
-        <form id="formulario_cotizacion">
+        <form id="formulario_cotizacion" enctype="multipart/form-data">
             @csrf
             <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
@@ -327,11 +327,19 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Ruta</label>
                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="ruta_cotizacion" name="ruta_cotizacion" required>
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div class="row">
+                            <div class="col">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
+                                    <label class="custom-file-label" for="customFileLang">Select file</label>
                                 </div>
                             </div>
                         </div>
