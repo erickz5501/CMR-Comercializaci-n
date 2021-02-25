@@ -130,8 +130,7 @@
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="cant_licencias">Licencias</label>
-                                                            <input class="form-control numero_valor" placeholder="licencias" type="number" name="cant_licencias"
-                                                                id="cant_licencias">
+                                                            <input class="form-control numero_valor" placeholder="licencias" type="number" name="cant_licencias" id="cant_licencias">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">

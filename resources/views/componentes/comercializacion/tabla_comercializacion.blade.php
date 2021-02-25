@@ -43,6 +43,10 @@
         </tr>
     @endforeach
     <tr class='noSearch hide'>
-        <td colspan="5"></td>
+        <td colspan="7"></td>
+    </tr>
+    @else
+    <tr>
+        <td colspan="7">No hay registros</td>
     </tr>
 @endif                    

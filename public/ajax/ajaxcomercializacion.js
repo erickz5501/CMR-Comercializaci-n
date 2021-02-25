@@ -111,6 +111,7 @@ function mostrar_one_registro(idregistro){
         $('#idcomercializacion').val(data.registro['idcomercializacion']);
         $('#idusers').val(data.registro['idusers']);
         $('#persona_contacto_input').val(data.registro['persona_contacto']);
+        $('#cant_licencias').val(data.modulo['cant_licencias']);
         $('#actividad_input').val(data.registro['actividad']);
         $('#llamadaDetTextarea').val(data.registro['detalla_llamada']);
         $('#example_date_input').val(data.registro['fecha_evento']);
@@ -183,25 +184,26 @@ function limpiar_comercializacion(){
 
 //Funciones para agregar los modulos con la cantidad de licencias xD
 
-function add_detalle() {
+function add_detalle() { //crea una fila con el nombre del modulo y la cantidad de licencias
 
+    //declaramos las variables
     let idmodulo            = $("#select_modal_modulos").val();
     let modulo_txt          = $("#select_modal_modulos option:selected").text();
     let cant_licencias      = $("#cant_licencias").val();
-    let id                  = _id();
+    let id                  = _id(); //creamos un id aleatorio
 
     console.log(idmodulo);
     console.log(cant_licencias);
 
-    if (validar_detalle(idmodulo, cant_licencias)) {
+    if (validar_detalle(idmodulo, cant_licencias)) { //llamamos a la funcion validar_detalle()
 
-        let tr_detalle = _tr('detalle_modulos', id, 
-                     _td( modulo_txt + _input_a('modulo', idmodulo) ) +
-                     _td( _input_n_edit('licencias', roundTwo(cant_licencias) ) ) +
-                     _td( _btn_eliminar(id, 'eliminar_tr') )
+        let tr_detalle = _tr('detalle_modulos', id, //creamos un tr con el id aleatorio
+                     _td( modulo_txt + _input_a('modulo', idmodulo) ) + //mostramos el nombre del modulo
+                     _td( _input_n_edit('licencias', cant_licencias ) ) + //mostramos la cantidad de licencias de ese modulo
+                     _td( _btn_eliminar(id, 'eliminar_tr') ) //creamos la opcion de eliminar  la fila
          );
 
-        $("#tabla_detalle_modulos").append(tr_detalle);
+        $("#tabla_detalle_modulos").append(tr_detalle);//adjuntamos el registro a la tabla_detalle_modulos
     }
 
 }
@@ -223,7 +225,7 @@ function validar_detalle(idmodulo, cant_licencias) {//aegura que no registre un 
         $("#cant_licencias").addClass("is-invalid");
     }
 
-    if (!_validate_exist_array(idmodulo)) {
+    if (!_validate_exist_array(idmodulo)) {//si existe el detalle, nos da una alerta
         flat_idturno = true;
     }else{
         Swal.fire({

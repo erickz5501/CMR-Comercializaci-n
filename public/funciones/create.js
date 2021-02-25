@@ -11,7 +11,7 @@ function _input_a(name, value) {
 }
 
 function _input_n_edit(name, value) {
-    return `<input class="form-control form-control-sm numero_valor" type="number" name="${name}[]"  value="${value}" style="width: 100px;">`;
+    return `<input class="form-control form-control-sm" type="number" name="${name}[]"  value="${value}" style="width: 100px;">`;
 }
 
 function _btn_eliminar(id, action = 'eliminar_tr') {
@@ -37,7 +37,7 @@ function eliminar_tr(id) {
     }).then((result) => {
         if (result.value) {
 
-            $("#tr_" + id).remove();
+            $("#tr_" + id).remove(); //eliminamos la fila 
 
             Swal.fire({
                 icon:"success",
@@ -59,7 +59,7 @@ function eliminar_tr(id) {
     });
 }
 
-function _validate_exist_array(id) {
+function _validate_exist_array(id) { //valida si existe ese modulo en la tabla
     flat = false;
     $('input[name="modulo[]"').each(function() {
 

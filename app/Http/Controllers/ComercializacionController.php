@@ -36,8 +36,8 @@ class ComercializacionController extends Controller
         $persona_contacto_input         = $request->input('persona_contacto_input');
         $actividad_input                = $request->input('actividad_input');
         $select_modal_medios            = $request->input('select_modal_medios');
-        $select_modal_modulos           = $request->toArray('tr_id');
-        //$select_modal_modulos           = $request->input('select_modal_modulos');//Este campo no esta en la tabla comercializacion
+        $select_modal_modulos           = $request->input('modulo');//Trae los valores de los modulos
+        $cant_licencias_modulo          = $request->input('licencias');
         $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
         $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
         $select_modal_eventos           = $request->input('select_modal_eventos');
@@ -50,11 +50,7 @@ class ComercializacionController extends Controller
         $cobrar_input                   = $request->input('cobrar_input');
         $conclusionessTextarea          = $request->input('conclusionessTextarea');
 
-        $ver_error = [        
-            'select_modal_modulos' => $select_modal_modulos,           
-        ];          
-
-        return json_encode($ver_error);
+        //return json_encode($cant_licencias_modulo);
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
@@ -99,13 +95,13 @@ class ComercializacionController extends Controller
                 'ideventos' => $select_modal_eventos,
                 'fecha_evento' => $example_date_input,
                 'descripcion_evento' => $evento_input,
-                // 'nro_cotizacion' => $select_modal_cotizacion,
                 'idpersonal' => $select_modal_personal,
                 'calificacion' => $calificacionSelect,
                 'avance' => $avance_input,
                 'por_cobrar' => $cobrar_input,
                 'observacion' => $conclusionessTextarea
                 ]);
+
             //Registro en la tabla modulo_comercializacion
             $registros = ComercializacionModel::all();
             $ultimo_registro = $registros->last();
@@ -113,12 +109,14 @@ class ComercializacionController extends Controller
             $ultimo_registro = json_decode($ultimo_registro);
             //dd($ultimo_registro);
             
-            //foreach ($variable as $key => $value) {
+            //Registra los modulos en la tablamodulo_comercializacion
+            foreach ($select_modal_modulos as $i => $value) {
                 $modulo_comercializacion = ModuloComercializacionModel::create([
                     'idcomercializacion' => $ultimo_registro->idcomercializacion,
-                    'idmodulos' => $select_modal_modulos
+                    'idmodulos' => $select_modal_modulos[$i],
+                    'cant_licencias' => $cant_licencias_modulo[$i]
                 ]);    
-            //}
+            }
             
             $cotizacion_comercializacion = CotizacionComercializacionModel::create([
                 'idcomercializacion' => $ultimo_registro->idcomercializacion,
@@ -168,9 +166,13 @@ class ComercializacionController extends Controller
 
     public function detalle_registro($idcomercializacion){
         $det_registro = ComercializacionModel::with('clientes', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
-        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->first();
-        //return json_encode(['registro'=>$det_modulo]);
-        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro', 'det_modulo'));
+        // trae el primer registro que coincida con idcomercializacio
+        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->first(); 
+        
+        //$modulos = $det_modulo;
+        //$modulos = ['registro'=>$det_modulo];
+        //return \json_encode($det_modulo);
+        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo') );
     }
 
 }

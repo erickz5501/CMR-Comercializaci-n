@@ -11,7 +11,12 @@ Reclamos:
 
 Comercializacion:
     Registrar usuario que creo el registro(idusers)
+    Hacer un buscador en el select de clientes y/o interesados
+    despues de crear un interesado, seleccionar automaticamente el interesado agregado
     Subir archivos a la web(ahora solo sube texto plano)
+        validar que sea un pdf(no permitir archivos .docx, .pptx, etc)
+    
+    Mostrar todos los modulos seleccionados en el detalle del registro
 
 General:
     Hacer login funcional
