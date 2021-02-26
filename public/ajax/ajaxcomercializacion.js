@@ -1,5 +1,7 @@
 function init(){
 
+    $('#filtro').hide();
+
     $("#formulario_comercializacion").on("submit", function(e) {
         guardar_registro(e);
         
@@ -56,6 +58,7 @@ function limpiar_interesado(){ //Para limpIar los campos despues de registrar un
 }
 
 function lista_comercializacion(){
+    $('#filtro').hide();
     $("#lista_comercializacion").html('<div id="loader"></div>');
     $.get('/dashboard/comercializacion/lista', function (data){
         $("#lista_comercializacion").html(data);
@@ -158,12 +161,12 @@ function mostrar_one_registro(idregistro){
     });
 }
 
-function desactivar_registro(idregistro) {
-    crud_desactivar('/dashboard/comercializacion/desactivar/' + idregistro , function(){ lista_comercializacion(); }, function(){ console.log('Eror') });
+function desactivar_registro(idregistro, idcliente) {
+    crud_desactivar('/dashboard/comercializacion/desactivar/' + idregistro , function(){ mostrar_seguimiento(idcliente); }, function(){ console.log('Eror') });
 }
 
-function activar_registro(idregistro) {
-    crud_activar('/dashboard/comercializacion/activar/' + idregistro , function(){ lista_comercializacion(); }, function(){ console.log('Eror') });
+function activar_registro(idregistro, idcliente) {
+    crud_activar('/dashboard/comercializacion/activar/' + idregistro , function(){ mostrar_seguimiento(idcliente); }, function(){ console.log('Eror') });
 }
 
 function limpiar_comercializacion(){
@@ -187,11 +190,11 @@ function limpiar_comercializacion(){
 }
 
 function mostrar_seguimiento(idcliente){
-    //alert("Selecciono al cliente: " + idregistro);
-    
+    //location.href ="http://127.0.0.1:8000/dashboard/comercializacion/historial";
+    $('#filtro').show("slow");
     $("#lista_comercializacion").html('<div id="loader"></div>');
-    $.get('/dashboard/comercializacion/detalle/'+idcliente, function(data){ //Obtenemos la ruta con el id del registro
-        $("#lista_comercializacion").html(data); //Mostramos el CUERPO modal con los datos del registro
+    $.get('/dashboard/comercializacion/detalle/'+idcliente, function(data){
+        $("#lista_comercializacion").html(data);
     });
 }
 

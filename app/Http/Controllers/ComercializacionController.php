@@ -19,15 +19,20 @@ class ComercializacionController extends Controller
     }
 
     public function indexLista(){
-        $comercio = ComercializacionModel::with('clientes')->get();
+        $comercio = ComercializacionModel::with('clientes')->get()->groupBy('idclientes');
+        //$comercio = $comercios->groupBy('idclientes');
         //return json_encode($comercio);
         return view('componentes.comercializacion.tabla_comercializacion', compact('comercio'));
     }
 
+    // public function indexregistro(){
+    //     return view('comercializacion.comercializacion_historial');
+    // }
+
     public function indexlistaregistro($idcliente){//Lista de comercializacion de un cliente/iteresado
         $comercio = ComercializacionModel::with('clientes')->where('idclientes', $idcliente)->get();
         //return json_encode($comercio);
-        return view('componentes.comercializacion.tabla_comercializacion', compact('comercio'));
+        return view('componentes.comercializacion.tabla_comercializacion_historial', compact('comercio'));
     }
 
     public function indexCotizacion(){
@@ -62,8 +67,9 @@ class ComercializacionController extends Controller
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
-            $modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion )->first();
-
+            $modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion )->get();
+            //return \json_encode($modulo);
+            $modulo->delete();
             try{
                 $registro->idusers              = $idusers;
                 $registro->idclientes           = $select_modal_clientes;
@@ -74,16 +80,22 @@ class ComercializacionController extends Controller
                 $registro->ideventos            = $select_modal_eventos;
                 $registro->fecha_evento         = $example_date_input;
                 $registro->descripcion_evento   = $evento_input;
-                //$registro->nro_cotizacion       = $select_modal_cotizacion;
                 $registro->idpersonal           = $select_modal_personal;
                 $registro->calificacion         = $calificacionSelect;
                 $registro->avance               = $avance_input;
                 $registro->por_cobrar           = $cobrar_input;
                 $registro->observacion          = $conclusionessTextarea;
-                $modulo->idmodulos              = $select_modal_modulos;
-
+                
+                //Registra los modulos en la tabla modulo_comercializacion
+                foreach ($select_modal_modulos as $i => $value) {
+                    $modulo_comercializacion = ModuloComercializacionModel::create([
+                    'idcomercializacion' => $idcomercializacion,
+                    'idmodulos' => $select_modal_modulos[$i],
+                    'cant_licencias' => $cant_licencias_modulo[$i]
+                    ]);    
+                }
                 $registro->save();
-                $modulo->save();
+
             }
             catch(Exception $e){
                 return json_encode($e->getMessage());
@@ -117,7 +129,7 @@ class ComercializacionController extends Controller
             $ultimo_registro = json_decode($ultimo_registro);
             //dd($ultimo_registro);
             
-            //Registra los modulos en la tablamodulo_comercializacion
+            //Registra los modulos en la tabla modulo_comercializacion
             foreach ($select_modal_modulos as $i => $value) {
                 $modulo_comercializacion = ModuloComercializacionModel::create([
                     'idcomercializacion' => $ultimo_registro->idcomercializacion,

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Comercializacion')
+@section('title', 'Comercializacion Historial')
 @section('pagina', 'COMERCIALIZACION')
 
 @section('content')
@@ -13,9 +13,6 @@
         </div>
         <div class="col-4 text-right">
             <a type="button" href="#" onclick="limpiar_comercializacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalComercializacion"><i class="fas fa-plus-circle"></i> Agregar registro</a>
-        </div>
-        <div class="col-4 text-left">
-            <a type="button" href="#" onclick="lista_comercializacion();" class="btn btn btn-primary" id="filtro"><i class="fas fa-list-alt"></i> Mostrar lista original</a>
         </div>
     </div>
 </div>
@@ -574,7 +571,7 @@
 @section('js')
 <script src="{{ asset('funciones/create.js')}}"></script>
 <script src="{{ asset('funciones/crud.js')}}"></script>
-<script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
+{{-- <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script> --}}
 
 @endsection
 <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">
