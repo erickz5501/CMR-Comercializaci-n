@@ -338,8 +338,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
                                     <label class="custom-file-label" for="customFileLang">Select file</label>
+                                    <input type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
                                 </div>
                             </div>
                         </div>
@@ -548,6 +548,8 @@
             <thead class="thead-light">
                 <tr>
                     <th>#</th>
+                    <th>Cliente</th>
+                    <th>Nro. Documento</th>
                     <th>Persona Contacto</th>
                     <th>Actividad</th>
                     <th>Fecha evento</th>

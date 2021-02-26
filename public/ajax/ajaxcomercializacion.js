@@ -76,7 +76,11 @@ function guardar_cotizacion(e){
 
 function limpiar_cotizacion(){
     $('#idcotizaciones').val("");
-    $('#nombre_cotizacion').val("");
+    $.get('/dashboard/cotizacion/generar', function(data){
+        data = JSON.parse(data);
+        $('#nombre_cotizacion').val(data);
+        nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
+    });
     $('#ruta_cotizacion').val("");
 }
 
@@ -182,6 +186,15 @@ function limpiar_comercializacion(){
     $('#select_modal_personal').val(null).trigger('change');
 }
 
+function mostrar_seguimiento(idcliente){
+    //alert("Selecciono al cliente: " + idregistro);
+    
+    $("#lista_comercializacion").html('<div id="loader"></div>');
+    $.get('/dashboard/comercializacion/detalle/'+idcliente, function(data){ //Obtenemos la ruta con el id del registro
+        $("#lista_comercializacion").html(data); //Mostramos el CUERPO modal con los datos del registro
+    });
+}
+
 function validar_pdf(){
     //validamos que el archivo a subir sea un pdf
     var fileInput = document.getElementById('ruta_cotizacion');
@@ -193,10 +206,15 @@ function validar_pdf(){
     //alert(extension);
 
     if (extension == ".pdf") {
-        alert('Archivo permitido');
         return true;
     } else {
-        alert('Este archivo tiene la extension: ' + extension + '. Por favor subir un documento .pdf');
+        Swal.fire({
+            icon: 'error',
+            title: 'Solo documentos PDF!',
+            text: 'esto es un archivo: ' + extension
+            //footer: 'Este documento es un: ' + extension
+          })
+
         $('#ruta_cotizacion').val("");
         return false;
     }

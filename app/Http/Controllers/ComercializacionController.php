@@ -19,7 +19,13 @@ class ComercializacionController extends Controller
     }
 
     public function indexLista(){
-        $comercio = ComercializacionModel::get();
+        $comercio = ComercializacionModel::with('clientes')->get();
+        //return json_encode($comercio);
+        return view('componentes.comercializacion.tabla_comercializacion', compact('comercio'));
+    }
+
+    public function indexlistaregistro($idcliente){//Lista de comercializacion de un cliente/iteresado
+        $comercio = ComercializacionModel::with('clientes')->where('idclientes', $idcliente)->get();
         //return json_encode($comercio);
         return view('componentes.comercializacion.tabla_comercializacion', compact('comercio'));
     }
@@ -131,27 +137,8 @@ class ComercializacionController extends Controller
 
     }
 
-    public function createCotizacion(CotizacionRequest $request){
-        $idcotizaciones             = $request->input('idcotizaciones');
-        $nombre_cotizacion          = $request->input('nombre_cotizacion');
-        $ruta_cotizacion            = $request->file('ruta_cotizacion');
-        $archivo                    = $_FILES["ruta_cotizacion"];
-        //$nombre_archivo             = $ruta_cotizacion->getClientOriginalName(); //obenemos el nombre del archivo
-
-        //dd($archivo);
-
-        $cotizacion = CotizacionesModel::create([
-            'nombre' => $nombre_cotizacion,
-            'ruta' => $ruta_cotizacion
-        ]);
-        
-        move_uploaded_file($archivo["tmp_name"], "storage/uploads/".$archivo["name"]   );
-
-        return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion']);
-    }
-
     //generamos el codigo de la cotizacion
-    public function generar_correlativo($increment = true){
+    public function generar_correlativo($increment = false){//en caso sea falso muestar el siguiente correlativo, pero no lo aumente a nivel de BD
         $correlativo = CorrelativoModel::first();
 
         //$nro_cotizacion = $correlativo;
@@ -163,9 +150,27 @@ class ComercializacionController extends Controller
         if ($increment) {
             $correlativo->correlativo++;
             $correlativo->save();
+
+            return $nro_cotizacion; //Guarda el siguiente correlativo
         }
 
-        return $nro_cotizacion;
+        return json_encode($nro_cotizacion);//muestra el siguiente correlativo
+    }
+
+    public function createCotizacion(CotizacionRequest $request){
+        $idcotizaciones             = $request->input('idcotizaciones');
+        $ruta_cotizacion            = $request->file('ruta_cotizacion');
+        $archivo                    = $_FILES["ruta_cotizacion"];
+        //$nombre_archivo             = $ruta_cotizacion->getClientOriginalName(); //obtenemos el nombre del archivo
+
+        //move_uploaded_file($archivo["tmp_name"], "storage/uploads/".$archivo["name"]   );
+
+        $cotizacion = CotizacionesModel::create([
+            'nombre' => ComercializacionController::generar_correlativo($increment = true),//llamamos a la funcion para generar su correlativo
+            'ruta' => $ruta_cotizacion
+        ]);
+        
+        return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion']);
     }
 
     public function activar($idcomercializacion){
