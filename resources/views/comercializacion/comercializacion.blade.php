@@ -115,17 +115,11 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                {{-- <div class="form-group">
-                                                    <label for="select_modal_modulos-input">Modulos</label>
-                                                    <select style="color: black !important; font-weight: bold !important;" multiple name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
-                                                        
-                                                    </select>
-                                                </div> --}}
                                                 <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="turno">Modulos</label>
-                                                            <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select" required>
+                                                            <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select">
                                                         
                                                             </select>
                                                         </div>
@@ -141,7 +135,6 @@
                                                             <i class="fas fa-arrow-down"></i>
                                                         </a>
                                                     </div>
-                    
                                                 </div>
 
                                                 <div class="row my-2">

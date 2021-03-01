@@ -34,9 +34,24 @@
                                         <li class="media pt-1 pb-2 border-bottom">
                                             <i class="fas fa-laptop-code font-size-lg mt-2 mb-0 text-primary"></i>
                                             <div class="media-body pl-3">
-                                                <span class="font-size-ms text-muted">Modulos:</span>
-                                                <span class="d-block text-heading font-size-sm">
-                                                        {{ $det_modulo->modulo->nombre }}
+                                                <span class="font-size-ms text-muted">Modulos:</span> <br>
+                                                <span>
+                                                    <table class="table align-items-center border">
+                                                        <thead class="thead-light">
+                                                            <tr>
+                                                                <th>Modulo</th>
+                                                                <th>Cnt. Licencias</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @for ($i = 0; $i < $cant_modulos; $i++)
+                                                            <tr>
+                                                                <td>{{ $det_modulo[$i]->modulo->nombre }}</td>
+                                                                <td>{{ $det_modulo[$i]->cant_licencias }}</td>
+                                                            </tr>
+                                                            @endfor 
+                                                        </tbody>
+                                                    </table>
                                                 </span>
                                             </div>
                                         </li>

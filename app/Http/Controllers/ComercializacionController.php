@@ -68,8 +68,14 @@ class ComercializacionController extends Controller
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
             $modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion )->get();
-            //return \json_encode($modulo);
-            $modulo->delete();
+            $cant_modulos = count($modulo);
+            // return json_encode($modulo);
+
+            foreach ($modulo as $i => $value) {
+                $modulo[$i]->estado = 1;
+                $modulo[$i]->save();     
+            }
+
             try{
                 $registro->idusers              = $idusers;
                 $registro->idclientes           = $select_modal_clientes;
@@ -101,7 +107,7 @@ class ComercializacionController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el evento']);
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo el evento']);
             
         } else {
             $registro = ComercializacionModel::create(
@@ -199,23 +205,24 @@ class ComercializacionController extends Controller
         return json_encode(['status' => true, 'message' => 'Se ah desactivado el registro']);
     }
 
-    public function DetalleRegistro($idcomercializacion){
+    public function DetalleRegistro($idcomercializacion){//Para editar
         $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-        $det_modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
+        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', '=', $idcomercializacion)->where('estado', '=', 0)->get();
         $cotizacion = CotizacionComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-        return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo, 'cotizacion'=>$cotizacion]);
-        //return json_encode(['modulo'=> $det_modulo]);
+        $cant_modulos = \count($det_modulo);
+        return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo, 'cant_modulos'=>$cant_modulos, 'cotizacion'=>$cotizacion]);
+        //return json_encode(['modulo'=> $det_modulo]); 
     }
 
     public function detalle_registro($idcomercializacion){
         $det_registro = ComercializacionModel::with('clientes', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
-        // trae el primer registro que coincida con idcomercializacio
-        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->first(); 
+        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->where('estado', '=', 0)->get(); 
+        $cant_modulos = \count($det_modulo);
         
         //$modulos = $det_modulo;
         //$modulos = ['registro'=>$det_modulo];
-        //return \json_encode($det_modulo);
-        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo') );
+        //return \json_encode($cant_modulos);
+        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo','cant_modulos') );
     }
 
 }

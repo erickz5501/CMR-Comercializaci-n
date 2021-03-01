@@ -111,14 +111,13 @@ function detalle_registro(id){
 
 function mostrar_one_registro(idregistro){
     $("#registroModalComercializacion").modal('show');
-    //$("#registroModalInteresado").modal('show');
     $.get('/dashboard/mostrar/comercializacion/'+idregistro , function (data){
         data = JSON.parse(data);
+
         //console.log(data.cliente);  
         $('#idcomercializacion').val(data.registro['idcomercializacion']);
         $('#idusers').val(data.registro['idusers']);
         $('#persona_contacto_input').val(data.registro['persona_contacto']);
-        $('#cant_licencias').val(data.modulo['cant_licencias']);
         $('#actividad_input').val(data.registro['actividad']);
         $('#llamadaDetTextarea').val(data.registro['detalla_llamada']);
         $('#example_date_input').val(data.registro['fecha_evento']);
@@ -126,6 +125,26 @@ function mostrar_one_registro(idregistro){
         $('#avance_input').val(data.registro['avance']);
         $('#cobrar_input').val(data.registro['por_cobrar']);
         $('#conclusionessTextarea').val(data.registro['observacion']);
+        $('#tabla_detalle_modulos').empty();//Limpiamos los registro de esa tabla
+
+        for (let i = 0; i < data.cant_modulos; i++) {
+            let id  = _id();
+            let tr_detalle =    `<tr class="tr_detalle_modulos" id="tr_`+id+`">
+                                    <td>` + data.modulo[i].modulo.nombre+ ` <input type="hidden" name="modulo[]" value="` + data.modulo[i].idmodulos + `"</td>
+                                    <td> 
+                                        <input class="form-control form-control-sm" type="number" name="licencias[]"  value="` + data.modulo[i].cant_licencias+ `" style="width: 100px;"> 
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="Eliminar" onclick="eliminar_tr(`+id+`)">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>`;
+
+            $("#tabla_detalle_modulos").append(tr_detalle);
+            console.log(data.modulo[i].idmodulos);
+        }
+        
 
         if (data.cotizacion['idcotizaciones']) {
             $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
@@ -136,11 +155,6 @@ function mostrar_one_registro(idregistro){
             $('#select_modal_clientes').val(data.registro['idclientes']).trigger('change');
         }else{
             $('#select_modal_clientes').val(null).trigger('change');
-        }
-        if (data.modulo['idmodulos']) {
-            $('#select_modal_modulos').val(data.modulo['idmodulos']).trigger('change');
-        }else{
-            $('#select_modal_modulos').val(null).trigger('change');
         }
         if (data.registro['idmedios']) {
             $('#select_modal_medios').val(data.registro['idmedios']).trigger('change');
@@ -180,7 +194,9 @@ function limpiar_comercializacion(){
     $('#evento_input').val("");
     $('#avance_input').val("");
     $('#cobrar_input').val("");
+    $('#cant_licencias').val("");
     $('#conclusionessTextarea').val("");
+    $('#tabla_detalle_modulos').empty();
     $('#select_modal_cotizacion').val(null).trigger('change');
     $('#select_modal_clientes').val(null).trigger('change');
     $('#select_modal_medios').val(null).trigger('change');
