@@ -34,14 +34,25 @@ function guardar_interesado(e){
         '/dashboard/guardar/interesados',
         'interesado',
         function(){ limpiar_interesado(); },
-        //function(){ lista_interesados(); },
         function(){ lista_select2('/dashboard/listas/cliente', 'clientes', null); },
         function(){ console.log('Console Error'); }
     );
     $("#registroModalInteresado").modal('hide');
 }
 
-function limpiar_interesado(){ //Para limpIar los campos despues de registrar un cliente
+// function ultimo_cliente(){
+//     $("#registroModalComercializacion").modal('show');
+//     $.get('/dashboard/comercializacion/interesado/ultimo', function (data){
+//         data = JSON.parse(data);
+//         if (data.ultimo['idclientes']) {
+//             $('#select_modal_clientes').val(data.ultimo['idclientes']).trigger('change');
+//         }else{
+//             $('#select_modal_clientes').val(null).trigger('change');
+//         }
+//     })
+// }
+
+function limpiar_interesado(){ //Para limpiar los campos despues de registrar un cliente
     $('#idclientes').val("");
     $('#nombre_razon_social_input').val("");
     $('#nombre_comercial_input').val("");

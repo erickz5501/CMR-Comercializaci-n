@@ -6,7 +6,7 @@
     <div class="row align-items-center">
         <div class="col-8">
             <form>
-                <input class="form-control" placeholder="Buscar actualización..." type="text" id="searchTerm" onkeyup="doSearch()" />
+                <input class="form-control" placeholder="Buscar actualizacion..." type="text" id="searchTerm" onkeyup="doSearch()" />
             </form>
         </div>
         <div class="col-4 text-right">
@@ -610,28 +610,6 @@
             <tbody class="list" id="lista_actualizaciones">
             
             </tbody>
-            {{-- <tr>
-                <th scope="row">
-                    1
-                </th>
-                <td class="budget">
-                    Erick
-                </td>
-                <td>
-                    20
-                </td>
-                <td>
-                    Vper
-                </td>
-                <td>
-                    <span class="badge badge-success badge-lg">Activo</span>
-                </td>
-                <td>
-                    <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalListaActualizaciones"><i class="fas fa-plus-circle"></i> Act</a>
-                    <a type="button" href="#" onclick="" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalCliente"><i class="fas fa-plus-circle"></i> Clc</a>
-                </td>
-                
-            </tr>  --}}
         </table>
     </div>
 </div>

@@ -70,7 +70,9 @@
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="" style="color: white">.</label><br>
-                                                    <button type="button" class="btn btn-success">Agregar</button>
+                                                    <a type="button" href="#" class="btn btn btn-success" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                    </a>
                                                 </div>
                                             </div> --}}
                                             <div class="col-12">
@@ -79,9 +81,6 @@
                                                         
                                                     </select>
                                                     <span class="input-group-addon input-group-append">
-                                                        {{-- <button class="btn btn-success" type="button" id="button-addon2">
-                                                            <i class="fas fa-plus-circle"></i>
-                                                        </button> --}}
                                                         <a type="button" href="#" class="btn btn-success" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
                                                             <i class="fas fa-plus-circle"></i>
                                                         </a>
@@ -159,13 +158,13 @@
                                             </div>
                                         </div>
                 
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="persona_atencion_input" name="persona_atencion_input" placeholder="Persona Atencion" required>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                 
                                         <div class="row">
                                             <div class="col-12">

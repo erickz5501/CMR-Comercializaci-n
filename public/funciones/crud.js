@@ -92,6 +92,7 @@ function lista_select2(url, nombre_modulo, id) {
 
         if (id) {
             $("#select_modal_" + nombre_modulo).val(id).trigger('change');
+            console.log(id);
         } else {
             $("#select_modal_" + nombre_modulo).val(null).trigger('change');
         }
@@ -108,6 +109,7 @@ function sw_success(txt = 'Exito', timer = 2000) {
         icon: "success"
     });
 }
+
 function sw_cancelar(txt = 'Se canceló', timer = 2000) {
     Swal.fire({
         title: txt,
@@ -199,10 +201,10 @@ function doSearch(){
     const tableReg = document.getElementById('datos');
     const searchText = document.getElementById('searchTerm').value.toLowerCase();
     let total = 0;
-
+    console.log(searchText);
     // Recorremos todas las filas con contenido de la tabla
     for (let i = 1; i < tableReg.rows.length; i++) {
-        // Si el td tiene la clase "noSearch" no se busca en su cntenido
+        // Si el td tiene la clase "noSearch" no se busca en su contenido
         if (tableReg.rows[i].classList.contains("noSearch")) {
             continue;
         }

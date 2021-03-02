@@ -46,4 +46,8 @@
     <tr class='noSearch hide'>
         <td colspan="6"></td>
     </tr>
+    @else
+    <tr>
+        <td colspan="6">No hay registros</td>
+    </tr>
 @endif                    

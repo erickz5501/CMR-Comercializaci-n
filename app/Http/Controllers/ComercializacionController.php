@@ -9,6 +9,7 @@ use App\Models\ComercializacionModel;
 use App\Models\CorrelativoModel;
 use App\Models\CotizacionesModel;
 use App\Models\CotizacionComercializacionModel;
+use App\Models\ClientesModel;
 use App\Models\comercializacion\ModuloComercializacionModel;
 use App\Http\Requests\ComercializacionRequest;
 use App\Http\Requests\CotizacionRequest;
@@ -223,6 +224,11 @@ class ComercializacionController extends Controller
         //$modulos = ['registro'=>$det_modulo];
         //return \json_encode($cant_modulos);
         return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo','cant_modulos') );
+    }
+
+    public function ultimo_cliente(){
+        $ultimo = ClientesModel::get()->last();
+        return json_encode(['ultimo' => $ultimo]);
     }
 
 }
