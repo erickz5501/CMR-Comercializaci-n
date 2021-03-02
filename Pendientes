@@ -14,6 +14,12 @@ Comercializacion:
     Hacer un buscador en el select de clientes y/o interesados
     despues de crear un interesado, seleccionar automaticamente el interesado agregado
     Subir archivos a la web(ahora solo sube texto plano)
+
+    Crud de giro de negocio(Clientes), em el modulo coonfiguracion.
+    Hacer consultas a la sunat / ruc(11) dni(8)
+    Validar el campo numero de telefono
+    Sacar calificacion, por cobrar.
+    
 General:
     Hacer login funcional
     Guardar datos del logueado

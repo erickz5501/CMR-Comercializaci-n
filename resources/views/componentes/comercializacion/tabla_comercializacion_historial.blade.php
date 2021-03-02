@@ -6,57 +6,11 @@
             <td>{{ $count+1 }}</td>
             <td>{{ $comerci->clientes->nombres_razon_social}}</td>
             <td>{{ $comerci->clientes->nro_documento}}</td>
+            <td>{{ $comerci->clientes->telefono_empresa}}</td>
             <td>{{ $comerci->persona_contacto}}</td>
             <td>{{ $comerci->actividad}}</td>
+            <td>{{ $comerci->observacion}}</td>
             <td>{{ $comerci->fecha_evento}}</td>
-            @if ($comerci->calificacion == 1)
-            <td>
-                <i class="fas fa-star text-yellow"></i>
-                <i class="fas fa-star text-black"></i>
-                <i class="fas fa-star text-black"></i>
-                <i class="fas fa-star text-black"></i>
-                <i class="fas fa-star text-black"></i>
-            </td>
-            @else
-                @if ( $comerci->calificacion == 2)
-                    <td>
-                        <i class="fas fa-star text-yellow"></i>
-                        <i class="fas fa-star text-yellow"></i>
-                        <i class="fas fa-star text-black"></i>
-                        <i class="fas fa-star text-black"></i>
-                        <i class="fas fa-star text-black"></i>
-                    </td>
-                @else
-                    @if ($comerci->calificacion == 3)
-                        <td>
-                            <i class="fas fa-star text-yellow"></i>
-                            <i class="fas fa-star text-yellow"></i>
-                            <i class="fas fa-star text-yellow"></i>
-                            <i class="fas fa-star text-black"></i>
-                            <i class="fas fa-star text-black"></i>
-                        </td>
-                    @else
-                        @if ($comerci->calificacion == 4)
-                            <td>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-black"></i>
-                            </td>
-                        @else
-                            <td>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                                <i class="fas fa-star text-yellow"></i>
-                            </td>
-                      @endif
-                  @endif 
-               @endif 
-            @endif
-
             @if ($comerci->estado == 0)
                 <td>
                     <span class="badge badge-success badge-lg">Activo</span>

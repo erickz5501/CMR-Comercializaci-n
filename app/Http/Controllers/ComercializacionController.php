@@ -123,9 +123,9 @@ class ComercializacionController extends Controller
                 'fecha_evento' => $example_date_input,
                 'descripcion_evento' => $evento_input,
                 'idpersonal' => $select_modal_personal,
-                'calificacion' => $calificacionSelect,
+                //'calificacion' => $calificacionSelect,
                 'avance' => $avance_input,
-                'por_cobrar' => $cobrar_input,
+                //'por_cobrar' => $cobrar_input,
                 'observacion' => $conclusionessTextarea
                 ]);
 
@@ -152,9 +152,70 @@ class ComercializacionController extends Controller
             
             return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
         }
-        
-
     }
+
+    public function createComercioNuevo(ComercializacionRequest $request){
+        //$idcomercializacion             = $request->input('idcomercializacion');
+        $idusers                        = 2;
+        $select_modal_clientes          = $request->input('select_modal_clientes');
+        $persona_contacto_input         = $request->input('persona_contacto_input');
+        $actividad_input                = $request->input('actividad_input');
+        $select_modal_medios            = $request->input('select_modal_medios');
+        $select_modal_modulos           = $request->input('modulo');//Trae los valores de los modulos
+        $cant_licencias_modulo          = $request->input('licencias');
+        $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
+        $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
+        $select_modal_eventos           = $request->input('select_modal_eventos');
+        $example_date_input             = $request->input('example_date_input');//fecha evento 
+        $evento_input                   = $request->input('evento_input');
+        $select_modal_cotizacion        = $request->input('select_modal_cotizacion');
+        $select_modal_personal          = $request->input('select_modal_personal');
+        $calificacionSelect             = $request->input('calificacionSelect');
+        $avance_input                   = $request->input('avance_input');
+        $cobrar_input                   = $request->input('cobrar_input');
+        $conclusionessTextarea          = $request->input('conclusionessTextarea');
+
+        $registro = ComercializacionModel::create(
+            [
+            'idusers' => $idusers,
+            'idclientes' => $select_modal_clientes,
+            'persona_contacto' => $persona_contacto_input,
+            'actividad' => $actividad_input,
+            'idmedios' => $select_modal_medios,
+            'detalla_llamada' => $llamadaDetTextarea,
+            'ideventos' => $select_modal_eventos,
+            'fecha_evento' => $example_date_input,
+            'descripcion_evento' => $evento_input,
+            'idpersonal' => $select_modal_personal,
+            //'calificacion' => $calificacionSelect,
+            'avance' => $avance_input,
+            //'por_cobrar' => $cobrar_input,
+            'observacion' => $conclusionessTextarea
+            ]);
+
+        //Registro en la tabla modulo_comercializacion
+        $registros = ComercializacionModel::all();
+        $ultimo_registro = $registros->last();
+        $ultimo_registro = json_encode($ultimo_registro);
+        $ultimo_registro = json_decode($ultimo_registro);
+        //dd($ultimo_registro);
+        
+        //Registra los modulos en la tabla modulo_comercializacion
+        foreach ($select_modal_modulos as $i => $value) {
+            $modulo_comercializacion = ModuloComercializacionModel::create([
+                'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                'idmodulos' => $select_modal_modulos[$i],
+                'cant_licencias' => $cant_licencias_modulo[$i]
+            ]);    
+        }
+        
+        $cotizacion_comercializacion = CotizacionComercializacionModel::create([
+            'idcomercializacion' => $ultimo_registro->idcomercializacion,
+            'idcotizaciones' => $select_modal_cotizacion
+        ]);
+        
+        return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
+    }   
 
     //generamos el codigo de la cotizacion
     public function generar_correlativo($increment = false){//en caso sea falso muestar el siguiente correlativo, pero no lo aumente a nivel de BD

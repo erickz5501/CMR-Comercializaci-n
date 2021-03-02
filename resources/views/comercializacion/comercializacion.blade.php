@@ -221,7 +221,7 @@
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="" style="color: white">.</label><br>
-                                                    <a type="button" href="#" class="btn btn btn-success" onclick="limpiar_cotizacion();" data-toggle="modal" data-target="#registroModalCotizacion">Agregar</a>
+                                                    <a type="button" href="#" class="btn btn btn-success" onclick="limpiar_cotizacion();" data-toggle="modal" data-target="#registroModalCotizacion">Cotizacion</a>
                                                 </div>
                                             </div>
 
@@ -239,7 +239,7 @@
                                         </div>
                 
                                         <div class="row">
-                                            <div class="col-4">
+                                            {{-- <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="calificacionSelect">Calificacion</label>
                                                     <select class="form-control" id="calificacionSelect" name="calificacionSelect" style="color: black !important; font-weight: bold !important;">
@@ -250,19 +250,21 @@
                                                     <option value="5">5 estrella</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="eventoTextarea">Avance</label>
-                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="avance_input" name="avance_input" placeholder="Detalle evento" required>
+                                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="avance_input" name="avance_input" placeholder="Avance evento">
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+
+                                            {{-- <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="eventoTextarea">Por Cobrar</label>
                                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="cobrar_input" name="cobrar_input" placeholder="Detalle evento" required>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         
                                         <div class="row">
@@ -285,7 +287,8 @@
 
             <!-- MODAL FOOTER -->
             <div class="modal-footer" style="padding-right: 1.5rem !important;">
-                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar registro</button>
+                <button type="submit" class="btn btn-warning" id="generar_n_comercializacion" style="align-items: left !important;"><i class="fas fa-plus"> </i> Generar registro</button>
+                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Editar registro</button>
             </div>
         </form>
         <!-- FIN-MODAL-FOOTER -->
@@ -548,10 +551,11 @@
                     <th>#</th>
                     <th>Cliente</th>
                     <th>Nro. Documento</th>
+                    <th>Telefono</th>
                     <th>Persona Contacto</th>
                     <th>Actividad</th>
+                    <th>Observaciones</th>
                     <th>Fecha evento</th>
-                    <th>Calificacion</th>
                     <th>Estado</th>
                     <th>Opciones</th>
                 </tr>

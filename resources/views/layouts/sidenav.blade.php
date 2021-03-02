@@ -61,6 +61,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href=" {{  url('/dashboard/configuracion/gironegocio') }} " class="nav-link">
+                    <span class="sidenav-mini-icon"> G </span>
+                    <span class="sidenav-normal"> Giro de negocio </span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="{{  url('/dashboard/configuracion/personal') }}" class="nav-link">
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal"> Personal </span>

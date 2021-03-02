@@ -9,7 +9,7 @@ class GiroNegocioModel extends Model
 {
     protected $table = 'giro_negocio';
     protected $primaryKey = 'idgiro_negocio';
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'estado'];
 
     public function ClientesModel(){
         return $this->belongsTo('App\Models\ClientesModel', 'idgiro_negocio');

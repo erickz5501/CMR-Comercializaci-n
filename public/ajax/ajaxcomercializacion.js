@@ -1,11 +1,15 @@
 function init(){
 
     $('#filtro').hide();
+    $('#generar_n_comercializacion').hide();
 
     $("#formulario_comercializacion").on("submit", function(e) {
         guardar_registro(e);
-        
     });
+
+    document.getElementById("generar_n_comercializacion").onclick =  function(e){
+            guardar_nuevo_registro(e);
+    }
 
     $("#formulario_cotizacion").on("submit", function(e) {
         guardar_cotizacion(e);
@@ -70,6 +74,7 @@ function limpiar_interesado(){ //Para limpiar los campos despues de registrar un
 
 function lista_comercializacion(){
     $('#filtro').hide();
+    $('#generar_n_comercializacion').hide();
     $("#lista_comercializacion").html('<div id="loader"></div>');
     $.get('/dashboard/comercializacion/lista', function (data){
         $("#lista_comercializacion").html(data);
@@ -103,6 +108,20 @@ function guardar_registro(e) {
     crud_guardar_editar(
         e,
         '/dashboard/comercializacion/guardar',
+        'comercializacion',
+        function(){ limpiar_comercializacion(); },
+        function(){ lista_comercializacion(); },
+        function(){ console.log('Console Error'); }
+    );
+
+    $("#registroModalComercializacion").modal('hide');
+}
+
+function guardar_nuevo_registro(e) {
+    //alert('nuevo registro ')
+    crud_guardar_editar(
+        e,
+        '/dashboard/comercializacion/guardar-registro',
         'comercializacion',
         function(){ limpiar_comercializacion(); },
         function(){ lista_comercializacion(); },
@@ -219,6 +238,7 @@ function limpiar_comercializacion(){
 function mostrar_seguimiento(idcliente){
     //location.href ="http://127.0.0.1:8000/dashboard/comercializacion/historial";
     $('#filtro').show("slow");
+    $('#generar_n_comercializacion').show("slow");
     $("#lista_comercializacion").html('<div id="loader"></div>');
     $.get('/dashboard/comercializacion/detalle/'+idcliente, function(data){
         $("#lista_comercializacion").html(data);

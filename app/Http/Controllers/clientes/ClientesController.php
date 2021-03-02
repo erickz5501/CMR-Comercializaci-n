@@ -22,8 +22,8 @@ class ClientesController extends Controller
     }
     
     public function indexClientes(){
-        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('estado', 0)->get();
-
+        //$clientes = ClientesModel::select(DB::raw("CONCAT('nombres_razon_social','nombres_razon_social') AS nombre"))->get();
+        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre' )->where('estado', 0)->get();
         return json_encode($clientes);
     }
 

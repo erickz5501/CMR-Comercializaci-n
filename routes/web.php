@@ -101,6 +101,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/medio/guardar', "configuracion\MediosController@createMedio");
     Route::get('/mostrar/medio/{idmedios}', "configuracion\MediosController@DetalleMedio");
 
+    Route::get('/configuracion/gironegocio', "GiroNegocioController@index");
+    Route::get('/configuracion/gironegocio/lista', "GiroNegocioController@indexLista");
+    Route::get('/gironegocio/activar/{idgiro_negocio}', "GiroNegocioController@activar");
+    Route::get('/gironegocio/desactivar/{idgiro_negocio}', "GiroNegocioController@desactivar");
+    Route::post('/gironegocio/guardar', "GiroNegocioController@createNegocio");
+    Route::get('/mostrar/gironegocio/{idgiro_negocio}', "GiroNegocioController@DetalleNegocio");
+
     Route::get('/configuracion/personal', "configuracion\PersonalController@index");
     Route::get('/configuracion/personal/lista', "configuracion\PersonalController@indexLista");
     Route::get('/personal/activar/{idpersonal}', "configuracion\PersonalController@activar");
@@ -127,6 +134,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/comercializacion', "ComercializacionController@index");
     Route::get('/comercializacion/lista', "ComercializacionController@indexLista");
     Route::post('/comercializacion/guardar', "ComercializacionController@createComercio");
+    Route::post('/comercializacion/guardar-registro', "ComercializacionController@createComercioNuevo");
     Route::get('/comercializacion/desactivar/{idcomercializacion}', "ComercializacionController@desactivar");
     Route::get('/comercializacion/activar/{idcomercializacion}', "ComercializacionController@activar");
     Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");//editar el registro
