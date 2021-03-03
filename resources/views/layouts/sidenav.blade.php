@@ -30,6 +30,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ url('/dashboard/cotizaciones') }}" >
+              <i class="fas fa-file-pdf text-blck"></i>
+              <span class="nav-link-text">Cotizacion</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{{ url('/dashboard/reclamos') }} " >
               <i class="far fa-address-book text-green"></i>
               <span class="nav-link-text">Reclamos</span>

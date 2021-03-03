@@ -129,6 +129,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/users/guardar', "configuracion\UsersController@createUsers");
     Route::get('/mostrar/user/{idusers}', "configuracion\UsersController@DetalleUser");
 });
+
 // .......... :::::: RUTAS COMERCIALIZACION DEL COMPLETADO :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/comercializacion', "ComercializacionController@index");
@@ -146,6 +147,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/cotizacion/guardar', "ComercializacionController@createCotizacion");
     
 });
+
 // .......... :::::: RUTAS  ACTUALIZACIONES DEL COMPLETADO :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/actualizaciones',"ActualizacionesController@index");
@@ -157,6 +159,18 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 
     
 });
+
+// .......... :::::: RUTAS  COTIZACIONES DEL COMPLETADO :::: ................
+Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
+    route::get('/cotizaciones',"CotizacionController@index");
+    route::get('/cotizaciones/lista',"CotizacionController@indexLista");
+    Route::get('/cotizaciones/desactivar/{idcotizacion}', "CotizacionController@desactivar");
+    Route::get('/cotizaciones/activar/{idcotizacion}', "CotizacionController@activar");
+    Route::get('/lista/cotizaciones/{idcotizacion}', "CotizacionController@detalle_actualizacion");
+
+    
+});
+
 // .......... :::::: RUTAS RECLAMOS DEL COMPLETADO :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/reclamos', "ReclamosController@index");

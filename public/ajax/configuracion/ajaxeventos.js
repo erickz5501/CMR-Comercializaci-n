@@ -40,10 +40,10 @@ function limpiar_evento(){
 }
 
 function mostrar_one_evento(ideventos){
-    $("#registroModalEvento").modal('show');
+     $("#registroModalEvento").modal('show');
     $.get('/dashboard/mostrar/evento/'+ideventos , function (data){
         data = JSON.parse(data);
-        //console.log(data.cliente);  
+       //console.log(data.cliente);  
         $('#ideventos').val(data.evento['ideventos']);
         $('#nombre_input').val(data.evento['nombre']);
         $('#descripcion_input').val(data.evento['descrripcion'])
