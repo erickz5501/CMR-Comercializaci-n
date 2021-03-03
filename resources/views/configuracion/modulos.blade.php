@@ -48,6 +48,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label for="nombre_razon_social_input">Nombre</label>
+                                <div class="form-group">
+                                    <div class="input-group input-group-merge">
+                                        <textarea type="text" class="form-control" id="caracteristicas_modulo" name="caracteristicas_modulo" placeholder="Cotizacion" required ></textarea>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- ================================= FIN-CUADRO-BRODER ================================= -->

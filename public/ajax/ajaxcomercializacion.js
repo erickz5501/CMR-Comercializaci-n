@@ -11,15 +11,6 @@ function init(){
             guardar_nuevo_registro(e);
     }
 
-    $("#formulario_cotizacion").on("submit", function(e) {
-        guardar_cotizacion(e);
-        lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
-    });
-
-    $("#formulario_interesado").on("submit", function(e){
-        guardar_interesado(e);
-    });
-
     lista_comercializacion();
 
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
@@ -32,46 +23,6 @@ function init(){
 
 }
 
-function guardar_interesado(e){
-    crud_guardar_editar(
-        e,
-        '/dashboard/guardar/interesados',
-        'interesado',
-        function(){ limpiar_interesado(); },
-        function(){ lista_select2('/dashboard/listas/cliente', 'clientes', null); },
-        function(){ console.log('Console Error'); }
-    );
-    $("#registroModalInteresado").modal('hide');
-}
-
-// function ultimo_cliente(){
-//     $("#registroModalComercializacion").modal('show');
-//     $.get('/dashboard/comercializacion/interesado/ultimo', function (data){
-//         data = JSON.parse(data);
-//         if (data.ultimo['idclientes']) {
-//             $('#select_modal_clientes').val(data.ultimo['idclientes']).trigger('change');
-//         }else{
-//             $('#select_modal_clientes').val(null).trigger('change');
-//         }
-//     })
-// }
-
-function limpiar_interesado(){ //Para limpiar los campos despues de registrar un cliente
-    $('#idclientes').val("");
-    $('#nombre_razon_social_input').val("");
-    $('#nombre_comercial_input').val("");
-    $('#numDocumentoInput').val("");
-    $('#InputCorreo1').val("");
-    $('#InputCorreo2').val("");
-    $('#InputCorreo3').val("");
-    $('#number_empresa_input').val("");
-    $('#number_contacto_input').val("");
-    $('#number_otro_input').val("");
-    $('#select_modal_giroNegocio').val(null).trigger('change');
-    $('#select_modal_tipoPersona').val("Seleccione").trigger('change');
-    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
-}
-
 function lista_comercializacion(){
     $('#filtro').hide();
     $('#generar_n_comercializacion').hide();
@@ -79,28 +30,6 @@ function lista_comercializacion(){
     $.get('/dashboard/comercializacion/lista', function (data){
         $("#lista_comercializacion").html(data);
     });
-}
-
-function guardar_cotizacion(e){
-    crud_guardar_editar(
-        e,
-        '/dashboard/cotizacion/guardar',
-        'cotizacion',
-        function(){ limpiar_comercializacion(); },
-        function(){ lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null); },
-        function(){ console.log('Console Error'); }
-    );
-    $("#registroModalCotizacion").modal('hide');
-}
-
-function limpiar_cotizacion(){
-    $('#idcotizaciones').val("");
-    $.get('/dashboard/cotizacion/generar', function(data){
-        data = JSON.parse(data);
-        $('#nombre_cotizacion').val(data);
-        nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
-    });
-    $('#ruta_cotizacion').val("");
 }
 
 function guardar_registro(e) {
@@ -243,32 +172,6 @@ function mostrar_seguimiento(idcliente){
     $.get('/dashboard/comercializacion/detalle/'+idcliente, function(data){
         $("#lista_comercializacion").html(data);
     });
-}
-
-function validar_pdf(){
-    //validamos que el archivo a subir sea un pdf
-    var fileInput = document.getElementById('ruta_cotizacion');
-    var filePath = fileInput.value;
-    extensiones_permitidas = new Array(".pdf");
-    mi_error = "";
-
-    extension = (filePath.substring(filePath.lastIndexOf("."))).toLowerCase();//Obtiene la extension del archivo a subir
-    //alert(extension);
-
-    if (extension == ".pdf") {
-        return true;
-    } else {
-        Swal.fire({
-            icon: 'error',
-            title: 'Solo documentos PDF!',
-            text: 'esto es un archivo: ' + extension
-            //footer: 'Este documento es un: ' + extension
-          })
-
-        $('#ruta_cotizacion').val("");
-        return false;
-    }
-
 }
 
 //Funciones para agregar los modulos con la cantidad de licencias xD

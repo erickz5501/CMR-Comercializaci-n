@@ -3,6 +3,7 @@ function init(){
 
     $("#formulario_medios").on("submit", function(e) {
         guardar_evento(e);
+        lista_select2('/dashboard/listas/medios', 'medios', null);
     });
 
 }

@@ -4,6 +4,27 @@ function init(){
     $("#formulario_modulos").on("submit", function(e) {
         guardar_modulo(e);
     });
+
+    // respuesta
+    $('#caracteristicas_modulo').summernote({
+        placeholder: 'Escriba su texto aquí.',
+        tabsize: 2,
+        height: 180,
+        width:700,
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['table', ['table']],
+            ['insert', ['link', 'picture', 'video']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+          ]
+    });
+
+// MOSTRAR DATOS
+$("#caracteristicas_modulo").summernote('code', '');
+
 }
 
 function lista_modulos(){
@@ -46,6 +67,7 @@ function mostrar_one_modulo(idmodulo){
         //console.log(data.cliente);  
         $('#idmodulos').val(data.modulo['idmodulos']);
         $('#nombre_input').val(data.modulo['nombre']);
+        $("#caracteristicas_modulo").summernote('code', data.modulo['caracteristicas']);
     });
 }
 

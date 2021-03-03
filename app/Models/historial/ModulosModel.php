@@ -9,7 +9,7 @@ class ModulosModel extends Model
 {
     protected $table = 'modulos';
     protected $primaryKey = 'idmodulos';
-    protected $fillable = ['nombre', 'estado'];
+    protected $fillable = ['nombre', 'caracteristicas', 'estado'];
 
     public function modulo_comercializacion(){
         return $this->belongsTo('App\Models\comercializacion\ModuloComercializacionModel', 'idmodulos');

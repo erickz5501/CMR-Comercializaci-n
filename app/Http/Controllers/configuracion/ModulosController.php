@@ -44,13 +44,14 @@ class ModulosController extends Controller
     public function createModulos(ModulosRequest $request){
         $idmodulos                = $request->input('idmodulos');
         $nombre_input             = $request->input('nombre_input');
+        $caracteristicas          = $request->input('caracteristicas_modulo');
        
         if ($idmodulos != "") {
             $modulos = ModulosModel::find($idmodulos);
 
             try{
                 $modulos->nombre = $nombre_input;
-
+                $modulos->caracteristicas = $caracteristicas;
                 $modulos->save();
             }
             catch(Exception $e){
@@ -63,6 +64,7 @@ class ModulosController extends Controller
             $modulo = ModulosModel::create(
                 [
                 'nombre' => $nombre_input,
+                'caracteristicas' => $caracteristicas
                 ]);
             
             return json_encode(['status' => true, 'message' => 'Éxito se registro el modulo']);

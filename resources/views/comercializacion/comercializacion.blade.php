@@ -54,7 +54,7 @@
                         <div class="accordion" id="accordionExample">
                             <div class="card">
                                 <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <h5 class="mb-0">#1</h5>
+                                    <h5 class="mb-0">#Datos generales</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
@@ -75,15 +75,18 @@
                                                     </a>
                                                 </div>
                                             </div> --}}
-                                            <div class="col-12">
-                                                <div class="input-group form-group" id="">
-                                                    <select class="form-control" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
+                                            <div class="col-md-12">
+                                                <div class="input-group" id>
+                                                    <select class="form-control custom-select" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
                                                         
                                                     </select>
                                                     <span class="input-group-addon input-group-append">
-                                                        <a type="button" href="#" class="btn btn-success" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
+                                                        {{-- <a type="button" href="#" class="btn btn-success" id="button-addon2" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
                                                             <i class="fas fa-plus-circle"></i>
-                                                        </a>
+                                                        </a> --}}
+                                                        <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -102,16 +105,21 @@
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="">Actividad</label>
-                                                    <input style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" type="text" id="actividad_input" name="actividad_input" placeholder="Actividad" required>
+                                                    <input style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" type="text" id="actividad_input" name="actividad_input" placeholder="Actividad">
                                                 </div>
                                             </div>
                                             <div class="col-3">
-                                                <div class="form-group">
                                                     <label for="select_modal_medios">Medios</label>
-                                                    <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="select" required>
-                                                        <option selected="selected" value="0">Medios</option>
-                                                    </select>
-                                                </div>
+                                                    <div class="input-group" id>
+                                                        <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="" required>
+                                                            <option selected="selected" value="0">Medios</option>
+                                                        </select>
+                                                        <span class="input-group-addon input-group-append">
+                                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="modal_medios();">
+                                                                <i class="fas fa-plus-circle"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="row">
@@ -221,7 +229,7 @@
                                             <div class="col-2">
                                                 <div class="form-group">
                                                     <label for="" style="color: white">.</label><br>
-                                                    <a type="button" href="#" class="btn btn btn-success" onclick="limpiar_cotizacion();" data-toggle="modal" data-target="#registroModalCotizacion">Cotizacion</a>
+                                                    <a type="button" href="#" class="btn btn btn-success" onclick="modal_cotizacion();" data-toggle="modal" data-target="#registroModalCotizacion">Cotizacion</a>
                                                 </div>
                                             </div>
 
@@ -298,68 +306,7 @@
 <!-- FIN-MODAL -->
 
 <!-- ================================= MODAL Registro COTIZACION================================= -->
-<div class="modal fade border" id="registroModalCotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
-      <div class="modal-content">
-        <!-- ================================= MODAL TITULO ================================= -->
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar cotizacion</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
-            </button>
-        </div>
-
-        <!-- ================================= MODAL CUERPO ================================= -->
-        <form id="formulario_cotizacion" enctype="multipart/form-data">
-            @csrf
-            <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
-                {{-- input ID oculto --}}
-                <input type="hidden" id="idcotizaciones" name="idcotizaciones"/>
-                <div class="row col-12">
-                    <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="">Nombre</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_cotizacion" name="nombre_cotizacion" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="">Ruta</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="ruta_cotizacion" name="ruta_cotizacion" required>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div class="row">
-                            <div class="col">
-                                <div class="custom-file">
-                                    <label class="custom-file-label" for="customFileLang">Select file</label>
-                                    <input type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            <!-- ================================= FIN-CUADRO-BRODER ================================= -->
-            </div>
-            <!-- FIN-MODAL-BODY -->
-
-            <!-- MODAL FOOTER -->
-            <div class="modal-footer" style="padding-right: 1.5rem !important"">
-                <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar cotizaion</button>
-            </div>
-        </form>
-        <!-- FIN-MODAL-FOOTER -->
-      </div>
-    </div>
-</div>
-<!-- FIN-MODAL -->
+@include('componentes/modals/cotizacion/modal_cotizacion')
 
 <!-- ================================= MODAL Registro Interesado ================================= -->
 <div class="modal fade" id="registroModalInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -543,6 +490,9 @@
 </div>
 <!-- FIN-MODAL -->
 
+<!-- ================================= MODAL Registro Medio ================================= -->
+@include('componentes/modals/medios/modal_medios')
+
 <div class="table-responsive">
     <div>
         <table class="table align-items-center" id="datos">
@@ -570,7 +520,11 @@
 @section('js')
 <script src="{{ asset('funciones/create.js')}}"></script>
 <script src="{{ asset('funciones/crud.js')}}"></script>
+<script src="{{ asset('ajax/componentes/ajaxmodals.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
+<script src="{{ asset('ajax/configuracion/ajaxmedios.js')}}"></script>
+<script src="{{ asset('ajax/ajaxcotizacion.js')}}"></script>
+<script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
 
 @endsection
 <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">

@@ -2,6 +2,7 @@ function init(){
     lista_cotizaciones();
     $("#formulario_cotizacion").on("submit", function(e) {
         guardar_cotizacion(e);
+        lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     });
 }
 

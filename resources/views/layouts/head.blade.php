@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="{{ asset('/argon/assets/css/argon.css?v=1.2.0')}}" type="text/css">
   <link rel="stylesheet" href="{{ asset('/argon/assets/css/mistylojunior.css')}}" type="text/css">
   <link rel="stylesheet" href="{{ asset('/argon/assets/vendor/sweetalert2/dist/sweetalert2.min.css')}}" type="text/css">
+  
+  <link href="{{ asset('/summernote/summernote-bs4.css') }}" rel="stylesheet">
   <!-- CSS only -->
   {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> --}}
 </head>
