@@ -18,6 +18,46 @@
                     <input type="hidden" id="idclientes" name="idclientes" />
                     <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
                         
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="select_modal_tipoPersona">Tipo persona</label>
+                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required>
+                                        <option>Seleccione</option>
+                                        <option style="color: green !important; font-weight: bold !important;" value="1">Interesado</option>
+                                        <option value="2">Cliente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="select_modal_tipoDocumento">Tipo documento</label>
+                                    <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="" required>
+                                        <option>Seleccione</option>
+                                        <option value="1">DNI</option>
+                                        <option value="2">RUC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="numDocumentoInput">Numero documento</label>
+                                    <div class="input-group input-group-merge">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                        </div>
+                                        <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero" required />
+                                        <span class="input-group-addon input-group-append">
+                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="cunsulta_sunat();">
+                                                <i class="fas fa-angle-right"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
                         <div class="form-row">
                             <div class="col-4">
                                 <label for="nombre_razon_social_input" class="form-control-label">Nombres/Razon social</label>
@@ -49,41 +89,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="select_modal_tipoPersona">Tipo persona</label>
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required>
-                                        <option>Seleccione</option>
-                                        <option style="color: green !important; font-weight: bold !important;" value="1">Interesado</option>
-                                        <option value="2">Cliente</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="select_modal_tipoDocumento">Tipo documento</label>
-                                    <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select" required>
-                                        <option>Seleccione</option>
-                                        <option value="3">DNI</option>
-                                        <option value="6">RUC</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="numDocumentoInput">Numero documento</label>
-                                    <div class="input-group input-group-merge">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
-                                        </div>
-                                        <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero" required />
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
 
                         <div class="row">

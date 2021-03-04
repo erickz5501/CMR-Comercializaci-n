@@ -47,7 +47,45 @@
                         <input type="hidden" id="select_modal_tipoPersona" name="select_modal_tipoPersona" value="1"/>  
 
                         <div class="border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px;">
-                            
+                            <div class="row">
+                                {{-- <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="select_modal_tipoPersona">Tipo persona</label>
+                                        <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required>
+                                            <option>Seleccione</option>
+                                            <option style="color: green !important; font-weight: bold !important;" value="1">Interesado</option>
+                                            <option value="2">Cliente</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="select_modal_tipoDocumento">Tipo documento</label>
+                                        <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="" required>
+                                            <option>Seleccione</option>
+                                            <option value="1">DNI</option>
+                                            <option value="2">RUC</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="numDocumentoInput">Numero documento</label>
+                                        <div class="input-group input-group-merge">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                            </div>
+                                            <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero" required />
+                                            <span class="input-group-addon input-group-append">
+                                                <button class="btn btn-default" type="button" id="button-addon2" onclick="cunsulta_sunat();">
+                                                    <i class="fas fa-angle-right"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="form-row">
                                 <div class="col-4">
                                     <label for="nombre_razon_social_input" class="form-control-label">Nombres/Razon social</label>
@@ -72,48 +110,18 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="select_modal_giroNegocio">Giro de negocio</label>
-                                        <select style="color: black !important; font-weight: bold !important;"  class="form-control" data-toggle="select" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
+                                    <label for="select_modal_giroNegocio">Giro de negocio</label>
+                                    <div class="input-group">
+                                        <select style="color: black !important; font-weight: bold !important;"  class="form-control" data-toggle="" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
                                             {{-- AQUI VAN LOS "OPTIONS" --}}
                                         </select>
+                                        <span class="input-group-addon input-group-append">
+                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_evento();" data-toggle="modal" data-target="#registroModalGiroNegocio">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
-                                {{-- <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="select_modal_tipoPersona">Tipo persona</label>
-                                        <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoPersona" name="select_modal_tipoPersona" data-toggle="select" required>
-                                            <option>Seleccione</option>
-                                            <option style="color: green !important; font-weight: bold !important;" value="1">Interesado</option>
-                                            <option value="2">Cliente</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="select_modal_tipoDocumento">Tipo documento</label>
-                                        <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select" required>
-                                            <option>Seleccione</option>
-                                            <option value="3">DNI</option>
-                                            <option value="6">RUC</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <div class="form-group">
-                                        <label for="numDocumentoInput">Numero documento</label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
-                                            </div>
-                                            <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero" required />
-                                        </div>
-                                    </div>
-                                </div>
-                                
                             </div>
 
                             <div class="row">
@@ -367,6 +375,9 @@
         </div>
     </div>
 
+    <!-- ================================= MODAL Registro Giro Negocio ================================= -->
+    @include('componentes/modals/giro_negocio/modal_giro_negocio')
+
     <div class="table-responsive">
         <div>
             <table class="table align-items-center" id="datos">
@@ -398,13 +409,7 @@
     <script src="{{ asset('funciones/crud.js')}}"></script>
     <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
     <script src="{{ asset('ajax/ajaxhistorial.js')}}"></script>
-    {{-- <script>
-        function validar_telefono(){
-            var numero = $('#number_empresa_input').val();
-            if (numero.length >= 9) {
-                $('#number_empresa_input').prop("disabled", true);
-            }
-        }
-    </script> --}}
+    <script src="{{ asset('ajax/configuracion/ajaxgironegocio.js')}}"></script>
+    
 @endsection
 <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">    

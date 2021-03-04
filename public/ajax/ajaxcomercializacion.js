@@ -23,6 +23,81 @@ function init(){
 
 }
 
+function cunsulta_sunat(){
+    let id_documento        = $("#select_modal_tipoDocumento").val();
+    let modulo_txt          = $("#select_modal_tipoDocumento option:selected").text();
+    let nro_document        = $('#numDocumentoInput').val();
+
+    if (id_documento == 1) {
+
+        if (nro_document.length != 8) {
+
+            Swal.fire({
+                title: "Error",
+                text: "DNI Invalido",
+                timer: 2000,
+                icon: "error"
+            });
+            
+        }else{
+            //Cunsolta DNI a la sunat
+            $.get('/consultas/dni/'+nro_document, function(data){
+                data = JSON.parse(data);
+                if (data['status'] == false) {
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se puede consultar el DNI en este momento",
+                        timer: 2000,
+                        icon: "error"
+                    });
+                }else{
+                $('#nombre_razon_social_input').val(data.cliente['nombres']);
+                $('#nombre_comercial_input').val(data.cliente['apellido_paterno'] + ' '+ data.cliente['apellido_materno']);
+                }
+            });
+        }
+
+    } else {
+        if (id_documento == 2) {
+            if (nro_document.length != 11) {
+                Swal.fire({
+                    title: "Error",
+                    text: "RUC Invalido",
+                    timer: 2000,
+                    icon: "error"
+                });
+            } else {
+               //Cunsolta RUC a la sunat
+            $.get('/consultas/ruc/'+nro_document, function(data){
+                data = JSON.parse(data);
+                if (data['status'] == false) {
+                    Swal.fire({
+                        title: "Error",
+                        text: "No se puede consultar el RUC en este momento",
+                        timer: 2000,
+                        icon: "error"
+                    });
+                } else {
+                    $('#nombre_razon_social_input').val(data.result['razon_social']);
+                    $('#nombre_comercial_input').val(data.result['nombre_comercial']);  
+                }
+                
+            });
+            }
+        }else{
+            Swal.fire({
+                title: "Error",
+                text: "Seleccione el tipo de documento",
+                timer: 2000,
+                icon: "error"
+            });
+        }
+        
+    }
+
+    // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
+}
+
 function lista_comercializacion(){
     $('#filtro').hide();
     $('#generar_n_comercializacion').hide();

@@ -3,6 +3,7 @@ function init(){
 
     $("#formulario_personal").on("submit", function(e) {
         guardar_personal(e);
+        lista_select2('/dashboard/listas/personal', 'personal', null);
     });
 
 }

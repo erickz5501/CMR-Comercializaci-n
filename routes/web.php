@@ -196,7 +196,8 @@ Route::get('/dashboard/listas/interesado', "clientes\ClientesController@indexInt
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
 // ........... ::::: RUTA PARA CONSULTAS SUNAT :::::...............
-Route::get('/consultas/ruc-dni/{dni_ruc}', "consultas\ConsultasController@consultaSunat");
+Route::get('/consultas/dni/{dni}', "consultas\ConsultasController@consultaDNISunat");
+Route::get('/consultas/ruc/{ruc}', "consultas\ConsultasController@consultaRUCSunat");
 
 
 // // ........... ::::: LISTAR TIPO PERSONA :::::...............

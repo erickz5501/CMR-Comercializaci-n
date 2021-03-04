@@ -3,6 +3,7 @@ function init (){
 
     $("#formulario_negocio").on("submit", function(e) {
         guardar_giro_negocio(e);
+        lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
     });
 }
 

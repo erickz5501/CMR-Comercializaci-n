@@ -213,11 +213,19 @@
 
                                         <div class="row">
                                             <div class="col">
-                                                <div class="form-group">
-                                                    <label for="personalInput">Personal</label>
-                                                    <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="select" required style="color: black !important; font-weight: bold !important;">
+                                                <label for="personalInput">Personal</label>
+                                                <div class="input-group">
+                                                    <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="" required style="color: black !important; font-weight: bold !important;">
                                                         
                                                     </select>
+                                                    <span class="input-group-addon input-group-append">
+                                                        {{-- <a type="button" href="#" class="btn btn-success" id="button-addon2" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </a> --}}
+                                                        <button class="btn btn-default" type="button" id="button-addon2" onclick="();" data-toggle="modal" data-target="#registroModalPersonal">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                        </button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
