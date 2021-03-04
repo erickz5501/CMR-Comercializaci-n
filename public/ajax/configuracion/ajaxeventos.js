@@ -2,6 +2,7 @@ function init(){
     lista_eventos();
     $("#formulario_evento").on("submit", function(e) {
         guardar_evento(e);
+        lista_select2('/dashboard/listas/eventos', 'eventos', null);
     });
 }
 

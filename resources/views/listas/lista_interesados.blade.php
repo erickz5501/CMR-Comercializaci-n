@@ -124,7 +124,14 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
-                                            <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" required maxlength="9" minlength="9"/>
+                                            <input 
+                                            style="color: black !important; font-weight: bold !important;" 
+                                            class="form-control" 
+                                            type="number" 
+                                            id="number_empresa_input" 
+                                            name="number_empresa_input"
+                                            {{-- onkeyup="validar_telefono()" --}}
+                                            required />
                                         </div>
                                     </div>
                                 </div>
@@ -391,5 +398,13 @@
     <script src="{{ asset('funciones/crud.js')}}"></script>
     <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
     <script src="{{ asset('ajax/ajaxhistorial.js')}}"></script>
+    {{-- <script>
+        function validar_telefono(){
+            var numero = $('#number_empresa_input').val();
+            if (numero.length >= 9) {
+                $('#number_empresa_input').prop("disabled", true);
+            }
+        }
+    </script> --}}
 @endsection
 <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">    

@@ -128,7 +128,7 @@ class ClientesController extends Controller
 
     }
 
-    public function editarCliente(UserGeneralRequest $request){
+    public function editarCliente(InteresadoRequest $request){
         $idclientes                     = $request->input('idclientes');
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
         $nombre_comercial_input         = $request->input('nombre_comercial_input');

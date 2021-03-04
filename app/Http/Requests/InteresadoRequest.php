@@ -21,10 +21,18 @@ class InteresadoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules(){
         return [
-            //
+            'number_empresa_input' => 'max:9|min:9|required'
         ];
     }
+
+    public function messages(){
+        return[
+            'number_empresa_input.required' => 'Este campo es requerido',
+            'number_empresa_input.min' => 'Solo 9 digitos',
+            'number_empresa_input.max' => 'Solo 9 digitos'
+        ];
+    }
+
 }
