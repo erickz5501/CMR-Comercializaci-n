@@ -21,7 +21,7 @@ class InteresadoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(){
+    public function rules(){//estas son las validaciones
         return [
             'number_empresa_input' => 'max:9|min:9|required'
         ];
@@ -30,8 +30,8 @@ class InteresadoRequest extends FormRequest
     public function messages(){
         return[
             'number_empresa_input.required' => 'Este campo es requerido',
-            'number_empresa_input.min' => 'Solo 9 digitos',
-            'number_empresa_input.max' => 'Solo 9 digitos'
+            'number_empresa_input.min' => 'Ingrese 9 digitos',
+            'number_empresa_input.max' => 'Ingrese 9 digitos'
         ];
     }
 

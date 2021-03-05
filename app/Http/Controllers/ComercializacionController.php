@@ -120,7 +120,7 @@ class ComercializacionController extends Controller
                 'idmedios' => $select_modal_medios,
                 'detalla_llamada' => $llamadaDetTextarea,
                 'ideventos' => $select_modal_eventos,
-                'fecha_evento' => $example_date_input,
+                'fecha_evento' => Carbon::now()->format('Y-m-d H:i:s'),
                 'descripcion_evento' => $evento_input,
                 'idpersonal' => $select_modal_personal,
                 //'calificacion' => $calificacionSelect,

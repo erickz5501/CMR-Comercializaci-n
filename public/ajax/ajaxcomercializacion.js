@@ -18,7 +18,7 @@ function init(){
     lista_select2('/dashboard/listas/medios', 'medios', null);
     lista_select2('/dashboard/listas/eventos', 'eventos', null);
     lista_select2('/dashboard/listas/personal', 'personal', null);
-    lista_select2('/dashboard/listas/cliente', 'clientes', null);
+    lista_select2('/dashboard/listas/cliente', 'clientes', 2);
     lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
 
 }

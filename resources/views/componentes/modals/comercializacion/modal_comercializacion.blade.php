@@ -177,12 +177,12 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            {{-- <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="example-date-input" class="form-control-label">Fecha evento</label>
                                                     <input style="color: black !important; font-weight: bold !important;" class="form-control" type="date" value="2018-11-23" id="example_date_input" name="example_date_input" required>
                                                 </div>                                    
-                                            </div>
+                                            </div> --}}
                                             <div class="col-4">
                                                 <div class="form-group">
                                                     <label for="eventoTextarea">Detalle evento</label>

@@ -41,7 +41,7 @@ function cunsulta_sunat(){
                 if (data['status'] == false) {
                     Swal.fire({
                         title: "Error",
-                        text: "No se puede consultar el DNI en este momento",
+                        text: "No se puede consultar este DNI",
                         timer: 2000,
                         icon: "error"
                     });
@@ -65,10 +65,10 @@ function cunsulta_sunat(){
                //Cunsolta RUC a la sunat
             $.get('/consultas/ruc/'+nro_document, function(data){
                 data = JSON.parse(data);
-                if (data['status'] == false) {
+                if (data['success'] == false) {
                     Swal.fire({
                         title: "Error",
-                        text: "No se puede consultar el RUC en este momento",
+                        text: "No se puede consultar este RUC",
                         timer: 2000,
                         icon: "error"
                     });

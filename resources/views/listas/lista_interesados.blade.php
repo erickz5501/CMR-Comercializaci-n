@@ -138,7 +138,6 @@
                                             type="number" 
                                             id="number_empresa_input" 
                                             name="number_empresa_input"
-                                            {{-- onkeyup="validar_telefono()" --}}
                                             required />
                                         </div>
                                     </div>
@@ -207,6 +206,7 @@
                                 </div> --}}
                             </div>
                         </div>
+                        @include('errors/errors_forms')
                     </div>
 
                     <!-- ================================= FIN-CUADRO-BRODER ================================= -->

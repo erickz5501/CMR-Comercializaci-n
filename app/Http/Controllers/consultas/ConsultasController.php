@@ -15,15 +15,16 @@ class ConsultasController extends Controller{
             $res = $client->request('GET', 'https://api.reniec.cloud/dni/' . $dni, ['verify' => false] );   //obtenemos los datos de la persona mediante la api de SUNAT
         
             $data = $res->getBody();
+            $cliente_data = json_decode($data);
         
-            if ($data) {
+            if (isset($cliente_data->error)) {
 
-                $cliente_data = json_decode($data);
-
-                return json_encode(['status' => true, "cliente" => $cliente_data]);
-
-            }else{
                 return json_encode(['status' => false, "exception" => 'No cencontrado']);
+        
+                
+            }else{
+                return json_encode(['status' => true, "cliente" => $cliente_data]);
+                
             }
         
         } catch (\Exception $e) {
