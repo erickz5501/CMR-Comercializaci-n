@@ -4,6 +4,7 @@
 
         <td>{{ $count+1}}</td>
         <td>{{ $modulo->nombre}}</td>
+        <td></td>
         @if ($modulo->estado == 0)
             <td>
                 <span class="badge badge-success badge-lg">Activo</span>
