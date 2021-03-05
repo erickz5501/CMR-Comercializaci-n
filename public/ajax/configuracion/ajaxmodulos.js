@@ -8,9 +8,8 @@ function init(){
     // respuesta
     $('#caracteristicas_modulo').summernote({
         placeholder: 'Escriba su texto aquí.',
-        tabsize: 2,
-        height: 180,
-        width:700,
+        tabsize: 4,
+        height: 100,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],

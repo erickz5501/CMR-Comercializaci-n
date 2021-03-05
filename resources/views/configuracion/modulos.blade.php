@@ -52,9 +52,8 @@
                             <div class="col-12">
                                 <label for="nombre_razon_social_input">Descripcion</label>
                                 <div class="form-group">
-                                    <div class="input-group input-group-merge">
-                                        <textarea type="text" class="form-control" id="caracteristicas_modulo" name="caracteristicas_modulo" placeholder="Cotizacion" required ></textarea>
-                                        
+                                    <div class="input-group">
+                                        <textarea type="text" class="form-control" id="caracteristicas_modulo" name="caracteristicas_modulo" required ></textarea>                                        
                                     </div>
                                 </div>
                             </div>
