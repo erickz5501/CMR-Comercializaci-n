@@ -6,7 +6,7 @@ function init(){
         guardar_cliente(e);
     });
 
-    $("#formulario_interesado").on("submit", function(e){
+    $("#formulario_registro_interesado").on("submit", function(e){
         guardar_interesado(e);
     });
 
@@ -112,12 +112,12 @@ function guardar_interesado(e){
     crud_guardar_editar(
         e,
         '/dashboard/guardar/interesados',
-        'interesado',
+        'registro_interesado',
         function(){ limpiar_interesado(); },
         function(){ lista_interesados(); },
         function(){ console.log('Console Error'); }
     );
-    $("#registroModalInteresado").modal('hide');
+    
 }
 
 // .................. :::: Funciones para "mostar" los modals :::: ....................
@@ -236,7 +236,7 @@ function mostrar_one_cliente(idclientes){
 }
 
 function mostrar_one_interesado(idclientes){
-    $("#registroModalInteresado").modal('show');
+    $("#modal_registro_interesado").modal('show');
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
         //console.log(data.cliente);  

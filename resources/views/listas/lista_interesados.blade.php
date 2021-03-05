@@ -12,7 +12,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="limpiar_interesado();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalInteresado"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
+            <a type="button" href="#" onclick="limpiar_interesado();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_registro_interesado"><i class="fas fa-plus-circle"></i> Agregar interesado</a>
         </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     <!-- FIN-MODAL -->
 
      <!-- ================================= MODAL Registro Interesado ================================= -->
-    <div class="modal fade" id="registroModalInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal_registro_interesado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
           <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
@@ -38,7 +38,7 @@
             </div>
 
             <!-- ================================= MODAL CUERPO ================================= -->
-            <form id="formulario_interesado" method="POST">
+            <form id="formulario_registro_interesado" method="POST">
                 @csrf            
                 <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
@@ -139,6 +139,7 @@
                                             id="number_empresa_input" 
                                             name="number_empresa_input"
                                             required />
+                                            <div class="invalid-feedback">Por Favor escriba un numero valido</div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,7 +207,10 @@
                                 </div> --}}
                             </div>
                         </div>
-                        @include('errors/errors_forms')
+                        {{-- @include('errors/errors_forms') --}}
+                        <div class="col-md-12">
+                            <div id="contenedor_de_errores_registro_interesado"></div>
+                        </div>
                     </div>
 
                     <!-- ================================= FIN-CUADRO-BRODER ================================= -->

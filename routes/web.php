@@ -14,9 +14,10 @@ use App\Http\Controllers\DashboardController;
 |
  */
 
-Route::get('/', function () {
-    return view('main');
-});
+// Route::get('/', function () {
+//     return view('main');
+// });
+Route::get('/', "ComercializacionController@index");
 
 Route::get('/index', function () {
     return view('login');

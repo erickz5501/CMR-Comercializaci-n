@@ -1,3 +1,5 @@
+var errores_list = [];
+
 function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callback_true, callback_false) {
 
     event.preventDefault();
@@ -17,7 +19,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
             //console.log(datos);
             if (datos.status) {
                 sw_success(datos.message);
-                //limpiar_form(nombre_modulo, callback_limpiar);
+                limpiar_form(nombre_modulo, callback_limpiar);
                 if (callback_true) {
                     callback_true();
                 }
@@ -67,13 +69,75 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
         },
         error: function (jqXhr) {
 
-            //comprobar_errores(jqXhr, nombre_modulo);
+            comprobar_errores(jqXhr, nombre_modulo);
         }
     });
     //$("#registroModal").modal('hide');
     
 }
 
+function limpiar_form(nombre_modulo, callback) {
+    $("#modal_" + nombre_modulo).modal('hide');
+    if (callback) {
+        callback();
+    }
+    /* Reiniciamos la barra */
+    // reniciar_barra(nombre_modulo);
+    /* Limpiamos posibles errores*/
+    limpiar_errores(nombre_modulo)
+}
+
+function comprobar_errores(jqXhr, nombre_modulo) {
+    if (jqXhr.status === 422) {
+        var errors = jqXhr.responseJSON;
+        ver_errores(errors, nombre_modulo);
+    } else {
+        Swal.fire({
+            title: "Error " + jqXhr.status,
+            text: 'Contactase con el area de desarrollo de software!',
+            timer: 2000,
+            icon: "error"
+        });
+    }
+}
+
+function ver_errores(errors, nombre_modulo) {
+
+    /* Limpiamos posibles errores pasados*/
+    limpiar_errores(nombre_modulo);
+    var errors_html = '';
+    $.each(errors.errors, function (key, value) {
+        $('input[name="' + key + '"]').addClass("is-invalid");
+        $('select[name="' + key + '"]').addClass("is-invalid");
+        $('textarea[name="' + key + '"]').addClass("is-invalid");
+        errors_html += '<li>' + value[0] + '</li>';
+    });
+    $("#contenedor_de_errores_" + nombre_modulo).html(div_alert_danger(errors_html));
+    console.log(div_alert_danger(errors_html));
+    /* Guardamos los errorres pasados*/
+    errores_list = errors;
+}
+
+function limpiar_errores(nombre_modulo) {
+
+    $("#contenedor_de_errores_" + nombre_modulo).html("");
+    $.each(errores_list.errors, function (key, value) {
+        console.log('borrrar is-invalid: '+key);
+        $('input[name="' + key + '"]').removeClass("is-invalid");
+        $('select[name="' + key + '"]').removeClass("is-invalid");
+        $('textarea[name="' + key + '"]').removeClass("is-invalid");
+    });
+}
+
+function div_alert_danger(html) {
+    return '<div class="alert alert-danger alert-dismissible fade show" role="alert" id="alert_error_cliente">' +
+        '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>' +
+        '<span class="font-weight-medium">¡ERROR!</span>' +
+        '<ul> ' + html + '</ul>' +
+        '</div>';
+}
+
+//:::::.... ...::::::
 
 function lista_select2(url, nombre_modulo, id) {
     $.get(url, function (data, status) {
