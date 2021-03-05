@@ -8,7 +8,7 @@
             <td>{{ $comerci[0]->clientes->nro_documento}}</td>
             <td>{{ $comerci[0]->clientes->telefono_empresa}}</td>
             <td>{{ $comerci[0]->persona_contacto}}</td>
-            <td>{{ $comerci[0]->actividad}}</td>
+            <td>{{ $comerci[0]->actividad->nombre}}</td>
             <td>{{ $comerci[0]->observacion}}</td>
             <td>{{ $comerci[0]->fecha_evento}}</td>
             @if ($comerci[0]->estado == 0)

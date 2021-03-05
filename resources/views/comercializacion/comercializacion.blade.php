@@ -47,6 +47,9 @@
 <!-- ================================= MODAL Registro Personal ================================= -->
 @include('componentes/modals/personal/modal_personal')
 
+<!-- ================================= MODAL Registro Actividad ================================= -->
+@include('componentes/modals/actividad/modal_actividad')
+
 <div class="table-responsive">
     <div>
         <table class="table align-items-center" id="datos">
@@ -79,6 +82,7 @@
 <script src="{{ asset('ajax/configuracion/ajaxmedios.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcotizacion.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
+<script src="{{ asset('ajax/configuracion/ajaxactividad.js')}}"></script>
 <script src="{{ asset('ajax/configuracion/ajaxeventos.js')}}"></script>
 <script src="{{ asset('ajax/configuracion/ajaxpersonal.js')}}"></script>
 

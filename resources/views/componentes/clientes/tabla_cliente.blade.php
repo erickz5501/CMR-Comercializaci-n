@@ -4,7 +4,7 @@
 
         <td>{{ $count+1}}</td>
         <td>
-            @if ($cliente->tipo_documento == 3)
+            @if ($cliente->tipo_documento == 1)
                 DNI
             @else
                 RUC

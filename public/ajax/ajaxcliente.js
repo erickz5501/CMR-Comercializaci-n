@@ -46,8 +46,8 @@ function cunsulta_sunat(){
                         icon: "error"
                     });
                 }else{
-                $('#nombre_razon_social_input').val(data.cliente['nombres']);
-                $('#nombre_comercial_input').val(data.cliente['apellido_paterno'] + ' '+ data.cliente['apellido_materno']);
+                $('#nombre_razon_social_input').val(data.cliente['name']);
+                $('#nombre_comercial_input').val(data.cliente['first_name'] + ' '+ data.cliente['last_name']);
                 }
             });
         }

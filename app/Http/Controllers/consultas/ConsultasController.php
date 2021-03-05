@@ -12,7 +12,7 @@ class ConsultasController extends Controller{
         try {
 
             $client = new Client();  //Creamos un cliente
-            $res = $client->request('GET', 'https://api.reniec.cloud/dni/' . $dni, ['verify' => false] );   //obtenemos los datos de la persona mediante la api de SUNAT
+            $res = $client->request('GET', 'https://dni.optimizeperu.com/api/persons/' . $dni, ['verify' => false] );   //obtenemos los datos de la persona mediante la api de SUNAT
         
             $data = $res->getBody();
             $cliente_data = json_decode($data);

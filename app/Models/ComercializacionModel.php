@@ -12,7 +12,7 @@ class ComercializacionModel extends Model
     protected $fillable = [
         'idclientes', 
         'persona_contacto', 
-        'actividad', 
+        'idactividad', 
         'idmedios', 
         'idusers', 
         'detalla_llamada', 
@@ -41,6 +41,10 @@ class ComercializacionModel extends Model
 
     public function personal(){
         return $this->hasOne('App\Models\historial\PersonalModel', 'idpersonal', 'idpersonal');
+    }
+
+    public function actividad(){
+        return $this->hasOne('App\Models\historial\ActividadModel', 'idactividad', 'idactividad');
     }
 
 }

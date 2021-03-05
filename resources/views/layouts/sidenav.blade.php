@@ -61,6 +61,12 @@
                   </a>
                 </li>
                 <li class="nav-item">
+                  <a href=" {{ url('/dashboard/configuracion/actividad') }} " class="nav-link">
+                    <span class="sidenav-mini-icon"> A </span>
+                    <span class="sidenav-normal"> Actividad </span>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href=" {{  url('/dashboard/configuracion/medios') }} " class="nav-link">
                     <span class="sidenav-mini-icon"> M </span>
                     <span class="sidenav-normal"> Medios </span>

@@ -48,7 +48,7 @@ class ComercializacionController extends Controller
         $idusers                        = 2;
         $select_modal_clientes          = $request->input('select_modal_clientes');
         $persona_contacto_input         = $request->input('persona_contacto_input');
-        $actividad_input                = $request->input('actividad_input');
+        $actividad_input                = $request->input('select_modal_actividad');
         $select_modal_medios            = $request->input('select_modal_medios');
         $select_modal_modulos           = $request->input('modulo');//Trae los valores de los modulos
         $cant_licencias_modulo          = $request->input('licencias');
@@ -81,11 +81,11 @@ class ComercializacionController extends Controller
                 $registro->idusers              = $idusers;
                 $registro->idclientes           = $select_modal_clientes;
                 $registro->persona_contacto     = $persona_contacto_input;
-                $registro->actividad            = $actividad_input;
+                $registro->idactividad          = $actividad_input;
                 $registro->idmedios             = $select_modal_medios;
                 $registro->detalla_llamada      = $llamadaDetTextarea;
                 $registro->ideventos            = $select_modal_eventos;
-                $registro->fecha_evento         = $example_date_input;
+                $registro->fecha_evento         = Carbon::now()->format('Y-m-d H:i:s');
                 $registro->descripcion_evento   = $evento_input;
                 $registro->idpersonal           = $select_modal_personal;
                 $registro->calificacion         = $calificacionSelect;
@@ -116,7 +116,7 @@ class ComercializacionController extends Controller
                 'idusers' => $idusers,
                 'idclientes' => $select_modal_clientes,
                 'persona_contacto' => $persona_contacto_input,
-                'actividad' => $actividad_input,
+                'idactividad' => $actividad_input,
                 'idmedios' => $select_modal_medios,
                 'detalla_llamada' => $llamadaDetTextarea,
                 'ideventos' => $select_modal_eventos,
@@ -159,7 +159,7 @@ class ComercializacionController extends Controller
         $idusers                        = 2;
         $select_modal_clientes          = $request->input('select_modal_clientes');
         $persona_contacto_input         = $request->input('persona_contacto_input');
-        $actividad_input                = $request->input('actividad_input');
+        $actividad_input                = $request->input('select_modal_actividad');
         $select_modal_medios            = $request->input('select_modal_medios');
         $select_modal_modulos           = $request->input('modulo');//Trae los valores de los modulos
         $cant_licencias_modulo          = $request->input('licencias');
@@ -180,11 +180,11 @@ class ComercializacionController extends Controller
             'idusers' => $idusers,
             'idclientes' => $select_modal_clientes,
             'persona_contacto' => $persona_contacto_input,
-            'actividad' => $actividad_input,
+            'idactividad' => $actividad_input,
             'idmedios' => $select_modal_medios,
             'detalla_llamada' => $llamadaDetTextarea,
             'ideventos' => $select_modal_eventos,
-            'fecha_evento' => $example_date_input,
+            'fecha_evento' => Carbon::now()->format('Y-m-d H:i:s'),
             'descripcion_evento' => $evento_input,
             'idpersonal' => $select_modal_personal,
             //'calificacion' => $calificacionSelect,

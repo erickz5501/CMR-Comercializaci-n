@@ -23,15 +23,19 @@ class InteresadoRequest extends FormRequest
      */
     public function rules(){//estas son las validaciones
         return [
+            'nombre_razon_social_input' => 'required',
+            'nombre_comercial_input' => 'required',
             'number_empresa_input' => 'max:9|min:9|required'
         ];
     }
 
     public function messages(){
         return[
-            'number_empresa_input.required' => 'Este campo es requerido',
-            'number_empresa_input.min' => 'Ingrese 9 digitos',
-            'number_empresa_input.max' => 'Ingrese 9 digitos'
+            'nombre_comercial_input.required' => 'El campo Apellido es requerido',
+            'nombre_razon_social_input.required' => 'El campo Nombre es requerido.',
+            'number_empresa_input.required' => 'El campo telefono es requerido.',
+            'number_empresa_input.min' => 'Numero de telefono invalido.',
+            'number_empresa_input.max' => 'Numero de telefono invalido.'
         ];
     }
 

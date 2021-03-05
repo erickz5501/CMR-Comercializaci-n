@@ -73,7 +73,16 @@
                                             <div class="col-3">
                                                 <div class="form-group">
                                                     <label for="">Actividad</label>
-                                                    <input style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" type="text" id="actividad_input" name="actividad_input" placeholder="Actividad">
+                                                    <div class="input-group" id>
+                                                        <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_actividad" name="select_modal_actividad" data-toggle="" required>
+                                                            <option selected="selected" value="0">Actividad</option>
+                                                        </select>
+                                                        <span class="input-group-addon input-group-append">
+                                                            <button class="btn btn-default" type="button" id="button-addon2" data-toggle="modal" data-target="#registroModalActividad">
+                                                                <i class="fas fa-plus-circle"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="col-3">

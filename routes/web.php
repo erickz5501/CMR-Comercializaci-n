@@ -94,6 +94,13 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/evento/desactivar/{ideventos}', "configuracion\EventosController@desactivar");
     Route::post('/evento/guardar', "configuracion\EventosController@createEvento");
     Route::get('/mostrar/evento/{ideventos}', "configuracion\EventosController@DetalleEvento");
+
+    Route::get('/configuracion/actividad', "configuracion\ActividadController@index");
+    Route::get('/configuracion/actividad/lista', "configuracion\ActividadController@indexLista");
+    Route::get('/actividad/activar/{idactividad}', "configuracion\ActividadController@activar");
+    Route::get('/actividad/desactivar/{idactividad}', "configuracion\ActividadController@desactivar");
+    Route::post('/actividad/guardar', "configuracion\ActividadController@createActividad");
+    Route::get('/mostrar/actividad/{idactividad}', "configuracion\ActividadController@DetalleActividad");
     
     Route::get('/configuracion/medios', "configuracion\MediosController@index");
     Route::get('/configuracion/medios/lista', "configuracion\MediosController@indexLista");
@@ -194,6 +201,7 @@ Route::get('/dashboard/listas/eventos', "configuracion\EventosController@indexEv
 Route::get('/dashboard/listas/personal', "configuracion\PersonalController@indexPersonal");
 Route::get('/dashboard/listas/cliente', "clientes\ClientesController@indexClientes");
 Route::get('/dashboard/listas/interesado', "clientes\ClientesController@indexInteresado");
+Route::get('/dashboard/listas/actividad', "configuracion\ActividadController@indexActvidad");
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 
 // ........... ::::: RUTA PARA CONSULTAS SUNAT :::::...............

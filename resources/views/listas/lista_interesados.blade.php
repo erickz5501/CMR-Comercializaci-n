@@ -90,22 +90,24 @@
                                 <div class="col-4">
                                     <label for="nombre_razon_social_input" class="form-control-label">Nombres/Razon social</label>
                                     <div class="form-group">
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" />
+                                            <div class="invalid-feedback">Por Favor escriba un nombre valido</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="nombre_comercial_input">Apellidos/Nombre comercial</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                                             </div>
-                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" required />
+                                            <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta"  />
+                                            <div class="invalid-feedback">Por Favor escriba un apellido valido</div>
                                         </div>
                                     </div>
                                 </div>
@@ -128,7 +130,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="number-empresa-input">Telefono empresa</label>
-                                        <div class="input-group input-group-merge">
+                                        <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                             </div>
@@ -137,8 +139,7 @@
                                             class="form-control" 
                                             type="number" 
                                             id="number_empresa_input" 
-                                            name="number_empresa_input"
-                                            required />
+                                            name="number_empresa_input" />
                                             <div class="invalid-feedback">Por Favor escriba un numero valido</div>
                                         </div>
                                     </div>
