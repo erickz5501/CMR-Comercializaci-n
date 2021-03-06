@@ -31,10 +31,10 @@
             <!-- ================================= MODAL CUERPO ================================= -->
             <form id="formulario_modulos" >
                 @csrf
-                <div class="modal-body">
+                <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; ">
                     {{-- input ID oculto --}}
                     <input type="hidden" id="idmodulos" name="idmodulos" />
-                    <div class="card-body mb-12 col-12" style="padding: 0px; margin-left: 0px !important;">
+                    <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                         <div class="row">
                             <div class="col">
                                 <label for="nombre_razon_social_input">Nombre</label>
@@ -66,7 +66,7 @@
                 <!-- FIN-MODAL-BODY -->
 
                 <!-- MODAL FOOTER -->
-                <div class="modal-footer">
+                <div class="modal-footer" style="padding-top: 0px !important; padding-bottom:0px !important;">
                     <button type="submit" class="btn btn-success"><i class="far fa-save"> </i> Guardar modulos</button>
                 </div>
             </form>
@@ -74,6 +74,15 @@
         </div>
     </div>
 </div>  
+<!-- FIN-MODAL -->
+
+<!-- ================================= MODAL detalle ================================= -->
+<div class="modal fade" id="ModalDetalleModulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="Modulo_modal">
+        <!-- Contenido del modal /  -->
+        
+    </div>
+</div>
 <!-- FIN-MODAL -->
 
 <div class="table-responsive">

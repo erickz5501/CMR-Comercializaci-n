@@ -44,18 +44,15 @@
                                                 </div>
                                             </div> --}}
                                             <div class="col-md-12">
-                                                <div class="input-group" id>
+                                                <div class="input-group">
                                                     <select class="form-control custom-select" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="">
                                                         
                                                     </select>
-                                                    <span class="input-group-addon input-group-append">
-                                                        {{-- <a type="button" href="#" class="btn btn-success" id="button-addon2" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
-                                                            <i class="fas fa-plus-circle"></i>
-                                                        </a> --}}
+                                                    <div class="input-group-append">
                                                         <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_interesado();" data-toggle="modal" data-target="#registroModalInteresado">
                                                             <i class="fas fa-plus-circle"></i>
                                                         </button>
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,9 +100,16 @@
                                                     <div class="col-md-8">
                                                         <div class="form-group">
                                                             <label class="form-control-label" for="turno">Modulos</label>
-                                                            <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select">
+                                                            <div class="input-group">
+                                                                <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control multi_select" data-toggle="select">
                                                         
-                                                            </select>
+                                                                </select>
+                                                                {{-- <span class="input-group-addon input-group-append">
+                                                                    <button class="btn btn-default" type="button" id="button-addon2" data-toggle="modal" data-target="#registroModalActividad">
+                                                                        <i class="fas fa-plus-circle"></i>
+                                                                    </button>
+                                                                </span> --}}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">

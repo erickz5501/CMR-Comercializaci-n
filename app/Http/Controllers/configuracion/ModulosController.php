@@ -77,5 +77,11 @@ class ModulosController extends Controller
 
         return json_encode(['modulo' => $det_modulo]);
     }
+
+    public function InformacionModulo($idmodulos){
+        $info_modulo = ModulosModel::where('idmodulos', $idmodulos)->first();
+
+        return \view('componentes.modals.modulos.modulo_detalle', compact('info_modulo'));
+    }
     
 }

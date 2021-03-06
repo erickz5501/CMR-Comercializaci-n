@@ -129,6 +129,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/modulos/desactivar/{idmodulos}', "configuracion\ModulosController@desactivar");
     Route::post('/modulos/guardar', "configuracion\ModulosController@createModulos");
     Route::get('/mostrar/modulo/{idmodulos}', "configuracion\ModulosController@DetalleModulo");
+    Route::get('/informacio/modulo/{idmodulos}', "configuracion\ModulosController@InformacionModulo");
 
     Route::get('/configuracion/users', "configuracion\UsersController@index");
     Route::get('/configuracion/users/lista', "configuracion\UsersController@indexLista");

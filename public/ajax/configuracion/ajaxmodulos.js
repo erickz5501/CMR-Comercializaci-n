@@ -8,8 +8,8 @@ function init(){
     // respuesta
     $('#caracteristicas_modulo').summernote({
         placeholder: 'Escriba su texto aquí.',
-        tabsize: 4,
-        height: 100,
+        tabsize: 5,
+        height: 250,
         toolbar: [
             ['style', ['style']],
             ['font', ['bold', 'underline', 'clear']],
@@ -57,6 +57,14 @@ function guardar_modulo(e){
 function limpiar_modulos(){
     $('#idmodulos').val("");
     $('#nombre_input').val("");
+}
+
+function detalle_modulo(idmodulo){
+    $("#ModalDetalleModulo").modal('show');
+
+    $.get('/dashboard/informacio/modulo/'+idmodulo, function(data){
+        $("#Modulo_modal").html(data);
+    });
 }
 
 function mostrar_one_modulo(idmodulo){

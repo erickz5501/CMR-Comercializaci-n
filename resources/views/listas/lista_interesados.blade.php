@@ -413,7 +413,7 @@
 @section('js')
     <script src="{{ asset('funciones/crud.js')}}"></script>
     <script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
-    <script src="{{ asset('ajax/ajaxhistorial.js')}}"></script>
+    {{-- <script src="{{ asset('ajax/ajaxhistorial.js')}}"></script> --}}
     <script src="{{ asset('ajax/configuracion/ajaxgironegocio.js')}}"></script>
     
 @endsection
