@@ -49,4 +49,32 @@
     to{ bottom:0; opacity:1 }
   }
 
+  /* Select2 CSS */
+  .btn-file {
+    overflow: hidden;
+    border-radius: 0 !important;
+  }
+  .btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100px;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+  }
+  
+  .btn-file input[readonly] {
+    background-color: white !important;
+    cursor: text !important;
+  }
+  .text-file {
+      float: right !important;
+      width: 100% !important;
+  }
   

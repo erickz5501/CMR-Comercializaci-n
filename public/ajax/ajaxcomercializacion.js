@@ -21,6 +21,14 @@ function init(){
 		dropdownAutoWidth: true,
     });
 
+    $('#select_modal_clientes').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione el cliente',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
     lista_comercializacion();
 
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);

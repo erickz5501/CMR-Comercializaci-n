@@ -19,28 +19,31 @@
                     <div class="row">
                         <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom: 0px !important;">
                             <div class="row">
-                            
-                                {{-- <div class="col-md-12">
-                                    <div class="input-group">
-                                        <select class="form-control custom-select" name="select_modal_clientes" id="select_modal_clientes" autocomplete="off" required data-toggle="" placeholder="Seleccionar Cliente"> </select>
-                                        <div class="input-group-append" data-toggle="modal" data-target="#registroModalInteresado">
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup> Cliente</label>
+                                        <div class="input-group">
+                                            <select class="form-control custom-select" id="select_modal_clientes" name="select_modal_clientes">
+                                                
+                                            </select>
+                                        </div>
+                                        <span class="input-group-addon input-group-append">
                                             <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_interesado();" data-toggle="tooltip" data-html="true" title="Agregar un cliente/interesado">
                                                 <i class="fas fa-plus-circle"></i>
                                             </button>
-                                        </div>
+                                        </span>
                                     </div>
-                                </div> --}}
-
-                                <div class="col-sm-12">
-                                        <label for="account-fn">Seleccionar Talla <small class="text-info">(opcional)</small></label>
-                                        <div class="input-group">
-                                            <select class="form-control custom-select" id="select_modal_clientes" name="select_modal_clientes"> </select>
-                                            <div class="input-group-prepend">
-                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal_talla" style="border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
-                                                    <i class="fas fa-plus-circle"></i>
-                                                </button>
-                                            </div>
+                                    {{-- <div class="input-group select2-bootstrap-append">
+                                        <div class="input-group-btn">
+                                            <select class="form-control custom-select" id="select_modal_clientes" name="select_modal_clientes">
+                                                
+                                            </select>
                                         </div>
+                                        <div class="input-group-btn">
+                                            <span class="btn btn-info btn-disabled view-doc btn-view " data-toggle="modal" data-target="#modal-info-i_file_1" disabled>Vista Previa</span>
+                                        </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="col-6">
@@ -56,13 +59,12 @@
                                             <sup class="text-danger font-weight-bold">*</sup>
                                             Actividad
                                         </label>
-                                        <div class="input-group" id>
-                                            
-                                            <div class="input-group-append" data-toggle="modal" data-target="#registroModalActividad">
+                                        <div class="input-group">
+                                            <div class="input-group-append">
                                                 <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_actividad" name="select_modal_actividad" data-toggle="" required>
-                                                    <option selected="selected" value="0">Actividad</option>
+                                                    
                                                 </select>
-                                                <button class="btn btn-default" type="button" id="button-addon2" data-toggle="tooltip" data-html="true" title="Agregar una actividad.">
+                                                <button class="btn btn-default" type="button" id="button-addon2" data-toggle="tooltip" data-html="true" title="Agregar una actividad." onclick="modal_actividad();">
                                                     <i class="fas fa-plus-circle"></i>
                                                 </button>
                                             </div>
