@@ -11,6 +11,16 @@ function init(){
             guardar_nuevo_registro(e);
     }
 
+    // listamos los grupos para el SELECT
+    $('#select_modal_actividad').select2({
+        theme: 'bootstrap4',
+        width: 'style',
+        placeholder: 'Seleccione el cliente',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
     lista_comercializacion();
 
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
@@ -26,7 +36,6 @@ function init(){
 
 function cunsulta_sunat(){
     let id_documento        = $("#select_modal_tipoDocumento").val();
-    let modulo_txt          = $("#select_modal_tipoDocumento option:selected").text();
     let nro_document        = $('#numDocumentoInput').val();
 
     if (id_documento == 1) {

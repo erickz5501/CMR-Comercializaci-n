@@ -84,6 +84,19 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-4">
+                                    <label for="select_modal_giroNegocio">Giro de negocio</label>
+                                    <div class="input-group">
+                                        <select style="color: black !important; font-weight: bold !important;"  class="form-control" data-toggle="" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
+                                            {{-- AQUI VAN LOS "OPTIONS" --}}
+                                        </select>
+                                        <span class="input-group-addon input-group-append">
+                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_evento();" data-toggle="modal" data-target="#registroModalGiroNegocio">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -109,19 +122,6 @@
                                             <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta"  />
                                             <div class="invalid-feedback">Por Favor escriba un apellido valido</div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-4">
-                                    <label for="select_modal_giroNegocio">Giro de negocio</label>
-                                    <div class="input-group">
-                                        <select style="color: black !important; font-weight: bold !important;"  class="form-control" data-toggle="" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
-                                            {{-- AQUI VAN LOS "OPTIONS" --}}
-                                        </select>
-                                        <span class="input-group-addon input-group-append">
-                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_evento();" data-toggle="modal" data-target="#registroModalGiroNegocio">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </button>
-                                        </span>
                                     </div>
                                 </div>
                             </div>
