@@ -15,6 +15,20 @@ function init(){
     lista_select2('/dashboard/listas/modulos', 'software', null);
     // lista_select2('/dashboard/listas/tipopersona', 'tipoPersona', null);
     // lista_select2('/dashboard/listas/tipodoc', 'tipoDocumento', null);
+    // listamos los grupos para el SELECT
+    $('#select_modal_tipoDocumento').select2({
+        theme: 'bootstrap4',
+        width: 'style',
+        placeholder: 'Seleccione el documento',
+        allowClear: true
+    });
+
+    $('#select_modal_giroNegocio').select2({
+        theme: 'bootstrap4',
+        width: 'style',
+        placeholder: 'Seleccione el giro de negocio',
+        allowClear: true
+    });
 }
 
 // ......................... :::: CONSULTAS RUC/DNI SUNAT :::::: .............................
@@ -36,8 +50,13 @@ function cunsulta_sunat(){
             
         }else{
             //Cunsolta DNI a la sunat
+            $('#cargado_sunat').hide();
+            $('#cargando_sunat').show();
             $.get('/consultas/dni/'+nro_document, function(data){
                 data = JSON.parse(data);
+                $('#cargado_sunat').show();
+                $('#cargando_sunat').hide();
+
                 if (data['status'] == false) {
                     Swal.fire({
                         title: "Error",
@@ -63,8 +82,13 @@ function cunsulta_sunat(){
                 });
             } else {
                //Cunsolta RUC a la sunat
+            $('#cargado_sunat').hide();
+            $('#cargando_sunat').show();
             $.get('/consultas/ruc/'+nro_document, function(data){
                 data = JSON.parse(data);
+                $('#cargado_sunat').show();
+                $('#cargando_sunat').hide();
+
                 if (data['success'] == false) {
                     Swal.fire({
                         title: "Error",
@@ -90,6 +114,7 @@ function cunsulta_sunat(){
         
     }
 
+    $('.tooltip').removeClass("show").addClass("hidde");
     // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
 }
 
@@ -195,6 +220,7 @@ function activar_cliente(idclientes) {
 // ........................:::::::: LISTA UN DATOS PARA EDITAR CLIENTE :::::: ..........................
 function mostrar_one_cliente(idclientes){
     $("#registroModal").modal('show');
+     
     //$("#registroModalInteresado").modal('show');
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
@@ -237,8 +263,10 @@ function mostrar_one_cliente(idclientes){
 
 function mostrar_one_interesado(idclientes){
     $("#modal_registro_interesado").modal('show');
+    $('#cargando_edit').show();
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
+        $('#cargando_edit').hide();
         //console.log(data.cliente);  
         $('#idclientes').val(data.cliente['idclientes']);
         $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);

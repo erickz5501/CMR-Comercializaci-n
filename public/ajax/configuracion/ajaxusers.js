@@ -43,9 +43,11 @@ function limpiar_users(){
 }
 
 function mostrar_one_user(iduser){
+    $('#cargando_edit').show();
     $("#registroModalusers").modal('show');
     $.get('/dashboard/mostrar/user/'+iduser , function (data){
         data = JSON.parse(data);
+        $('#cargando_edit').hide();
         //console.log(data.cliente);  
         $('#idusers').val(data.user['idusers']);
         $('#nombre_input').val(data.user['nombres']);

@@ -2,20 +2,32 @@ function init(){
 
     $('#filtro').hide();
     $('#generar_n_comercializacion').hide();
+    $('#guardar_registro').hide();
+    $('#ant_form').hide();
 
     $("#formulario_comercializacion").on("submit", function(e) {
         guardar_registro(e);
     });
 
     document.getElementById("generar_n_comercializacion").onclick =  function(e){
-            guardar_nuevo_registro(e);
+        guardar_nuevo_registro(e);
+    }
+    document.getElementById("sgt_form").onclick =  function(){
+        $('#guardar_registro').show();
+        $('#sgt_form').hide();
+        $('#ant_form').show();
+    }
+    document.getElementById("ant_form").onclick =  function(){
+        $('#guardar_registro').hide();
+        $('#sgt_form').show();
+        $('#ant_form').hide();
     }
 
     // listamos los grupos para el SELECT
     $('#select_modal_actividad').select2({
         theme: 'bootstrap4',
         width: 'style',
-        placeholder: 'Seleccione el cliente',
+        placeholder: '*Sel. actividad*',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -23,7 +35,47 @@ function init(){
 
     $('#select_modal_clientes').select2({
         theme: 'bootstrap4',
-        placeholder: 'Seleccione el cliente',
+        placeholder: '*Sel. cliente*',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_medios').select2({
+        theme: 'bootstrap4',
+        placeholder: '*Sel. medio*',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_modulos').select2({
+        theme: 'bootstrap4',
+        placeholder: '*Sel. modulo*',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_eventos').select2({
+        theme: 'bootstrap4',
+        placeholder: '*Sel. evento*',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_cotizacion').select2({
+        theme: 'bootstrap4',
+        placeholder: '*Sel. cotizacion*',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_personal').select2({   
+        theme: 'bootstrap4',
+        placeholder: '*Sel. personal*',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -36,6 +88,7 @@ function init(){
     lista_select2('/dashboard/listas/medios', 'medios', null);
     lista_select2('/dashboard/listas/eventos', 'eventos', null);
     lista_select2('/dashboard/listas/personal', 'personal', null);
+    
     lista_select2('/dashboard/listas/cliente', 'clientes', null);
     lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     lista_select2('/dashboard/listas/actividad', 'actividad', null);
@@ -119,6 +172,8 @@ function cunsulta_sunat(){
 function lista_comercializacion(){
     $('#filtro').hide();
     $('#generar_n_comercializacion').hide();
+    $('#guardar_registro').hide();
+    $('#ant_form').hide();
     $("#lista_comercializacion").html('<div id="loader"></div>');
     $.get('/dashboard/comercializacion/lista', function (data){
         $("#lista_comercializacion").html(data);
@@ -170,7 +225,6 @@ function mostrar_one_registro(idregistro){
         $('#idcomercializacion').val(data.registro['idcomercializacion']);
         $('#idusers').val(data.registro['idusers']);
         $('#persona_contacto_input').val(data.registro['persona_contacto']);
-        $('#actividad_input').val(data.registro['actividad']);
         $('#llamadaDetTextarea').val(data.registro['detalla_llamada']);
         $('#example_date_input').val(data.registro['fecha_evento']);
         $('#evento_input').val(data.registro['descripcion_evento']);
@@ -197,6 +251,12 @@ function mostrar_one_registro(idregistro){
             console.log(data.modulo[i].idmodulos);
         }
         
+
+        if (data.registro['idactividad']) {
+            $('#select_modal_actividad').val(data.registro['idactividad']).trigger('change');
+        }else{
+            $('#select_modal_actividad').val(null).trigger('change');
+        }
 
         if (data.cotizacion['idcotizaciones']) {
             $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
@@ -239,7 +299,6 @@ function limpiar_comercializacion(){
     $('#idcomercializacion').val("");
     $('#idusers').val("");
     $('#persona_contacto_input').val("");
-    $('#actividad_input').val("");
     $('#persona_atencion_input').val("");
     $('#llamadaDetTextarea').val("");
     $('#example_date_input').val("");
@@ -249,6 +308,7 @@ function limpiar_comercializacion(){
     $('#cant_licencias').val("");
     $('#conclusionessTextarea').val("");
     $('#tabla_detalle_modulos').empty();
+    $('#select_modal_actividad').val(null).trigger('change');
     $('#select_modal_cotizacion').val(null).trigger('change');
     $('#select_modal_clientes').val(null).trigger('change');
     $('#select_modal_medios').val(null).trigger('change');

@@ -46,3 +46,6 @@
     </div>
 </div>
 <!-- FIN-MODAL -->
+<script>
+    $('.tooltip').removeClass("show").addClass("hidde");
+</script>

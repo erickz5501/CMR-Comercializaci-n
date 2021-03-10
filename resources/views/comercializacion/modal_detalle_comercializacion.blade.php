@@ -69,7 +69,7 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-muted">Actividad</span>
                                                 <span class="d-block text-heading font-size-sm">
-                                                        {{ $det_registro->actividad}}
+                                                        {{ $det_registro->actividad->nombre}}
                                                 </span>
                                             </div>
                                         </li>
@@ -161,66 +161,11 @@
                                             </div>
                                         </li>
                                         <li class="media pt-2m pb-3 border-bottom">
-                                            <i class="fas fa-star font-size-lg mt-2 mb-0 text-primary"></i>
-                                            <div class="media-body pl-3">
-                                                <span class="font-size-ms text-primary">Calificacion:</span>
-                                                <span class="d-block text-heading font-size-sm">
-                                                    @if ($det_registro->calificacion == 1)
-                                                        <i class="fas fa-star text-yellow"></i>
-                                                        <i class="fas fa-star text-black"></i>
-                                                        <i class="fas fa-star text-black"></i>
-                                                        <i class="fas fa-star text-black"></i>
-                                                        <i class="fas fa-star text-black"></i>
-                                                    @else
-                                                       @if ( $det_registro->calificacion == 2)
-                                                       <i class="fas fa-star text-yellow"></i>
-                                                       <i class="fas fa-star text-yellow"></i>
-                                                       <i class="fas fa-star text-black"></i>
-                                                       <i class="fas fa-star text-black"></i>
-                                                       <i class="fas fa-star text-black"></i>
-                                                       @else
-                                                          @if ($det_registro->calificacion == 3)
-                                                          <i class="fas fa-star text-yellow"></i>
-                                                          <i class="fas fa-star text-yellow"></i>
-                                                          <i class="fas fa-star text-yellow"></i>
-                                                          <i class="fas fa-star text-black"></i>
-                                                          <i class="fas fa-star text-black"></i>
-                                                          @else
-                                                              @if ($det_registro->calificacion == 4)
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-black"></i>
-                                                              @else
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              <i class="fas fa-star text-yellow"></i>
-                                                              @endif
-                                                          @endif 
-                                                       @endif 
-                                                    @endif
-                                                    
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="media pt-2m pb-3 border-bottom">
                                             <i class="fas fa-book-open font-size-lg mt-2 mb-0 text-primary"></i>
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-primary">Avanze </span>
                                                 <span class="d-block text-heading font-size-sm">
                                                     {{ $det_registro->avance}}
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="media pt-2m pb-3 border-bottom">
-                                            <i class="fas fa-money-check-alt font-size-xl mt-2 mb-0 text-primary" style="font-size: 20px;"></i>
-                                            <div class="media-body pl-3">
-                                                <span class="font-size-ms text-primary">Por cobrar </span>
-                                                <span class="d-block text-heading font-size-sm">
-                                                    {{ $det_registro->por_cobrar}}
                                                 </span>
                                             </div>
                                         </li>

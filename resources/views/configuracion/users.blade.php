@@ -22,7 +22,10 @@
         <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar usuarios</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Agregar usuarios
+                    <i style="font-size: 24px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_edit"></i>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red"></i> </span>
                 </button>

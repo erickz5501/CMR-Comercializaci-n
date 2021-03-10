@@ -18,6 +18,7 @@ function guardar_giro_negocio(e){
     );
 
     $("#registroModalGiroNegocio").modal('hide');
+    $('.tooltip').removeClass("show").addClass("hidde");
 }
 
 function limpiar_evento(){

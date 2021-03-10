@@ -2,6 +2,10 @@
 @section('title', 'Comercializacion')
 @section('pagina', 'COMERCIALIZACION')
 
+@section('extra-css')
+    <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">s
+@endsection
+
 @section('content')
 
 <div class="card-header">
@@ -87,4 +91,3 @@
 <script src="{{ asset('ajax/configuracion/ajaxpersonal.js')}}"></script>
 
 @endsection
-<link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">
