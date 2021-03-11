@@ -25,7 +25,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link mb-sm-3 mb-md-0" data-toggle="tab" href="#tabs-icons-text-2a" role="tab" aria-controls="tabs-icons-text-2a" aria-selected="false">
-                                    <i class="fas fa-paperclip"></i> Datos de cotizacion
+                                    <i class="fas fa-paperclip"></i> Datos de adicionales
                                 </a>
                             </li>
                         </ul>
@@ -61,7 +61,7 @@
                                                                 <td>{{ $det_modulo[$i]->modulo->nombre }}</td>
                                                                 <td>{{ $det_modulo[$i]->cant_licencias }}</td>
                                                             </tr>
-                                                            @endfor 
+                                                            @endfor
                                                         </tbody>
                                                     </table>
                                                 </span>
@@ -81,7 +81,12 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-muted">Actividad</span>
                                                 <span class="d-block text-heading font-size-sm">
+                                                    @if ( $det_registro->actividad)
                                                         {{ $det_registro->actividad->nombre}}
+                                                    @else
+                                                        -- no definido --
+                                                    @endif
+
                                                 </span>
                                             </div>
                                         </li>
@@ -90,7 +95,12 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-muted">Medio</span>
                                                 <span class="d-block text-heading font-size-sm">
+                                                    @if ($det_registro->medio)
                                                         {{ $det_registro->medio->nombre }}
+                                                    @else
+                                                        -- no definido --
+                                                    @endif
+
                                                 </span>
                                             </div>
                                         </li>
@@ -104,7 +114,7 @@
                                                     @else
                                                         No definido.
                                                     @endif
-                                                    
+
                                                 </span>
                                             </div>
                                         </li>
@@ -118,7 +128,12 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-primary">Cotizacion </span>
                                                 <span class="d-block text-heading font-size-sm">
-                                                    {{  $cotizacion->cotizacion->nombre }}
+                                                    @if ( $cotizacion->cotizacion )
+                                                        {{  $cotizacion->cotizacion->nombre }}
+                                                    @else
+                                                        -- no definido --
+                                                    @endif
+
                                                 </span>
                                             </div>
                                         </li>
@@ -127,7 +142,12 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-primary">Eventos </span>
                                                 <span class="d-block text-heading font-size-sm">
-                                                    {{  $det_registro->evento->nombre }}
+                                                    @if ( $det_registro->evento)
+                                                        {{  $det_registro->evento->nombre }}
+                                                    @else
+                                                        -- no definido --
+                                                    @endif
+
                                                 </span>
                                             </div>
                                         </li>
@@ -163,7 +183,7 @@
                                                     @else
                                                         No definido.
                                                     @endif
-                                                    
+
                                                 </span>
                                             </div>
                                         </li>
@@ -172,7 +192,12 @@
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-primary">Personal Encargado: </span>
                                                 <span class="d-block text-heading font-size-sm">
-                                                    {{  $det_registro->personal->nombres }}
+                                                    @if ($det_registro->personal)
+                                                        {{  $det_registro->personal->nombres }}
+                                                    @else
+                                                        -- no definido --
+                                                    @endif
+
                                                 </span>
                                             </div>
                                         </li>
@@ -186,7 +211,7 @@
                                                     @else
                                                         No definido
                                                     @endif
-                                                    
+
                                                 </span>
                                             </div>
                                         </li>

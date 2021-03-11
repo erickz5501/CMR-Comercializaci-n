@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="limpiar_comercializacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalComercializacion"><i class="fas fa-plus-circle"></i> Agregar registro</a>
+            <a type="button" href="#" onclick="limpiar_comercializacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_comercializacion"><i class="fas fa-plus-circle"></i> Agregar registro</a>
         </div>
         <div class="col-4 text-left">
             <a type="button" href="#" onclick="lista_comercializacion();" class="btn btn btn-primary" id="filtro"><i class="fas fa-list-alt"></i> Mostrar lista original</a>
@@ -28,7 +28,7 @@
 <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="registro_modal">
         <!-- Contenido del modal /  -->
-        
+
     </div>
 </div>
 <!-- FIN-MODAL -->
@@ -54,6 +54,9 @@
 <!-- ================================= MODAL Registro Actividad ================================= -->
 @include('componentes/modals/actividad/modal_actividad')
 
+<!-- ================================= MODAL Registro giro de negocio ================================= -->
+@include('componentes/modals/giro_negocio/modal_giro_negocio')
+
 <div class="table-responsive">
     <div>
         <table class="table align-items-center" id="datos">
@@ -75,7 +78,7 @@
         </table>
     </div>
 </div>
-    
+
 @endsection
 
 @section('js')

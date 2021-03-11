@@ -30,7 +30,7 @@
   <script src={{ asset('/argon/assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}></script>
   <script src="{{ asset('/summernote/summernote-bs4.js') }}"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
     $(function() {
       $('#datetimepicker1').datetimepicker({
         icons: {
@@ -46,7 +46,7 @@
         }
       });
     });
-  </script>
+  </script> --}}
   <!-- Argon JS -->
   <script src="{{ asset('/argon/assets/js/argon.js?v=1.2.0')}}"></script>
   <!-- Demo JS - remove this in your project -->

@@ -24,7 +24,21 @@ class ComercializacionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'select_modal_clientes' => 'required|min:1',
+            'persona_contacto_input' => 'max:150',
+            'select_modal_actividad' => 'required|min:1',
+            'select_modal_medios' => 'required|min:1',
+
+            'avance_input' => 'max:500',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'select_modal_clientes.required' => 'Asegurese de selecionar el campo Cliente.',
+            'select_modal_actividad.required' => 'Asegurese de selecionar el campo Actividad.',
+            'select_modal_medios.required' => 'Asegurese de selecionar el campo Medios.',
         ];
     }
 }

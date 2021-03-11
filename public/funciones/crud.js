@@ -73,7 +73,7 @@ function crud_guardar_editar(event, url, nombre_modulo, callback_limpiar, callba
         }
     });
     //$("#registroModal").modal('hide');
-    
+
 }
 
 function limpiar_form(nombre_modulo, callback) {
@@ -140,29 +140,29 @@ function div_alert_danger(html) {
 //:::::.... ...::::::
 
 function lista_select2(url, nombre_modulo, id) {
-    
+
     $.get(url, function (data, status) {
         data = JSON.parse(data);
-        
+
         $("#select_modal_" + nombre_modulo).html('');
-        
+
         $.each(data, function (i, item) {
-            
+
             var option = '<option style="color: black !important; font-weight: bold !important;" value="' + item.id + '">' + item.nombre + '</option>';
-            
+
             $('#select_modal_' + nombre_modulo).append(option);
-        }); 
-        console.log('IdEvento: ' + id);
-        console.log('modulo: ' + nombre_modulo);
+        });
+        // console.log('IdEvento: ' + id);
+        // console.log('modulo: ' + nombre_modulo);
         if (id) {
             $("#select_modal_" + nombre_modulo).val(id).trigger('change');
-            
+
         } else {
             $("#select_modal_" + nombre_modulo).val('').trigger('change');
-        }       
+        }
     });
-    
-    
+
+
 }
 
 function sw_success(txt = 'Exito', timer = 2000) {

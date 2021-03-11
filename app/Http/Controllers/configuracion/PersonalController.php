@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\historial\PersonalModel;
 use App\Http\Requests\PersonalRequest;
+use Exception;
+use Illuminate\Support\Facades\DB;
+
 class PersonalController extends Controller
 {
     public function index()
@@ -21,7 +24,7 @@ class PersonalController extends Controller
 
     public function indexPersonal()
     {
-        $personal = PersonalModel::select('idpersonal as id', 'nombres as nombre')->where('estado', 0)->get();
+        $personal = PersonalModel::select(['idpersonal as id', DB::raw("CONCAT( personal.nombres, ' ' ,personal.apellidos) AS nombre")])->where('estado', 0)->get();
 
         return json_encode($personal);
     }
@@ -32,7 +35,7 @@ class PersonalController extends Controller
         $personal->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el personal']);
     }
-    
+
     public function desactivar($idpersonal){
         $personal = PersonalModel::where('idpersonal', $idpersonal)->first();
         $personal->estado = 1;
@@ -44,7 +47,7 @@ class PersonalController extends Controller
         $idpersonal                 = $request->input('idpersonal');
         $nombre_input               = $request->input('nombre_input');
         $apellido_input             = $request->input('apellido_input');
-       
+
         if ($idpersonal != "") {
             $personal = PersonalModel::find($idpersonal);
 
@@ -59,17 +62,17 @@ class PersonalController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el personal']);
-            
+
         } else {
             $personal = PersonalModel::create(
                 [
                 'nombres' => $nombre_input,
                 'apellidos' => $apellido_input,
                 ]);
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el personal', 'id' => $personal->idpersonal]);
         }
-        
+
     }
 
     public function DetallePersonal($idpersonal){

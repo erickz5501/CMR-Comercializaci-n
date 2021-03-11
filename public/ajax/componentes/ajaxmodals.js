@@ -14,7 +14,7 @@ function modal_actividad(){
 
 function modal_interesado(){
     limpiar_interesado_comercializacion();
-    $('#modal_registro_interesado').modal('show');
+    $('#modal_clientes').modal('show');
 }
 
 function modal_evento(){

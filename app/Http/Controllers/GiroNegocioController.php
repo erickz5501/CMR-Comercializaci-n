@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\GiroNegocioModel;
 use App\Http\Requests\EventosRequest;
+use Exception;
 
 class GiroNegocioController extends Controller
 {
@@ -58,16 +59,16 @@ class GiroNegocioController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el giro de negocio']);
-            
+
         } else {
-            $evento = GiroNegocioModel::create(
+            $giro_negocio = GiroNegocioModel::create(
                 [
                 'nombre' => $nombre_input,
                 ]);
-            
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el giro de negocio']);
+
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el giro de negocio', 'id'=>$giro_negocio->idgiro_negocio]);
         }
-        
+
     }
 
     public function DetalleNegocio($idgiro){

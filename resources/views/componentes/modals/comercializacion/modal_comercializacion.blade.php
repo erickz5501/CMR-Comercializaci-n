@@ -1,18 +1,18 @@
-<div class="modal fade" id="registroModalComercializacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     
+<div class="modal fade" id="modal_comercializacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
-            
+
                 <div class="modal-content">
                     <!-- ================================= MODAL TITULO ================================= -->
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar comercialización</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button onclick="limpiar_comercializacion();" type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
                         </button>
                     </div>
 
                     <!-- ================================= MODAL CUERPO ================================= -->
-                    
+
                         <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                             <form id="formulario_comercializacion">
                                 @csrf
@@ -32,7 +32,7 @@
 
                                             <li class="nav-item" >
                                                 <a  class="nav-link mb-sm-3 mb-md-0 disabled" id="btn_arriba_2" href="#" data-toggle="tab"  role="tab" aria-controls="tabs-icons-text-2" aria-selected="false">
-                                                    <i class="fas fa-paperclip"></i> Datos de cotizacion
+                                                    <i class="fas fa-paperclip"></i> Datos adicionales
                                                 </a>
                                             </li>
                                         </ul>
@@ -48,7 +48,7 @@
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <select class="form-control" id="select_modal_clientes" name="select_modal_clientes">
-                                                                                    
+
                                                                     </select>
                                                                     <span class="input-group-addon input-group-append">
                                                                         <button class="btn btn-default" type="button"  onclick="modal_interesado();" data-toggle="tooltip" data-html="true" title="Agregar un cliente/interesado">
@@ -60,13 +60,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                            
+
                                                     <div class="row">
                                                         <div class="col-4">
                                                             <div class="form-group">
                                                                 <label for="">Persona contacto</label>
                                                                 <input style="color: black !important; font-weight: bold !important;" class="form-control " type="text" id="persona_contacto_input" name="persona_contacto_input" placeholder="Persona Contacto" required>
-                                                                 
+
                                                             </div>
                                                         </div>
                                                         <div class="col-4">
@@ -74,7 +74,7 @@
                                                             <div class="form-group">
                                                                 <div class="input-group" id="datetimepicker1">
                                                                     <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_actividad" name="select_modal_actividad" data-toggle="" required>
-                                                                        
+
                                                                     </select>
                                                                     <span class="input-group-addon input-group-append">
                                                                         <button class="btn btn-default" type="button" onclick="modal_actividad();"   data-toggle="tooltip" data-html="true" title="Agregar una actividad.">
@@ -104,16 +104,16 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row border" style="margin-bottom: 10px; padding: 20px; border-radius: 10px; border:1px solid #000000 !important">
                                                         <div class="col-6">
                                                             <div class="row">
                                                                 <div class="col-md-8">
                                                                     <div class="form-group">
-                                                                        <label class="form-control-label" for="turno">Modulos</label>                                                                         
+                                                                        <label class="form-control-label" for="turno">Modulos</label>
                                                                         <select style="color: black !important; font-weight: bold !important;" name="select_modal_modulos" id="select_modal_modulos" class="form-control">
-                                                                
-                                                                        </select>                                                                         
+
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-4">
@@ -129,7 +129,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                    
+
                                                         <div class="col-6">
                                                             <div class="row my-2">
                                                                 <div class="col-md-12">
@@ -143,14 +143,14 @@
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody class="list" id="tabla_detalle_modulos">
-                                                                            
+
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
@@ -159,17 +159,17 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
 
                                                 <div class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel" aria-labelledby="tabs-icons-text-2-tab">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup> Evento</label>
+                                                            <label for="select_modal_clientes">Evento</label>
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <select class="form-control" id="select_modal_evento" name="select_modal_evento" data-toggle="" required style="color: black !important; font-weight: bold !important;">
-                                                                    
+
                                                                     </select>
                                                                     <span class="input-group-addon input-group-append">
                                                                         <button class="btn btn-default" type="button"   onclick="modal_evento();" data-toggle="tooltip" data-html="true" title="Agregar un evento.">
@@ -194,14 +194,14 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                            
+
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup> Cotización</label>
+                                                            <label for="select_modal_clientes">Cotización</label>
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <select class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion" required style="color: black !important; font-weight: bold !important;">
-                                                                        
+
                                                                     </select>
                                                                     <span class="input-group-addon input-group-append">
                                                                         <button class="btn btn-default" type="button"   data-toggle="tooltip" data-html="true" title="Agregar nueva cotización." onclick="modal_cotizacion();">
@@ -213,11 +213,11 @@
                                                         </div>
 
                                                         <div class="col-6">
-                                                            <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup> Personal</label>
+                                                            <label for="select_modal_clientes">Personal</label>
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="" required style="color: black !important; font-weight: bold !important;">
-                                                                    
+
                                                                     </select>
                                                                     <span class="input-group-addon input-group-append">
                                                                         <button class="btn btn-default" type="button" onclick="modal_personal();"   data-toggle="tooltip" data-html="true" title="Agregar nuevo personal.">
@@ -228,13 +228,23 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="">Observaciones</label>
                                                                 <textarea class="form-control" id="conclusionessTextarea" name="conclusionessTextarea" rows="3" style="color: black !important; font-weight: bold !important;">Observaciones</textarea>
                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                <div class="progress" id="div_barra_progress_comercializacion">
+                                                                    <div id="barra_progress_comercializacion" class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div id="contenedor_de_errores_comercializacion"></div>
                                                         </div>
                                                     </div>
 
@@ -268,11 +278,11 @@
                                 <i class="far fa-save"> </i> Guardar registro
                             </button>
                         </div>
-                    
+
                     <!-- FIN-MODAL-FOOTER -->
                 </div>
-            
+
     </div>
-    
+
 </div>
 <!-- FIN-MODAL -->

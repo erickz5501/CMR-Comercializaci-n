@@ -40,7 +40,7 @@
                             <div class="col">
                                 <div class="custom-file">
                                     <label class="custom-file-label" for="customFileLang">Select file</label>
-                                    <input type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
+                                    <input required type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
                                 </div>
                             </div>
                         </div>

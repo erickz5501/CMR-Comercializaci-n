@@ -6,10 +6,7 @@ function init(){
     $('#ant_form').hide();
 
     $("#guardar_registro").on('click', function(e){
-
-        
-            $("#formulario_comercializacion").submit();
-               
+        $("#formulario_comercializacion").submit();
     });
 
     $("#formulario_comercializacion").on("submit", function(e) {
@@ -40,17 +37,19 @@ function init(){
         guardar_medio(e);
     });
 
+    $("#formulario_giro_negocio").on("submit", function(e){
+        guardar_giro_negocio(e);
+    });
+
     document.getElementById("generar_n_comercializacion").onclick =  function(e){
         guardar_nuevo_registro(e);
     }
-
-    
 
     // listamos los grupos para el SELECT
     $('#select_modal_actividad').select2({
         theme: 'bootstrap4',
         width: 'style',
-        placeholder: '*Sel. actividad*',
+        placeholder: 'Selec. actividad',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -58,7 +57,7 @@ function init(){
 
     $('#select_modal_clientes').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. cliente*',
+        placeholder: 'Selec. cliente',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -66,7 +65,7 @@ function init(){
 
     $('#select_modal_medios').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. medio*',
+        placeholder: 'Selec. medio',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -74,7 +73,7 @@ function init(){
 
     $('#select_modal_modulos').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. modulo*',
+        placeholder: 'Selec. modulo',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -82,7 +81,7 @@ function init(){
 
     $('#select_modal_evento').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. evento*',
+        placeholder: 'Selec. evento',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -90,15 +89,30 @@ function init(){
 
     $('#select_modal_cotizacion').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. cotizacion*',
+        placeholder: 'Selec. cotizacion',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
     });
 
-    $('#select_modal_personal').select2({   
+    $('#select_modal_personal').select2({
         theme: 'bootstrap4',
-        placeholder: '*Sel. personal*',
+        placeholder: 'Selec. personal',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#select_modal_tipoDocumento').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+
+    $('#select_modal_giro_negocio').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -106,7 +120,7 @@ function init(){
 
     lista_comercializacion();
 
-    lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
+    lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
     lista_select2('/dashboard/listas/medios', 'medios', null);
     lista_select2('/dashboard/listas/evento', 'evento', null);
@@ -120,17 +134,17 @@ function init(){
 
 
 
-$("#btn_arriba_1").on('click', function () {  
+$("#btn_arriba_1").on('click', function () {
     $('#guardar_registro').hide();
     $('#sgt_form').show();
     $('#ant_form').hide();
-    console.log('btn arriba');  
+    console.log('btn arriba');
 
     $('#tabs-icons-text-1').addClass('show active');
     $('#tabs-icons-text-2').removeClass('show active');
 });
 
-$("#btn_arriba_2").on('click', function () {   
+$("#btn_arriba_2").on('click', function () {
 
     if ($("#select_modal_clientes").val() != null  && $("#select_modal_actividad").val() != null && $("#select_modal_medios").val() != null ) {
         $('#guardar_registro').show();
@@ -139,12 +153,13 @@ $("#btn_arriba_2").on('click', function () {
         $('#tabs-icons-text-1').removeClass('show active');
         $('#tabs-icons-text-2').addClass('show active');
 
-    }else{        
-        $('#btn_arriba_2').addClass('disabled'); 
+    }else{
+        $('#btn_arriba_2').addClass('disabled');
+        sw_error('Selecione campos requeridos')
     }
 });
 
-$("#sgt_form").on('click', function () {    
+$("#sgt_form").on('click', function () {
 
     if ($("#select_modal_clientes").val() == null || $("#select_modal_clientes").val() == '') {
         $('#invlid_cliente').addClass("d-block");
@@ -169,25 +184,26 @@ $("#sgt_form").on('click', function () {
         $('#sgt_form').hide();
         $('#ant_form').show();
         $('#btn_arriba_1').removeClass('active');
-        $('#btn_arriba_2').addClass("active");    
-        
+        $('#btn_arriba_2').addClass("active");
+
         $('#tabs-icons-text-1').removeClass('show active');
         $('#tabs-icons-text-2').addClass('show active');
 
         $('#btn_arriba_2').removeClass("disabled");
 
-    }else{        
-        $('#btn_arriba_2').addClass('disabled'); 
+    }else{
+        $('#btn_arriba_2').addClass('disabled');
+        sw_error('Selecione campos requeridos');
     }
 });
 
-$("#ant_form").on('click', function () {   
+$("#ant_form").on('click', function () {
     $('#guardar_registro').hide();
     $('#sgt_form').show();
     $('#ant_form').hide();
     $('#btn_arriba_1').addClass('active');
-    $('#btn_arriba_2').removeClass("active");    
-    
+    $('#btn_arriba_2').removeClass("active");
+
     $('#tabs-icons-text-1').addClass('show active');
     $('#tabs-icons-text-2').removeClass('show active');
 });
@@ -208,7 +224,7 @@ function cunsulta_sunat(){
                 timer: 2000,
                 icon: "error"
             });
-            
+
         }else{
             //Cunsolta DNI a la sunat
             $('#cargado_sunat').hide();
@@ -259,9 +275,9 @@ function cunsulta_sunat(){
                     });
                 } else {
                     $('#nombre_razon_social_input').val(data.result['razon_social']);
-                    $('#nombre_comercial_input').val(data.result['nombre_comercial']);  
+                    $('#nombre_comercial_input').val(data.result['nombre_comercial']);
                 }
-                
+
             });
             }
         }else{
@@ -272,7 +288,7 @@ function cunsulta_sunat(){
                 icon: "error"
             });
         }
-        
+
     }
 
     $('.tooltip').removeClass("show").addClass("hidde");
@@ -301,7 +317,7 @@ function guardar_registro(e) {
         function(){ console.log('Console Error'); }
     );
 
-    $("#registroModalComercializacion").modal('hide');
+    // $("#registroModalComercializacion").modal('hide');
 }
 
 function guardar_nuevo_registro(e) {
@@ -327,11 +343,11 @@ function detalle_registro(id){
 }
 
 function mostrar_one_registro(idregistro){
-    $("#registroModalComercializacion").modal('show');
+    $("#modal_comercializacion").modal('show');
     $.get('/dashboard/mostrar/comercializacion/'+idregistro , function (data){
         data = JSON.parse(data);
 
-        //console.log(data.cliente);  
+        //console.log(data.cliente);
         $('#idcomercializacion').val(data.registro['idcomercializacion']);
         $('#idusers').val(data.registro['idusers']);
         $('#persona_contacto_input').val(data.registro['persona_contacto']);
@@ -347,8 +363,8 @@ function mostrar_one_registro(idregistro){
             let id  = _id();
             let tr_detalle =    `<tr class="tr_detalle_modulos" id="tr_`+id+`">
                                     <td>` + data.modulo[i].modulo.nombre+ ` <input type="hidden" name="modulo[]" value="` + data.modulo[i].idmodulos + `"</td>
-                                    <td> 
-                                        <input class="form-control form-control-sm" type="number" name="licencias[]"  value="` + data.modulo[i].cant_licencias+ `" style="width: 100px;"> 
+                                    <td>
+                                        <input class="form-control form-control-sm" type="number" name="licencias[]"  value="` + data.modulo[i].cant_licencias+ `" style="width: 100px;">
                                     </td>
                                     <td>
                                         <a href="javascript:void(0)" class="btn btn-danger btn-sm" data-toggle="tooltip" data-original-title="Eliminar" onclick="eliminar_tr(`+id+`)">
@@ -360,7 +376,7 @@ function mostrar_one_registro(idregistro){
             $("#tabla_detalle_modulos").append(tr_detalle);
             //console.log(data.modulo[i].idmodulos);
         }
-        
+
 
         if (data.registro['idactividad']) {
             $('#select_modal_actividad').val(data.registro['idactividad']).trigger('change');
@@ -385,19 +401,20 @@ function mostrar_one_registro(idregistro){
         }else{
             $('#select_modal_evento').val(null).trigger('change');
         }
-        
+
         if (data.registro['idpersonal']) {
             $('#select_modal_personal').val(data.registro['idpersonal']).trigger('change');
         }else{
             $('#select_modal_personal').val(null).trigger('change');
         }
+        console.log('cotizacion: '+data.mod_cotizacion.cotizacion.idcotizaciones);
 
-        if (data.cotizacion['idcotizaciones']) {
-            $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
+        if (data.mod_cotizacion.cotizacion.idcotizaciones) {
+            $('#select_modal_cotizacion').val(data.mod_cotizacion.cotizacion.idcotizaciones).trigger('change');
         }else{
             $('#select_modal_cotizacion').val(null).trigger('change');
         }
-       
+
     });
 }
 
@@ -429,6 +446,19 @@ function limpiar_comercializacion(){
     $('#select_modal_modulos').val(null).trigger('change');
     $('#select_modal_eventos').val(null).trigger('change');
     $('#select_modal_personal').val(null).trigger('change');
+
+    $('#guardar_registro').hide();
+    $('#generar_n_comercializacion').hide();
+    $('#sgt_form').show();
+    $('#ant_form').hide();
+    $('#tabs-icons-text-1').addClass('show active');
+    $('#tabs-icons-text-2').removeClass('show active');
+    $('#btn_arriba_1').addClass('active');
+    $('#btn_arriba_2').removeClass("active");
+
+    $('#invlid_cliente').removeClass("d-block");
+    $('#invlid_actividad').removeClass("d-block");
+    $('#invlid_medio').removeClass("d-block");
 }
 
 function mostrar_seguimiento(idcliente){
@@ -509,7 +539,7 @@ function guardar_interesado_comercializacion(e){
         function(){ limpiar_interesado_comercializacion(); },
         function(){ console.log('Console Error'); }
     );
-    $("#modal_registro_interesado").modal('hide');
+    // $("#modal_registro_interesado").modal('hide');
 }
 
 function limpiar_interesado_comercializacion(){ //Para limpIar los campos despues de registrar un interesado
@@ -564,8 +594,20 @@ function limpiar_medio(){
     $('#nombre_input').val("");
 }
 
+function guardar_giro_negocio(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/gironegocio/guardar',
+        'giro_negocio',
+        function(){ limpiar_form_giro_negocio(); },
+        function(){ console.log('Console Error'); }
+    );
+}
 
-
+function limpiar_form_giro_negocio(){
+    $('#idgiro_negocio').val("");
+    $('#nombre_input').val("");
+}
 
 //Funciones para agregar los modulos con la cantidad de licencias xD
 function add_detalle() { //crea una fila con el nombre del modulo y la cantidad de licencias
@@ -578,7 +620,7 @@ function add_detalle() { //crea una fila con el nombre del modulo y la cantidad 
 
     console.log(idmodulo);
     console.log(cant_licencias);
-    
+
     if (validar_detalle(idmodulo, cant_licencias)) { //llamamos a la funcion validar_detalle()
 
         let tr_detalle = _tr('detalle_modulos', id, //creamos un tr con el id aleatorio

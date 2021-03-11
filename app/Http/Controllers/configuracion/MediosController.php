@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\historial\MediosModel;
 use App\Http\Requests\MediosRequest;
+use Exception;
+
 class MediosController extends Controller
 {
     /**
@@ -37,7 +39,7 @@ class MediosController extends Controller
         $medio->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el medio']);
     }
-    
+
     public function desactivar($idmedios){
         $medio = MediosModel::where('idmedios', $idmedios)->first();
         $medio->estado = 1;
@@ -48,7 +50,7 @@ class MediosController extends Controller
     public function createMedio(MediosRequest $request){
         $idmedios                = $request->input('idmedios');
         $nombre_input             = $request->input('nombre_input');
-       
+
         if ($idmedios != "") {
             $medio = MediosModel::find($idmedios);
 
@@ -62,16 +64,16 @@ class MediosController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el medio']);
-            
+
         } else {
             $medio = MediosModel::create(
                 [
                 'nombre' => $nombre_input,
                 ]);
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el medio','id'=>$medio->idmedios]);
         }
-        
+
     }
 
     public function DetalleMedio($idmedios){

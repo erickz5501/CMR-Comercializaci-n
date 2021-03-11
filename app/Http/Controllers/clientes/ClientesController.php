@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\ClientesModel;
 use App\Http\Requests\InteresadoRequest;
 use App\Http\Requests\UserGeneralRequest;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
@@ -14,16 +16,20 @@ class ClientesController extends Controller
         //dd($cliente);
         return view('listas.clientes');
     }
-    
+
     public function indexLista(){
         $clientes = ClientesModel::where('tipo_persona', 2)->get();
         //dd($cliente);
         return view('componentes.clientes.tabla_cliente', compact('clientes'));
     }
-    
+
     public function indexClientes(){
         //$clientes = ClientesModel::select(DB::raw("CONCAT('nombres_razon_social','nombres_razon_social') AS nombre"))->get();
-        $clientes = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre' )->where('estado', 0)->get();
+        // 'nombres_razon_social as nombre'
+        $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT( clientes.nro_documento, ' - ' , clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial) AS nombre") ] )
+                                    ->where('estado', 0)
+                                    ->get();
+
         return json_encode($clientes);
     }
 
@@ -61,7 +67,7 @@ class ClientesController extends Controller
         $det_interesado = ClientesModel::with('gironegocio')->where('idclientes', $id_interesado)->first();
 
         //return json_encode(['interesado'=>$det_interesado]);
-       
+
         return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
     }
 
@@ -69,7 +75,7 @@ class ClientesController extends Controller
         $idclientes                     = $request->input('idclientes');
         $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
-        $GiroNegocioSelect              = $request->input('select_modal_giroNegocio');
+        $GiroNegocioSelect              = $request->input('select_modal_giro_negocio');
         $tipoPersonaSelect              = $request->input('select_modal_tipoPersona');
         $tipoDocSelect                  = $request->input('select_modal_tipoDocumento');
         $numDocumentoInput              = $request->input('numDocumentoInput');
@@ -103,8 +109,8 @@ class ClientesController extends Controller
             catch(Exception $e){
                 return json_encode($e->getMessage());
             }
-                
-                
+
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
 
         }else{
@@ -122,7 +128,7 @@ class ClientesController extends Controller
                 'idgiro_negocio' => $GiroNegocioSelect,
                 'tipo_persona' => $tipoPersonaSelect
                 ]);
-                
+
                 return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa', 'id' => $usuario->idclientes]);
         }
 
@@ -164,8 +170,8 @@ class ClientesController extends Controller
         catch(Exception $e){
             return json_encode($e->getMessage());
         }
-            
-        
+
+
         return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
 
     }
@@ -191,9 +197,9 @@ class ClientesController extends Controller
         $usuario->estado = 0;
         $usuario->save();
         return json_encode(['status' => true, 'message' => 'Se ha activado el Cliente']);
-        
+
     }
-    
+
     public function desactivarInteresado($idclientes)
     {
         $usuario = ClientesModel::where('idclientes', $idclientes)->first();
