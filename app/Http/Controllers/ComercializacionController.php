@@ -178,7 +178,7 @@ class ComercializacionController extends Controller
 
     public function createComercioNuevo(ComercializacionRequest $request){
         //$idcomercializacion             = $request->input('idcomercializacion');
-        $idusers                        = 2;
+        $idusers                        = 1;
         $select_modal_clientes          = $request->input('select_modal_clientes');
         $persona_contacto_input         = $request->input('persona_contacto_input');
         $actividad_input                = $request->input('select_modal_actividad');

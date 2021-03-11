@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CotizacionesModel;
 use App\Http\Requests\ComercializacionRequest;
+use App\Http\Requests\CotizacionRequest;
+use App\Models\CorrelativoModel;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Support\Facades\Storage;
+
 class CotizacionController extends Controller
 {
-   
+
     public function index(){
         return view('cotizacion.cotizacion');
     }
@@ -53,37 +58,76 @@ class CotizacionController extends Controller
     }
 
     public function createCotizacion(CotizacionRequest $request){
-        $idcotizaciones             = $request->input('idcotizaciones');
-        $codigo                     = $request->input('nombre_cotizacion');
-        $ruta_cotizacion            = $request->file('ruta_cotizacion');
-        $archivo                    = $_FILES["ruta_cotizacion"];
-        //$nombre_archivo             = $ruta_cotizacion->getClientOriginalName(); //obtenemos el nombre del archivo
 
-        //move_uploaded_file($archivo["tmp_name"], "storage/uploads/".$archivo["name"]   );
+        $doc_ruta = "";
 
-        if ($idcotizaciones != "") {
-            $evento = CotizacionesModel::find($idcotizaciones);
+        $idcotizaciones         = $request->input('idcotizaciones');
+
+        $codigo                 = $request->input('nombre_cotizacion');
+
+        $doc_cotizacion_antiguo = $request->input('doc_cotizacion_antiguo');
+
+        // $ruta_cotizacion            = $request->file('ruta_cotizacion');
+
+        // $archivo                    = $_FILES["ruta_cotizacion"];
+
+        $doc_cotizacion = $request->file('ruta_cotizacion');
+
+        // return json_encode($idcotizaciones,$codigo ,$doc_cotizacion_antiguo ,$doc_cotizacion);
+        // if ($doc_cotizacion_antiguo) {
+
+        //     $doc_ruta = $doc_cotizacion_antiguo;
+        // } else {
+
+        // }
+
+
+        if (!empty( $idcotizaciones)) {
+
+            $editar_cotizacion = CotizacionesModel::find($idcotizaciones);
+
+            if ($doc_cotizacion) {
+                // borramos doc
+                $cotizacion_ruta_delete = '/docs/' . $editar_cotizacion->ruta;
+                Storage::disk('public')->delete($cotizacion_ruta_delete);
+                // insetamos nuevo doc
+                $doc_cotizacion_nombre =  $doc_cotizacion->getClientOriginalName() . '-' . rand() . '.' . $doc_cotizacion->getClientOriginalExtension();
+                $doc_ruta = '/docs';
+                $doc_ruta = Storage::disk('public')->put($doc_ruta ,  $doc_cotizacion);
+
+                // $delete = CotizacionesModel::where('idcertificados', $editar_cotizacion->idcertificados)->delete();
+            }else{
+                $doc_ruta = $doc_cotizacion_antiguo;
+            }
 
             try{
-                $evento->nombre = $codigo;
-                $evento->ruta = $ruta_cotizacion;
+                $editar_cotizacion->nombre = $codigo;
+                $editar_cotizacion->ruta = $doc_ruta;
 
-                $evento->save();
+                $editar_cotizacion->save();
             }
             catch(Exception $e){
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el evento']);
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo la cotizaion', $codigo]);
         } else {
+
+            if (!empty($doc_cotizacion)) {
+                $doc_cotizacion_nombre =  $doc_cotizacion->getClientOriginalName() . '-' . rand() . '.' . $doc_cotizacion->getClientOriginalExtension();
+                $doc_ruta = '/docs';
+
+                $doc_ruta = Storage::disk('public')->put($doc_ruta ,  $doc_cotizacion);
+            }
+
             $cotizacion = CotizacionesModel::create([
                 'nombre' => CotizacionController::generar_correlativo($increment = true),//llamamos a la funcion para generar su correlativo
-                'ruta' => $ruta_cotizacion
+                'ruta' => $doc_ruta
             ]);
-            
-            return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion', 'id' => $cotizacion->idcotizaciones]);
+
+            return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion', 'id' => $cotizacion->idcotizaciones,$doc_ruta]);
         }
-        
+
     }
 
     public function detalle_actualizacion($idcotizacion){

@@ -4,7 +4,7 @@ function modal_medios(){
 
 function modal_cotizacion(){
     limpiar_cotizacion_comercializacion();
-    $('#registroModalCotizacion').modal('show');
+    $('#modal_cotizacion').modal('show');
 }
 
 function modal_actividad(){

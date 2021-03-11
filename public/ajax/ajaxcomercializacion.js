@@ -155,7 +155,7 @@ $("#btn_arriba_2").on('click', function () {
 
     }else{
         $('#btn_arriba_2').addClass('disabled');
-        sw_error('Selecione campos requeridos')
+        sw_error('Selecione campos requeridos');
     }
 });
 

@@ -2,7 +2,8 @@ function init(){
     lista_cotizaciones();
     $("#formulario_cotizacion").on("submit", function(e) {
         guardar_cotizacion(e);
-        lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
+        console.log("hoola nueva cotizacion");
+        // lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     });
 }
 
@@ -11,7 +12,7 @@ function limpiar_cotizacion(){
     $.get('/dashboard/cotizacion/generar', function(data){
         data = JSON.parse(data);
         $('#nombre_cotizacion').val(data);
-        nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
+        // nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
     });
     $('#ruta_cotizacion').val("");
 }
@@ -19,13 +20,13 @@ function limpiar_cotizacion(){
 function guardar_cotizacion(e){
     crud_guardar_editar(
         e,
-        '/dashboard/cotizacion/guardar',
+        '/dashboard/cotizacion/crear',
         'cotizacion',
         function(){ limpiar_cotizacion();},
         function(){ lista_cotizaciones(); },
         function(){ console.log('Console Error'); }
     );
-    $("#registroModalCotizacion").modal('hide');
+    // $("#registroModalCotizacion").modal('hide');
 }
 
 function lista_cotizaciones(){
@@ -36,14 +37,22 @@ function lista_cotizaciones(){
 }
 
 function editar(idcotizacion){
-    $("#registroModalCotizacion").modal('show');
+
+    $("#modal_cotizacion").modal('show');
+
     $.get('/dashboard/lista/cotizaciones/'+idcotizacion , function (data){
+
         data = JSON.parse(data);
-       //console.log(data.cliente);  
+       //console.log(data.cliente);
         $('#idcotizaciones').val(data.evento['idcotizaciones']);
+
         $('#nombre_cotizacion').val(data.evento['nombre']);
-        $('#ruta_cotizacion').val(data.evento['ruta'])
-        nombre_cotizacion.disabled = true;
+
+        // $('#ruta_cotizacion').val(data.evento['ruta']);
+
+        $('#doc_cotizacion_antiguo').val(data.evento['ruta']);
+
+        // nombre_cotizacion.disabled = true;
     });
 
 }

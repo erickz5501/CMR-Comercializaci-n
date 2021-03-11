@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="limpiar_cotizacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalCotizacion"><i class="fas fa-plus-circle"></i> Agregar Cotizacion</a>
+            <a type="button" href="#" onclick="limpiar_cotizacion();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_cotizacion"><i class="fas fa-plus-circle"></i> Agregar Cotizacion</a>
         </div>
     </div>
 </div>

@@ -23,20 +23,20 @@ class InteresadoRequest extends FormRequest
      */
     public function rules(){//estas son las validaciones
         return [
+            'numDocumentoInput' => 'required|max:11',
             'nombre_razon_social_input' => 'required',
             'nombre_comercial_input' => 'required',
-            'number_empresa_input' => 'max:9|min:9|required',
-            'InputCorreo1' => 'email|max:45',
+            'number_empresa_input' => 'max:9',
+            'InputCorreo1' => 'max:45',
             'select_modal_giro_negocio' => 'required|min:1',
         ];
     }
 
     public function messages(){
         return[
+            'numDocumentoInput.required' => 'Asegurese de escribir un numero de Documento.',
             'nombre_comercial_input.required' => 'El campo Apellido es requerido',
             'nombre_razon_social_input.required' => 'El campo Nombre es requerido.',
-            'number_empresa_input.required' => 'El campo telefono es requerido.',
-            'number_empresa_input.min' => 'Numero de telefono invalido.',
             'number_empresa_input.max' => 'Numero de telefono invalido.',
             'select_modal_giro_negocio.required' => 'Selecione un giro de negocio'
         ];

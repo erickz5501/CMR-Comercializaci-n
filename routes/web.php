@@ -176,6 +176,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/cotizaciones/desactivar/{idcotizacion}', "CotizacionController@desactivar");
     Route::get('/cotizaciones/activar/{idcotizacion}', "CotizacionController@activar");
     Route::get('/lista/cotizaciones/{idcotizacion}', "CotizacionController@detalle_actualizacion");
+    Route::post('/cotizacion/crear', "CotizacionController@createCotizacion");
 
 
 });

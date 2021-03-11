@@ -1,5 +1,5 @@
 <!-- ================================= MODAL Registro COTIZACION================================= -->
-<div class="modal fade border" id="registroModalCotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade border" id="modal_cotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal" role="document">
       <div class="modal-content">
         <!-- ================================= MODAL TITULO ================================= -->
@@ -22,7 +22,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Nombre</label>
-                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_cotizacion" name="nombre_cotizacion" required>
+                                    <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="nombre_cotizacion" readonly name="nombre_cotizacion" required>
                                 </div>
                             </div>
                         </div>
@@ -40,7 +40,9 @@
                             <div class="col">
                                 <div class="custom-file">
                                     <label class="custom-file-label" for="customFileLang">Select file</label>
-                                    <input required type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" onchange="validar_pdf();">
+                                    <input  type="file" class="custom-file-input" id="ruta_cotizacion" name="ruta_cotizacion" lang="en" >
+                                    {{-- onchange="validar_pdf();" --}}
+                                    <input  type="hidden" id="doc_cotizacion_antiguo" name="doc_cotizacion_antiguo" >
                                 </div>
                             </div>
                         </div>

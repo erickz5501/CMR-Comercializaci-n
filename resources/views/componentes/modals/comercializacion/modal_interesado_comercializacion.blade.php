@@ -28,7 +28,10 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="select_modal_tipoDocumento">Tipo documento</label>
+                                        <label class="form-control-label" for="select_modal_tipoDocumento">
+                                            <sup class="text-danger font-weight-bold">*</sup>
+                                            Tipo documento
+                                        </label>
                                         <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle=""  >
 
                                             <option value="1">DNI</option>
@@ -39,8 +42,11 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="numDocumentoInput">Numero documento</label>
-                                        <div class="input-group input-group-merge">
+                                        <label class="form-control-label" for="numDocumentoInput">
+                                            <sup class="text-danger font-weight-bold">*</sup>
+                                            Numero documento
+                                        </label>
+                                        <div class="input-group  ">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                             </div>
@@ -51,6 +57,7 @@
                                                     <i style="font-size: 20px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_sunat"></i>
                                                 </button>
                                             </span>
+                                            <div class="invalid-feedback">Por Favor escriba un N° Doc. valido</div>
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +117,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-4">
+                                {{-- <div class="col-4">
                                     <div class="form-group">
                                         <label class="form-control-label" for="exampleFormControlInput1">Correo 1 </label>
                                         <div class="input-group input-group-merge">
@@ -118,6 +125,19 @@
                                                 <span class="input-group-text"><i class="fas fa-at"></i></span>
                                             </div>
                                             <input style="color: black !important; font-weight: bold !important;" type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com"   />
+                                            <div class="invalid-feedback">Por Favor escriba un email valido</div>
+                                        </div>
+                                    </div>
+                                </div> --}}
+
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="number-empresa-input">Correo 1</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                            </div>
+                                            <input style="color: black !important; font-weight: bold !important;" class="form-control" type="email" id="InputCorreo1" name="InputCorreo1" autocomplete="off"/>
                                             <div class="invalid-feedback">Por Favor escriba un email valido</div>
                                         </div>
                                     </div>
