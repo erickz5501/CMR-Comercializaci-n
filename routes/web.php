@@ -43,7 +43,7 @@ Route::get('/dashboard', "DashboardController@index") ->name('dashboard.dashboar
 // ..........:: RUTAS INTERESADOS ::............//
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     //MUESTRA LA VISTA
-    Route::get('/listas/interesados', 'clientes\ClientesController@interesados');
+    Route::get('/listas/interesados/', 'clientes\ClientesController@interesados');
     //MUESTRA LOS DATOS EN UNA TABLA
     Route::get('/listas/interesados/lista', "clientes\ClientesController@indexListaInteresado");
     //MUESTRA DETTALE DE INTERESADO EN UN MODAL
@@ -198,9 +198,9 @@ Route::get('/dashboard/listas/cotizacion', "ComercializacionController@indexCoti
 Route::get('/dashboard/listas/gironegocio', "GiroNegocioController@indexGiroNegocio");
 Route::get('/dashboard/listas/modulos', "configuracion\ModulosController@indexModulos");
 Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedios");
-Route::get('/dashboard/listas/eventos', "configuracion\EventosController@indexEventos");
+Route::get('/dashboard/listas/evento', "configuracion\EventosController@indexEventos");
 Route::get('/dashboard/listas/personal', "configuracion\PersonalController@indexPersonal");
-Route::get('/dashboard/listas/cliente', "clientes\ClientesController@indexClientes");
+Route::get('/dashboard/listas/clientes', "clientes\ClientesController@indexClientes");
 Route::get('/dashboard/listas/interesado', "clientes\ClientesController@indexInteresado");
 Route::get('/dashboard/listas/actividad', "configuracion\ActividadController@indexActvidad");
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");

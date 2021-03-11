@@ -68,7 +68,7 @@ class EventosController extends Controller
                 'descrripcion' => $descripcion_input
                 ]);
             
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el evento']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el evento', 'id' => $evento->ideventos ]);
         }
         
     }

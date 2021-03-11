@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="limpiar_actividad();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalActividad"><i class="fas fa-plus-circle"></i> Agregar actividad</a>
+            <a type="button" href="#" onclick="limpiar_actividad();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_actividad"><i class="fas fa-plus-circle"></i> Agregar actividad</a>
         </div>
     </div>
 </div>

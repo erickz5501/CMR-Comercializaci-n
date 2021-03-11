@@ -67,7 +67,7 @@ class PersonalController extends Controller
                 'apellidos' => $apellido_input,
                 ]);
             
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el personal']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el personal', 'id' => $personal->idpersonal]);
         }
         
     }

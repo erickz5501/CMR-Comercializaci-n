@@ -3,7 +3,7 @@
         <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Agregar registro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Agregar evento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red"></i> </span>
                 </button>

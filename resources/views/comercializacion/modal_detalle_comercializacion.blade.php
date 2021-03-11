@@ -14,15 +14,27 @@
     <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
         <div class="row col-12">
             <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
-                
                 <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
-                    <div class="accordion" id="accordionExampleDet">
-                        <div class="card">
-                            <div class="card-header" id="headingOneDet" data-toggle="collapse" data-target="#collapseOneDet" aria-expanded="true" aria-controls="collapseOneDet">
-                                <h5 class="mb-0">#1</h5>
-                            </div>
-                            <div id="collapseOneDet" class="collapse show" aria-labelledby="headingOneDet" data-parent="#accordionExampleDet">
-                                <div class="card-body">
+                    <div class="nav-wrapper">
+                        <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0 active" data-toggle="tab" href="#tabs-icons-text-1a" role="tab" aria-controls="tabs-icons-text-1a" aria-selected="true">
+                                    <i class="fas fa-digital-tachograph"></i> Datos generales
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link mb-sm-3 mb-md-0" data-toggle="tab" href="#tabs-icons-text-2a" role="tab" aria-controls="tabs-icons-text-2a" aria-selected="false">
+                                    <i class="fas fa-paperclip"></i> Datos de cotizacion
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="tabs-icons-text-1a"  role="tabpanel" aria-labelledby="tabs-icons-text-1a-tab">
                                     <ul class="list-unstyled mb-0">
                                         <li class="media pt-1 pb-2 border-bottom">
                                             <i class="fas fa-id-card font-size-lg mt-2 mb-0 text-primary"></i>
@@ -82,18 +94,6 @@
                                                 </span>
                                             </div>
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header" id="headingTwoDet" data-toggle="collapse" data-target="#collapseTwoDet" aria-expanded="false" aria-controls="collapseTwoDet">
-                                <h5 class="mb-0">#2</h5>
-                            </div>
-                            <div id="collapseTwoDet" class="collapse" aria-labelledby="headingTwoDet" data-parent="#accordionExampleDet">
-                                <div class="card-body">
-                                    <ul class="list-unstyled mb-0">
                                         <li class="media pt-2m pb-3 border-bottom">
                                             <i class="fas fa-bookmark font-size-lg mt-2 mb-0 text-primary"></i>
                                             <div class="media-body pl-3">
@@ -105,6 +105,20 @@
                                                         No definido.
                                                     @endif
                                                     
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" id="tabs-icons-text-2a" role="tabpanel" aria-labelledby="tabs-icons-text-2a-tab">
+                                    <ul>
+                                        <li class="media pt-2m pb-3 border-bottom">
+                                            <i class="fab fa-elementor font-size-lg mt-2 mb-0 text-primary"></i>
+                                            <div class="media-body pl-3">
+                                                <span class="font-size-ms text-primary">Cotizacion </span>
+                                                <span class="d-block text-heading font-size-sm">
+                                                    {{  $cotizacion->cotizacion->nombre }}
                                                 </span>
                                             </div>
                                         </li>
@@ -139,33 +153,26 @@
                                                 </span>
                                             </div>
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header" id="headingTreeDet" data-toggle="collapse" data-target="#collapseTreeDet" aria-expanded="false" aria-controls="collapseTreeDet">
-                                <h5 class="mb-0">#3</h5>
-                            </div>
-                            <div id="collapseTreeDet" class="collapse" aria-labelledby="headingTreeDet" data-parent="#accordionExampleDet">
-                                <div class="card-body">
-                                    <ul class="list-unstyled mb-0">
+                                        <li class="media pt-2m pb-3 border-bottom">
+                                            <i class="fas fa-book-open font-size-lg mt-2 mb-0 text-primary"></i>
+                                            <div class="media-body pl-3">
+                                                <span class="font-size-ms text-primary">Avanze </span>
+                                                <span class="d-block text-heading font-size-sm">
+                                                    @if ($det_registro->avance)
+                                                        {{ $det_registro->avance}}
+                                                    @else
+                                                        No definido.
+                                                    @endif
+                                                    
+                                                </span>
+                                            </div>
+                                        </li>
                                         <li class="media pt-2m pb-3 border-bottom">
                                             <i class="fas fa-user-check font-size-lg mt-2 mb-0 text-primary"></i>
                                             <div class="media-body pl-3">
                                                 <span class="font-size-ms text-primary">Personal Encargado: </span>
                                                 <span class="d-block text-heading font-size-sm">
                                                     {{  $det_registro->personal->nombres }}
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li class="media pt-2m pb-3 border-bottom">
-                                            <i class="fas fa-book-open font-size-lg mt-2 mb-0 text-primary"></i>
-                                            <div class="media-body pl-3">
-                                                <span class="font-size-ms text-primary">Avanze </span>
-                                                <span class="d-block text-heading font-size-sm">
-                                                    {{ $det_registro->avance}}
                                                 </span>
                                             </div>
                                         </li>
@@ -187,7 +194,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

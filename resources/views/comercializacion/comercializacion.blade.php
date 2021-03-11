@@ -83,11 +83,4 @@
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/componentes/ajaxmodals.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
-<script src="{{ asset('ajax/configuracion/ajaxmedios.js')}}"></script>
-<script src="{{ asset('ajax/ajaxcotizacion.js')}}"></script>
-<script src="{{ asset('ajax/ajaxcliente.js')}}"></script>
-<script src="{{ asset('ajax/configuracion/ajaxactividad.js')}}"></script>
-<script src="{{ asset('ajax/configuracion/ajaxeventos.js')}}"></script>
-<script src="{{ asset('ajax/configuracion/ajaxpersonal.js')}}"></script>
-
 @endsection

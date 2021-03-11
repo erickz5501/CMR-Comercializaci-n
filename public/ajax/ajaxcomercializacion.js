@@ -5,23 +5,46 @@ function init(){
     $('#guardar_registro').hide();
     $('#ant_form').hide();
 
+    $("#guardar_registro").on('click', function(e){
+
+        
+            $("#formulario_comercializacion").submit();
+               
+    });
+
     $("#formulario_comercializacion").on("submit", function(e) {
         guardar_registro(e);
+    });
+
+    $("#formulario_evento").on("submit", function(e) {
+        guardar_evento_comercializacion(e);
+    });
+
+    $("#formulario_cotizacion").on("submit", function(e) {
+        guardar_cotizacion_comercializacion(e);
+    });
+
+    $("#formulario_personal").on("submit", function(e) {
+        guardar_personal_comercializacion(e);
+    });
+
+    $("#formulario_clientes").on("submit", function(e){
+        guardar_interesado_comercializacion(e);
+    });
+
+    $("#formulario_actividad").on("submit", function(e){
+        guardar_actividad_comercializacion(e);
+    });
+
+    $("#formulario_medios").on("submit", function(e){
+        guardar_medio(e);
     });
 
     document.getElementById("generar_n_comercializacion").onclick =  function(e){
         guardar_nuevo_registro(e);
     }
-    document.getElementById("sgt_form").onclick =  function(){
-        $('#guardar_registro').show();
-        $('#sgt_form').hide();
-        $('#ant_form').show();
-    }
-    document.getElementById("ant_form").onclick =  function(){
-        $('#guardar_registro').hide();
-        $('#sgt_form').show();
-        $('#ant_form').hide();
-    }
+
+    
 
     // listamos los grupos para el SELECT
     $('#select_modal_actividad').select2({
@@ -57,7 +80,7 @@ function init(){
 		dropdownAutoWidth: true,
     });
 
-    $('#select_modal_eventos').select2({
+    $('#select_modal_evento').select2({
         theme: 'bootstrap4',
         placeholder: '*Sel. evento*',
         allowClear: true,
@@ -86,17 +109,93 @@ function init(){
     lista_select2('/dashboard/listas/gironegocio', 'giroNegocio', null);
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
     lista_select2('/dashboard/listas/medios', 'medios', null);
-    lista_select2('/dashboard/listas/eventos', 'eventos', null);
+    lista_select2('/dashboard/listas/evento', 'evento', null);
     lista_select2('/dashboard/listas/personal', 'personal', null);
-    
-    lista_select2('/dashboard/listas/cliente', 'clientes', null);
+    lista_select2('/dashboard/listas/clientes', 'clientes', null);
     lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     lista_select2('/dashboard/listas/actividad', 'actividad', null);
 
 }
 
+
+
+
+$("#btn_arriba_1").on('click', function () {  
+    $('#guardar_registro').hide();
+    $('#sgt_form').show();
+    $('#ant_form').hide();
+    console.log('btn arriba');  
+
+    $('#tabs-icons-text-1').addClass('show active');
+    $('#tabs-icons-text-2').removeClass('show active');
+});
+
+$("#btn_arriba_2").on('click', function () {   
+
+    if ($("#select_modal_clientes").val() != null  && $("#select_modal_actividad").val() != null && $("#select_modal_medios").val() != null ) {
+        $('#guardar_registro').show();
+        $('#sgt_form').hide();
+        $('#ant_form').show();
+        $('#tabs-icons-text-1').removeClass('show active');
+        $('#tabs-icons-text-2').addClass('show active');
+
+    }else{        
+        $('#btn_arriba_2').addClass('disabled'); 
+    }
+});
+
+$("#sgt_form").on('click', function () {    
+
+    if ($("#select_modal_clientes").val() == null || $("#select_modal_clientes").val() == '') {
+        $('#invlid_cliente').addClass("d-block");
+    }else{
+        $('#invlid_cliente').removeClass("d-block");
+    }
+
+    if ($("#select_modal_actividad").val() == null || $("#select_modal_actividad").val() == '') {
+        $('#invlid_actividad').addClass("d-block");
+    }else{
+        $('#invlid_actividad').removeClass("d-block");
+    }
+
+    if ($("#select_modal_medios").val() == null || $("#select_modal_medios").val() == '') {
+        $('#invlid_medio').addClass("d-block");
+    }else{
+        $('#invlid_medio').removeClass("d-block");
+    }
+
+    if ($("#select_modal_medios").val() != null  && $("#select_modal_actividad").val() != null && $("#select_modal_clientes").val() != null ) {
+        $('#guardar_registro').show();
+        $('#sgt_form').hide();
+        $('#ant_form').show();
+        $('#btn_arriba_1').removeClass('active');
+        $('#btn_arriba_2').addClass("active");    
+        
+        $('#tabs-icons-text-1').removeClass('show active');
+        $('#tabs-icons-text-2').addClass('show active');
+
+        $('#btn_arriba_2').removeClass("disabled");
+
+    }else{        
+        $('#btn_arriba_2').addClass('disabled'); 
+    }
+});
+
+$("#ant_form").on('click', function () {   
+    $('#guardar_registro').hide();
+    $('#sgt_form').show();
+    $('#ant_form').hide();
+    $('#btn_arriba_1').addClass('active');
+    $('#btn_arriba_2').removeClass("active");    
+    
+    $('#tabs-icons-text-1').addClass('show active');
+    $('#tabs-icons-text-2').removeClass('show active');
+});
+
+// ......................... :::: CONSULTAS RUC/DNI SUNAT :::::: .............................
 function cunsulta_sunat(){
     let id_documento        = $("#select_modal_tipoDocumento").val();
+    let modulo_txt          = $("#select_modal_tipoDocumento option:selected").text();
     let nro_document        = $('#numDocumentoInput').val();
 
     if (id_documento == 1) {
@@ -112,18 +211,23 @@ function cunsulta_sunat(){
             
         }else{
             //Cunsolta DNI a la sunat
+            $('#cargado_sunat').hide();
+            $('#cargando_sunat').show();
             $.get('/consultas/dni/'+nro_document, function(data){
                 data = JSON.parse(data);
+                $('#cargado_sunat').show();
+                $('#cargando_sunat').hide();
+
                 if (data['status'] == false) {
                     Swal.fire({
                         title: "Error",
-                        text: "No se puede consultar el DNI en este momento",
+                        text: "No se puede consultar este DNI",
                         timer: 2000,
                         icon: "error"
                     });
                 }else{
-                $('#nombre_razon_social_input').val(data.cliente['nombres']);
-                $('#nombre_comercial_input').val(data.cliente['apellido_paterno'] + ' '+ data.cliente['apellido_materno']);
+                $('#nombre_razon_social_input').val(data.cliente['name']);
+                $('#nombre_comercial_input').val(data.cliente['first_name'] + ' '+ data.cliente['last_name']);
                 }
             });
         }
@@ -139,12 +243,17 @@ function cunsulta_sunat(){
                 });
             } else {
                //Cunsolta RUC a la sunat
+            $('#cargado_sunat').hide();
+            $('#cargando_sunat').show();
             $.get('/consultas/ruc/'+nro_document, function(data){
                 data = JSON.parse(data);
-                if (data['status'] == false) {
+                $('#cargado_sunat').show();
+                $('#cargando_sunat').hide();
+
+                if (data['success'] == false) {
                     Swal.fire({
                         title: "Error",
-                        text: "No se puede consultar el RUC en este momento",
+                        text: "No se puede consultar este RUC",
                         timer: 2000,
                         icon: "error"
                     });
@@ -166,6 +275,7 @@ function cunsulta_sunat(){
         
     }
 
+    $('.tooltip').removeClass("show").addClass("hidde");
     // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
 }
 
@@ -232,7 +342,7 @@ function mostrar_one_registro(idregistro){
         $('#cobrar_input').val(data.registro['por_cobrar']);
         $('#conclusionessTextarea').val(data.registro['observacion']);
         $('#tabla_detalle_modulos').empty();//Limpiamos los registro de esa tabla
-
+        console.log(data.registro['idclientes']);
         for (let i = 0; i < data.cant_modulos; i++) {
             let id  = _id();
             let tr_detalle =    `<tr class="tr_detalle_modulos" id="tr_`+id+`">
@@ -248,7 +358,7 @@ function mostrar_one_registro(idregistro){
                                 </tr>`;
 
             $("#tabla_detalle_modulos").append(tr_detalle);
-            console.log(data.modulo[i].idmodulos);
+            //console.log(data.modulo[i].idmodulos);
         }
         
 
@@ -258,32 +368,36 @@ function mostrar_one_registro(idregistro){
             $('#select_modal_actividad').val(null).trigger('change');
         }
 
-        if (data.cotizacion['idcotizaciones']) {
-            $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
-        }else{
-            $('#select_modal_cotizacion').val(null).trigger('change');
-        }
         if (data.registro['idclientes']) {
             $('#select_modal_clientes').val(data.registro['idclientes']).trigger('change');
         }else{
             $('#select_modal_clientes').val(null).trigger('change');
         }
+
         if (data.registro['idmedios']) {
             $('#select_modal_medios').val(data.registro['idmedios']).trigger('change');
         }else{
             $('#select_modal_medios').val(null).trigger('change');
         }
+
         if (data.registro['ideventos']) {
-            $('#select_modal_eventos').val(data.registro['ideventos']).trigger('change');
+            $('#select_modal_evento').val(data.registro['ideventos']).trigger('change');
         }else{
-            $('#select_modal_eventos').val(null).trigger('change');
+            $('#select_modal_evento').val(null).trigger('change');
         }
+        
         if (data.registro['idpersonal']) {
             $('#select_modal_personal').val(data.registro['idpersonal']).trigger('change');
         }else{
             $('#select_modal_personal').val(null).trigger('change');
         }
-        
+
+        if (data.cotizacion['idcotizaciones']) {
+            $('#select_modal_cotizacion').val(data.cotizacion['idcotizaciones']).trigger('change');
+        }else{
+            $('#select_modal_cotizacion').val(null).trigger('change');
+        }
+       
     });
 }
 
@@ -327,8 +441,133 @@ function mostrar_seguimiento(idcliente){
     });
 }
 
-//Funciones para agregar los modulos con la cantidad de licencias xD
+//:::::.... Funciones de evento ....:::://
+function limpiar_evento_comercializacion(){
+    $('#ideventos').val("");
+    $('#nombre_input').val("");
+    $('#descripcion_input').val("");
+}
 
+function guardar_evento_comercializacion(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/evento/guardar',
+        'evento',
+        function(){ limpiar_evento_comercializacion(); },
+        function(){ console.log('Console Error'); }
+    );
+    $("#registroModalEvento").modal('hide');
+}
+
+//:::::.... Funciones de cotizacion ....:::://
+function limpiar_cotizacion_comercializacion(){
+    $('#idcotizaciones').val("");
+    $.get('/dashboard/cotizacion/generar', function(data){
+        data = JSON.parse(data);
+        $('#nombre_cotizacion').val(data);
+        nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modificar el campo
+    });
+    $('#ruta_cotizacion').val("");
+}
+
+function guardar_cotizacion_comercializacion(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/cotizacion/guardar',
+        'cotizacion',
+        function(){ limpiar_cotizacion_comercializacion();},
+        function(){ console.log('Console Error'); }
+    );
+    $("#registroModalCotizacion").modal('hide');
+}
+
+//:::::.... Funciones de personal ....:::://
+function guardar_personal_comercializacion(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/personal/guardar',
+        'personal',
+        function(){ limpiar_personal_comercializacion(); },
+        function(){ console.log('Console Error'); }
+    );
+
+    $("#registroModalPersonal").modal('hide');
+}
+
+function limpiar_personal_comercializacion(){
+    $('#idpersonal').val("");
+    $('#nombre_input').val("");
+    $('#apellido_input').val("");
+}
+
+//:::::.... Funciones de clientes/interesados ....:::://
+function guardar_interesado_comercializacion(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/guardar/interesados',
+        'clientes',
+        function(){ limpiar_interesado_comercializacion(); },
+        function(){ console.log('Console Error'); }
+    );
+    $("#modal_registro_interesado").modal('hide');
+}
+
+function limpiar_interesado_comercializacion(){ //Para limpIar los campos despues de registrar un interesado
+    $('#idclientes').val("");
+    $('#nombre_razon_social_input').val("");
+    $('#nombre_comercial_input').val("");
+    $('#numDocumentoInput').val("");
+    $('#InputCorreo1').val("");
+    $('#InputCorreo2').val("");
+    $('#InputCorreo3').val("");
+    $('#number_empresa_input').val("");
+    $('#number_contacto_input').val("");
+    $('#number_otro_input').val("");
+    //$('#select_modal_tipoPersona').val("2");
+    $('#select_modal_giroNegocio').val(null).trigger('change');
+    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
+}
+
+//:::::.... Funciones de actividad ....:::://
+function limpiar_actividad_comercializacion(){
+    $('#idactividad').val("");
+    $('#nombre_input').val("");
+}
+
+function guardar_actividad_comercializacion(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/actividad/guardar',
+        'actividad',
+        function(){ limpiar_actividad_comercializacion(); },
+        function(){ console.log('Console Error'); }
+    );
+
+    // $("#registroModalActividad").modal('hide');
+}
+
+//:::::.... Funciones de medios ....:::://
+function guardar_medio(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/medio/guardar',
+        'medios',
+        function(){ limpiar_medio(); },
+        function(){ console.log('Console Error'); }
+    );
+
+    $("#registroModalMedio").modal('hide');
+}
+
+function limpiar_medio(){
+    $('#idmedios').val("");
+    $('#nombre_input').val("");
+}
+
+
+
+
+//Funciones para agregar los modulos con la cantidad de licencias xD
 function add_detalle() { //crea una fila con el nombre del modulo y la cantidad de licencias
 
     //declaramos las variables
@@ -339,7 +578,7 @@ function add_detalle() { //crea una fila con el nombre del modulo y la cantidad 
 
     console.log(idmodulo);
     console.log(cant_licencias);
-
+    
     if (validar_detalle(idmodulo, cant_licencias)) { //llamamos a la funcion validar_detalle()
 
         let tr_detalle = _tr('detalle_modulos', id, //creamos un tr con el id aleatorio
@@ -349,6 +588,9 @@ function add_detalle() { //crea una fila con el nombre del modulo y la cantidad 
          );
 
         $("#tabla_detalle_modulos").append(tr_detalle);//adjuntamos el registro a la tabla_detalle_modulos
+        //limpiamos los campos modulo y cant.licencias
+        $("#select_modal_modulos").val("").trigger('change');
+        $("#cant_licencias").val('')
     }
 
 }
@@ -358,24 +600,25 @@ function validar_detalle(idmodulo, cant_licencias) {//aegura que no registre un 
     let flat_idturno = false;
     let flat_cant_licencias = false;
 
-    if (cant_licencias) {
+    if (cant_licencias > 0) {
         flat_cant_licencias = true;
         $("#cant_licencias").removeClass("is-invalid");
     }else{
-        Toast.fire({
-            type: 'error',
-            title: 'Cantidad invalida'
-          })
-
+        Swal.fire({
+            icon: "error",
+            title: "Cantidad invalida",
+            timer: 2000,
+            type: "error"
+        });
         $("#cant_licencias").addClass("is-invalid");
     }
 
-    if (!_validate_exist_array(idmodulo)) {//si existe el detalle, nos da una alerta
+    if (!_validate_exist_array(idmodulo) && idmodulo != null ) {//si existe el detalle, nos da una alerta
         flat_idturno = true;
     }else{
         Swal.fire({
             icon: "error",
-            title: "Ya existe este modulo",
+            title: "Seleccione un modulo o el modulo ya existe",
             timer: 2000,
             type: "error"
         });

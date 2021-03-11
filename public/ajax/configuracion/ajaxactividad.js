@@ -4,7 +4,6 @@ function init(){
 
     $('#formulario_actividad').on("submit", function(e){
         guardar_actividad(e);
-        lista_select2('/dashboard/listas/actividad', 'actividad', null);
     })
 
 }
@@ -25,7 +24,7 @@ function activar_actividad(idactividad){
 }
 
 function mostrar_one_actividad(idactividad){
-    $("#registroModalActividad").modal('show');
+    $("#modal_actividad").modal('show');
     $.get('/dashboard/mostrar/actividad/'+ idactividad, function(data){
         data = JSON.parse(data);
         $("#idactividad").val(data.actividad['idactividad']);

@@ -67,7 +67,7 @@ class ActividadController extends Controller
                 'nombre' => $nombre_input,
                 ]);
             
-            return json_encode(['status' => true, 'message' => 'Éxito se registro la actividad']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro la actividad','id'=>$actividad->idactividad]);
         }
     }
 

@@ -81,7 +81,7 @@ class CotizacionController extends Controller
                 'ruta' => $ruta_cotizacion
             ]);
             
-            return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion', 'id' => $cotizacion->idcotizaciones]);
         }
         
     }

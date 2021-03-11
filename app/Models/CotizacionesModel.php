@@ -14,4 +14,7 @@ class CotizacionesModel extends Model
     public function ComprasModel(){
         return $this->belongsTo('App\Models\ComprasModel', 'idcompras');
     }
+    public function cotizacion_comercializacion(){
+        return $this->belongsTo('App\Models\CotizacionComercializacionModel', 'idcotizaciones');
+    }
 }

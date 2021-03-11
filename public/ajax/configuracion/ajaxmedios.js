@@ -3,7 +3,6 @@ function init(){
 
     $("#formulario_medios").on("submit", function(e) {
         guardar_evento(e);
-        lista_select2('/dashboard/listas/medios', 'medios', null);
     });
 
 }
@@ -34,7 +33,7 @@ function guardar_evento(e){
         function(){ console.log('Console Error'); }
     );
 
-    $("#registroModalMedio").modal('hide');
+    // $("#registroModalMedio").modal('hide');
 }
 
 function limpiar_medio(){
@@ -43,7 +42,7 @@ function limpiar_medio(){
 }
 
 function mostrar_one_medio(idmedios){
-    $("#registroModalMedio").modal('show');
+    $("#modal_medios").modal('show');
     $.get('/dashboard/mostrar/medio/'+idmedios , function (data){
         data = JSON.parse(data);
         //console.log(data.cliente);  

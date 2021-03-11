@@ -69,7 +69,7 @@ class MediosController extends Controller
                 'nombre' => $nombre_input,
                 ]);
             
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el medio']);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el medio','id'=>$medio->idmedios]);
         }
         
     }

@@ -54,7 +54,7 @@ class ComercializacionController extends Controller
         $cant_licencias_modulo          = $request->input('licencias');
         $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
         $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
-        $select_modal_eventos           = $request->input('select_modal_eventos');
+        $select_modal_eventos           = $request->input('select_modal_evento');
         $example_date_input             = $request->input('example_date_input');//fecha evento 
         $evento_input                   = $request->input('evento_input');
         $select_modal_cotizacion        = $request->input('select_modal_cotizacion');
@@ -64,13 +64,15 @@ class ComercializacionController extends Controller
         $cobrar_input                   = $request->input('cobrar_input');
         $conclusionessTextarea          = $request->input('conclusionessTextarea');
 
-        //return json_encode($cant_licencias_modulo);
+        //return json_encode($select_modal_cotizacion);
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
             $modulo = ModuloComercializacionModel::where('idcomercializacion', $idcomercializacion )->get();
             $cant_modulos = count($modulo);
-            // return json_encode($modulo);
+            $cotizacion = CotizacionComercializacionModel::where('idcomercializacion' ,$idcomercializacion )->get();
+            $cant_cotizacion = count($cotizacion);
+            //return json_encode(count($cotizacion));
 
             foreach ($modulo as $i => $value) {
                 $modulo[$i]->estado = 1;
@@ -94,13 +96,24 @@ class ComercializacionController extends Controller
                 $registro->observacion          = $conclusionessTextarea;
                 
                 //Registra los modulos en la tabla modulo_comercializacion
-                foreach ($select_modal_modulos as $i => $value) {
-                    $modulo_comercializacion = ModuloComercializacionModel::create([
-                    'idcomercializacion' => $idcomercializacion,
-                    'idmodulos' => $select_modal_modulos[$i],
-                    'cant_licencias' => $cant_licencias_modulo[$i]
-                    ]);    
+
+                if ($cant_licencias_modulo != null) {
+                    foreach ($select_modal_modulos as $i => $value) {
+                        $modulo_comercializacion = ModuloComercializacionModel::create([
+                        'idcomercializacion' => $idcomercializacion,
+                        'idmodulos' => $select_modal_modulos[$i],
+                        'cant_licencias' => $cant_licencias_modulo[$i]
+                        ]);    
+                    }
                 }
+
+                if ($cant_cotizacion != 0) {
+                    $cotizacion->idcotizaciones = $select_modal_cotizacion;
+                    $cotizacion->save();
+                }else{
+
+                }
+                
                 $registro->save();
 
             }
@@ -137,18 +150,22 @@ class ComercializacionController extends Controller
             //dd($ultimo_registro);
             
             //Registra los modulos en la tabla modulo_comercializacion
-            foreach ($select_modal_modulos as $i => $value) {
-                $modulo_comercializacion = ModuloComercializacionModel::create([
-                    'idcomercializacion' => $ultimo_registro->idcomercializacion,
-                    'idmodulos' => $select_modal_modulos[$i],
-                    'cant_licencias' => $cant_licencias_modulo[$i]
-                ]);    
+            if ($select_modal_modulos != null) {
+                foreach ($select_modal_modulos as $i => $value) {
+                    $modulo_comercializacion = ModuloComercializacionModel::create([
+                        'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                        'idmodulos' => $select_modal_modulos[$i],
+                        'cant_licencias' => $cant_licencias_modulo[$i]
+                    ]);    
+                }
             }
             
-            $cotizacion_comercializacion = CotizacionComercializacionModel::create([
-                'idcomercializacion' => $ultimo_registro->idcomercializacion,
-                'idcotizaciones' => $select_modal_cotizacion
-            ]);
+            if ($select_modal_cotizacion != null) {
+                $cotizacion_comercializacion = CotizacionComercializacionModel::create([
+                    'idcomercializacion' => $ultimo_registro->idcomercializacion,
+                    'idcotizaciones' => $select_modal_cotizacion
+                ]);
+            }
             
             return json_encode(['status' => true, 'message' => 'Éxito se registro la comercializacion']);
         }
@@ -165,7 +182,7 @@ class ComercializacionController extends Controller
         $cant_licencias_modulo          = $request->input('licencias');
         $persona_atencion_input         = $request->input('persona_atencion_input');//Este campo no esta en la tabla comercializacion
         $llamadaDetTextarea             = $request->input('llamadaDetTextarea');
-        $select_modal_eventos           = $request->input('select_modal_eventos');
+        $select_modal_eventos           = $request->input('select_modal_evento');
         $example_date_input             = $request->input('example_date_input');//fecha evento 
         $evento_input                   = $request->input('evento_input');
         $select_modal_cotizacion        = $request->input('select_modal_cotizacion');
@@ -250,7 +267,7 @@ class ComercializacionController extends Controller
             'ruta' => $ruta_cotizacion
         ]);
         
-        return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion']);
+        return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion', 'id' => $cotizacion->idcotizaciones]);
     }
 
     public function activar($idcomercializacion){
@@ -279,12 +296,11 @@ class ComercializacionController extends Controller
     public function detalle_registro($idcomercializacion){
         $det_registro = ComercializacionModel::with('clientes', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
         $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->where('estado', '=', 0)->get(); 
+        $cotizacion = CotizacionComercializacionModel::with('cotizacion')->where('idcomercializacion', $idcomercializacion)->first();
         $cant_modulos = \count($det_modulo);
         
-        //$modulos = $det_modulo;
-        //$modulos = ['registro'=>$det_modulo];
-        //return \json_encode($cant_modulos);
-        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo','cant_modulos') );
+        //return \json_encode($cotizacion);
+        return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo','cant_modulos', 'cotizacion') );
     }
 
     public function ultimo_cliente(){

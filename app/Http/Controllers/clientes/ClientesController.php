@@ -123,7 +123,7 @@ class ClientesController extends Controller
                 'tipo_persona' => $tipoPersonaSelect
                 ]);
                 
-                return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa']);
+                return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa', 'id' => $usuario->idclientes]);
         }
 
     }

@@ -11,7 +11,7 @@
             </form>
         </div>
         <div class="col-4 text-right">
-            <a type="button" href="#" onclick="limpiar_medio();" class="btn btn btn-primary" data-toggle="modal" data-target="#registroModalMedio"><i class="fas fa-plus-circle"></i> Agregar medio</a>
+            <a type="button" href="#" onclick="limpiar_medio();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_medios"><i class="fas fa-plus-circle"></i> Agregar medio</a>
         </div>
     </div>
 </div>

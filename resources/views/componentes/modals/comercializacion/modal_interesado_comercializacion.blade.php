@@ -1,4 +1,5 @@
-<div class="modal fade" id="registroModalInteresado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- ================================= MODAL Registro Interesado ================================= -->
+<div class="modal fade" id="modal_registro_interesado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <!-- ================================= MODAL TITULO ================================= -->
@@ -7,13 +8,13 @@
                     Agregar Interesado
                     <i style="font-size: 24px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_edit"></i>
                 </h5>
-                <button onclick="limpiar_interesado();" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button onclick="limpiar_interesado_comercializacion();" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
                 </button>
             </div>
 
             <!-- ================================= MODAL CUERPO ================================= -->
-            <form id="formulario_registro_interesado" method="POST">
+            <form id="formulario_clientes" method="POST">
                 @csrf
                 <div class="modal-body" style="padding-bottom: 0px !important;">
                     <div class="row">
@@ -38,7 +39,7 @@
                                     --}}
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="select_modal_tipoDocumento">Tipo documento</label>
+                                            <label class="form-control-label" for="select_modal_tipoDocumento">Tipo documento</label>
                                             <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="" required>
                                                 <option disabled>Seleccione</option>
                                                 <option value="1">DNI</option>
@@ -59,7 +60,7 @@
                                     </div>--}}
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="numDocumentoInput">Numero documento</label>
+                                            <label class="form-control-label" for="numDocumentoInput">Numero documento</label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="far fa-id-badge"></i></span>
@@ -67,20 +68,21 @@
                                                 <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero" required />
                                                 <span class="input-group-addon input-group-append">
                                                     <button class="btn btn-default" type="button" id="button-addon2" onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta SUNAT">
-                                                        <i class="fas fa-angle-right"></i>
+                                                        <i class="fas fa-angle-right" id="cargado_sunat"></i>
+                                                        <i style="font-size: 24px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_sunat"></i> 
                                                     </button>
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-4">
-                                        <label for="select_modal_giroNegocio">Giro de negocio</label>
+                                        <label class="form-control-label" for="select_modal_giroNegocio">Giro de negocio</label>
                                         <div class="input-group">
                                             <select style="color: black !important; font-weight: bold !important;" class="form-control" data-toggle="" id="select_modal_giroNegocio" name="select_modal_giroNegocio" required>
                                                 {{-- AQUI VAN LOS "OPTIONS" --}}
                                             </select>
                                             <span class="input-group-addon input-group-append" data-toggle="tooltip" data-placement="top" title="Crear nuevo giro negocio">
-                                                <button class="btn btn-default" type="button" id="button-addon2" onclick="limpiar_evento();" data-toggle="modal" data-target="#registroModalGiroNegocio" >
+                                                <button class="btn btn-default" type="button" id="button-addon2" onclick="" data-toggle="modal" data-target="#registroModalGiroNegocio" >
                                                     <i class="fas fa-plus-circle"></i>
                                                 </button>
                                             </span>
@@ -96,42 +98,43 @@
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                                 </div>
-                                                <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" />
+                                                <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" autocomplete="off"/>
                                                 <div class="invalid-feedback">Por Favor escriba un nombre valido</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="nombre_comercial_input">Apellidos/Nombre comercial</label>
+                                            <label class="form-control-label" for="nombre_comercial_input">Apellidos/Nombre comercial</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                                 </div>
-                                                <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" />
+                                                <input style="color: black !important; font-weight: bold !important;" type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" autocomplete="off" />
                                                 <div class="invalid-feedback">Por Favor escriba un apellido valido</div>
                                             </div>
                                         </div>
                                         {{-- <button type="button" class="btn btn-sm btn-secondary btn-tooltip" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom" data-container="body" data-animation="true">Secondary</button> --}}
                                     </div>
+                                     
                                 </div>
 
                                 <div class="row">
                                     <div class="col-4">
                                         <div class="form-group">
-                                            <label for="number-empresa-input">Telefono empresa</label>
+                                            <label class="form-control-label" for="number-empresa-input">Telefono empresa</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                                 </div>
-                                                <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" />
+                                                <input style="color: black !important; font-weight: bold !important;" class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" autocomplete="off"/>
                                                 <div class="invalid-feedback">Por Favor escriba un numero valido</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-8">
                                         <div class="form-group">
-                                            <label for="exampleFormControlInput1">Correo 1 </label>
+                                            <label class="form-control-label" for="exampleFormControlInput1">Correo 1 </label>
                                             <div class="input-group input-group-merge">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-at"></i></span>
@@ -139,6 +142,7 @@
                                                 <input style="color: black !important; font-weight: bold !important;" type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" required />
                                             </div>
                                         </div>
+                                        
                                     </div>
 
                                     {{--
@@ -210,6 +214,7 @@
                 <div class="modal-footer">
                     {{-- <button type="submit" class="btn btn-success"></button> --}}
                     <button type="submit" class="btn btn-outline-success">
+                        
                         <i style="font-size: 20px;" class="far fa-save"> </i> Guardar Interesado
                     </button>
                 </div>
