@@ -80,8 +80,8 @@ class ClientesController extends Controller
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
         $GiroNegocioSelect              = $request->input('select_modal_giro_negocio');
         $tipoPersonaSelect              = $request->input('select_modal_tipoPersona');
-        $tipoDocSelect                  = $request->input('select_modal_tipoDocumento');
-        $numDocumentoInput              = $request->input('numDocumentoInput');
+        $tipoDocSelect                  = $request->input('select_modal_tipo_doc');
+        $nro_documento              = $request->input('nro_documento');
         $InputCorreo1                   = $request->input('InputCorreo1');
         $InputCorreo2                   = $request->input('InputCorreo2');
         $InputCorreo3                   = $request->input('InputCorreo3');
@@ -95,7 +95,7 @@ class ClientesController extends Controller
 
             try {
                 $interesado->tipo_documento = $tipoDocSelect;
-                $interesado->nro_documento = $numDocumentoInput;
+                $interesado->nro_documento = $nro_documento;
                 $interesado->nombres_razon_social = $nombre_razon_social_input;
                 $interesado->apellidos_nombre_comercial = $nombre_comercial_input;
                 $interesado->correo_1 = $InputCorreo1;
@@ -119,7 +119,7 @@ class ClientesController extends Controller
         }else{
             $usuario = ClientesModel::create(
                 ['tipo_documento' => $tipoDocSelect,
-                'nro_documento' => $numDocumentoInput,
+                'nro_documento' => $nro_documento,
                 'nombres_razon_social' => $nombre_razon_social_input,
                 'apellidos_nombre_comercial' => $nombre_comercial_input,
                 'correo_1' => $InputCorreo1,
@@ -143,8 +143,8 @@ class ClientesController extends Controller
         $nombre_comercial_input         = $request->input('nombre_comercial_input');
         $GiroNegocioSelect              = $request->input('select_modal_giroNegocio');
         $tipoPersonaSelect              = $request->input('select_modal_tipoPersona');
-        $tipoDocSelect                  = $request->input('select_modal_tipoDocumento');
-        $numDocumentoInput              = $request->input('numDocumentoInput');
+        $tipoDocSelect                  = $request->input('select_modal_tipo_doc');
+        $nro_documento              = $request->input('nro_documento');
         $InputCorreo1                   = $request->input('InputCorreo1');
         $InputCorreo2                   = $request->input('InputCorreo2');
         $InputCorreo3                   = $request->input('InputCorreo3');
@@ -156,7 +156,7 @@ class ClientesController extends Controller
 
         try {
             $usuario->tipo_documento = $tipoDocSelect;
-            $usuario->nro_documento = $numDocumentoInput;
+            $usuario->nro_documento = $nro_documento;
             $usuario->nombres_razon_social = $nombre_razon_social_input;
             $usuario->apellidos_nombre_comercial = $nombre_comercial_input;
             $usuario->correo_1 = $InputCorreo1;

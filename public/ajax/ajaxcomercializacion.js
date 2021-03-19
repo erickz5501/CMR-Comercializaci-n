@@ -39,12 +39,16 @@ function init(){
     $("#guardar_registro_cotiza_comercia").on('click', function(e){ $("#formulario_cotizacion_comercializacion").submit(); });
     $("#formulario_cotizacion_comercializacion").on("submit", function(e){ agregar_cotizacion_comercializacion(e); });
 
-    $("#guardar_registro_seguimiento").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit(); });guardar_registro_seguimiento
+    $("#guardar_registro_seguimiento").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit(); });
     $("#formulario_comercializacion_seguimiento").on("submit", function(e) { guardar_registro_seguimiento(e); });
 
-    document.getElementById("generar_n_comercializacion").onclick =  function(e){
-        guardar_nuevo_registro(e);
-    }
+    $("#generar_n_comercializacion").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit();  });
+    // document.getElementById("guardar_registro_seguimiento").onclick =  function(e){
+    //     guardar_registro(e);
+    // }
+    // document.getElementById("generar_n_comercializacion").onclick =  function(e){
+    //     guardar_nuevo_registro(e);
+    // }
 
     // listamos los grupos para el SELECT
     $('#select_modal_actividad').select2({
@@ -103,7 +107,7 @@ function init(){
         width: 'auto',
 		dropdownAutoWidth: true,
     });
-    $('#select_modal_tipoDocumento').select2({
+    $('#select_modal_tipo_doc').select2({
         theme: 'bootstrap4',
         placeholder: 'Seleccione',
         allowClear: true,
@@ -131,7 +135,7 @@ function init(){
     lista_select2('/dashboard/listas/actividad', 'actividad', null);
 
 }
-
+//
 // PAGINAMOS LA TABLA RUBOS
 // $(document).on("click",'.pagination a',function(e){
 //     e.preventDefault();
@@ -238,9 +242,9 @@ $("#ant_form").on('click', function () {
 
 // ......................... :::: CONSULTAS RUC/DNI SUNAT :::::: .............................
 function cunsulta_sunat(){
-    let id_documento        = $("#select_modal_tipoDocumento").val();
-    let modulo_txt          = $("#select_modal_tipoDocumento option:selected").text();
-    let nro_document        = $('#numDocumentoInput').val();
+    let id_documento        = $("#select_modal_tipo_doc").val();
+    let modulo_txt          = $("#select_modal_tipo_doc option:selected").text();
+    let nro_document        = $('#nro_documento').val();
 
     if (id_documento == 1) {
 
@@ -414,6 +418,7 @@ function mostrar_one_registro(idregistro){
     $('#guardar_registro_seguimiento').hide();
 
     $("#modal_comercializacion").modal('show');
+    $("#modal_comercializacion_seguimiento").modal('show');
 
     $.get('/dashboard/mostrar/comercializacion/'+idregistro , function (data){
 
@@ -635,7 +640,7 @@ function limpiar_interesado_comercializacion(){ //Para limpIar los campos despue
     $('#idclientes').val("");
     $('#nombre_razon_social_input').val("");
     $('#nombre_comercial_input').val("");
-    $('#numDocumentoInput').val("");
+    $('#nro_documento').val("");
     $('#InputCorreo1').val("");
     $('#InputCorreo2').val("");
     $('#InputCorreo3').val("");
@@ -644,7 +649,7 @@ function limpiar_interesado_comercializacion(){ //Para limpIar los campos despue
     $('#number_otro_input').val("");
     //$('#select_modal_tipoPersona').val("2");
     $('#select_modal_giroNegocio').val(null).trigger('change');
-    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
+    $('#select_modal_tipo_doc').val("Seleccione").trigger('change');
 }
 
 //:::::.... Funciones de actividad ....:::://

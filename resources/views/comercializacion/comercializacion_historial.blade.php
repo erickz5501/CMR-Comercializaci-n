@@ -206,7 +206,7 @@
                                     <label for="select_modal_clientes"> <sup class="text-danger font-weight-bold">*</sup> Actividad </label>
                                     <div class="form-group">
                                         <div class="input-group" id="datetimepicker1">
-                                            <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_actividad" name="select_modal_actividad" data-toggle="" required> </select>
+                                            <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_actividad" name="select_modal_actividad" data-toggle="" > </select>
                                             <span class="input-group-addon input-group-append">
                                                 <button class="btn btn-default" type="button" onclick="modal_actividad();" data-toggle="tooltip" data-html="true" title="Agregar una actividad.">
                                                     <i class="fas fa-plus-circle"></i>
@@ -223,7 +223,7 @@
                                     <label for="select_modal_medios"><sup class="text-danger font-weight-bold">*</sup> Medio de contacto</label>
                                     <div class="form-group">
                                         <div class="input-group" >
-                                            <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="" required> </select>
+                                            <select style="color: rgb(0, 0, 0) !important; font-weight: bold !important;" class="form-control" id="select_modal_medios" name="select_modal_medios" data-toggle="" > </select>
                                             <span class="input-group-addon input-group-append">
                                                 <button class="btn btn-default" type="button" onclick="modal_medios();" data-toggle="tooltip" data-html="true" title="Agregar un medio.">
                                                     <i class="fas fa-plus-circle"></i>
@@ -313,7 +313,7 @@
                                     <label for="select_modal_clientes">Evento</label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select class="form-control" id="select_modal_evento" name="select_modal_evento" data-toggle="" required style="color: black !important; font-weight: bold !important;"> </select>
+                                            <select class="form-control" id="select_modal_evento" name="select_modal_evento" data-toggle=""  style="color: black !important; font-weight: bold !important;"> </select>
                                             <span class="input-group-addon input-group-append">
                                                 <button class="btn btn-default" type="button" onclick="modal_evento();" data-toggle="tooltip" data-html="true" title="Agregar un evento.">
                                                     <i class="fas fa-plus-circle"></i>
@@ -327,7 +327,7 @@
                                 <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-8">
                                     <div class="form-group">
                                         <label for="eventoTextarea">Detalle evento</label>
-                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="evento_input" name="evento_input" placeholder="Detalle evento" required />
+                                        <input style="color: black !important; font-weight: bold !important;" class="form-control" type="text" id="evento_input" name="evento_input" placeholder="Detalle evento"  />
                                         {{-- <textarea class="form-control" id="eventoTextarea" name="eventoTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea> --}}
                                     </div>
                                 </div>
@@ -345,7 +345,7 @@
                                     <label for="select_modal_clientes">Cotización</label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion" required style="color: black !important; font-weight: bold !important;"> </select>
+                                            <select class="form-control" id="select_modal_cotizacion" name="select_modal_cotizacion"  style="color: black !important; font-weight: bold !important;"> </select>
                                             <span class="input-group-addon input-group-append">
                                                 <button class="btn btn-default" type="button" data-toggle="tooltip" data-html="true" title="Agregar nueva cotización." onclick="modal_cotizacion();">
                                                     <i class="fas fa-plus-circle"></i>
@@ -360,7 +360,7 @@
                                     <label for="select_modal_clientes">Personal</label>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle="" required style="color: black !important; font-weight: bold !important;"> </select>
+                                            <select class="form-control" id="select_modal_personal" name="select_modal_personal" data-toggle=""  style="color: black !important; font-weight: bold !important;"> </select>
                                             <span class="input-group-addon input-group-append">
                                                 <button class="btn btn-default" type="button" onclick="modal_personal();" data-toggle="tooltip" data-html="true" title="Agregar nuevo personal.">
                                                     <i class="fas fa-plus-circle"></i>
@@ -394,7 +394,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" style="display: none;"></button>
+                    {{-- <button type="submit" style="display: none;"></button> --}}
+
                 </form>
             </div>
 
@@ -405,9 +406,9 @@
 
                 <button class="btn btn-primary" id="ant_form" aria-selected="false"><i class="fas fa-paperclip"></i> Anterior</button>
 
-                <button type="submit" class="btn btn-warning" id="generar_n_comercializacion" style="align-items: left !important;"><i class="fas fa-plus"> </i> Generar registro</button>
+                <button  class="btn btn-warning" id="generar_n_comercializacion" style="align-items: left !important;"><i class="fas fa-plus"> </i> Generar registro</button>
 
-                <button type="submit" class="btn btn-success" id="guardar_registro_seguimiento"><i class="far fa-save"> </i> Guardar registro</button>
+                <button  class="btn btn-success" id="guardar_registro_seguimiento"><i class="far fa-save"> </i> Guardar registro</button>
 
             </div>
         </div>
@@ -455,11 +456,11 @@
                         <input type="hidden" id="select_modal_tipoPersona" name="select_modal_tipoPersona" value="1" />
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="select_modal_tipoDocumento">
+                                <label class="form-control-label" for="select_modal_tipo_doc">
                                     <sup class="text-danger font-weight-bold">*</sup>
                                     Tipo documento
                                 </label>
-                                <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle=""  >
+                                <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipo_doc" name="select_modal_tipo_doc" data-toggle=""  >
 
                                     <option value="1">DNI</option>
                                     <option value="2">RUC</option>
@@ -469,7 +470,7 @@
 
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                             <div class="form-group">
-                                <label class="form-control-label" for="numDocumentoInput">
+                                <label class="form-control-label" for="nro_documento">
                                     <sup class="text-danger font-weight-bold">*</sup>
                                     Numero documento
                                 </label>
@@ -477,7 +478,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                     </div>
-                                    <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero"   />
+                                    <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="nro_documento" name="nro_documento" placeholder="numero"   />
                                     <span class="input-group-addon input-group-append">
                                         <button class="btn btn-default" type="button"  onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta RENIEC/SUNAT">
                                             <i class="fas fa-angle-right" id="cargado_sunat"></i>

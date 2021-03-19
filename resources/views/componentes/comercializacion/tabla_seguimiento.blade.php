@@ -48,22 +48,22 @@
                             <i style="font-size: 17px !important" class="far fa-file-pdf"></i>
                         </button>
 
-                        <button onclick="mostrar_one_registro( {{$seguimiento->idcomercializacion}} );" type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-html="true" title="Editar o duplicar registro.">
+                        <button onclick="mostrar_one_registro( '{{$seguimiento->idcomercializacion}}' );" type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-html="true" title="Editar o duplicar registro.">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
 
-                        <button onclick="detalle_registro({{$seguimiento->idcomercializacion}});" type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-html="true" title="Ver detalle registro.">
+                        <button onclick="detalle_registro('{{$seguimiento->idcomercializacion}}');" type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-html="true" title="Ver detalle registro.">
                             <i class="fas fa-eye"></i>
                         </button>
 
                         @if ($seguimiento->estado == 0)
 
-                            <button onclick="desactivar_registro( {{$seguimiento->idcomercializacion}}, {{$seguimiento->idclientes}} );" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-html="true" title="Desactivar">
+                            <button onclick="desactivar_registro( '{{$seguimiento->idcomercializacion}}', '{{$seguimiento->idclientes}}' );" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-html="true" title="Desactivar">
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         @else
 
-                            <button onclick="activar_registro( {{$seguimiento->idcomercializacion}}, {{$seguimiento->idclientes}} );" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-html="true" title="Activar">
+                            <button onclick="activar_registro( '{{$seguimiento->idcomercializacion}}', '{{$seguimiento->idclientes}}' );" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-html="true" title="Activar">
                                 <i class="fas fa-check"></i>
                             </button>
                         @endif

@@ -331,9 +331,9 @@
 
                     <button class="btn btn-primary" id="ant_form" aria-selected="false"><i class="fas fa-paperclip"></i> Anterior</button>
 
-                    <button type="submit" class="btn btn-warning" id="generar_n_comercializacion" style="align-items: left !important;"><i class="fas fa-plus"> </i> Generar registro</button>
+                    <button   class="btn btn-warning" id="generar_n_comercializacion" style="align-items: left !important;"><i class="fas fa-plus"> </i> Generar registro</button>
 
-                    <button type="submit" class="btn btn-success" id="guardar_registro"><i class="far fa-save"> </i> Guardar registro</button>
+                    <button   class="btn btn-success" id="guardar_registro"><i class="far fa-save"> </i> Guardar registro</button>
 
                 </div>
             </div>
@@ -381,11 +381,11 @@
                             <input type="hidden" id="select_modal_tipoPersona" name="select_modal_tipoPersona" value="1" />
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="select_modal_tipoDocumento">
+                                    <label class="form-control-label" for="select_modal_tipo_doc">
                                         <sup class="text-danger font-weight-bold">*</sup>
                                         Tipo documento
                                     </label>
-                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle=""  >
+                                    <select style="color: black !important; font-weight: bold !important;" class="form-control" id="select_modal_tipo_doc" name="select_modal_tipo_doc" data-toggle=""  >
 
                                         <option value="1">DNI</option>
                                         <option value="2">RUC</option>
@@ -395,7 +395,7 @@
 
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="numDocumentoInput">
+                                    <label class="form-control-label" for="nro_documento">
                                         <sup class="text-danger font-weight-bold">*</sup>
                                         Numero documento
                                     </label>
@@ -403,7 +403,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                         </div>
-                                        <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero"   />
+                                        <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="nro_documento" name="nro_documento" placeholder="numero"   />
                                         <span class="input-group-addon input-group-append">
                                             <button class="btn btn-default" type="button"  onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta RENIEC/SUNAT">
                                                 <i class="fas fa-angle-right" id="cargado_sunat"></i>
