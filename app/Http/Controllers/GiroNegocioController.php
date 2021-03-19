@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\GiroNegocioModel;
 use App\Http\Requests\EventosRequest;
+use App\Http\Requests\GiroNegocioRequest;
 use Exception;
 
 class GiroNegocioController extends Controller
@@ -42,15 +43,15 @@ class GiroNegocioController extends Controller
         return json_encode(['status' => true, 'message' => 'Se ah activado el giro de negocio']);
     }
 
-    public function createNegocio(EventosRequest $request){
-        $idgiro_negocio           = $request->input('idgiro_negocio');
-        $nombre_input             = $request->input('nombre_input');
+    public function createNegocio(GiroNegocioRequest $request){
+        $idgiro_negocio        = $request->input('idgiro_negocio');
+        $nombre_giro_negocio   = $request->input('nombre_giro_negocio');
 
         if ($idgiro_negocio != "") {
             $negocio = GiroNegocioModel::find($idgiro_negocio);
 
             try{
-                $negocio->nombre = $nombre_input;
+                $negocio->nombre = $nombre_giro_negocio;
 
                 $negocio->save();
             }
@@ -58,12 +59,12 @@ class GiroNegocioController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el giro de negocio']);
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo el giro de negocio']);
 
         } else {
             $giro_negocio = GiroNegocioModel::create(
                 [
-                'nombre' => $nombre_input,
+                'nombre' => $nombre_giro_negocio,
                 ]);
 
             return json_encode(['status' => true, 'message' => 'Éxito se registro el giro de negocio', 'id'=>$giro_negocio->idgiro_negocio]);
@@ -72,9 +73,10 @@ class GiroNegocioController extends Controller
     }
 
     public function DetalleNegocio($idgiro){
-        $det_evento = GiroNegocioModel::where('idgiro_negocio', $idgiro)->first();
 
-        return json_encode(['evento' => $det_evento]);
+        $evento = GiroNegocioModel::where('idgiro_negocio', $idgiro)->first();
+
+        return json_encode($evento);
     }
 
 }

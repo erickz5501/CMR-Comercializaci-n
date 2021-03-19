@@ -24,7 +24,14 @@ class EventosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_evento' => 'required|min:3|max:45',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre_evento.required' => 'Asegurese de escribir el nombre del MÓDULO',
         ];
     }
 }

@@ -10,9 +10,9 @@ use App\Models\CorrelativoModel;
 use App\Models\CotizacionesModel;
 use App\Models\CotizacionComercializacionModel;
 use App\Models\ClientesModel;
-use App\Models\comercializacion\ModuloComercializacionModel;
 use App\Http\Requests\ComercializacionRequest;
 use App\Http\Requests\CotizacionRequest;
+use App\Models\ModuloComercializacionModel;
 use Exception;
 
 class ComercializacionController extends Controller
@@ -22,21 +22,54 @@ class ComercializacionController extends Controller
     }
 
     public function indexLista(){
-        $comercio = ComercializacionModel::with('clientes')->get()->groupBy('idclientes');
-        //$comercio = $comercios->groupBy('idclientes');
-        //return json_encode($comercio);
-        return view('componentes.comercializacion.tabla_comercializacion', compact('comercio'));
+
+            $comercializaciones = ClientesModel::with('ModeloComercializaciones','gironegocio')
+                                                ->where(function($query){
+                                                    return $query->orWhereHas('ModeloComercializaciones', function ($query){
+                                                        return $query->where('idcomercializacion', '>', '0');
+                                                    });
+                                                })
+                                                ->orderBy('created_at', 'DESC')
+                                                ->get();
+        // return json_encode($comercializaciones);
+        return view('componentes.comercializacion.tabla_comercializacion', compact('comercializaciones'));
     }
 
-    // public function indexregistro(){
-    //     return view('comercializacion.comercializacion_historial');
-    // }
+    public function mostrar_seguimiento($idcliente){//Lista de comercializacion de un cliente/iteresado
 
-    public function indexlistaregistro($idcliente){//Lista de comercializacion de un cliente/iteresado
-        $comercio = ComercializacionModel::with('clientes')->where('idclientes', $idcliente)->get();
-        //return json_encode($comercio);
-        return view('componentes.comercializacion.tabla_comercializacion_historial', compact('comercio'));
+        $seguimientos = ComercializacionModel::with('ModeloCliente.gironegocio','medio')
+                                        ->where('idclientes', $idcliente)
+                                        ->orderBy('created_at', 'DESC')
+                                        ->get();
+
+        // return json_encode($seguimientos);
+        return view('comercializacion.comercializacion_historial', compact('seguimientos'));
     }
+
+    public function recargar_tabla_seguimiento($id_idclientes,Request $request){//Lista de comercializacion de un cliente/iteresado
+
+        if ( !empty( $request->fecha_inicio ) &&  !empty( $request->fecha_fin ) ) {
+
+            $fecha_inicio = \Carbon\Carbon::parse($request->fecha_inicio)->format('Y-m-d H:i:s');
+
+            $fecha_fin = \Carbon\Carbon::parse($request->fecha_fin)->format('Y-m-d H:i:s');
+
+            $seguimientos = ComercializacionModel::with('ModeloCliente.gironegocio','medio')
+                                                ->where('idclientes', $id_idclientes)
+                                                ->whereBetween('fecha_evento', [$fecha_inicio, $fecha_fin])
+                                                ->orderBy('fecha_evento', 'DESC')
+                                                ->get();
+        }else{
+            $seguimientos = ComercializacionModel::with('ModeloCliente.gironegocio','medio')
+                                                ->where('idclientes', $id_idclientes)
+                                                ->orderBy('fecha_evento', 'DESC')
+                                                ->get();
+        }
+        // return json_encode(['total'=>count($seguimientos),'segui'=>$seguimientos,'inicio'=>$fecha_inicio,'fin'=>$fecha_fin]);
+        return view('componentes.comercializacion.tabla_seguimiento', compact('seguimientos'));
+    }
+
+
 
     public function indexCotizacion(){
         $cotizacion = CotizacionesModel::select('idcotizaciones as id', 'nombre as nombre')->get();
@@ -261,6 +294,7 @@ class ComercializacionController extends Controller
 
     public function createCotizacion(CotizacionRequest $request){
         $idcotizaciones             = $request->input('idcotizaciones');
+        $nombre_cotizacion             = $request->input('nombre_cotizacion');
         $ruta_cotizacion            = $request->file('ruta_cotizacion');
         $archivo                    = $_FILES["ruta_cotizacion"];
         //$nombre_archivo             = $ruta_cotizacion->getClientOriginalName(); //obtenemos el nombre del archivo
@@ -289,19 +323,22 @@ class ComercializacionController extends Controller
         return json_encode(['status' => true, 'message' => 'Se ah desactivado el registro']);
     }
 
-    public function DetalleRegistro($idcomercializacion){//Para editar
-        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
-        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', '=', $idcomercializacion)->where('estado', '=', 0)->get();
-        $cotizacion = CotizacionComercializacionModel::with('cotizacion')->where('idcomercializacion', $idcomercializacion)->first();
+    public function mostrar_one_comercializacion($idcomercializacion){//Para editar
+        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->orderBy('created_at', 'DESC')->first();
+        $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', '=', $idcomercializacion)
+                                                ->where('estado', '=', 0)
+                                                ->orderBy('created_at', 'DESC')
+                                                ->get();
+        $cotizacion = CotizacionComercializacionModel::with('ModeloCotizacion')->where('idcomercializacion', $idcomercializacion)->first();
         $cant_modulos = \count($det_modulo);
         return json_encode(['registro' => $det_registro,'modulo'=> $det_modulo, 'cant_modulos'=>$cant_modulos, 'mod_cotizacion'=>$cotizacion]);
         //return json_encode(['modulo'=> $det_modulo]);
     }
 
     public function detalle_registro($idcomercializacion){
-        $det_registro = ComercializacionModel::with('clientes', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
+        $det_registro = ComercializacionModel::with('ModeloCliente', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
         $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->where('estado', '=', 0)->get();
-        $cotizacion = CotizacionComercializacionModel::with('cotizacion')->where('idcomercializacion', $idcomercializacion)->first();
+        $cotizacion = CotizacionComercializacionModel::with('ModeloCotizacion')->where('idcomercializacion', $idcomercializacion)->first();
         $cant_modulos = \count($det_modulo);
 
         //return \json_encode($cotizacion);
@@ -311,6 +348,14 @@ class ComercializacionController extends Controller
     public function ultimo_cliente(){
         $ultimo = ClientesModel::get()->last();
         return json_encode(['ultimo' => $ultimo]);
+    }
+
+    public function ver_one_documento($idcomercializacion){//Lista de comercializacion de un cliente/iteresado
+        $one_documento = ComercializacionModel::with('ModeloCotizacionComercializaciones.ModeloCotizacion','ModeloCliente')
+                                            ->where('idcomercializacion', $idcomercializacion)
+                                            ->first();
+        // return json_encode($one_documento);
+        return view('componentes.comercializacion.docs_cotizacion', compact('one_documento'));
     }
 
 }

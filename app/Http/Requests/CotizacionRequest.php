@@ -24,7 +24,16 @@ class CotizacionRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_cotizacion' => 'required|min:4|max:100',
+            'ruta_cotizacion' => 'max:100000',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre_cotizacion.required' => 'Asegurese de escribir el nombre.',
+            'ruta_cotizacion.max' => 'El documento no puede pesar mas de 100 Megabyte (mb)',
         ];
     }
 }

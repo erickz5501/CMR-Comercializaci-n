@@ -4,8 +4,9 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\historial\ActividadModel;
 use App\Http\Requests\ActividadRequest;
+use App\Models\ActividadModel;
+use Exception;
 
 class ActividadController extends Controller
 {
@@ -14,7 +15,7 @@ class ActividadController extends Controller
     }
 
     public function indexLista(){
-        $actividades = ActividadModel::get();
+        $actividades = ActividadModel::orderBy('created_at', 'DESC')->get();
         return view('componentes.configuracion.tabla_actividad', compact('actividades'));
     }
 
@@ -37,15 +38,15 @@ class ActividadController extends Controller
         $actividad->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado la actividad']);
     }
-    
+
     public function DetalleActividad($idactividad){
-        $det_actividad = ActividadModel::where('idactividad', $idactividad)->first();
-        return json_encode(['actividad' => $det_actividad]);
+        $actividad = ActividadModel::where('idactividad', $idactividad)->first();
+        return json_encode($actividad);
     }
 
     public function createActividad(ActividadRequest $request){
         $idactividad              = $request->input('idactividad');
-        $nombre_input             = $request->input('nombre_input');
+        $nombre_input             = $request->input('nombre_actividad');
 
         if ($idactividad != "") {
             $actividad = ActividadModel::find($idactividad);
@@ -60,13 +61,13 @@ class ActividadController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo la actividad']);
-            
+
         } else {
             $actividad = ActividadModel::create(
                 [
                 'nombre' => $nombre_input,
                 ]);
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro la actividad','id'=>$actividad->idactividad]);
         }
     }

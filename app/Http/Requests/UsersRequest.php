@@ -24,7 +24,30 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'dni_users' => 'required|min:8|max:45',
+            'nombre_users' => 'required|min:3|max:250',
+            'apellido_users' => 'required|min:3|max:250',
+            'email_users' => 'required|min:4|max:100',
+            'password' => 'required|confirmed|min:8|max:16',
+            'password_confirmation' => 'required|min:8|max:16'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'dni_users.required' => 'Asegurese de escribir el DNI.',
+            'nombre_users.required' => 'Asegurese de escribir el NOMBRE.',
+            'apellido_users.required' => 'Asegurese de escribir el APELLIDOS.',
+            'email_users.required' => 'Asegurese de escribir el nombre.',
+            'password.required'                 => 'El campo clave no debe estar vacio.',
+            'password.min'                      => 'El campo clave debe tener al menos 8 caracteres.',
+            'password.max'                      => 'El campo clave debe tener menos de 16 caracteres.',
+            'password.confirmed'                => 'El campo clave y confirmar clave no coinciden.',
+            'password_confirmation.required'    => 'El campo clave no debe estar vacio.',
+            'password_confirmation.min'         => 'El campo clave debe tener al menos 8 caracteres.',
+            'password_confirmation.max'         => 'El campo clave debe tener menos de 16 caracteres.'
+        ];
+    }
+
 }

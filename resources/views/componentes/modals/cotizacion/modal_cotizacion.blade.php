@@ -1,7 +1,7 @@
 <!-- ================================= MODAL Registro COTIZACION================================= -->
-<div class="modal fade border" id="modal_cotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal" role="document">
-      <div class="modal-content">
+<div class="modal fade " id="modal_cotizacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+      <div class="modal-content" style="box-shadow: 0 5px 45px rgb(30 30 97 / 79%), 0 5px 45px rgb(16 13 13 / 76%) !important;">
         <!-- ================================= MODAL TITULO ================================= -->
         <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Agregar cotizacion</h5>
@@ -16,7 +16,7 @@
             <div class="modal-body" style="padding-top: 0px !important; padding-bottom:0px !important; padding-right: 0px !important">
                 {{-- input ID oculto --}}
                 <input type="hidden" id="idcotizaciones" name="idcotizaciones"/>
-                <div class="row col-12">
+                <div class="row ">
                     <div class="card-body mb-12 col-12" style="padding-top: 0px !important; padding-bottom:0px !important; ">
                         <div class="row">
                             <div class="col">

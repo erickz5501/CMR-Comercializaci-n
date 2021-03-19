@@ -24,7 +24,14 @@ class ModulosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_input' => 'required|max:45',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre_input.required' => 'Asegurese de escribir el nombre del MÓDULO',
         ];
     }
 }

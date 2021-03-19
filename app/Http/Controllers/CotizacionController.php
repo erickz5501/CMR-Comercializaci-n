@@ -19,7 +19,7 @@ class CotizacionController extends Controller
     }
 
     public function indexLista(){
-        $cotizaciones = CotizacionesModel::get();
+        $cotizaciones = CotizacionesModel::orderBy('created_at', 'DESC')->get();
         //return json_encode($eventos);
         return view('componentes.cotizacion.tabla_cotizacion', compact('cotizaciones'));
     }
@@ -65,22 +65,11 @@ class CotizacionController extends Controller
 
         $codigo                 = $request->input('nombre_cotizacion');
 
+        $validez_cotizacion                 = $request->input('validez_cotizacion');
+
         $doc_cotizacion_antiguo = $request->input('doc_cotizacion_antiguo');
 
-        // $ruta_cotizacion            = $request->file('ruta_cotizacion');
-
-        // $archivo                    = $_FILES["ruta_cotizacion"];
-
         $doc_cotizacion = $request->file('ruta_cotizacion');
-
-        // return json_encode($idcotizaciones,$codigo ,$doc_cotizacion_antiguo ,$doc_cotizacion);
-        // if ($doc_cotizacion_antiguo) {
-
-        //     $doc_ruta = $doc_cotizacion_antiguo;
-        // } else {
-
-        // }
-
 
         if (!empty( $idcotizaciones)) {
 
@@ -88,7 +77,7 @@ class CotizacionController extends Controller
 
             if ($doc_cotizacion) {
                 // borramos doc
-                $cotizacion_ruta_delete = '/docs/' . $editar_cotizacion->ruta;
+                $cotizacion_ruta_delete = '/' . $editar_cotizacion->ruta;
                 Storage::disk('public')->delete($cotizacion_ruta_delete);
                 // insetamos nuevo doc
                 $doc_cotizacion_nombre =  $doc_cotizacion->getClientOriginalName() . '-' . rand() . '.' . $doc_cotizacion->getClientOriginalExtension();
@@ -103,6 +92,7 @@ class CotizacionController extends Controller
             try{
                 $editar_cotizacion->nombre = $codigo;
                 $editar_cotizacion->ruta = $doc_ruta;
+                $editar_cotizacion->validez = $validez_cotizacion;
 
                 $editar_cotizacion->save();
             }
@@ -110,7 +100,7 @@ class CotizacionController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actualizo la cotizaion', $codigo]);
+            return json_encode(['status' => true, 'message' => 'Se actualizó corectamente la cotizacion', $codigo]);
         } else {
 
             if (!empty($doc_cotizacion)) {
@@ -122,18 +112,20 @@ class CotizacionController extends Controller
 
             $cotizacion = CotizacionesModel::create([
                 'nombre' => CotizacionController::generar_correlativo($increment = true),//llamamos a la funcion para generar su correlativo
-                'ruta' => $doc_ruta
+                'ruta' => $doc_ruta,
+                'validez' => $validez_cotizacion
             ]);
 
-            return json_encode(['status' => true, 'message' => 'Éxito se registro la cotizacion', 'id' => $cotizacion->idcotizaciones,$doc_ruta]);
+            return json_encode(['status' => true, 'message' => 'Se registró correctamente la cotizacion', 'id' => $cotizacion->idcotizaciones,$doc_ruta]);
         }
 
     }
 
     public function detalle_actualizacion($idcotizacion){
-        $det_cotizacion = CotizacionesModel::where('idcotizaciones', $idcotizacion)->first();
 
-        return json_encode(['evento' => $det_cotizacion]);
+        $cotizacion = CotizacionesModel::where('idcotizaciones', $idcotizacion)->first();
+
+        return json_encode($cotizacion);
     }
 
 }

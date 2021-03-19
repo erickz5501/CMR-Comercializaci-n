@@ -4,8 +4,8 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\historial\MediosModel;
 use App\Http\Requests\MediosRequest;
+use App\Models\MediosModel;
 use Exception;
 
 class MediosController extends Controller
@@ -49,13 +49,13 @@ class MediosController extends Controller
 
     public function createMedio(MediosRequest $request){
         $idmedios                = $request->input('idmedios');
-        $nombre_input             = $request->input('nombre_input');
+        $nombre_medio             = $request->input('nombre_medio');
 
         if ($idmedios != "") {
             $medio = MediosModel::find($idmedios);
 
             try{
-                $medio->nombre = $nombre_input;
+                $medio->nombre = $nombre_medio;
 
                 $medio->save();
             }
@@ -63,22 +63,23 @@ class MediosController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el medio']);
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo el medio de contacto']);
 
         } else {
             $medio = MediosModel::create(
                 [
-                'nombre' => $nombre_input,
+                'nombre' => $nombre_medio,
                 ]);
 
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el medio','id'=>$medio->idmedios]);
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el medio medio de contacto','id'=>$medio->idmedios]);
         }
 
     }
 
     public function DetalleMedio($idmedios){
-        $det_medio = MediosModel::where('idmedios', $idmedios)->first();
 
-        return json_encode(['medio' => $det_medio]);
+        $medio = MediosModel::where('idmedios', $idmedios)->first();
+
+        return json_encode($medio);
     }
 }

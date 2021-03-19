@@ -4,11 +4,13 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\historial\ModulosModel;
 use App\Http\Requests\ModulosRequest;
+use App\Models\ModulosModel;
+use Exception;
+
 class ModulosController extends Controller
 {
-    
+
     public function index()
     {
         return view('configuracion.modulos');
@@ -33,7 +35,7 @@ class ModulosController extends Controller
         $modulo->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el modulo']);
     }
-    
+
     public function desactivar($idmodulos){
         $modulo = ModulosModel::where('idmodulos', $idmodulos)->first();
         $modulo->estado = 1;
@@ -45,7 +47,7 @@ class ModulosController extends Controller
         $idmodulos                = $request->input('idmodulos');
         $nombre_input             = $request->input('nombre_input');
         $caracteristicas          = $request->input('caracteristicas_modulo');
-       
+
         if ($idmodulos != "") {
             $modulos = ModulosModel::find($idmodulos);
 
@@ -58,24 +60,25 @@ class ModulosController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el modulo']);
-            
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo el modulo']);
+
         } else {
             $modulo = ModulosModel::create(
                 [
                 'nombre' => $nombre_input,
                 'caracteristicas' => $caracteristicas
                 ]);
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el modulo']);
         }
-        
+
     }
 
     public function DetalleModulo($idmodulos){
-        $det_modulo = ModulosModel::where('idmodulos', $idmodulos)->first();
 
-        return json_encode(['modulo' => $det_modulo]);
+        $modulo = ModulosModel::where('idmodulos', $idmodulos)->first();
+
+        return json_encode($modulo);
     }
 
     public function InformacionModulo($idmodulos){
@@ -83,5 +86,5 @@ class ModulosController extends Controller
 
         return \view('componentes.modals.modulos.modulo_detalle', compact('info_modulo'));
     }
-    
+
 }

@@ -24,7 +24,16 @@ class ActividadRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_actividad' => 'required|min:3|max:45',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre_actividad.required' => 'Asegúrese de escribir el campo nombre',
+            'nombre_actividad.min' => 'min',
+            'nombre_actividad.max' => 'max',
         ];
     }
 }

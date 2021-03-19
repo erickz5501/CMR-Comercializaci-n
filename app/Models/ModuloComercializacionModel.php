@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\comercializacion;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,6 +12,6 @@ class ModuloComercializacionModel extends Model
     protected $fillable = ['idmodulos', 'cant_licencias', 'idcomercializacion', 'estado'];
 
     public function modulo(){
-        return $this->hasOne('App\Models\historial\ModulosModel', 'idmodulos', 'idmodulos');
+        return $this->hasOne('App\Models\ModulosModel', 'idmodulos', 'idmodulos');
     }
 }

@@ -10,41 +10,45 @@ class ComercializacionModel extends Model
     protected $table = 'comercializacion';
     protected $primaryKey = 'idcomercializacion';
     protected $fillable = [
-        'idclientes', 
-        'persona_contacto', 
-        'idactividad', 
-        'idmedios', 
-        'idusers', 
-        'detalla_llamada', 
-        'ideventos', 
-        'fecha_evento', 
+        'idclientes',
+        'persona_contacto',
+        'idactividad',
+        'idmedios',
+        'idusers',
+        'detalla_llamada',
+        'ideventos',
+        'fecha_evento',
         'descripcion_evento',
-        'nro_cotizacion', 
-        'idpersonal', 
-        'calificacion', 
-        'avance', 
-        'por_cobrar', 
-        'observacion', 
+        'nro_cotizacion',
+        'idpersonal',
+        'calificacion',
+        'avance',
+        'por_cobrar',
+        'observacion',
         'estado'];
 
-    public function clientes(){
-        return $this->hasOne('App\Models\ClientesModel', 'idclientes', 'idclientes');
+    public function ModeloCliente(){
+        return $this->belongsTo('App\Models\ClientesModel', 'idclientes', 'idclientes');
     }
 
     public function medio(){
-        return $this->hasOne('App\Models\historial\MediosModel', 'idmedios', 'idmedios');
+        return $this->hasOne('App\Models\MediosModel', 'idmedios', 'idmedios');
     }
 
     public function evento(){
-        return $this->hasOne('App\Models\historial\EventosModel', 'ideventos', 'ideventos');
+        return $this->hasOne('App\Models\EventosModel', 'ideventos', 'ideventos');
     }
 
     public function personal(){
-        return $this->hasOne('App\Models\historial\PersonalModel', 'idpersonal', 'idpersonal');
+        return $this->hasOne('App\Models\PersonalModel', 'idpersonal', 'idpersonal');
     }
 
     public function actividad(){
-        return $this->hasOne('App\Models\historial\ActividadModel', 'idactividad', 'idactividad');
+        return $this->hasOne('App\Models\ActividadModel', 'idactividad', 'idactividad');
+    }
+
+    public function ModeloCotizacionComercializaciones(){
+        return $this->hasMany('App\Models\CotizacionComercializacionModel', 'idcomercializacion', 'idcomercializacion');
     }
 
 }

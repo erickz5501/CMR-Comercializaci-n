@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\historial\UsersModel;
 use App\Http\Requests\UsersRequest;
+use Exception;
+
 class UsersController extends Controller
 {
-    
+
     public function index()
     {
         return view('configuracion.users');
@@ -26,7 +28,7 @@ class UsersController extends Controller
         $user->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el usuario']);
     }
-    
+
     public function desactivar($idusers){
         $user = UsersModel::where('idusers', $idusers)->first();
         $user->estado = 1;
@@ -36,19 +38,19 @@ class UsersController extends Controller
 
     public function createUsers(UsersRequest $request){
         $idusers                    = $request->input('idusers');
-        $nombre_input               = $request->input('nombre_input');
-        $apellido_input             = $request->input('apellido_input');
-        $email_input                = $request->input('email_input');
-        $password_input             = $request->input('password_input');
-       
+        $nombre_users               = $request->input('nombre_users');
+        $apellido_users             = $request->input('apellido_users');
+        $email_users                = $request->input('email_users');
+        $password             = $request->input('password');
+
         if ($idusers != "") {
             $users = UsersModel::find($idusers);
 
             try{
-                $users->nombres = $nombre_input;
-                $users->apellidos = $apellido_input;
-                $users->email = $email_input;
-                $users->password = $password_input;
+                $users->nombres = $nombre_users;
+                $users->apellidos = $apellido_users;
+                $users->email = $email_users;
+                $users->password = $password;
 
                 $users->save();
             }
@@ -57,24 +59,24 @@ class UsersController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el modulo']);
-            
+
         } else {
             $users = UsersModel::create(
                 [
-                'nombres' => $nombre_input,
-                'apellidos' => $apellido_input,
-                'email' => $email_input,
-                'password' => $password_input
+                'nombres' => $nombre_users,
+                'apellidos' => $apellido_users,
+                'email' => $email_users,
+                'password' => $password
                 ]);
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el usuario']);
         }
-        
+
     }
 
     public function DetalleUser($iduser){
-        $det_user = UsersModel::where('idusers', $iduser)->first();
+        $user = UsersModel::where('idusers', $iduser)->first();
 
-        return json_encode(['user' => $det_user]);
+        return json_encode( $user);
     }
 }

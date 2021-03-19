@@ -12,20 +12,20 @@ use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
-    public function index(){
+    public function index_vista(){
         //dd($cliente);
         return view('listas.clientes');
     }
 
-    public function indexLista(){
-        $clientes = ClientesModel::where('tipo_persona', 2)->get();
-        //dd($cliente);
+    public function lista_tabla_clientes(){
+
+        $clientes = ClientesModel::orderBy('idclientes', 'DESC')->get();
+        // return json_encode($clientes);
         return view('componentes.clientes.tabla_cliente', compact('clientes'));
     }
 
-    public function indexClientes(){
-        //$clientes = ClientesModel::select(DB::raw("CONCAT('nombres_razon_social','nombres_razon_social') AS nombre"))->get();
-        // 'nombres_razon_social as nombre'
+    public function lista_select2_clientes(){
+
         $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT( clientes.nro_documento, ' - ' , clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial) AS nombre") ] )
                                     ->where('estado', 0)
                                     ->get();
@@ -33,14 +33,17 @@ class ClientesController extends Controller
         return json_encode($clientes);
     }
 
-    public function indexInteresado(){
+    public function lista_select2_interesado(){
+
         $interesados = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('tipo_persona', 1)->get();
 
         return json_encode($interesados);
     }
 
     public function indexListaInteresado(){
+
         $interesados = ClientesModel::where('tipo_persona', 1)->get();
+
         return view('componentes.interesados.tabla_interesados', compact('interesados'));
     }
 

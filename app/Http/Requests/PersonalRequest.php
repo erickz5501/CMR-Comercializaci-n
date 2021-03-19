@@ -24,7 +24,17 @@ class PersonalRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_personal' => 'required|min:3|max:120',
+            'apellido_personal' => 'required|min:3|max:120',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'nombre_personal.required' => 'Asegurese de escribir el nombre.',
+            'apellido_personal.required' => 'Asegurese de escribir el apellido',
+        ];
+    }
+
 }

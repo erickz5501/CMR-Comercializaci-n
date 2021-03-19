@@ -52,4 +52,19 @@
   <!-- Demo JS - remove this in your project -->
   <script src="{{ asset('/argon/assets/js/demo.min.js')}}"></script>
 
+  <script>
+      var modal_lv = 0;
+
+      $('.modal').on('shown.bs.modal', function (e) {
+          $(document).off('focusin.modal');
+          $('.modal-backdrop:last').css('zIndex',1051 + modal_lv);
+          $(e.currentTarget).css('zIndex',1052 + modal_lv);
+          modal_lv++;
+      });
+
+      $('.modal').on('hidden.bs.modal', function (e) {
+          modal_lv--;
+      });
+  </script>
+
   @yield('js')

@@ -15,9 +15,13 @@ class ClientesModel extends Model
     public function gironegocio(){
         return $this->hasOne('App\Models\GiroNegocioModel', 'idgiro_negocio', 'idgiro_negocio');
     }
-    
-    public function comercializacion(){
-        return $this->belongsTo('App\Models\ComercializacionModel', 'idclientes');
-    }
+
+    // public function comercializacion(){
+    //     return $this->belongsTo('App\Models\ComercializacionModel', 'idclientes');
+    // }
+
+    public function ModeloComercializaciones(){
+        return $this->hasMany('App\Models\ComercializacionModel', 'idclientes', 'idclientes');
+   }
 
 }

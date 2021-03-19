@@ -4,8 +4,8 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\historial\PersonalModel;
 use App\Http\Requests\PersonalRequest;
+use App\Models\PersonalModel;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -45,15 +45,15 @@ class PersonalController extends Controller
 
     public function createPersonal(PersonalRequest $request){
         $idpersonal                 = $request->input('idpersonal');
-        $nombre_input               = $request->input('nombre_input');
-        $apellido_input             = $request->input('apellido_input');
+        $nombre_personal               = $request->input('nombre_personal');
+        $apellido_personal             = $request->input('apellido_personal');
 
         if ($idpersonal != "") {
             $personal = PersonalModel::find($idpersonal);
 
             try{
-                $personal->nombres = $nombre_input;
-                $personal->apellidos = $apellido_input;
+                $personal->nombres = $nombre_personal;
+                $personal->apellidos = $apellido_personal;
 
                 $personal->save();
             }
@@ -66,8 +66,8 @@ class PersonalController extends Controller
         } else {
             $personal = PersonalModel::create(
                 [
-                'nombres' => $nombre_input,
-                'apellidos' => $apellido_input,
+                'nombres' => $nombre_personal,
+                'apellidos' => $apellido_personal,
                 ]);
 
             return json_encode(['status' => true, 'message' => 'Éxito se registro el personal', 'id' => $personal->idpersonal]);
@@ -76,9 +76,10 @@ class PersonalController extends Controller
     }
 
     public function DetallePersonal($idpersonal){
-        $det_personal = PersonalModel::where('idpersonal', $idpersonal)->first();
 
-        return json_encode(['personal' => $det_personal]);
+        $personal = PersonalModel::where('idpersonal', $idpersonal)->first();
+
+        return json_encode($personal);
     }
 
 }

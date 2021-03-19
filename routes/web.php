@@ -61,9 +61,9 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 //........... ::RUTAS CLIENTES:: ............//
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     // MUESTRA LA VISTA DE CLIENTES
-    Route::get('/listas/clientes', "clientes\ClientesController@index");
-    // MIESTRA LISTA DE CLIENTES EN UNA TABLA
-    Route::get('/listas/clientes/lista', "clientes\ClientesController@indexLista");
+    Route::get('/clientes-interesados', "clientes\ClientesController@index_vista");
+    // MUESTRA TABLA CON LISTA DE CLIENTES
+    Route::get('/clientes-interesados/lista-tabla', "clientes\ClientesController@lista_tabla_clientes");
     // MUESTRA MODAL DETALLE DE CLIENTE
     Route::get('/listas/clientes/{id_cliente}', "clientes\ClientesController@detalle_cliente");
     // MUESTRA DATOS DE UN CLIENTE PAARA EDITAR
@@ -76,7 +76,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/cliente/desactivar/{idclientes}', "clientes\ClientesController@desactivar");
 });
 
-// .......... :::::: RUTAS HISTORIAL DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS HISTORIAL   :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/listas/historial', "historial\HistorialController@index");
     Route::get('/listas/historial/lista', "historial\HistorialController@indexLista");
@@ -86,7 +86,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 });
 Route::get('/ver/historial/detalle/{idhist}', "historial\HistorialController@DetalleHistorial");
 
-// .......... :::::: RUTAS CONFIGURACION DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS CONFIGURACION   :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/configuracion/eventos', "configuracion\EventosController@index");
     Route::get('/configuracion/eventos/lista', "configuracion\EventosController@indexLista");
@@ -139,7 +139,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/mostrar/user/{idusers}', "configuracion\UsersController@DetalleUser");
 });
 
-// .......... :::::: RUTAS COMERCIALIZACION DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS COMERCIALIZACION   :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/comercializacion', "ComercializacionController@index");
     Route::get('/comercializacion/lista', "ComercializacionController@indexLista");
@@ -147,17 +147,20 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/comercializacion/guardar-registro', "ComercializacionController@createComercioNuevo");
     Route::get('/comercializacion/desactivar/{idcomercializacion}', "ComercializacionController@desactivar");
     Route::get('/comercializacion/activar/{idcomercializacion}', "ComercializacionController@activar");
-    Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@DetalleRegistro");//editar el registro
+    Route::get('/mostrar/comercializacion/{idcomercializacion}', "ComercializacionController@mostrar_one_comercializacion");//editar el registro
     Route::get('/lista/comercializacion/{idcomercializacion}', "ComercializacionController@detalle_registro");//para ver el registro
-    Route::get('/comercializacion/detalle/{idcliente}', "ComercializacionController@indexlistaregistro");
+    Route::get('/comercializacion/mostrar-seguimiento/lista/{idcomercializacion}', "ComercializacionController@mostrar_seguimiento"); //mustra toda la vista
+    Route::get('/comercializacion/mostrar-seguimiento/recargar-tabla/{idcomercializacion}', "ComercializacionController@recargar_tabla_seguimiento"); //RECARGA LA TABLA
 
     Route::get('/comercializacion/interesado/ultimo', "ComercializacionController@ultimo_cliente");
     Route::get('/cotizacion/generar', "ComercializacionController@generar_correlativo");
     Route::post('/cotizacion/guardar', "ComercializacionController@createCotizacion");
 
+    Route::get('/comercializacion/ver-docs/{idcomercializacion}', "ComercializacionController@ver_one_documento");
+
 });
 
-// .......... :::::: RUTAS  ACTUALIZACIONES DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS  ACTUALIZACIONES   :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/actualizaciones',"ActualizacionesController@index");
     route::get('/actualizaciones/lista',"ActualizacionesController@indexLista");
@@ -169,19 +172,21 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 
 });
 
-// .......... :::::: RUTAS  COTIZACIONES DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS  COTIZACIONES :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/cotizaciones',"CotizacionController@index");
     route::get('/cotizaciones/lista',"CotizacionController@indexLista");
     Route::get('/cotizaciones/desactivar/{idcotizacion}', "CotizacionController@desactivar");
     Route::get('/cotizaciones/activar/{idcotizacion}', "CotizacionController@activar");
-    Route::get('/lista/cotizaciones/{idcotizacion}', "CotizacionController@detalle_actualizacion");
+    Route::get('/cotizaciones/mostrar-one/{idcotizacion}', "CotizacionController@detalle_actualizacion");
     Route::post('/cotizacion/crear', "CotizacionController@createCotizacion");
+    // CREAR O ACTUALIZAR COTIZACION-COMERCIALIZACION
+    Route::post('/cotizacion-comercializacion/crear', "CotizacionComercializacionController@agregar_modificar_cotiza");
 
 
 });
 
-// .......... :::::: RUTAS RECLAMOS DEL COMPLETADO :::: ................
+// .......... :::::: RUTAS RECLAMOS :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/reclamos', "ReclamosController@index");
     Route::get('/reclamos/lista', "ReclamosController@indexLista");
@@ -201,8 +206,8 @@ Route::get('/dashboard/listas/modulos', "configuracion\ModulosController@indexMo
 Route::get('/dashboard/listas/medios', "configuracion\MediosController@indexMedios");
 Route::get('/dashboard/listas/evento', "configuracion\EventosController@indexEventos");
 Route::get('/dashboard/listas/personal', "configuracion\PersonalController@indexPersonal");
-Route::get('/dashboard/listas/clientes', "clientes\ClientesController@indexClientes");
-Route::get('/dashboard/listas/interesado', "clientes\ClientesController@indexInteresado");
+Route::get('/dashboard/listas/clientes', "clientes\ClientesController@lista_select2_clientes");
+Route::get('/dashboard/listas/interesado', "clientes\ClientesController@lista_select2_interesado");
 Route::get('/dashboard/listas/actividad', "configuracion\ActividadController@indexActvidad");
 // Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
 

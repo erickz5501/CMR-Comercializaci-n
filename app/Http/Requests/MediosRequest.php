@@ -24,7 +24,14 @@ class MediosRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nombre_medio' => 'required|min:3|max:45',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre_medio.required' => 'Asegurese de escribir el nombre.',
         ];
     }
 }

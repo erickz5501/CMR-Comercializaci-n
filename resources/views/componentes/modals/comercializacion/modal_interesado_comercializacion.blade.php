@@ -1,7 +1,7 @@
 <!-- ================================= MODAL Registro Interesado ================================= -->
 <div class="modal fade" id="modal_clientes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="box-shadow: 0 5px 45px rgb(30 30 97 / 79%), 0 5px 45px rgb(16 13 13 / 76%) !important;">
             <!-- ================================= MODAL TITULO ================================= -->
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
@@ -52,7 +52,7 @@
                                             </div>
                                             <input style="color: black !important; font-weight: bold !important;" type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput" placeholder="numero"   />
                                             <span class="input-group-addon input-group-append">
-                                                <button class="btn btn-default" type="button" id="button-addon2" onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta SUNAT">
+                                                <button class="btn btn-default" type="button"  onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta RENIEC/SUNAT">
                                                     <i class="fas fa-angle-right" id="cargado_sunat"></i>
                                                     <i style="font-size: 20px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_sunat"></i>
                                                 </button>
@@ -96,7 +96,7 @@
                                             {{-- AQUI VAN LOS "OPTIONS" --}}
                                         </select>
                                         <span class="input-group-addon input-group-append" data-toggle="tooltip" data-placement="top" title="Crear nuevo giro negocio">
-                                            <button class="btn btn-default" type="button" id="button-addon2" onclick="" data-toggle="modal" data-target="#modal_giro_negocio" >
+                                            <button class="btn btn-default" type="button"  onclick="" data-toggle="modal" data-target="#modal_giro_negocio" >
                                                 <i class="fas fa-plus-circle"></i>
                                             </button>
                                         </span>

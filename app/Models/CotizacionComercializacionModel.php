@@ -11,7 +11,11 @@ class CotizacionComercializacionModel extends Model
     protected $primaryKey = 'idcotizacion_comercializacion';
     protected $fillable = ['idcomercializacion', 'idcotizaciones',  'estado'];
 
-    public function cotizacion(){
-        return $this->hasOne('App\Models\CotizacionesModel', 'idcotizaciones', 'idcotizaciones');
+    public function ModeloCotizacion(){
+        return $this->belongsTo('App\Models\CotizacionesModel', 'idcotizaciones', 'idcotizaciones');
+    }
+
+    public function ModeloComercializacion(){
+        return $this->belongsTo('App\Models\ComercializacionModel', 'idcomercializacion', 'idcomercializacion');
     }
 }

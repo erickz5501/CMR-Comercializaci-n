@@ -9,7 +9,7 @@ class ReclamosModel extends Model
 {
     protected $table = 'reclamos';
     protected $primaryKey = 'idreclamos';
-    protected $fillable = ['idclientes', 'persona_contacto', 'Ruc_nro_contrato', 'idmedios', 'idmodulos', 'descripcion_reclamo', 'tipo_solucion', 
+    protected $fillable = ['idclientes', 'persona_contacto', 'Ruc_nro_contrato', 'idmedios', 'idmodulos', 'descripcion_reclamo', 'tipo_solucion',
                             'causa', 'procede', 'accion_tomar', 'idpersonal', 'fecha_compromiso', 'fecha_solucion', 'solucion_minutos', 'solucion_dias',
                             'evidencia', 'emite_accion', 'estado'];
 
@@ -18,19 +18,19 @@ class ReclamosModel extends Model
     }
 
     public function medio(){
-        return $this->hasOne('App\Models\historial\MediosModel', 'idmedios', 'idmedios');
+        return $this->hasOne('App\Models\MediosModel', 'idmedios', 'idmedios');
     }
 
     public function evento(){
-        return $this->hasOne('App\Models\historial\EventosModel', 'ideventos', 'ideventos');
+        return $this->hasOne('App\Models\EventosModel', 'ideventos', 'ideventos');
     }
 
     public function personal(){
-        return $this->hasOne('App\Models\historial\PersonalModel', 'idpersonal', 'idpersonal');
+        return $this->hasOne('App\Models\PersonalModel', 'idpersonal', 'idpersonal');
     }
 
     public function modulo(){
-        return $this->hasOne('App\Models\historial\ModulosModel', 'idmodulos', 'idmodulos');
+        return $this->hasOne('App\Models\ModulosModel', 'idmodulos', 'idmodulos');
     }
 
 }
