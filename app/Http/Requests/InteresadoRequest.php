@@ -23,13 +23,19 @@ class InteresadoRequest extends FormRequest
      */
     public function rules(){//estas son las validaciones
         return [
-            'select_modal_tipo_doc' => 'required|min:1',
-            'nro_documento' => 'required|max:11',
             'nombre_razon_social_input' => 'required',
             'nombre_comercial_input' => 'required',
             'number_empresa_input' => 'max:9',
             'InputCorreo1' => 'max:45',
             'select_modal_giro_negocio' => 'required|min:1',
+
+            'InputCorreo2' => 'max:45',
+            'InputCorreo3' => 'max:45',
+
+            'select_modal_tamano_empresa' => 'max:20',
+            'select_modal_a_que_dedicas'  => 'max:50',
+            'select_modal_grado_interes'  => 'max:50',
+            'select_modal_provincia'      => 'max:70',
         ];
     }
 

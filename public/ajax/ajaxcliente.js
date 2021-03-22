@@ -1,19 +1,27 @@
 function init(){
-    lista_clientes();
-    lista_interesados();
 
-    $("#guardar_registro_cliente").on('click', function(e){  $("#formulario_cliente_interesado").submit(); });
+    lista_tabla_clientes(1);
+    // lista_interesados();
+    // PAGINAMOS LA TABLA CLIENTE
+    $(document).on("click",'.pagination a',function(e){
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        lista_tabla_clientes(page);
+    });
+
+    $("#guardar_registro").on('click', function(e){  $("#formulario_cliente_interesado").submit(); });
     $("#formulario_cliente_interesado").on("submit", function(e) { guardar_cliente(e); });
 
-    $("#formulario_registro_interesado").on("submit", function(e){
-        guardar_interesado(e);
-    });
+    // Giro negocio
+    $("#guardar_registro_giro_negocio").on('click', function(e){ $("#formulario_giro_negocio").submit(); });
+    $("#formulario_giro_negocio").on("submit", function(e){ guardar_giro_negocio(e); });
+
+    $("#formulario_registro_interesado").on("submit", function(e){ guardar_interesado(e); });
 
     lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
     lista_select2('/dashboard/listas/modulos', 'software', null);
-    // lista_select2('/dashboard/listas/tipopersona', 'tipoPersona', null);
+    lista_select2('/dashboard/listas/actividad', 'actividad', null);
     // lista_select2('/dashboard/listas/tipodoc', 'tipoDocumento', null);
-
     $('#select_modal_tipo_doc').select2({
         theme: 'bootstrap4',
         width: 'style',
@@ -30,33 +38,86 @@ function init(){
         overflow: 'scroll'
     });
 
-    $('#filtrar_por').select2({
-        theme: 'bootstrap4',
-        placeholder: 'Filtrar por',
-        allowClear: true,
-        width: 'auto',
-		dropdownAutoWidth: true,
-    });
+    // $('#select_modal_tipoPersona').select2({
+    //     theme: 'bootstrap4',
+    //     placeholder: 'Seleccione',
+    //     allowClear: true,
+    //     width: 'auto',
+	// 	dropdownAutoWidth: true,
+    // });
 
-    $('#select_modal_tipoPersona').select2({
+    $('#select_modal_actividad').select2({
         theme: 'bootstrap4',
         placeholder: 'Seleccione',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
     });
+
+
+
+    // FILTROS DE BUSQUEDA ........
+    $('#filtro_estado').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#filtro_tipo').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Filtrar por',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#filtro_estado').val('').trigger('change');
 }
 
+// BUSCADOR
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+$("#filtro_search").on("keyup", function () {
+    delay(function(){
+        lista_tabla_clientes(1);
+    }, 600 );
+    console.log('searg');
+});
+
 // ::::::: LISTAR TABLA CLIENTES :::::::
-function lista_clientes(){
+function lista_tabla_clientes(page){
+
+    var filtro_cant = $('#filtro_cant').val();
+    var filtro_search    = $('#filtro_search').val();
+
+    var filtro_tipo = $('#filtro_tipo').val() ;
+    var filtro_estado = $('#filtro_estado').val() ;
 
     $("#lista_tabla_clientes_interesados").html('<div id="loader"></div>');
 
-    $.get('/dashboard/clientes-interesados/lista-tabla', function (data){
-
+    $.get(`/dashboard/clientes-interesados/lista-tabla?page=${page}&filtro_tipo=${filtro_tipo}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function (data){
         $("#lista_tabla_clientes_interesados").html(data);
     });
 }
+
+$("#interesado").on('click', function(e){
+    limpiar_form_cliente();
+    $('#titulo_modal_cliente').html('Agregar Interesado');
+    $('#select_modal_tipoPersona').val('1');
+    $('#modal_cliente_interesado').modal('show');
+});
+
+$("#cliente").on('click', function(e){
+    limpiar_form_cliente();
+    $('#titulo_modal_cliente').html('Agregar Cliente');
+    $('#select_modal_tipoPersona').val('2');
+    $('#modal_cliente_interesado').modal('show');
+});
 
 //  :::: GUARDAR Y EDITAR "CLIENTE" ::::::
 function guardar_cliente(e) {
@@ -65,25 +126,14 @@ function guardar_cliente(e) {
 
     crud_guardar_editar(
         e,
-        '/dashboard/editar/clientes',
+        '/dashboard/guardar/clientes-interesados',
         'cliente_interesado',
         function(){ limpiar_form_cliente(); },
-        function(){ lista_clientes(); },
+        function(){ lista_tabla_clientes(); },
         function(){ console.log('Console Error'); }
     );
 }
 
-function guardar_interesado(e){
-    crud_guardar_editar(
-        e,
-        '/dashboard/guardar/interesados',
-        'registro_interesado',
-        function(){ limpiar_form_interesado(); },
-        function(){ lista_interesados(); },
-        function(){ console.log('Console Error'); }
-    );
-
-}
 
 //  :::: Funciones para "mostar" los modals ::::
 function mostrar_modal(id){
@@ -112,28 +162,39 @@ function limpiar_form_cliente(){ //Para limpIar los campos despues de registrar 
     $('#contenedor_de_errores_cliente_interesado').html(''); // REMOVEMOS EL CONTENEDOR DE ERRORES
 
     $('#titulo_modal_cliente').html('Agregar Cliente');
-    $('#btn_footer_modal_cliente').html('Guardar');
+    $('#btn_footer_modal_cliente').html('GUARDAR');
 
-    $('#idclientes').val("");
-    $('#nombre_razon_social_input').val("");
-    $('#nombre_comercial_input').val("");
-    $('#numDocumentoInput').val("");
-    $('#InputCorreo1').val("");
-    $('#InputCorreo2').val("");
-    $('#InputCorreo3').val("");
-    $('#number_empresa_input').val("");
-    $('#number_contacto_input').val("");
-    $('#number_otro_input').val("");
-    $('#select_modal_giroNegocio').val(null).trigger('change');
-    $('#select_modal_tipoPersona').val("Seleccione").trigger('change');
-    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
+    $('#cargando_edit_cliente').hide(); //oculto icon spiner
+
+    $('#idclientes').val('');
+    $('#select_modal_tipoPersona').val('');
+    $('#select_modal_tipo_doc').val('');
+    $('#nro_documento').val('');
+    $('#nombre_razon_social_input').val('');
+    $('#nombre_comercial_input').val('');
+    $('#InputCorreo1').val('');
+    $('#number_empresa_input').val('');
+    $('#direccion').val('');
+
+    $('#select_modal_provincia').val('');
+    $('#select_modal_grado_interes').val('');
+    $('#select_modal_tamano_empresa').val('');
+    $('#select_modal_a_que_dedicas').val('');
+    $('#InputCorreo2').val('');
+    $('#InputCorreo3').val('');
+    $('#number_contacto_input').val('');
+    $('#number_otro_input').val('');
+
+    $('#select_modal_giro_negocio').val('').trigger('change');
+
+    $('#select_modal_tipo_doc').val('').trigger('change');
 }
 
 function limpiar_form_interesado(){ //Para limpIar los campos despues de registrar un interesado
     $('#idclientes').val("");
     $('#nombre_razon_social_input').val("");
     $('#nombre_comercial_input').val("");
-    $('#numDocumentoInput').val("");
+    $('#select_modal_tipo_doc').val("");
     $('#InputCorreo1').val("");
     $('#InputCorreo2').val("");
     $('#InputCorreo3').val("");
@@ -145,21 +206,12 @@ function limpiar_form_interesado(){ //Para limpIar los campos despues de registr
     $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
 }
 
-
-
-function lista_interesados(){
-    $("#lista_interesados").html('<div id="loader"></div>');
-    $.get('/dashboard/listas/interesados/lista', function(data){
-        $("#lista_interesados").html(data);
-    });
-}
-
 function desactivar_cliente(idclientes) {
-        crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
+        crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_tabla_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
 }
 
 function activar_cliente(idclientes) {
-    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_clientes();lista_interesados(); }, function(){ console.log('Eror') });
+    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_tabla_clientes();lista_interesados(); }, function(){ console.log('Eror') });
 }
 // .:::::::: LISTA UN DATOS PARA EDITAR CLIENTE ::::::.
 function mostrar_one_cliente(idclientes){
@@ -176,43 +228,39 @@ function mostrar_one_cliente(idclientes){
     //$("#registroModalInteresado").modal('show');
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
-        //console.log(data.cliente);
+        console.log(data);
         $('#cargando_edit_cliente').hide(); //oculto icon spiner
 
-        $('#idclientes').val(data.cliente['idclientes']);
-        $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
-        $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
-        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
-        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
-        $('#numDocumentoInput').val(data.cliente['nro_documento']);
-        $('#InputCorreo1').val(data.cliente['correo_1']);
-        $('#InputCorreo2').val(data.cliente['correo_2']);
-        $('#InputCorreo3').val(data.cliente['correo_3']);
-        $('#number_empresa_input').val(data.cliente['telefono_empresa']);
-        $('#number_contacto_input').val(data.cliente['telefono_contacto']);
-        $('#number_otro_input').val(data.cliente['telefono_otro']);
-        $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']);
+        $('#idclientes').val(data.idclientes);
+        $('#select_modal_tipoPersona').val(data.tipo_persona);
+        $('#select_modal_tipo_doc').val(data.tipo_documento);
+        $('#nro_documento').val(data.nro_documento);
+        $('#nombre_razon_social_input').val(data.nombres_razon_social);
+        $('#nombre_comercial_input').val(data.apellidos_nombre_comercial);
+        $('#InputCorreo1').val(data.correo_1);
+        $('#number_empresa_input').val(data.telefono_empresa);
+        $('#direccion').val(data.direccion);
 
-        if (data.cliente['idgiro_negocio']) {
-            $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']).trigger('change');
+        $('#select_modal_provincia').val(data.provincia);
+        $('#select_modal_grado_interes').val(data.grado_interes);
+        $('#select_modal_tamano_empresa').val(data.tamano_empresa);
+        $('#select_modal_a_que_dedicas').val(data.a_que_dedicas);
+        $('#InputCorreo2').val(data.correo_2);
+        $('#InputCorreo3').val(data.correo_3);
+        $('#number_contacto_input').val(data.telefono_contacto);
+        $('#number_otro_input').val(data.telefono_otro);
+
+        if (data.idgiro_negocio) {
+            $('#select_modal_giro_negocio').val(data.idgiro_negocio).trigger('change');
         }else{
-            $('#select_modal_giroNegocio').val(null).trigger('change');
+            $('#select_modal_giro_negocio').val('').trigger('change');
         }
 
-        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
-        if (data.cliente['tipo_persona']) {
-            $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
+        if (data.tipo_documento) {
+            $('#select_modal_tipo_doc').val(data.tipo_documento).trigger('change');
         }else{
-            $('#select_modal_tipoPersona').val(null).trigger('change');
+            $('#select_modal_tipo_doc').val('').trigger('change');
         }
-
-        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
-        if (data.cliente['tipo_documento']) {
-            $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
-        }else{
-            $('#select_modal_tipoDocumento').val(null).trigger('change');
-        }
-
     });
 }
 
@@ -231,7 +279,7 @@ function mostrar_one_interesado(idclientes){
         $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
         $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
         $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
-        $('#numDocumentoInput').val(data.cliente['nro_documento']);
+        $('#select_modal_tipo_doc').val(data.cliente['nro_documento']);
         $('#InputCorreo1').val(data.cliente['correo_1']);
         $('#InputCorreo2').val(data.cliente['correo_2']);
         $('#InputCorreo3').val(data.cliente['correo_3']);
@@ -298,7 +346,7 @@ function cunsulta_sunat(){
                 data = JSON.parse(data);
                 $('#cargado_sunat').show();
                 $('#cargando_sunat').hide();
-
+                console.log(data);
                 if (data['status'] == false) {
                     Swal.fire({
                         title: "Error",
@@ -330,6 +378,7 @@ function cunsulta_sunat(){
             $('#cargando_sunat').show();
             $.get('/consultas/ruc/'+nro_document, function(data){
                 data = JSON.parse(data);
+                console.log(data);
                 $('#cargado_sunat').show();
                 $('#cargando_sunat').hide();
 
@@ -343,6 +392,7 @@ function cunsulta_sunat(){
                 } else {
                     $('#nombre_razon_social_input').val(data.result['razon_social']);
                     $('#nombre_comercial_input').val(data.result['nombre_comercial']);
+                    $('#direccion').val(data.result['domicilio_fiscal']);
                     $('#persona_contacto_input').val('');
                 }
 
@@ -361,5 +411,46 @@ function cunsulta_sunat(){
 
     $('.tooltip').removeClass("show").addClass("hidde");
     // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
+}
+
+
+// ..:::: GUARDAR ACTIVIDAD ::::..
+function guardar_actividad(e){
+
+    $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
+
+    crud_guardar_editar( e, '/dashboard/actividad/guardar', 'actividad', function(){ limpiar_form_actividad(); }, function(){ lista_tabla_actividades(); }, function(){ console.log('Console Error'); });
+}
+// ..:::
+function limpiar_form_actividad(){
+
+    $('.tooltip').removeClass("show").addClass("hidde"); // REMOVEMOS EL TOOTIP
+
+    $('.form-control').removeClass("is-invalid"); // REMOVEMOS LOS INPUT MARCADOS EN ROJO
+
+    $('#contenedor_de_errores_actividad').html(''); // REMOVEMOS EL CONTENEDOR DE ERRORES
+
+    $('#titulo_modal').html('Agregar actividad');
+    $('#btn_footer_modal').html('Guardar actividad');
+
+    $('#idactividad').val("");
+
+    $('#nombre_actividad').val("");
+}
+
+// AGREGAR - GIRO NEGOCIO
+function guardar_giro_negocio(e){
+    crud_guardar_modal(
+        e,
+        '/dashboard/gironegocio/guardar',
+        'giro_negocio',
+        function(){ limpiar_form_giro_negocio(); },
+        function(){ console.log('Console Error'); }
+    );
+}
+
+function limpiar_form_giro_negocio(){
+    $('#idgiro_negocio').val("");
+    $('#nombre_input').val("");
 }
 init();

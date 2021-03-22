@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <!-- ::::::::: CLIENTES / INTERESADOS ::::::: -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">
                             <i class="fas fa-list-alt text-purple"></i>
                             <span class="nav-link-text">Listas</span>
@@ -91,7 +91,7 @@
                                 </li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                     <!-- ::::::::: CONFIGURACION ::::::: -->
                     <li class="nav-item">
                         <a class="nav-link" href="#navbar-component" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-components">

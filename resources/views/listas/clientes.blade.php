@@ -18,32 +18,77 @@
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
+                    <div class="row align-middle">
+
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
-                            <select  name="filtrar_por" id="filtrar_por" class="form-control"  style="color: black !important; font-weight: bold !important;">
+                            <select  name="filtro_tipo" id="filtro_tipo" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; font-weight: bold !important;" data-minimum-results-for-search="Infinity">
                                 <option value="0">TODOS</option>
                                 <option value="1">INTERESADO</option>
                                 <option value="2">CLIENTE</option>
                             </select>
                         </div>
-                        {{-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            <form>
-                                <input class="form-control" placeholder="Buscar evento..." type="text" id="searchTerm" onkeyup="doSearch()" />
-                            </form>
-                        </div> --}}
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-10 text-right">
-                            <a type="button" href="#" onclick="limpiar_form_interesado();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_interesado"><i class="fas fa-plus-circle"></i> Agregar Interesado</a>
-                            <a type="button" href="#" onclick="limpiar_form_cliente();" class="btn btn btn-primary" data-toggle="modal" data-target="#modal_cliente_interesado"><i class="fas fa-plus-circle"></i> Agregar Cliente</a>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
+                            <select  name="filtro_estado" id="filtro_estado" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; font-weight: bold !important;" data-minimum-results-for-search="Infinity">
+                                <option value="0">ACTIVO</option>
+                                <option value="1">INACTIVO</option>
+                            </select>
                         </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8 text-right">
+                            <button id="interesado" type="button" class="btn btn-outline-primary px-3 py-2" >
+                                <i class="fas fa-plus-circle"></i>
+                                <span > Agregar Interesado</span>
+                            </button>
+                            {{-- <a id="cliente" onclick="limpiar_form_cliente();"   class="btn btn btn-primary" type="button" href="#"><i class="fas fa-plus-circle"></i> Agregar Interesado</a> --}}
+                            {{-- <a id="cliente" onclick="limpiar_form_cliente();"   class="btn btn btn-primary" type="button" href="#"><i class="fas fa-plus-circle"></i> Agregar Cliente</a> --}}
+                            <button id="cliente" type="button" class="btn btn-outline-primary px-3 py-2" >
+                                <i class="fas fa-plus-circle"></i>
+                                <span > Agregar Cliente</span>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="card-body" style="padding-top: 0px !important;" >
-                    <!-- TABLA LISTA DE ACTIVIDADES-->
-                    <div class="table-responsive py-4" id="lista_tabla_clientes_interesados" >
+                <div class="card-body" style="padding-top: 15px !important; padding-bottom: 0px !important;" >
+                    <div class="row" >
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 ">
+                            <label class="media align-items-center">
+                                <span style="padding-right: 15px;">Ver </span>
+                                <select name="filtro_cant" id="filtro_cant" onchange="lista_tabla_clientes(1);" aria-controls="datatable-basic" class="form-control form-control-sm"  style="color: black !important; font-weight: bold !important; display: inline-block;" >
+                                    <option value="3">3</option>
+                                    <option selected value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>
+                                <span style="padding-left: 15px;"> registros</span>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-6 col-xl-7 ">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 ">
+                            <div class="input-group input-group-merge"">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="padding: 2px 8px 2px 8px !important;"><i  class="fas fa-search"></i></span>
+                                </div>
+                                <input id="filtro_search" name="filtro_search" class="form-control form-control-sm" placeholder="Buscar cliente..." type="search" >
+                            </div>
+                        </div>
                     </div>
+
+                    <div id="lista_tabla_clientes_interesados"  style="padding-top: 0px !important;">
+                    </div>
+                    <!-- TABLA LISTA DE CLIENTES-->
                 </div>
-                <div class="card-footer py-4"></div>
             </div>
         </div>
     </div>
@@ -53,7 +98,7 @@
         <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <!-- ::::::: MODAL HEADER ::::::: -->
-                <div class="modal-header">
+                <div class="modal-header" style="padding-bottom: 10px !important;">
                     <h5 class="modal-title" id="exampleModalLabel">
                         <span id="titulo_modal_cliente"> Agregar Cliente </span>
                         <i style="font-size: 20px !important; display: none;" class="fas fa-spinner fa-pulse" id="cargando_edit_cliente"></i>
@@ -63,93 +108,53 @@
                     </button>
                 </div>
                 <!-- ::::::: MODAL BODY ::::::: -->
-                <div class="modal-body" style="padding-top: 0px !important; padding-bottom: 0px !important;">
+                <div class="modal-body" style="padding-top: 0px !important; padding-bottom: 0px !important;  ">
                     <form id="formulario_cliente_interesado" >
                         @csrf
                         <input type="hidden" id="idclientes" name="idclientes" />
-                        <div class="card-body border" style="border-radius: 10px !important; padding-bottom: 0px !important;">
-                            <div class="row">
-                                <!-- ::::::::::: BARRA DE PROGRESO :::::::::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="select_modal_tipo_doc">
-                                            <sup class="text-danger font-weight-bold">*</sup>
-                                            Tipo documento
-                                        </label>
-                                        <select  class="form-control" id="select_modal_tipo_doc" name="select_modal_tipo_doc" data-toggle="" style="color: black !important; font-weight: bold !important;" >
+                        <input type="hidden" id="select_modal_tipoPersona" name="select_modal_tipoPersona" value="1" />
+                        <div class="row">
+                            <!-- ::::::::::: INPUT TIPO DOCUMENTO :::::::::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="select_modal_tipo_doc">
+                                        Tipo documento
+                                    </label>
+                                    <select  class="form-control" id="select_modal_tipo_doc" name="select_modal_tipo_doc" data-toggle="" style="color: black !important; font-weight: bold !important;" >
 
-                                            <option value="1">DNI</option>
-                                            <option value="2">RUC</option>
-                                        </select>
-                                    </div>
+                                        <option value="1">DNI</option>
+                                        <option value="2">RUC</option>
+                                    </select>
                                 </div>
-                                <!-- ::::::::::: BARRA DE PROGRESO :::::::::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="nro_documento">
-                                            <sup class="text-danger font-weight-bold">*</sup>
-                                            Numero documento
-                                        </label>
-                                        <div class="input-group  ">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
-                                            </div>
-                                            <input  type="number" class="form-control" id="nro_documento" name="nro_documento" placeholder="numero"   style="color: black !important; font-weight: bold !important;"/>
-                                            <span class="input-group-addon input-group-append">
-                                                <button class="btn btn-default" type="button"  onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta RENIEC/SUNAT">
-                                                    <i class="fas fa-angle-right" id="cargado_sunat"></i>
-                                                    <i style="font-size: 20px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_sunat"></i>
-                                                </button>
-                                            </span>
-                                            <div class="invalid-feedback">Por Favor escriba un N° Doc. valido</div>
+                            </div>
+                            <!-- ::::::::::: INPUT N° DE DOCUMENTO :::::::::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="nro_documento">
+                                        Numero documento
+                                    </label>
+                                    <div class="input-group  ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                         </div>
-                                    </div>
-                                </div>
-                                <!-- ::::::::::: SELECT TIPO PERSONA:::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <label class="form-control-label" for="select_modal_tipoPersona">Tipo persona</label>
-                                    <div class="input-group">
-                                        <select  class="form-control" data-toggle="" id="select_modal_tipoPersona" name="select_modal_tipoPersona"  style="color: black !important; font-weight: bold !important;">
-                                            <option value="1" >Interesado</option>
-                                            <option value="2" >Cliente</option>
-                                        </select>
-                                        <span class="input-group-addon input-group-append" data-toggle="tooltip" data-placement="top" title="Deshabilitado">
-                                            <button disabled class="btn btn-default" type="button">
-                                                <i class="fas fa-plus-circle"></i>
+                                        <input  type="number" class="form-control" id="nro_documento" name="nro_documento" placeholder="numero"   style="color: black !important; font-weight: bold !important;"/>
+                                        <span class="input-group-addon input-group-append">
+                                            <button class="btn btn-default" type="button"  onclick="cunsulta_sunat();" data-toggle="tooltip" data-placement="top" title="Consulta RENIEC/SUNAT">
+                                                <i class="fas fa-angle-right" id="cargado_sunat"></i>
+                                                <i style="font-size: 20px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_sunat"></i>
                                             </button>
                                         </span>
-                                        <div class="invalid-feedback">Selecione un tipo persona por favor.</div>
+                                        <div class="invalid-feedback">Por Favor escriba un N° Doc. valido</div>
                                     </div>
                                 </div>
-                                <!-- ::::::::::: INPUT NOMBRE RAZON SOCIAL ::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <label for="nombre_razon_social_input" class="form-control-label">Nombres/Razon social</label>
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input  type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Erick" autocomplete="off" style="color: black !important; font-weight: bold !important;"/>
-                                            <div class="invalid-feedback">Por Favor escriba un nombre valido</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ::::::::::: INPUT APELLIDOS NOMBRE COMERCIAL ::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8">
-                                    <div class="form-group">
-                                        <label class="form-control-label" for="nombre_comercial_input">Apellidos/Nombre comercial</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                            </div>
-                                            <input  type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Zumaeta" autocomplete="off" style="color: black !important; font-weight: bold !important;" />
-                                            <div class="invalid-feedback">Por Favor escriba un apellido valido</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- ::::::::::: SELECT GIRO NEGOCIO ::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <label class="form-control-label" for="select_modal_giroNegocio">Giro de negocio</label>
+                            </div>
+                            <!-- ::::::::::: SELECT GIRO NEGOCIO ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="select_modal_giroNegocio">
+                                        <sup class="text-danger font-weight-bold">*</sup>
+                                        Giro de negocio
+                                    </label>
                                     <div class="input-group">
 
                                         <select  class="form-control" data-toggle="" id="select_modal_giro_negocio" name="select_modal_giro_negocio"  style="color: black !important; font-weight: bold !important;">
@@ -163,72 +168,138 @@
                                         <div class="invalid-feedback">Por Favor selecione un giro de negocio</div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- ::::::::::: INPUT NOMBRE RAZON SOCIAL ::::::::::::-->
-                                {{-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label for="select_modal_tipoDocumento">Tipo documento</label>
-                                        <div class="input-group ">
-                                            <select class="form-control" id="select_modal_tipoDocumento" name="select_modal_tipoDocumento" data-toggle="select" >
-                                                <option>Seleccione</option>
-                                                <option value="3">DNI</option>
-                                                <option value="6">RUC</option>
-                                            </select>
-                                            <div class="invalid-feedback">Seleccione un tipo documento por favor.</div>
+                            <!-- ::::::::::: INPUT NOMBRE RAZON SOCIAL ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <label for="nombre_razon_social_input" class="form-control-label">
+                                    <sup class="text-danger font-weight-bold">*</sup>
+                                    Nombres/Razon social
+                                </label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
-                                    </div>
-                                </div> --}}
-                                <!-- ::::::::::: BARRA DE PROGRESO :::::::::::::::::::-->
-                                {{-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label for="numDocumentoInput">Numero documento</label>
-                                        <div class="input-group ">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
-                                            </div>
-                                            <input  type="number" class="form-control" id="numDocumentoInput" name="numDocumentoInput"  style="color: black !important; font-weight: bold !important;" />
-                                            <div class="invalid-feedback">Escriba un numero de documento por favor.</div>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                                <!-- ::::::::::: INPUT CORREO 1 ::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlInput1">Correo 1 </label>
-                                        <div class="input-group ">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-at"></i></span>
-                                            </div>
-                                            <input  type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" style="color: black !important; font-weight: bold !important;" />
-                                        </div>
+                                        <input  type="text" class="form-control" id="nombre_razon_social_input" name="nombre_razon_social_input" placeholder="Nombre / Razon Social"   style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                        <div class="invalid-feedback">Por Favor escriba un nombre valido</div>
                                     </div>
                                 </div>
-
-                                <!-- ::::::::::: INPUT TELEFONO EMPRESA ::::::::::::-->
-                                <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                                    <div class="form-group">
-                                        <label for="number-empresa-input">Telefono empresa</label>
-                                        <div class="input-group ">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                            </div>
-                                            <input  class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" style="color: black !important; font-weight: bold !important;" />
+                            </div>
+                            <!-- ::::::::::: INPUT APELLIDOS NOMBRE COMERCIAL ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="nombre_comercial_input">
+                                        Apellidos/Nombre comercial
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         </div>
+                                        <input  type="text" class="form-control" id="nombre_comercial_input" name="nombre_comercial_input" placeholder="Apellidos / Nombre Comercial"   style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                        <div class="invalid-feedback">Por Favor escriba un apellido valido</div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <!-- ::::::::::: INPUT CORREO 1 ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Correo 1 </label>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        </div>
+                                        <input  type="email" class="form-control" id="InputCorreo1" name="InputCorreo1" placeholder="name@example.com" style="color: black !important; font-weight: bold !important;" autocomplete="off"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ::::::::::: INPUT TELEFONO EMPRESA ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                <div class="form-group">
+                                    <label for="number-empresa-input">Telefono empresa</label>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                        <input  class="form-control" type="number" id="number_empresa_input" name="number_empresa_input" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ::::::::::: INPUT DIRECCION ::::::::::::-->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8">
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Dirección</label>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                        </div>
+                                        <input  type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="accordion" id="accordion_opcional" style="padding-top: 10px !important;">
-                            <div class="card">
-                                <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <h5 class="mb-0">FORM OPCIONAL</h5>
+                            <div class="card ">
+                                <div class="card-header bg-gradient-default text-white " id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <h5 class="mb-0 text-white">FORM OPCIONAL</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_opcional">
-                                    <div class="card-body">
+                                    <div class="card-body" style="border: 1px solid #191d4d !important; border-radius: 0 0 10px 10px !important;">
                                         <div class="row">
+                                            <!-- ::::::::::: SELECT PROVINCIA ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_provincia">Provincia</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_provincia" name="select_modal_provincia" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: SELECT GRADO DE INTERES ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_grado_interes">Grado de interés</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_grado_interes" name="select_modal_grado_interes" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: SELECT TAMAÑO DE EMPRESA ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_tamano_empresa">Tamaño de empresa</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_tamano_empresa" name="select_modal_tamano_empresa" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ::::::::::: SELECT A QUE TE DEDICAS ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                                                <div class="form-group">
+                                                    <label for="select_modal_a_que_dedicas">A que te dedicas</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_a_que_dedicas" name="select_modal_a_que_dedicas" placeholder="A que te dedicas" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <!-- ::::::::::: INPUT CORREO 2 ::::::::::::-->
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlInput2">Correo 2 </label>
                                                     <div class="input-group ">
@@ -240,7 +311,7 @@
                                                 </div>
                                             </div>
                                             <!-- ::::::::::: INPUT CORREO 3 ::::::::::::-->
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="form-group">
                                                     <label for="exampleFormControlInput3">Correo 3 </label>
                                                     <div class="input-group ">
@@ -252,7 +323,7 @@
                                                 </div>
                                             </div>
                                             <!-- ::::::::::: INPUT TELEFONO CONTACTO ::::::::::::-->
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="form-group">
                                                     <label for="number-contacto-input">Telefono contacto</label>
                                                     <div class="input-group ">
@@ -264,7 +335,7 @@
                                                 </div>
                                             </div>
                                             <!-- ::::::::::: INPUT TELEFONO OTRO::::::::::::-->
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                                                 <div class="form-group">
                                                     <label for="number-otro-input">Telefono otro</label>
                                                     <div class="input-group ">
@@ -301,9 +372,9 @@
 
                 <!-- MODAL FOOTER -->
                 <div class="modal-footer" style="padding-top: 0px !important;">
-                    <button id="guardar_registro_cliente" type="button" class="btn btn-outline-success px-2 py-2" >
+                    <button id="guardar_registro" type="button" class="btn btn-outline-primary px-3 py-2" >
                         <i class="far fa-save"> </i>
-                        <span id="btn_footer_modal_cliente">Guardar</span>
+                        <span id="btn_footer_modal_cliente">GUARDAR</span>
                     </button>
                 </div>
             </div>
@@ -320,7 +391,7 @@
                         Agregar Interesado
                         <i style="font-size: 24px; display: none;" class="fas fa-spinner fa-pulse fa-2x" id="cargando_edit"></i>
                     </h5>
-                    <button onclick="limpiar_interesado();" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button  type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
                     </button>
                 </div>
@@ -533,7 +604,7 @@
 
     <!-- ================================= MODAL Detalle================================= -->
     <div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" id="cliente_modal">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable" role="document" id="cliente_modal">
             <!-- Contenido del modal /  -->
         </div>
     </div>
@@ -664,6 +735,65 @@
         </div>
     </div>
     <!-- FIN-MODAL -->
+    <!-- ::::::: MODAL GIRO NEGOCIO -->
+    <div class="modal fade" id="modal_giro_negocio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+            <div class="modal-content" >
+                <!-- :::: MODAL HEADER :::: -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                          Agregar Giro Negocio
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red"></i> </span>
+                    </button>
+                </div>
+
+                <!-- :::: MODAL BODY :::: -->
+                <div class="modal-body" style="padding-top: 0px !important; padding-bottom: 0px !important;" >
+                    <form id="formulario_giro_negocio" >
+                        @csrf
+                        <input type="hidden" id="idgiro_negocio" name="idgiro_negocio" />
+                        <div class="row">
+                            <!-- :::::::: BARRA DE PROGRESO ::::::::-->
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <label for="nombre_razon_social_input">Nombre</label>
+                                <div class="form-group">
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-signature"></i></span>
+                                        </div>
+                                        <input  type="text" class="form-control" id="nombre_giro_negocio" name="nombre_giro_negocio" placeholder="Giro de negocio" style="color: black !important; font-weight: bold !important;" />
+                                        <div class="invalid-feedback"> Rellene el campo por favor. </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- :::::::: BARRA DE PROGRESO ::::::::-->
+                            <div class="col-sm-12 col-md-12 col-xl-12" >
+                                <div class="form-group">
+                                    <div class="progress" id="div_barra_progress_giro_negocio" style="height: 12px !important;">
+                                        <div id="barra_progress_giro_negocio" class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- :::::::: CONTENEDOR DE ERRORES ::::::::-->
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <div id="contenedor_de_errores_giro_negocio"></div>
+                            </div>
+                        </div>
+                        <button type="submit" style="display: none;"></button>
+                    </form>
+                </div>
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer" style="padding-top: 0px !important;">
+                    <button id="guardar_registro_giro_negocio" type="button" class="btn btn-outline-success" >
+                        <i class="far fa-save"> </i>
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 @endsection

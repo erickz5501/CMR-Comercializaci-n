@@ -69,7 +69,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     // MUESTRA DATOS DE UN CLIENTE PAARA EDITAR
     Route::get('/mostrar/clientes/{id_cliente}', "clientes\ClientesController@detalle_cliente_one");
     // EDITA LOS DATOS DE UN CLIENTE
-    Route::post('/editar/clientes', 'clientes\ClientesController@editarCliente');
+    Route::post('/guardar/clientes-interesados', 'clientes\ClientesController@agregar_edit_cliente_interesado');
     //ACTIVA UN CLIENTE
     Route::get('/cliente/activar/{idclientes}', "clientes\ClientesController@activar");
     //DESACTIVA UN CLIENTE
