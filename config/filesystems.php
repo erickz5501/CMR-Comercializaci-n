@@ -35,12 +35,21 @@ return [
             'root' => storage_path('app'),
         ],
 
+        // Quitar este...
         'public' => [
             'driver' => 'local',
-            'root' => public_path(),
+            'root' => public_path() . '\\docs\\',
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+
+        // Activar este
+        // 'public' => [
+        //     'driver' => 'local',
+        //     'root' => '/home/ceatec18/gestion.ceatec.com.pe/docs/',
+        //     'url' => env('APP_URL').'/storage',
+        //     'visibility' => 'public',
+        // ],
 
         's3' => [
             'driver' => 's3',

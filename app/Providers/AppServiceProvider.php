@@ -14,9 +14,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         // $this->app->bind('path.public',function(){
-        //     return'/home/ceatec18/ceatiendas.ceatec.com.pe/';
+        //     return'/home/ceatec18/gestion.ceatec.com.pe/';
         // });
+
     }
 
     /**

@@ -19,12 +19,12 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # HTTPS
+    # HTTPS #
     # RewriteEngine On
     # RewriteCond %{HTTPS} off
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # RewriteEngine on
+    # RewriteEngine on #
     # RewriteCond %{HTTP_HOST} ^www.gestion.ceatec.com.pe [NC]
     # RewriteRule ^(.*)$ https://gestion.ceatec.com.pe/$1 [L,R=301,NC]
 </IfModule>
