@@ -256,7 +256,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                                                         </div>
-                                                        <input  type="text" class="form-control" id="select_modal_provincia" name="select_modal_provincia" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                        <input  type="text" class="form-control" id="select_modal_provincia" name="select_modal_provincia" placeholder="Provincia" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,7 +268,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                                                         </div>
-                                                        <input  type="text" class="form-control" id="select_modal_grado_interes" name="select_modal_grado_interes" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                        <input  type="text" class="form-control" id="select_modal_grado_interes" name="select_modal_grado_interes" placeholder="Grado de interes" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +280,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                                                         </div>
-                                                        <input  type="text" class="form-control" id="select_modal_tamano_empresa" name="select_modal_tamano_empresa" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                        <input  type="text" class="form-control" id="select_modal_tamano_empresa" name="select_modal_tamano_empresa" placeholder="Tamaño de empresa" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
                                                     </div>
                                                 </div>
                                             </div>

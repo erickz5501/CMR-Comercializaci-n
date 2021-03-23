@@ -25,14 +25,14 @@
                                     <li class="media pt-1 pb-2 border-bottom">
                                         <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
                                         <div class="media-body pl-3">
-                                            <span class="font-size-ms text-muted">Nombre:</span>
+                                            <span class="font-size-ms text-primary">Nombre:</span>
                                             <span class="d-block text-heading font-size-sm">{{ $det_cliente->nombres_razon_social }}</span>
                                         </div>
                                     </li>
                                     <li class="media pt-1 pb-2 border-bottom">
                                         <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
                                         <div class="media-body pl-3">
-                                            <span class="font-size-ms text-muted">Apellido:</span>
+                                            <span class="font-size-ms text-primary">Apellido:</span>
                                             <span class="d-block text-heading font-size-sm">
                                                     {{ $det_cliente->apellidos_nombre_comercial }}
                                             </span>
@@ -41,7 +41,7 @@
                                     <li class="media pt-1 pb-2 border-bottom">
                                         <i class="fas fa-chart-line font-size-lg mt-2 mb-0 text-primary"></i>
                                         <div class="media-body pl-3">
-                                            <span class="font-size-ms text-muted">Giro negocio</span>
+                                            <span class="font-size-ms text-primary">Giro negocio</span>
                                             <span class="d-block text-heading font-size-sm">
                                                     {{ $det_cliente->gironegocio->nombre }}
                                             </span>
@@ -50,7 +50,7 @@
                                     <li class="media pt-1 pb-2 border-bottom">
                                         <i class="fas fa-id-card font-size-lg mt-2 mb-0 text-primary"></i>
                                         <div class="media-body pl-3">
-                                            <span class="font-size-ms text-muted">N° documento</span>
+                                            <span class="font-size-ms text-primary">N° documento</span>
                                             <span class="d-block text-heading font-size-sm">
                                                     {{ $det_cliente->nro_documento }}
                                             </span>

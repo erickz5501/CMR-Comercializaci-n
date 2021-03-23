@@ -434,8 +434,10 @@ function mostrar_one_registro(idregistro){
         $('#evento_input').val(data.registro['descripcion_evento']);
         $('#avance_input').val(data.registro['avance']);
         $('#cobrar_input').val(data.registro['por_cobrar']);
+        $('#proxima_llamada').val(data.registro['proxima_llamada']);
         $('#conclusionessTextarea').val(data.registro['observacion']);
         $('#tabla_detalle_modulos').empty();//Limpiamos los registro de esa tabla
+
         console.log(data.registro['idclientes']);
         for (let i = 0; i < data.cant_modulos; i++) {
             let id  = _id();

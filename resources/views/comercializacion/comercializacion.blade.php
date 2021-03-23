@@ -121,7 +121,7 @@
                                     </div>
 
                                     <!-- ::::::: INPUT PERSONA DE CONTACTO ::::::::: -->
-                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 ">
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4 ">
                                         <div class="form-group">
                                             <label for="">Persona contacto</label>
                                             <input  class="form-control" type="text" id="persona_contacto_input" name="persona_contacto_input" placeholder="Persona Contacto" autocomplete="off" style="color: black !important; font-weight: bold !important;"/>
@@ -146,7 +146,7 @@
                                     </div> --}}
 
                                     <!-- ::::::: INPUT MEDIO DE CONTACTO ::::::::: -->
-                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
                                         <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup> Medio de contacto</label>
                                         <div class="form-group">
                                             <div class="input-group" >
@@ -158,6 +158,18 @@
                                                 </span>
                                                 <!-- MENSAJE DE ERROR -->
                                                 <div id="invlid_medio" class="invalid-feedback">Por favor Seleccione un MEDIO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
+                                        <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup>Próxima Llamada </label>
+                                        <div class="form-group">
+                                            <div class="input-group" >
+                                                <input class="form-control" type="datetime-local"  id="proxima_llamada" name="proxima_llamada"  >
+                                                {{-- <input type="text"   id="proxima_llamada"> --}}
+                                                <!-- MENSAJE DE ERROR -->
+                                                <div id="invlid_medio" class="invalid-feedback">Por favor Seleccione proxima LLAMADA.</div>
                                             </div>
                                         </div>
                                     </div>
@@ -1005,5 +1017,23 @@
 <script src="{{ asset('funciones/crud.js')}}"></script>
 <script src="{{ asset('ajax/componentes/ajaxmodals.js')}}"></script>
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
-
+{{-- <script>
+    <script type="text/javascript">
+    $(function() {
+      $('#proxima_llamada').datetimepicker({
+        icons: {
+          time: "fa fa-clock",
+          date: "fa fa-calendar-day",
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down",
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-screenshot',
+          clear: 'fa fa-trash',
+          close: 'fa fa-remove'
+        }
+      });
+    });
+  </script>
+</script> --}}
 @endsection

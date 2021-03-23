@@ -22,6 +22,7 @@ class ComercializacionModel extends Model
         'nro_cotizacion',
         'idpersonal',
         'calificacion',
+        'proxima_llamada',
         'avance',
         'por_cobrar',
         'observacion',

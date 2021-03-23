@@ -44,7 +44,7 @@ class ClientesController extends Controller
 
     public function lista_select2_clientes(){
 
-        $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT( clientes.nro_documento, ' - ' , clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial) AS nombre") ] )
+        $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT(  clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial ) AS nombre") ] )
                                     ->where('estado', 0)
                                     ->get();
 

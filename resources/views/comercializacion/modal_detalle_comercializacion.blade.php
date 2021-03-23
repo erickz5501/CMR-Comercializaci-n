@@ -129,8 +129,10 @@
                         <div class="media-body pl-3">
                             <span class="font-size-ms text-primary">Cotizacion </span>
                             <span class="d-block text-heading font-size-sm">
-                                @if ( $cotizacion->cotizacion )
+                                @if ( $cotizacion )
+                                    @if ( $cotizacion->ModeloCotizacion )
                                     {{  $cotizacion->ModeloCotizacion->nombre }}
+                                    @endif
                                 @else
                                     -- no definido --
                                 @endif

@@ -99,7 +99,9 @@ class ComercializacionController extends Controller
         $cobrar_input                   = $request->input('cobrar_input');
         $conclusionessTextarea          = $request->input('conclusionessTextarea');
 
-        //return json_encode($select_modal_cotizacion);
+        $proxima_llamada          = \Carbon\Carbon::parse($request->input('proxima_llamada'))->format('Y-m-d h:i:s');
+
+        // return json_encode($proxima_llamada);
 
         if ($idcomercializacion != "") {
             $registro = ComercializacionModel::find($idcomercializacion);
@@ -129,9 +131,9 @@ class ComercializacionController extends Controller
                 $registro->avance               = $avance_input;
                 $registro->por_cobrar           = $cobrar_input;
                 $registro->observacion          = $conclusionessTextarea;
+                $registro->proxima_llamada      = $proxima_llamada;
 
                 //Registra los modulos en la tabla modulo_comercializacion
-
                 if ($cant_licencias_modulo != null) {
                     foreach ($select_modal_modulos as $i => $value) {
                         $modulo_comercializacion = ModuloComercializacionModel::create([
@@ -177,7 +179,8 @@ class ComercializacionController extends Controller
                 //'calificacion' => $calificacionSelect,
                 'avance' => $avance_input,
                 //'por_cobrar' => $cobrar_input,
-                'observacion' => $conclusionessTextarea
+                'observacion' => $conclusionessTextarea,
+                'proxima_llamada' => $proxima_llamada
                 ]);
 
             //Registro en la tabla modulo_comercializacion
@@ -229,7 +232,7 @@ class ComercializacionController extends Controller
         $avance_input                   = $request->input('avance_input');
         $cobrar_input                   = $request->input('cobrar_input');
         $conclusionessTextarea          = $request->input('conclusionessTextarea');
-
+        $proxima_llamada          = \Carbon\Carbon::parse($request->input('proxima_llamada'))->format('Y-m-d h:i:s');
         $registro = ComercializacionModel::create(
             [
             'idusers' => $idusers,
@@ -245,7 +248,8 @@ class ComercializacionController extends Controller
             //'calificacion' => $calificacionSelect,
             'avance' => $avance_input,
             //'por_cobrar' => $cobrar_input,
-            'observacion' => $conclusionessTextarea
+            'observacion' => $conclusionessTextarea,
+            'proxima_llamada' => $proxima_llamada,
             ]);
 
         //Registro en la tabla modulo_comercializacion
@@ -341,7 +345,7 @@ class ComercializacionController extends Controller
         $cotizacion = CotizacionComercializacionModel::with('ModeloCotizacion')->where('idcomercializacion', $idcomercializacion)->first();
         $cant_modulos = \count($det_modulo);
 
-        //return \json_encode($cotizacion);
+        // return json_encode($cotizacion);
         return view('comercializacion.modal_detalle_comercializacion', compact('det_registro','det_modulo','cant_modulos', 'cotizacion') );
     }
 
