@@ -53,9 +53,9 @@
 
                 <div class="card-body" style="padding-top: 15px !important; padding-bottom: 0px !important;" >
                     <div class="row" >
-                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2 ">
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 " >
                             <label class="media align-items-center">
-                                <span style="padding-right: 15px;">Ver </span>
+                                <span style="padding-right: 10px;">Ver </span>
                                 <select name="filtro_cant" id="filtro_cant" onchange="lista_tabla_clientes(1);" aria-controls="datatable-basic" class="form-control form-control-sm"  style="color: black !important; font-weight: bold !important; display: inline-block;" >
                                     <option value="3">3</option>
                                     <option selected value="5">5</option>
@@ -67,11 +67,11 @@
                                     <option value="100">100</option>
                                     <option value="200">200</option>
                                 </select>
-                                <span style="padding-left: 15px;"> registros</span>
+                                <span style="padding: 0px 30px 0px 10px;"> registros</span>
                             </label>
                         </div>
 
-                        <div class="col-sm-12 col-md-4 col-lg-6 col-xl-7 ">
+                        <div class="col-sm-12 col-md-4 col-lg-6 col-xl-6 ">
                         </div>
 
                         <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 ">

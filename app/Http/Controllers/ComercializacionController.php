@@ -21,32 +21,58 @@ class ComercializacionController extends Controller
         return view('comercializacion.comercializacion');
     }
 
-    public function indexLista(){
+    public function indexLista(Request $request){
 
-            $comercializaciones = ClientesModel::with('ModeloComercializaciones','gironegocio')
-                                                ->where(function($query){
-                                                    return $query->orWhereHas('ModeloComercializaciones', function ($query){
+        $filtro_cant   = $request->filtro_cant;
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $comercializaciones = ClientesModel::with('ModeloComercializaciones','gironegocio')
+                                            ->where(function($query) use ($filtro_search){
+                                                    return $query->orWhereHas('ModeloComercializaciones', function ($query) use ($filtro_search){
                                                         return $query->where('idcomercializacion', '>', '0');
                                                     });
                                                 })
-                                                ->orderBy('created_at', 'DESC')
-                                                ->get();
+                                            ->where(function($query) use ($filtro_search){
+                                                    return $query->orWhereHas('gironegocio', function ($query) use ($filtro_search){
+                                                        return $query->orwhere('nombre', 'like', "%{$filtro_search}%");
+                                                    });
+                                                })
+                                            ->where(function ($query) use ($filtro_search){
+                                                return $query->orWhere('nombres_razon_social', 'like', "%{$filtro_search}%")
+                                                                ->orWhere('apellidos_nombre_comercial', 'like', "%{$filtro_search}%")
+                                                                ->orWhere('nro_documento', 'like', "%{$filtro_search}%")
+                                                                ->orWhere('correo_1', 'like', "%{$filtro_search}%")
+                                                                ->orWhere('telefono_empresa', 'like', "%{$filtro_search}%");
+                                                })
+                                            ->orderBy('idclientes', 'DESC')
+                                            ->paginate($filtro_cant);
         // return json_encode($comercializaciones);
         return view('componentes.comercializacion.tabla_comercializacion', compact('comercializaciones'));
     }
 
-    public function mostrar_seguimiento($idcliente){//Lista de comercializacion de un cliente/iteresado
+    public function mostrar_seguimiento($idcliente,Request $request){//Lista de comercializacion de un cliente/iteresado
+
+        $filtro_cant   = $request->filtro_cant;
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
 
         $seguimientos = ComercializacionModel::with('ModeloCliente.gironegocio','medio')
                                         ->where('idclientes', $idcliente)
                                         ->orderBy('created_at', 'DESC')
-                                        ->get();
+                                        ->where(function ($query) use ($filtro_search){
+                                            return $query->orWhere('persona_contacto', 'like', "%{$filtro_search}%")
+                                                            ->orWhere('detalla_llamada', 'like', "%{$filtro_search}%")
+                                                            ->orWhere('fecha_evento', 'like', "%{$filtro_search}%");
+                                            })
+                                        ->paginate();
 
         // return json_encode($seguimientos);
         return view('comercializacion.comercializacion_historial', compact('seguimientos'));
     }
 
     public function recargar_tabla_seguimiento($id_idclientes,Request $request){//Lista de comercializacion de un cliente/iteresado
+
+        $filtro_cant   = $request->filtro_cant;
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
 
         if ( !empty( $request->fecha_inicio ) &&  !empty( $request->fecha_fin ) ) {
 
@@ -58,12 +84,22 @@ class ComercializacionController extends Controller
                                                 ->where('idclientes', $id_idclientes)
                                                 ->whereBetween('fecha_evento', [$fecha_inicio, $fecha_fin])
                                                 ->orderBy('fecha_evento', 'DESC')
-                                                ->get();
+                                                ->where(function ($query) use ($filtro_search){
+                                                    return $query->orWhere('persona_contacto', 'like', "%{$filtro_search}%")
+                                                                    ->orWhere('detalla_llamada', 'like', "%{$filtro_search}%")
+                                                                    ->orWhere('fecha_evento', 'like', "%{$filtro_search}%");
+                                                    })
+                                                ->paginate($filtro_cant);
         }else{
             $seguimientos = ComercializacionModel::with('ModeloCliente.gironegocio','medio')
                                                 ->where('idclientes', $id_idclientes)
                                                 ->orderBy('fecha_evento', 'DESC')
-                                                ->get();
+                                                ->where(function ($query) use ($filtro_search){
+                                                    return $query->orWhere('persona_contacto', 'like', "%{$filtro_search}%")
+                                                                    ->orWhere('detalla_llamada', 'like', "%{$filtro_search}%")
+                                                                    ->orWhere('fecha_evento', 'like', "%{$filtro_search}%");
+                                                    })
+                                                ->paginate($filtro_cant);
         }
         // return json_encode(['total'=>count($seguimientos),'segui'=>$seguimientos,'inicio'=>$fecha_inicio,'fin'=>$fecha_fin]);
         return view('componentes.comercializacion.tabla_seguimiento', compact('seguimientos'));

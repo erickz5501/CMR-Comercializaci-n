@@ -81,7 +81,7 @@ class CotizacionController extends Controller
                 Storage::disk('public')->delete($cotizacion_ruta_delete);
                 // insetamos nuevo doc
                 $doc_cotizacion_nombre =  $doc_cotizacion->getClientOriginalName() . '-' . rand() . '.' . $doc_cotizacion->getClientOriginalExtension();
-                $doc_ruta = '/docs';
+                $doc_ruta = '/';
                 $doc_ruta = Storage::disk('public')->put($doc_ruta ,  $doc_cotizacion);
 
                 // $delete = CotizacionesModel::where('idcertificados', $editar_cotizacion->idcertificados)->delete();
@@ -105,7 +105,7 @@ class CotizacionController extends Controller
 
             if (!empty($doc_cotizacion)) {
                 $doc_cotizacion_nombre =  $doc_cotizacion->getClientOriginalName() . '-' . rand() . '.' . $doc_cotizacion->getClientOriginalExtension();
-                $doc_ruta = '/docs';
+                $doc_ruta = '/';
 
                 $doc_ruta = Storage::disk('public')->put($doc_ruta ,  $doc_cotizacion);
             }

@@ -13,7 +13,7 @@
     <!-- ================================= MODAL CUERPO ================================= -->
     <div class="modal-body" style="padding-top: 0px !important; padding-bottom: 0px !important;">
 
-        <div class="nav-wrapper">
+        <div class="nav-wrapper" style="padding-top: 0px !important;  ">
             <ul class="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-icons-text" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link mb-sm-3 mb-md-0 active" data-toggle="tab" href="#tabs-icons-text-1a" role="tab" aria-controls="tabs-icons-text-1a" aria-selected="true">
@@ -38,6 +38,16 @@
                         <div class="media-body pl-3">
                             <span class="font-size-ms text-primary">Cliente</span>
                             <span class="d-block text-heading font-size-sm">{{ $det_registro->ModeloCliente->nombres_razon_social }}</span>
+                        </div>
+                    </li>
+                    <li class="media pt-1 pb-2 border-bottom">
+                        <i class="fas fa-id-card font-size-lg mt-2 mb-0 text-primary"></i>
+                        <div class="media-body pl-3">
+                            <span class="font-size-ms text-primary">Proxima Llamada</span>
+                            <span class="d-block text-heading font-size-sm">
+
+                                {{ \Carbon\Carbon::parse($det_registro->proxima_llamada)->format('Y-m-d / g:i a') }}
+                            </span>
                         </div>
                     </li>
                     <li class="media pt-1 pb-2 border-bottom" >

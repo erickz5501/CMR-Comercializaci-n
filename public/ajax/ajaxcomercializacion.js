@@ -123,7 +123,7 @@ function init(){
 		dropdownAutoWidth: true,
     });
 
-    lista_comercializacion();
+    lista_comercializacion(1);
 
     lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
@@ -136,13 +136,18 @@ function init(){
 
 }
 //
-// PAGINAMOS LA TABLA RUBOS
-// $(document).on("click",'.pagination a',function(e){
-//     e.preventDefault();
-//     var page = $(this).attr('href').split('page=')[1];
-//     lista_comercializacion(page);
-// });
+// PAGINAMOS LA TABLA COMERCIALIZACION
+$(document).on("click",'.pagination a',function(e){
+    e.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    lista_comercializacion(page);
+});
 
+$(document).on("click",'#paginacion_tabla_seguimiento .pagination a',function(e){
+    e.preventDefault();
+    var page = $(this).attr('href').split('page=')[1];
+    recargar_tabla_seguimiento(page);
+});
 
 
 
@@ -330,8 +335,31 @@ function cunsulta_sunat(){
     // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
 }
 
+// BUSCADOR
+var delay = (function(){
+    var timer = 0;
+    return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+})();
+$("#filtro_search").on("keyup", function () {
+    delay(function(){
+        lista_comercializacion(1);
+    }, 600 );
+    console.log('searg');
+});
 
-function lista_comercializacion(){
+$("#filtro_search2").on("keyup", function () {
+    delay(function(){
+        recargar_tabla_seguimiento(1);
+    }, 600 );
+    console.log('searg');
+});
+
+function lista_comercializacion(page){
+    var filtro_cant = $('#filtro_cant').val();
+    var filtro_search    = $('#filtro_search').val();
 
     $('#migaja_de_pan').html(''+
         '<div class="col-lg-6 col-7">'+
@@ -349,7 +377,7 @@ function lista_comercializacion(){
     $('#guardar_registro').hide();
     $('#ant_form').hide();
     $("#lista_tabla_comercializacion").html('<div id="loader"></div>');
-    $.get('/dashboard/comercializacion/lista', function (data){
+    $.get(`/dashboard/comercializacion/lista?page=${page}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function (data){
         $("#lista_tabla_comercializacion").html(data);
     });
 }
@@ -434,11 +462,12 @@ function mostrar_one_registro(idregistro){
         $('#evento_input').val(data.registro['descripcion_evento']);
         $('#avance_input').val(data.registro['avance']);
         $('#cobrar_input').val(data.registro['por_cobrar']);
-        $('#proxima_llamada').val(data.registro['proxima_llamada']);
+        $('#proxima_llamada').val((data.registro['proxima_llamada'].toLocaleString("sv-SE") + '').replace(' ','T'));
         $('#conclusionessTextarea').val(data.registro['observacion']);
         $('#tabla_detalle_modulos').empty();//Limpiamos los registro de esa tabla
 
-        console.log(data.registro['idclientes']);
+        console.log(data.registro['proxima_llamada']);
+
         for (let i = 0; i < data.cant_modulos; i++) {
             let id  = _id();
             let tr_detalle =    `<tr class="tr_detalle_modulos" id="tr_`+id+`">
@@ -521,14 +550,14 @@ function limpiar_comercializacion(){
     $('#cant_licencias').val("");
     $('#conclusionessTextarea').val("");
     $('#tabla_detalle_modulos').empty();
-    $('#select_modal_actividad').val(null).trigger('change');
-    $('#select_modal_cotizacion').val(null).trigger('change');
-    $('#select_modal_clientes').val(null).trigger('change');
-    $('#select_modal_medios').val(null).trigger('change');
-    $('#select_modal_modulos').val(null).trigger('change');
-    $('#select_modal_eventos').val(null).trigger('change');
-    $('#select_modal_personal').val(null).trigger('change');
-
+    $('#select_modal_actividad').val('').trigger('change');
+    $('#select_modal_cotizacion').val('').trigger('change');
+    $('#select_modal_clientes').val('').trigger('change');
+    $('#select_modal_medios').val('').trigger('change');
+    $('#select_modal_modulos').val('').trigger('change');
+    $('#select_modal_eventos').val('').trigger('change');
+    $('#select_modal_personal').val('').trigger('change');
+    $('#proxima_llamada').val('');
     $('#guardar_registro').hide();
     $('#guardar_registro_seguimiento').hide();
     $('#generar_n_comercializacion').hide();
@@ -548,7 +577,23 @@ if ($('#id_idclientes').val()) { //ASIGNAMOS EL ID CLIENTE AL SESION-STORAGE
     sessionStorage.setItem('id_idclientes', $('#id_idclientes').val());
 }
 
-function recargar_tabla_seguimiento(){
+function recargar_tabla_seguimiento(page){
+    $('#migaja_de_pan').html(''+
+        '<div class="col-lg-6 col-7">'+
+            '<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">'+
+                '<ol class="breadcrumb breadcrumb-links breadcrumb-dark">'+
+                    '<li class="breadcrumb-item">'+
+                        '<a href="/dashboard/comercializacion"  ><i class="fas fa-home"></i> Home</a>'+
+                    '</li>'+
+                    '<li class="breadcrumb-item active" aria-current="page">'+sessionStorage.getItem('nombres_cliente')+'</li>'+
+                    '<li class="breadcrumb-item active" aria-current="page">Lista</li>'+
+                '</ol>'+
+            '</nav>'+
+        '</div>'+
+    '');
+
+    var filtro_cant = $('#filtro_cant2').val();
+    var filtro_search    = $('#filtro_search2').val();
 
     var fecha_inicio = ''; var fecha_fin = '';
 
@@ -563,7 +608,7 @@ function recargar_tabla_seguimiento(){
     $('#filtro').show("slow");
     $('#generar_n_comercializacion').show("slow");
     $("#tabla_seguimiento_comercializacion").html('<div id="loader"></div>');
-    $.get('/dashboard/comercializacion/mostrar-seguimiento/recargar-tabla/' + sessionStorage.getItem('id_idclientes') + '?fecha_inicio=' + fecha_inicio + '&fecha_fin=' + fecha_fin, function(data){
+    $.get(`/dashboard/comercializacion/mostrar-seguimiento/recargar-tabla/${sessionStorage.getItem('id_idclientes')}?page=${page}&fecha_inicio=${fecha_inicio}&fecha_fin=${fecha_fin}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function(data){
         $("#tabla_seguimiento_comercializacion").html(data);
     });
 }
@@ -630,7 +675,7 @@ function limpiar_personal_comercializacion(){
 function guardar_interesado_comercializacion(e){
     crud_guardar_modal(
         e,
-        '/dashboard/guardar/interesados',
+        '/dashboard/guardar/clientes-interesados',
         'clientes',
         function(){ limpiar_interesado_comercializacion(); },
         function(){ console.log('Console Error'); }
@@ -650,7 +695,7 @@ function limpiar_interesado_comercializacion(){ //Para limpIar los campos despue
     $('#number_contacto_input').val("");
     $('#number_otro_input').val("");
     //$('#select_modal_tipoPersona').val("2");
-    $('#select_modal_giroNegocio').val(null).trigger('change');
+    $('#select_modal_giroNegocio').val('').trigger('change');
     $('#select_modal_tipo_doc').val("Seleccione").trigger('change');
 }
 
@@ -909,11 +954,11 @@ function ver_documento_comercializacion(idcotizacion) {
 
             if (data.ruta.substring(data.ruta.lastIndexOf(".")) == ".pdf" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".png" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jpg" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jpeg" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jfif" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".svg") {
 
-                $('#ver_documento_comercializacion').html('<embed  src="/'+data.ruta+'" width="100%" style=" height: 400px !important;" ></embed>');
+                $('#ver_documento_comercializacion').html('<embed  src="/docs/'+data.ruta+'" width="100%" style=" height: 400px !important;" ></embed>');
 
             } else {
                 $('#ver_documento_comercializacion').html('<div class="alert alert-default alert-dismissible fade show" role="alert">'+
-                    '<embed  src="/'+data.ruta+'" width="100%" style=" height: 1px !important;" ></embed>'+
+                    '<embed  src="/docs/'+data.ruta+'" width="100%" style=" height: 1px !important;" ></embed>'+
                     '<span class="alert-icon"><i class="ni ni-like-2"></i></span>'+
                     '<span class="alert-text"><strong>Comunicado!</strong> El documento no se puede previzualizar.</span>'+
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
@@ -960,34 +1005,4 @@ $("#agregar_comercializacion_seguimiento").on('click', function(e){
 });
 
 
-var DatatableBasic = (function() {
 
-    var $dtBasic = $('#datatable-seguimiento-comercializacion');
-
-    function init($this) {
-
-        var options = {
-            keys: !0,
-            // select: {
-            //     style: "multi"
-            // },
-            language: {
-                paginate: {
-                    previous: "<i class='fas fa-angle-left'>",
-                    next: "<i class='fas fa-angle-right'>"
-                }
-            },
-        };
-
-        var table = $this.on( 'init.dt', function () {
-
-            $('div.dataTables_length select').removeClass('custom-select custom-select-sm');
-
-        }).DataTable(options);
-    }
-
-    if ($dtBasic.length) {
-
-        init($dtBasic);
-    }
-})();

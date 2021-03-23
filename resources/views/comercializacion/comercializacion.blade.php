@@ -10,42 +10,57 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
-                <div class="card-header" style="padding-bottom: 0px !important;">
+                <div class="card-header" style="padding-bottom: 10px !important;">
                     <div class="row ">
-                        {{-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6  ">
-                            <div class="row input-daterange datepicker   ">
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  ">
-                                    <div class="form-group">
-                                        <input type="text" name="fecha_inicio" id="fecha_inicio" onchange="lista_comercializacion()" autocomplete="off" class="form-control form-control-md" placeholder="Fecha inicio" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  ">
-                                    <div class="form-group  ">
-                                        <input type="text" name="fecha_fin" id="fecha_fin" onchange="lista_comercializacion()" autocomplete="off" class="form-control form-control-md  " placeholder="Fecha fin"   />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                            {{-- <form>
-                                <input class="form-control form-control-md" placeholder="Buscar registro..." type="text" id="searchTerm" onkeyup="doSearch()" />
-                            </form> --}}
                         </div>
+
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6  text-right" >
-                            <a type="button" href="#" onclick="limpiar_comercializacion(); modal_comercializacion();"  class="btn btn btn-primary btn-md" data-toggle="tooltip" data-html="true" title="Agregar una nueva comercialización.">
-                                <i class="fas fa-plus-circle"></i> Agregar registro
-                            </a>
+                            <button onclick="limpiar_comercializacion(); modal_comercializacion();"   type="button" class="btn btn-outline-primary px-3 py-2" data-toggle="tooltip" data-html="true" title="Agregar una nueva comercialización." >
+                                <i class="fas fa-plus-circle"></i>
+                                <span > Agregar Comercialización</span>
+                            </button>
                         </div>
                     </div>
                 </div>
 
                 <!-- LISTAMOS LA TABLA COMERCIALIZACION-->
-                <div class="card-body" style="padding-top: 0px !important;" >
-                    <div class="table-responsive py-4" id="lista_tabla_comercializacion" >
+                <div class="card-body" style="padding-top: 10px !important;" >
+                    <div class="row" >
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 " >
+                            <label class="media align-items-center">
+                                <span style="padding-right: 10px;">Ver </span>
+                                <select name="filtro_cant" id="filtro_cant" onchange="lista_comercializacion(1);" aria-controls="datatable-basic" class="form-control form-control-sm"  style="color: black !important; font-weight: bold !important; display: inline-block;" >
+                                    <option value="3">3</option>
+                                    <option selected value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>
+                                <span style="padding: 0px 30px 0px 10px;"> registros</span>
+                            </label>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-6 col-xl-5 ">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 ">
+                            <div class="input-group input-group-merge"">
+
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="padding: 2px 8px 2px 8px !important;"><i  class="fas fa-search"></i></span>
+                                </div>
+                                <input id="filtro_search" name="filtro_search" class="form-control form-control-sm" placeholder="Buscar cliente..." type="search" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive " id="lista_tabla_comercializacion" >
                     </div>
                 </div>
-
-                <div class="card-footer py-4"></div>
             </div>
         </div>
     </div>
@@ -163,7 +178,7 @@
                                     </div>
 
                                     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
-                                        <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup>Próxima Llamada </label>
+                                        <label for="select_modal_clientes">Próxima Llamada </label>
                                         <div class="form-group">
                                             <div class="input-group" >
                                                 <input class="form-control" type="datetime-local"  id="proxima_llamada" name="proxima_llamada"  >
@@ -234,7 +249,7 @@
                                     <!-- ::::::: INPUT DETALLE DE LA LLAMADA ::::::::: -->
                                     <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                         <div class="form-group">
-                                            <label for="llamadaDetTextarea">Detalle llamada</label>
+                                            <label for="llamadaDetTextarea"><sup class="text-danger font-weight-bold">*</sup>Detalle llamada</label>
                                             <div class="input-group" >
                                                 <textarea class="form-control" id="llamadaDetTextarea" name="llamadaDetTextarea" rows="3" style="color: black !important; font-weight: bold !important;"></textarea>
                                                 <!-- MENSAJE DE ERROR -->

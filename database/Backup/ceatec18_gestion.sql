@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2021 a las 00:21:51
+-- Tiempo de generación: 23-03-2021 a las 17:39:35
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.25
 
@@ -125,6 +125,7 @@ CREATE TABLE `comercializacion` (
   `idpersonal` int(11) DEFAULT NULL,
   `calificacion` int(11) DEFAULT NULL,
   `avance` varchar(500) DEFAULT NULL,
+  `proxima_llamada` timestamp NULL DEFAULT NULL,
   `por_cobrar` double DEFAULT NULL,
   `observacion` text DEFAULT NULL,
   `estado` char(1) DEFAULT '0',
@@ -192,7 +193,7 @@ CREATE TABLE `correlativo` (
 --
 
 INSERT INTO `correlativo` (`idcorrelativo`, `nombre`, `serie`, `correlativo`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'COTIZACION', 'CEATEC', '4', '', NULL, '2021-03-19 20:54:35');
+(1, 'COTIZACION', 'CEATEC', '1', '', NULL, '2021-03-23 16:34:01');
 
 -- --------------------------------------------------------
 
@@ -245,9 +246,9 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`ideventos`, `nombre`, `descrripcion`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'RECLAMO DEL CLIENTE', 'Los reclamos, tienen solución inmediata o con demora', '0', NULL, NULL),
-(2, 'REALIZAR COTIZACION', 'Las cotizaciones son muy eficientes.', '0', NULL, NULL),
-(3, 'REALIZAR PEDIDO', 'Los pedidos tienen que terminarse en ese momento', '0', NULL, NULL);
+(1, 'RECLAMO DEL CLIENTE', 'Los reclamos, tienen solución inmediata o con demora', '0', '2021-03-23 14:51:17', '2021-03-08 14:51:22'),
+(2, 'REALIZAR COTIZACION', 'Las cotizaciones son muy eficientes.', '0', '2021-03-09 14:51:25', '2021-03-23 14:51:27'),
+(3, 'REALIZAR PEDIDO', 'Los pedidos tienen que terminarse en ese momento', '0', '2021-03-03 14:51:29', '2021-03-25 14:51:31');
 
 -- --------------------------------------------------------
 
@@ -291,7 +292,8 @@ CREATE TABLE `giro_negocio` (
 INSERT INTO `giro_negocio` (`idgiro_negocio`, `nombre`, `estado`, `created_at`, `updated_at`) VALUES
 (1, 'VENTAS', '0', NULL, '2021-03-15 03:55:26'),
 (2, 'COMPRAS', NULL, NULL, '2021-03-15 03:49:28'),
-(3, 'COMPRA-VENTAS', NULL, '2021-03-05 19:04:38', '2021-03-15 03:49:47');
+(3, 'COMPRA-VENTAS', NULL, '2021-03-05 19:04:38', '2021-03-15 03:49:47'),
+(4, 'ESTUDIO CONTABLE', NULL, '2021-03-23 00:07:02', '2021-03-23 00:07:02');
 
 -- --------------------------------------------------------
 
@@ -748,7 +750,7 @@ ALTER TABLE `cotizaciones`
 -- AUTO_INCREMENT de la tabla `cotizacion_comercializacion`
 --
 ALTER TABLE `cotizacion_comercializacion`
-  MODIFY `idcotizacion_comercializacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idcotizacion_comercializacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -766,7 +768,7 @@ ALTER TABLE `facturacion`
 -- AUTO_INCREMENT de la tabla `giro_negocio`
 --
 ALTER TABLE `giro_negocio`
-  MODIFY `idgiro_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idgiro_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `medios`

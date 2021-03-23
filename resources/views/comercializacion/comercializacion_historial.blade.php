@@ -2,6 +2,10 @@
 @section('title', 'Comercializacion (seguimiento)')
 @section('pagina', 'COMERCIALIZACION')
 
+@section('extra-css')
+
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
@@ -35,10 +39,42 @@
                 </div>
             </div>
 
-            <div class="card-body" style="padding-top: 0px !important;">
+            <div class="card-body" style="padding-top: 10px !important;">
+                <div class="row" >
+                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 " >
+                        <label class="media align-items-center">
+                            <span style="padding-right: 10px;">Ver </span>
+                            <select name="filtro_cant2" id="filtro_cant2" onchange="recargar_tabla_seguimiento(1);" aria-controls="datatable-basic" class="form-control form-control-sm"  style="color: black !important; font-weight: bold !important; display: inline-block;" >
+                                <option value="3">3</option>
+                                <option selected value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                            </select>
+                            <span style="padding: 0px 30px 0px 10px;"> registros</span>
+                        </label>
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-6 col-xl-5 ">
+                    </div>
+
+                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-4 ">
+                        <div class="input-group input-group-merge"">
+
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="padding: 2px 8px 2px 8px !important;"><i  class="fas fa-search"></i></span>
+                            </div>
+                            <input id="filtro_search2" name="filtro_search2" class="form-control form-control-sm" placeholder="Buscar cliente..." type="search" >
+                        </div>
+                    </div>
+                </div>
                 <input type="hidden" id="id_idclientes" name="id_idclientes" value="{{$seguimientos->first()->idclientes}}">
-                <div class="table-responsive py-4" id="tabla_seguimiento_comercializacion" >
-                    <table class="table table-flush table-hover" id="datatable-seguimiento-comercializacion">
+                <div class="table-responsive " id="tabla_seguimiento_comercializacion" >
+                    <table class="table table-flush table-hover" >
                         <thead class="thead-light">
                             <tr>
                                 <th>PERSONA CONTACTO</th>
@@ -109,13 +145,28 @@
                                         </td>
                                     </tr>
                                 @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="6" class="text-center"><span class="badge badge-danger badge-lg">NO HAY REGISTROS...</span></td>
+                                </tr>
                             @endif
                         </tbody>
                     </table>
+                    <div class="card-footer py-4">
+                        <div class="row"  >
+                            <div class="d-none {{ $seguimientos->total() / $seguimientos->perPage() > 5 ? 'd-md-none d-lg-none d-xl-none' : ' d-md-block' }} col-xs-12 col-ms-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                Mostrando {{ count($seguimientos) }} de {{ $seguimientos->total() }} registros.
+                            </div>
+                            <div class=" col-xs-12 col-sm-12 {{ $seguimientos->total() / $seguimientos->perPage() > 10 ? 'col-md-12 col-lg-12 col-xl-12' : 'col-md-6 col-lg-6 col-xl-6' }} " style="overflow-x: auto;">
+                                <div class="d-flex flex-row-reverse " style="padding-left: 20px !important;" id="paginacion_tabla_seguimiento">
+                                    {!! $seguimientos->links() !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-footer py-4">
-            </div>
+
         </div>
     </div>
 </div>
@@ -236,7 +287,7 @@
                                 </div>
 
                                 <div class="col-sm-12 col-md-12 col-lg-6 col-xl-4">
-                                    <label for="select_modal_clientes"><sup class="text-danger font-weight-bold">*</sup>Próxima Llamada </label>
+                                    <label for="select_modal_clientes">Próxima Llamada </label>
                                     <div class="form-group">
                                         <div class="input-group" >
                                             <input class="form-control" type="datetime-local"  id="proxima_llamada" name="proxima_llamada"  >
@@ -246,6 +297,9 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+
 
                                 <div class=" col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                     <div style="margin-bottom: 10px; padding: 20px; border-radius: 10px; border: 1px solid #000000 !important;">
@@ -1093,8 +1147,10 @@
 <script src="{{ asset('ajax/ajaxcomercializacion.js')}}"></script>
 <script src="{{ asset('ajax/componentes/ajaxmodals.js')}}"></script>
 <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">
-
 <script>
+    if ('{{$seguimiento->ModeloCliente->nombres_razon_social}}') {
+        sessionStorage.setItem('nombres_cliente','{{$seguimiento->ModeloCliente->nro_documento}} - {{$seguimiento->ModeloCliente->nombres_razon_social}} {{$seguimiento->ModeloCliente->apellidos_nombre_comercial}}');
+    }
     $('#migaja_de_pan').html(''+
         '<div class="col-lg-6 col-7">'+
             '<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">'+
@@ -1102,7 +1158,7 @@
                     '<li class="breadcrumb-item">'+
                         '<a href="{{ url("/dashboard/comercializacion") }} "  ><i class="fas fa-home"></i> Home</a>'+
                     '</li>'+
-                    '<li class="breadcrumb-item active" aria-current="page">{{$seguimiento->ModeloCliente->nro_documento}} - {{$seguimiento->ModeloCliente->nombres_razon_social}} {{$seguimiento->ModeloCliente->apellidos_nombre_comercial}}</li>'+
+                    '<li class="breadcrumb-item active" aria-current="page">'+sessionStorage.getItem('nombres_cliente')+'</li>'+
                     '<li class="breadcrumb-item active" aria-current="page">Lista</li>'+
                 '</ol>'+
             '</nav>'+

@@ -20,7 +20,6 @@
             <table class="table table-flush table-hover" >
                 <thead class="thead-light">
                     <tr>
-
                         <th>N° CORRELATIVO</th>
                         <th>FECHA</th>
                         <th>Estado</th>
@@ -32,53 +31,56 @@
                     @if ($one_documento)
                         @if (count($one_documento->ModeloCotizacionComercializaciones) > 0)
                             @foreach($one_documento->ModeloCotizacionComercializaciones as $key => $doc)
-                                <tr>
-                                    <td class="align-middle">
-                                        {{ $doc->ModeloCotizacion->nombre}}
-                                    </td>
+                                @if ($doc->ModeloCotizacion)
+                                    <tr>
+                                        <td class="align-middle">
+                                            {{ $doc->ModeloCotizacion->nombre}}
+                                        </td>
 
-                                    <td class="align-middle">
-                                        {{ \Carbon\Carbon::parse($doc->ModeloCotizacion->created_at)->format('Y-m-d') }}
-                                    </td>
+                                        <td class="align-middle">
+                                            {{ \Carbon\Carbon::parse($doc->ModeloCotizacion->created_at)->format('Y-m-d') }}
+                                        </td>
 
-                                    <td class="align-middle">
-                                        @if ($doc->ModeloCotizacion->estado == 0)
-                                            @if ( \Carbon\Carbon::parse($doc->ModeloCotizacion->created_at)->addDay($doc->ModeloCotizacion->validez) <= now() )
-                                                <span class="badge badge-warning badge-lg">Vencido</span>
+                                        <td class="align-middle">
+                                            @if ($doc->ModeloCotizacion->estado == 0)
+                                                @if ( \Carbon\Carbon::parse($doc->ModeloCotizacion->created_at)->addDay($doc->ModeloCotizacion->validez) <= now() )
+                                                    <span class="badge badge-warning badge-lg">Vencido</span>
+                                                @else
+                                                    <span class="badge badge-success badge-lg">Activo</span>
+                                                @endif
                                             @else
-                                                <span class="badge badge-success badge-lg">Activo</span>
+                                                <span class="badge badge-danger badge-lg">Inactivo</span>
                                             @endif
-                                        @else
-                                            <span class="badge badge-danger badge-lg">Inactivo</span>
-                                        @endif
-                                    </td>
+                                        </td>
 
-                                    <td class="align-middle">
-                                        <button onclick="ver_documento_comercializacion('{{$doc->ModeloCotizacion->idcotizaciones}}');"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-html="true" title="Vizualizar documento.">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
+                                        <td class="align-middle">
+                                            <button onclick="ver_documento_comercializacion('{{$doc->ModeloCotizacion->idcotizaciones}}');"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-html="true" title="Vizualizar documento.">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
 
-                                        <button onclick="ver_editar_cotizacion_comercializacion('{{$doc->ModeloCotizacion->idcotizaciones}}');"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-html="true" title="Editar registro">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
-                                        @if ($doc->ModeloCotizacion->estado == 0)
-                                            <button onclick="desactivar_cotizacion('{{$doc->ModeloCotizacion->idcotizaciones}}');" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-html="true" title="Desactivar">
-                                                <i class="far fa-trash-alt"></i>
+                                            <button onclick="ver_editar_cotizacion_comercializacion('{{$doc->ModeloCotizacion->idcotizaciones}}');"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-html="true" title="Editar registro">
+                                                <i class="fas fa-pencil-alt"></i>
                                             </button>
-                                        @else
-                                            <button onclick="activar_cotizacion('{{$doc->ModeloCotizacion->idcotizaciones}}' );" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-html="true" title="Activar">
-                                                <i class="fas fa-check"></i>
-                                            </button>
-                                        @endif
-                                    </td>
-                                </tr>
+
+                                            @if ($doc->ModeloCotizacion->estado == 0)
+                                                <button onclick="desactivar_cotizacion('{{$doc->ModeloCotizacion->idcotizaciones}}');" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-html="true" title="Desactivar">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
+                                            @else
+                                                <button onclick="activar_cotizacion('{{$doc->ModeloCotizacion->idcotizaciones}}' );" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-html="true" title="Activar">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            @endif
+
+                                        </td>
+                                    </tr>
+                                @endif
                             @endforeach
                         @else
-                            <tr >
+                            <tr>
                                 <td colspan="4" class="text-center ">
                                     <span class="badge badge-danger badge-lg">Sin registros</span>
                                 </td>
-
                             </tr>
                         @endif
                     @endif

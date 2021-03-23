@@ -151,12 +151,12 @@ function ver_documento(idcotizacion) {
 
         if (data.ruta.substring(data.ruta.lastIndexOf(".")) == ".pdf" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".png" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jpg" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jpeg" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".jfif" || data.ruta.substring(data.ruta.lastIndexOf(".")) == ".svg") {
 
-            $('#visualizar_pdf').html('<embed  src="/'+data.ruta+'" width="100%" style=" height: 400px !important;" ></embed>');
+            $('#visualizar_pdf').html('<embed  src="/docs/'+data.ruta+'" width="100%" style=" height: 400px !important;" ></embed>');
 
         } else {
 
             $('#visualizar_pdf').html('<div class="alert alert-default alert-dismissible fade show" role="alert">'+
-                '<embed  src="/'+data.ruta+'" width="100%" style=" height: 1px !important;" ></embed>'+
+                '<embed  src="/docs/'+data.ruta+'" width="100%" style=" height: 1px !important;" ></embed>'+
                 '<span class="alert-icon"><i class="ni ni-like-2"></i></span>'+
                 '<span class="alert-text"><strong>Alerta!</strong> El documento no se puede previzualizar, su descarga empresara en breve, o de lo contrario pulse el boton <span class="badge badge-success badge-lg"><i class="ni ni-cloud-download-95 align-middle"></i> DESCARGAR</span>.</span>'+
                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
@@ -165,7 +165,7 @@ function ver_documento(idcotizacion) {
             '</div>');
         }
 
-        $('#download_doc').html('<a href="/'+data.ruta+'" download="'+data.nombre+'" class="btn btn-outline-success px-2 py-2"><i class="ni ni-cloud-download-95 align-middle"> </i> DESCARGAR</a>');
+        $('#download_doc').html('<a href="/docs/'+data.ruta+'" download="'+data.nombre+'" class="btn btn-outline-success px-2 py-2"><i class="ni ni-cloud-download-95 align-middle"> </i> DESCARGAR</a>');
     });
 }
 
