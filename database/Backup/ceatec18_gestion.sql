@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2021 a las 23:23:07
+-- Tiempo de generación: 24-03-2021 a las 23:45:19
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.25
 
@@ -105,6 +105,13 @@ CREATE TABLE `clientes` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`idclientes`, `idgiro_negocio`, `idetiquetas`, `tipo_documento`, `nro_documento`, `nombres_razon_social`, `apellidos_nombre_comercial`, `direccion`, `correo_1`, `correo_2`, `correo_3`, `telefono_empresa`, `telefono_contacto`, `telefono_otro`, `tipo_persona`, `tamano_empresa`, `a_que_dedicas`, `grado_interes`, `provincia`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 5, NULL, '2', '20553814457', 'Cesar Aviles', 'Cesar Aviles', 'Lima', 'Caviles@facilitadores.pe', NULL, NULL, '924222912', NULL, NULL, '1', NULL, NULL, NULL, NULL, '0', '2021-03-24 16:26:56', '2021-03-24 16:26:56');
 
 -- --------------------------------------------------------
 
@@ -242,6 +249,13 @@ CREATE TABLE `etiquetas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `etiquetas`
+--
+
+INSERT INTO `etiquetas` (`idetiquetas`, `nombre`, `descripcion`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'CLIENTE POTENCIAL', 'UN CLIENTE POTENCIAL ES CUANDO...', '0', '2021-03-24 22:44:54', '2021-03-24 22:44:54');
+
 -- --------------------------------------------------------
 
 --
@@ -309,7 +323,8 @@ INSERT INTO `giro_negocio` (`idgiro_negocio`, `nombre`, `estado`, `created_at`, 
 (1, 'VENTAS', '0', NULL, '2021-03-15 03:55:26'),
 (2, 'COMPRAS', NULL, NULL, '2021-03-15 03:49:28'),
 (3, 'COMPRA-VENTAS', NULL, '2021-03-05 19:04:38', '2021-03-15 03:49:47'),
-(4, 'ESTUDIO CONTABLE', NULL, '2021-03-23 00:07:02', '2021-03-23 00:07:02');
+(4, 'ESTUDIO CONTABLE', NULL, '2021-03-23 00:07:02', '2021-03-23 00:07:02'),
+(5, 'Consultoria', NULL, '2021-03-24 16:26:47', '2021-03-24 16:26:47');
 
 -- --------------------------------------------------------
 
@@ -449,6 +464,19 @@ CREATE TABLE `personal` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `personal`
+--
+
+INSERT INTO `personal` (`idpersonal`, `nombres`, `apellidos`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'Jony', 'Juarez mendieta', '1', '2021-03-11 18:56:13', '2021-03-15 05:31:37'),
+(2, 'Pedro', 'Pinedo Dominguez', '0', '2021-03-12 02:34:59', '2021-03-12 02:34:59'),
+(3, 'Mariba', 'barriga fria', '0', '2021-03-12 05:27:30', '2021-03-12 05:27:30'),
+(4, 'KAROL HE', 'TAPULLIMA', '0', '2021-03-15 19:39:09', '2021-03-15 19:39:09'),
+(5, 'TADEO PEDRO', NULL, '0', '2021-03-15 22:09:24', '2021-03-15 22:09:24'),
+(6, 'TADEO PEDRO', 'CAPELLAN', '0', '2021-03-15 22:09:35', '2021-03-15 22:09:35'),
+(7, 'TADEO PEDRO', 'TAPULLIMA', '0', '2021-03-15 22:11:46', '2021-03-15 22:11:46');
 
 -- --------------------------------------------------------
 
@@ -730,7 +758,7 @@ ALTER TABLE `actualizaciones`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `idclientes` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idclientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `comercializacion`
@@ -766,7 +794,7 @@ ALTER TABLE `cotizacion_comercializacion`
 -- AUTO_INCREMENT de la tabla `etiquetas`
 --
 ALTER TABLE `etiquetas`
-  MODIFY `idetiquetas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idetiquetas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -784,7 +812,7 @@ ALTER TABLE `facturacion`
 -- AUTO_INCREMENT de la tabla `giro_negocio`
 --
 ALTER TABLE `giro_negocio`
-  MODIFY `idgiro_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idgiro_negocio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `medios`
@@ -814,7 +842,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `reclamos`

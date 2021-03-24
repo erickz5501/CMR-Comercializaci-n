@@ -43,15 +43,6 @@
                                 <option value="0">Interesado Potenciales</option>
                                 <option value="1">Interesado Potenciales</option>
                                 <option value="0">Interesado Potenciales</option>
-                                <option value="1">INInteresado Potenciales</option>
-                                <option value="0">Interesado Potenciales</option>
-                                <option value="1">INInteresado Potenciales</option>
-                                <option value="0">Interesado Potenciales</option>
-                                <option value="1">INInteresado Potenciales</option>
-                                <option value="0">Interesado Potenciales</option>
-                                <option value="1">INInteresado Potenciales</option>
-                                <option value="0">Interesado Potenciales</option>
-                                <option value="1">INInteresado Potenciales</option>
                             </select>
                         </div>
 

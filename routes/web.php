@@ -40,6 +40,7 @@ Route::redirect('/login', '/main');
 //-------Rutas por controlador----------//
 Route::get('/dashboard', "DashboardController@index") ->name('dashboard.dashboard');
 
+
 // ..........:: RUTAS INTERESADOS ::............//
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     //MUESTRA LA VISTA
