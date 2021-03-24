@@ -16,9 +16,7 @@
             @foreach ($seguimientos as $count => $seguimiento)
                 <tr>
                     <td class="align-middle">
-                        <span class="text-dark font-weight-600 text-sm">
-                            {{Str::limit($seguimiento->persona_contacto, 20, '...')}}
-                        </span>
+                        {{Str::limit($seguimiento->persona_contacto, 20, '...')}}
                     </td>
 
                     <td class="align-middle">

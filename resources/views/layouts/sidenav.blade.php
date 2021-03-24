@@ -106,40 +106,46 @@
                                         <span class="sidenav-normal"> Eventos </span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href=" {{ url('/dashboard/configuracion/actividad') }} " class="nav-link">
                                         <span class="sidenav-mini-icon"> A </span>
                                         <span class="sidenav-normal"> Actividad </span>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href=" {{  url('/dashboard/configuracion/medios') }} " class="nav-link">
                                         <span class="sidenav-mini-icon"> M </span>
-                                        <span class="sidenav-normal"> Medios </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-people-arrows"></i> Medios </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href=" {{  url('/dashboard/configuracion/gironegocio') }} " class="nav-link">
                                         <span class="sidenav-mini-icon"> G </span>
-                                        <span class="sidenav-normal"> Giro de negocio </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-briefcase"></i> Giro de negocio </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{  url('/dashboard/configuracion/personal') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal"> Personal </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-user-friends"></i> Personal </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{  url('/dashboard/configuracion/modulos') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> M </span>
-                                        <span class="sidenav-normal"> Modulos </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-tasks"></i> Modulos </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{  url('/dashboard/configuracion/etiquetas') }}" class="nav-link">
+                                        <span class="sidenav-mini-icon"> E </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-tags"></i> Etiquetas </span>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{  url('/dashboard/configuracion/users') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> U </span>
-                                        <span class="sidenav-normal"> Users </span>
+                                        <span class="sidenav-normal"> <i class="fas fa-users-cog"></i> Users </span>
                                     </a>
                                 </li>
                             </ul>
@@ -162,3 +168,4 @@
         </div>
     </div>
 </nav>
+

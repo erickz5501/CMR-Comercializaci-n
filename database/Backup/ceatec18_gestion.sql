@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-03-2021 a las 17:39:35
+-- Tiempo de generación: 24-03-2021 a las 23:23:07
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.25
 
@@ -84,6 +84,7 @@ CREATE TABLE `actualizaciones` (
 CREATE TABLE `clientes` (
   `idclientes` int(11) NOT NULL,
   `idgiro_negocio` int(11) NOT NULL,
+  `idetiquetas` int(11) DEFAULT NULL,
   `tipo_documento` char(1) DEFAULT NULL COMMENT '1 = DNI\n2 = RUC',
   `nro_documento` varchar(11) DEFAULT NULL,
   `nombres_razon_social` varchar(120) DEFAULT NULL,
@@ -221,6 +222,21 @@ CREATE TABLE `cotizacion_comercializacion` (
   `idcotizacion_comercializacion` int(11) NOT NULL,
   `idcomercializacion` int(11) NOT NULL,
   `idcotizaciones` int(11) DEFAULT NULL,
+  `estado` char(1) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `etiquetas`
+--
+
+CREATE TABLE `etiquetas` (
+  `idetiquetas` int(11) NOT NULL,
+  `nombre` varchar(150) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL,
   `estado` char(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -434,19 +450,6 @@ CREATE TABLE `personal` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `personal`
---
-
-INSERT INTO `personal` (`idpersonal`, `nombres`, `apellidos`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'Jony', 'Juarez mendieta', '1', '2021-03-11 18:56:13', '2021-03-15 05:31:37'),
-(2, 'Pedro', 'Pinedo Dominguez', '0', '2021-03-12 02:34:59', '2021-03-12 02:34:59'),
-(3, 'Mariba', 'barriga fria', '0', '2021-03-12 05:27:30', '2021-03-12 05:27:30'),
-(4, 'KAROL HE', 'TAPULLIMA', '0', '2021-03-15 19:39:09', '2021-03-15 19:39:09'),
-(5, 'TADEO PEDRO', NULL, '0', '2021-03-15 22:09:24', '2021-03-15 22:09:24'),
-(6, 'TADEO PEDRO', 'CAPELLAN', '0', '2021-03-15 22:09:35', '2021-03-15 22:09:35'),
-(7, 'TADEO PEDRO', 'TAPULLIMA', '0', '2021-03-15 22:11:46', '2021-03-15 22:11:46');
-
 -- --------------------------------------------------------
 
 --
@@ -555,7 +558,8 @@ ALTER TABLE `actualizaciones`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`idclientes`),
-  ADD KEY `fk_cliente_giro_negocio_idx` (`idgiro_negocio`);
+  ADD KEY `fk_cliente_giro_negocio_idx` (`idgiro_negocio`),
+  ADD KEY `fk_clientes_etiquetas1_idx` (`idetiquetas`);
 
 --
 -- Indices de la tabla `comercializacion`
@@ -604,6 +608,12 @@ ALTER TABLE `cotizacion_comercializacion`
   ADD PRIMARY KEY (`idcotizacion_comercializacion`),
   ADD KEY `fk_cotizacion_comercializacion_comercializacion1_idx` (`idcomercializacion`),
   ADD KEY `fk_cotizacion_comercializacion_cotizaciones1_idx` (`idcotizaciones`);
+
+--
+-- Indices de la tabla `etiquetas`
+--
+ALTER TABLE `etiquetas`
+  ADD PRIMARY KEY (`idetiquetas`);
 
 --
 -- Indices de la tabla `eventos`
@@ -753,6 +763,12 @@ ALTER TABLE `cotizacion_comercializacion`
   MODIFY `idcotizacion_comercializacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `etiquetas`
+--
+ALTER TABLE `etiquetas`
+  MODIFY `idetiquetas` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
@@ -798,7 +814,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
@@ -832,7 +848,8 @@ ALTER TABLE `actualizaciones`
 -- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD CONSTRAINT `fk_cliente_giro_negocio` FOREIGN KEY (`idgiro_negocio`) REFERENCES `giro_negocio` (`idgiro_negocio`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_cliente_giro_negocio` FOREIGN KEY (`idgiro_negocio`) REFERENCES `giro_negocio` (`idgiro_negocio`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_clientes_etiquetas1` FOREIGN KEY (`idetiquetas`) REFERENCES `etiquetas` (`idetiquetas`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `comercializacion`

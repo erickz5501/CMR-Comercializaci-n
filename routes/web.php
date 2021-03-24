@@ -123,6 +123,7 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::post('/personal/guardar', "configuracion\PersonalController@createPersonal");
     Route::get('/mostrar/personal/{idpersonal}', "configuracion\PersonalController@DetallePersonal");
 
+    // rutas modulos
     Route::get('/configuracion/modulos', "configuracion\ModulosController@index");
     Route::get('/configuracion/modulos/lista', "configuracion\ModulosController@indexLista");
     Route::get('/modulos/activar/{idmodulos}', "configuracion\ModulosController@activar");
@@ -131,6 +132,15 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     Route::get('/mostrar/modulo/{idmodulos}', "configuracion\ModulosController@DetalleModulo");
     Route::get('/informacio/modulo/{idmodulos}', "configuracion\ModulosController@InformacionModulo");
 
+    // rutas etiquetas
+    Route::get('/configuracion/etiquetas', "configuracion\EtiquetaController@index");
+    Route::get('/configuracion/etiquetas/lista-tabla', "configuracion\EtiquetaController@tabla_etiqueta");
+    Route::post('/configuracion/etiquetas/guardar-editar', "configuracion\EtiquetaController@crear_editar_etiqueta");
+    Route::get('/configuracion/etiquetas/mostra-one/{id}', "configuracion\EtiquetaController@mostrar_one_etiqueta");
+    Route::get('/configuracion/etiquetas/activar/{idetiquetas}', "configuracion\EtiquetaController@activar");
+    Route::get('/configuracion/etiquetas/desactivar/{idetiquetas}', "configuracion\EtiquetaController@desactivar");
+
+    // rutas user
     Route::get('/configuracion/users', "configuracion\UsersController@index");
     Route::get('/configuracion/users/lista', "configuracion\UsersController@indexLista");
     Route::get('/users/activar/{idusers}', "configuracion\UsersController@activar");

@@ -191,6 +191,43 @@ function sw_error(txt = 'Error', timer = 2000) {
         icon: "error"
     });
 }
+
+// ............................ :::::::: CRUD ELIMINAR :::::::: ................................
+function crud_eliminar(url, callback_true, callback_false) {
+    Swal.fire({
+            title: "¿Deseas eliminar permanetemente este registro?",
+            text: "¡No se podra recuperar!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#f34770",
+            confirmButtonText: "Si, eliminar",
+            cancelButtonText: "No, cancelar",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then((result) => {
+            if (result.value) {
+                $.get(url, function (data, status) {
+                    data = JSON.parse(data);
+                    if (data.status) {
+                        sw_success("Se eliminó");
+                        if (callback_true) {
+                            callback_true();
+                        }
+                    } else {
+                        sw_error(data.message);
+                        if (callback_false) {
+                            callback_false();
+                        }
+                    }
+                });
+
+            } else if ( result.dismiss ) {
+                sw_cancelar();
+            }
+        });
+
+}
+
 // ............................ :::::::: DESACTIVAR CLIENTE :::::::: ................................
 function crud_desactivar(url, callback_true, callback_false) {
     Swal.fire({

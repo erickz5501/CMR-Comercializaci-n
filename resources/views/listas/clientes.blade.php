@@ -1,11 +1,14 @@
 @extends('layout')
-@section('title', 'Lista de clientes')
-@section('pagina', 'Clientes')
+@section('title', 'Lista de clientes / interesado')
+@section('pagina', 'Clientes / interesado')
 
 @section('extra-css')
     <!--  Extra CSS search-->
     <link rel="stylesheet" href="{{ asset('css/search.css')}}" type="text/css">
     <style>
+        .select2-selection__rendered{
+            font-size: 14px !important;
+        }
         .select2-results__options {
             height: 150px;
             overflow-y: auto;
@@ -17,37 +20,68 @@
     <div class="row">
         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="padding-bottom: 10px !important;">
                     <div class="row align-middle">
 
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
-                            <select  name="filtro_tipo" id="filtro_tipo" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; font-weight: bold !important;" data-minimum-results-for-search="Infinity">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2" style="padding-bottom: 10px !important;">
+                            <select  name="filtro_tipo" id="filtro_tipo" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important;" data-minimum-results-for-search="Infinity">
                                 <option value="0">TODOS</option>
                                 <option value="1">INTERESADO</option>
                                 <option value="2">CLIENTE</option>
                             </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2">
-                            <select  name="filtro_estado" id="filtro_estado" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; font-weight: bold !important;" data-minimum-results-for-search="Infinity">
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2" style="padding-bottom: 10px !important;">
+                            <select  name="filtro_estado" id="filtro_estado" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; " data-minimum-results-for-search="Infinity">
                                 <option value="0">ACTIVO</option>
                                 <option value="1">INACTIVO</option>
                             </select>
                         </div>
 
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-8 text-right">
-                            <button id="interesado" type="button" class="btn btn-outline-primary px-3 py-2" >
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3" style="padding-bottom: 10px !important;">
+                            <select  name="filtro_etiqueta" id="filtro_etiqueta" class="form-control" onchange="lista_tabla_clientes(1);" style="color: black !important; font-size: 13px !important;">
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">Interesado Potenciales</option>
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">INInteresado Potenciales</option>
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">INInteresado Potenciales</option>
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">INInteresado Potenciales</option>
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">INInteresado Potenciales</option>
+                                <option value="0">Interesado Potenciales</option>
+                                <option value="1">INInteresado Potenciales</option>
+                            </select>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-5 text-right" style="padding-bottom: 10px !important;">
+                            <button id="interesado" type="button" class="btn btn-outline-primary px-3 py-2" style="margin: 0px 0px 10px !important;" >
                                 <i class="fas fa-plus-circle"></i>
                                 <span > Agregar Interesado</span>
                             </button>
-                            {{-- <a id="cliente" onclick="limpiar_form_cliente();"   class="btn btn btn-primary" type="button" href="#"><i class="fas fa-plus-circle"></i> Agregar Interesado</a> --}}
-                            {{-- <a id="cliente" onclick="limpiar_form_cliente();"   class="btn btn btn-primary" type="button" href="#"><i class="fas fa-plus-circle"></i> Agregar Cliente</a> --}}
-                            <button id="cliente" type="button" class="btn btn-outline-primary px-3 py-2" >
+                            <button id="cliente" type="button" class="btn btn-outline-primary px-3 py-2" style="margin: 0px 0px 10px !important;">
                                 <i class="fas fa-plus-circle"></i>
                                 <span > Agregar Cliente</span>
                             </button>
                         </div>
 
+                        {{-- <div class="col-sm-12">
+                            <div class="bootstrap-tagsinput">
+                                <span  class="tag badge badge-primary">
+                                    Interesado Potenciales
+                                    <span onclick="eliminar_etiqueta()" data-role="remove" data-toggle="tooltip" data-original-title="Quitar"> </span>
+                                </span>
+                                <span  class="tag badge badge-primary">
+                                     Interesado Indeciso
+                                    <span onclick="eliminar_etiqueta()" data-role="remove" data-toggle="tooltip" data-original-title="Quitar"></span>
+                                </span>
+                                <span  class="tag badge badge-primary">
+                                     Interesado potenciales
+                                    <span onclick="eliminar_etiqueta()" data-role="remove" data-toggle="tooltip" data-original-title="Quitar"></span>
+                                </span>
+                            </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -243,7 +277,7 @@
                         <div class="accordion" id="accordion_opcional" style="padding-top: 10px !important;">
                             <div class="card ">
                                 <div class="card-header bg-gradient-default text-white " id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <h5 class="mb-0 text-white">FORM OPCIONAL</h5>
+                                    <h5 class="mb-0 text-white">DATOS OPCIONALES</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_opcional">
                                     <div class="card-body" style="border: 1px solid #191d4d !important; border-radius: 0 0 10px 10px !important;">

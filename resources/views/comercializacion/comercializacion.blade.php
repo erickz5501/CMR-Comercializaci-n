@@ -526,7 +526,7 @@
                         <div class="accordion" id="accordion_opcional" style="padding-top: 10px !important;">
                             <div class="card ">
                                 <div class="card-header bg-gradient-default text-white " id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                    <h5 class="mb-0 text-white">FORM OPCIONAL</h5>
+                                    <h5 class="mb-0 text-white">DATOS OPCIONALES</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_opcional">
                                     <div class="card-body" style="border: 1px solid #191d4d !important; border-radius: 0 0 10px 10px !important;">

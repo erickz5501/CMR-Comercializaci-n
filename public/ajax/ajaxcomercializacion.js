@@ -42,7 +42,7 @@ function init(){
     $("#guardar_registro_seguimiento").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit(); });
     $("#formulario_comercializacion_seguimiento").on("submit", function(e) { guardar_registro_seguimiento(e); });
 
-    $("#generar_n_comercializacion").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit();  });
+    $("#generar_n_comercializacion").on('click', function(e){ $('#idcomercializacion').val(''); $("#formulario_comercializacion_seguimiento").submit();  });
     // document.getElementById("guardar_registro_seguimiento").onclick =  function(e){
     //     guardar_registro(e);
     // }

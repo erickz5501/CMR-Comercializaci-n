@@ -24,7 +24,8 @@
                                 <div class="mx-3">
                                     <span class="text-dark font-weight-600 text-sm">{{ $comercializacion->nro_documento}}</span>
                                     <small class="d-block text-muted">
-                                        {{$comercializacion->nombres_razon_social}} {{ $comercializacion->apellidos_nombre_comercial}}
+                                        {{Str::limit($comercializacion->nombres_razon_social.' '.$comercializacion->apellidos_nombre_comercial, 25, '...')}}
+
                                     </small>
                                 </div>
                             </div>

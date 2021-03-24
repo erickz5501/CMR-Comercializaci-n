@@ -113,36 +113,18 @@ class ClientesController extends Controller
         $number_contacto_input      = $request->input('number_contacto_input');
         $number_otro_input          = $request->input('number_otro_input');
 
-        $hola = [
-            'idclientes'=>                  $idclientes                 ,
-            'nombre_razon_social_input'=>   $nombre_razon_social_input  ,
-            'nombre_comercial_input'=>      $nombre_comercial_input    ,
-            'GiroNegocioSelect'=>           $GiroNegocioSelect          ,
-            'tipoPersonaSelect'=>           $tipoPersonaSelect          ,
-            'tipoDocSelect'=>               $tipoDocSelect              ,
-            'nro_documento'=>               $nro_documento              ,
-            'direccion'=>                   $direccion                 ,
-            'InputCorreo1'=>                $InputCorreo1               ,
-            'InputCorreo2'=>                $InputCorreo2               ,
-            'InputCorreo3'=>                $InputCorreo3               ,
-            'number_empresa_input'=>        $number_empresa_input       ,
-            'number_contacto_input'=>       $number_contacto_input      ,
-            'number_otro_input'=>           $number_otro_input,
-            'select_modal_provincia' =>     $select_modal_provincia    ,
-            'select_modal_grado_interes' => $select_modal_grado_interes  ,
-            'select_modal_tamano_empresa' =>$select_modal_tamano_empresa ,
-            'select_modal_a_que_dedicas' =>     $select_modal_a_que_dedicas     ,
-        ];
+
         // return json_encode($hola);
         if ( empty( $idclientes ) ){
             $usuario = ClientesModel::firstOrCreate(
-            [   'tipo_persona' => $tipoPersonaSelect,
+            [
                 'tipo_documento' => $tipoDocSelect,
                 'nro_documento' => $nro_documento,
                 'nombres_razon_social' => $nombre_razon_social_input,
                 'apellidos_nombre_comercial' => $nombre_comercial_input,
             ],
             [
+                'tipo_persona' => $tipoPersonaSelect,
                 'idgiro_negocio' => $GiroNegocioSelect,
 
                 'correo_1' => $InputCorreo1,
@@ -159,11 +141,7 @@ class ClientesController extends Controller
                 'telefono_otro' => $number_otro_input,
             ]
             );
-
-                return json_encode(['status' => true, 'message' => 'Éxito se registro su empresa', 'id' => $usuario->idclientes]);
-
-
-
+            return json_encode(['status' => true, 'message' => 'Registro conforme!!', 'id' => $usuario->idclientes]);
         }else{
             $interesado = ClientesModel::find($idclientes);
 
@@ -188,9 +166,8 @@ class ClientesController extends Controller
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
+            return json_encode(['status' => true, 'message' => 'Actualización exitosa']);
         }
-
     }
 
     public function editarCliente(InteresadoRequest $request){

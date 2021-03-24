@@ -59,7 +59,7 @@ function init(){
     // FILTROS DE BUSQUEDA ........
     $('#filtro_estado').select2({
         theme: 'bootstrap4',
-        placeholder: 'Seleccione',
+        placeholder: 'Filtrar por estado',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
@@ -71,7 +71,15 @@ function init(){
         width: 'auto',
 		dropdownAutoWidth: true,
     });
+    $('#filtro_etiqueta').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Filtrar por etiqueta',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
     $('#filtro_estado').val('').trigger('change');
+    $('#filtro_etiqueta').val('').trigger('change');
 }
 
 // BUSCADOR
@@ -454,3 +462,7 @@ function limpiar_form_giro_negocio(){
     $('#nombre_input').val("");
 }
 init();
+
+function eliminar_etiqueta() {
+    crud_eliminar('/dashboard/cliente/desactivar/' , function(){ lista_tabla_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
+}
