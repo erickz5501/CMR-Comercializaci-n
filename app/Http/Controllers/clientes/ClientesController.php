@@ -28,7 +28,7 @@ class ClientesController extends Controller
         $clientes = ClientesModel::
                       when( $filtro_tipo == '1' ,function ($query) { return $query->interesados();   })
                     ->when( $filtro_tipo == '2' ,function ($query) { return $query->clientes();   })
-                    ->when($filtro_estado == '1' , function ($query) { return $query->activos();  })
+                    ->when($filtro_estado == '0' , function ($query) { return $query->activos();  })
                     ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
                     ->orderBy('idclientes', 'DESC')
                     ->where(function ($query) use ($filtro_search){

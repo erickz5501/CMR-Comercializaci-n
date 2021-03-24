@@ -467,7 +467,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- .::::::: INPUT GIRO NEGOCIO ::::::. -->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <label class="form-control-label" for="select_modal_giroNegocio">Giro de negocio</label>
                                 <div class="input-group">
@@ -482,7 +482,7 @@
                                     <div class="invalid-feedback">Por Favor selecione un giro de negocio</div>
                                 </div>
                             </div>
-
+                            <!-- .::::::: INPUT TELEFONO ::::::. -->
                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="number-empresa-input">Telefono empresa</label>
@@ -495,8 +495,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <!-- .::::::: INPUT CORREO ::::::. -->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="number-empresa-input">Correo 1</label>
                                     <div class="input-group">
@@ -508,31 +508,133 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+                            <!-- .::::::: INPUT DIRECCIÓN ::::::. -->
+                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                 <div class="form-group">
-                                    <label class="form-control-label" for="number-empresa-input">Correo 2</label>
-                                    <div class="input-group">
+                                    <label for="exampleFormControlInput1">Dirección</label>
+                                    <div class="input-group ">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
                                         </div>
-                                        <input  class="form-control" type="email" id="InputCorreo2" name="InputCorreo2" autocomplete="off" style="color: black !important; font-weight: bold !important;"/>
-                                        <div class="invalid-feedback">Por Favor escriba un email valido</div>
+                                        <input  type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
-                                <div class="form-group">
-                                    <label class="form-control-label" for="number-empresa-input">Correo 3</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
-                                        </div>
-                                        <input  class="form-control" type="email" id="InputCorreo3" name="InputCorreo3" autocomplete="off" style="color: black !important; font-weight: bold !important;"/>
-                                        <div class="invalid-feedback">Por Favor escriba un email valido</div>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
 
+                        <!-- .::::::: FORM OPCIONAL ::::::. -->
+                        <div class="accordion" id="accordion_opcional" style="padding-top: 10px !important;">
+                            <div class="card ">
+                                <div class="card-header bg-gradient-default text-white " id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                    <h5 class="mb-0 text-white">FORM OPCIONAL</h5>
+                                </div>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_opcional">
+                                    <div class="card-body" style="border: 1px solid #191d4d !important; border-radius: 0 0 10px 10px !important;">
+                                        <div class="row">
+                                            <!-- ::::::::::: SELECT PROVINCIA ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="select_modal_provincia">Provincia</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_provincia" name="select_modal_provincia" placeholder="Provincia" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: SELECT GRADO DE INTERES ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="select_modal_grado_interes">Grado de interés</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_grado_interes" name="select_modal_grado_interes" placeholder="Grado de interes" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: SELECT TAMAÑO DE EMPRESA ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="select_modal_tamano_empresa">Tamaño de empresa</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_tamano_empresa" name="select_modal_tamano_empresa" placeholder="Tamaño de empresa" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ::::::::::: SELECT A QUE TE DEDICAS ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="select_modal_a_que_dedicas">A que te dedicas</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                                        </div>
+                                                        <input  type="text" class="form-control" id="select_modal_a_que_dedicas" name="select_modal_a_que_dedicas" placeholder="A que te dedicas" style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- ::::::::::: INPUT CORREO 2 ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput2">Correo 2 </label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                                        </div>
+                                                        <input  type="email" class="form-control" id="InputCorreo2" name="InputCorreo2" placeholder="name@example2.com" style="color: black !important; font-weight: bold !important;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: INPUT CORREO 3 ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlInput3">Correo 3 </label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                                        </div>
+                                                        <input  type="email" class="form-control" id="InputCorreo3" name="InputCorreo3" placeholder="name@example3.com" style="color: black !important; font-weight: bold !important;"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: INPUT TELEFONO CONTACTO ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="number-contacto-input">Telefono contacto</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                                                        </div>
+                                                        <input  class="form-control" type="number" id="number_contacto_input" name="number_contacto_input" style="color: black !important; font-weight: bold !important;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ::::::::::: INPUT TELEFONO OTRO::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label for="number-otro-input">Telefono otro</label>
+                                                    <div class="input-group ">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i class="fas fa-phone-square"></i></span>
+                                                        </div>
+                                                        <input  class="form-control" type="number" id="number_otro_input" name="number_otro_input" style="color: black !important; font-weight: bold !important;" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <!-- :::::::: BARRA DE PROGRESO ::::::::-->
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
                                 <div class="form-group">

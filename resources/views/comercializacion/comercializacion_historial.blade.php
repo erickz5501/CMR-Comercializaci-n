@@ -460,7 +460,7 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <button type="submit" style="display: none;"></button> --}}
+                    <button type="submit" style="display: none;"></button>
 
                 </form>
             </div>
@@ -1152,7 +1152,7 @@
         sessionStorage.setItem('nombres_cliente','{{$seguimiento->ModeloCliente->nro_documento}} - {{$seguimiento->ModeloCliente->nombres_razon_social}} {{$seguimiento->ModeloCliente->apellidos_nombre_comercial}}');
     }
     $('#migaja_de_pan').html(''+
-        '<div class="col-lg-6 col-7">'+
+        '<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">'+
             '<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">'+
                 '<ol class="breadcrumb breadcrumb-links breadcrumb-dark">'+
                     '<li class="breadcrumb-item">'+

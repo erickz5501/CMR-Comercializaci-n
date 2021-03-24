@@ -315,6 +315,7 @@ function cunsulta_sunat(){
                 } else {
                     $('#nombre_razon_social_input').val(data.result['razon_social']);
                     $('#nombre_comercial_input').val(data.result['nombre_comercial']);
+                    $('#direccion').val(data.result['domicilio_fiscal']);
                     $('#persona_contacto_input').val('');
                 }
 
@@ -579,7 +580,7 @@ if ($('#id_idclientes').val()) { //ASIGNAMOS EL ID CLIENTE AL SESION-STORAGE
 
 function recargar_tabla_seguimiento(page){
     $('#migaja_de_pan').html(''+
-        '<div class="col-lg-6 col-7">'+
+        '<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">'+
             '<nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">'+
                 '<ol class="breadcrumb breadcrumb-links breadcrumb-dark">'+
                     '<li class="breadcrumb-item">'+
