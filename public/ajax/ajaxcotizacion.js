@@ -1,6 +1,13 @@
 function init(){
 
-    lista_tabla_cotizaciones();
+    lista_tabla_cotizaciones(1);
+
+    // PAGINAMOS LA TABLA COTIZACION
+    $(document).on("click",'.pagination a',function(e){
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        lista_tabla_cotizaciones(page);
+    });
 
     $("#guardar_registro").on('click', function(e){
         $("#formulario_cotizacion").submit();
@@ -9,46 +16,39 @@ function init(){
     $("#formulario_cotizacion").on("submit", function(e) {
         guardar_cotizacion(e);
     });
-}
-
-function limpiar_cotizacion(){
-
-    $.get('/dashboard/cotizacion/generar', function(data){
-
-        data = JSON.parse(data);
-
-        $('#nombre_cotizacion').val(data);
-        // nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
+    $('#filtro_estado').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Filtrar por estado',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
     });
-
-    $('.tooltip').removeClass("show").addClass("hidde"); // REMOVEMOS EL TOOTIP
-
-    $('.form-control').removeClass("is-invalid"); // REMOVEMOS LOS INPUT MARCADOS EN ROJO
-
-    $('#contenedor_de_errores_evento').html(''); // REMOVEMOS EL CONTENEDOR DE ERRORES
-
-    $('#titulo_modal').html('Agregar Cotizacion');
-    $('#btn_footer_modal').html('Guardar');
-
-    $('#idcotizaciones').val("");
-
-    $('#validez_cotizacion').val(7);
-
-    $('#ruta_cotizacion').val("");
+    $('#filtro_estado').val('').trigger('change');
 }
+
+// BUCADOR
+var delay = (function(){ var timer = 0; return function(callback, ms){ clearTimeout (timer); timer = setTimeout(callback, ms); };})();
+
+$("#filtro_search").on("keyup", function () { // CAPTURA TEXTO BUSCADOR
+    delay(function(){ lista_tabla_cotizaciones(1); }, 600 );
+});
 
 function guardar_cotizacion(e){
 
     $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
 
-    crud_guardar_editar( e, '/dashboard/cotizacion/crear', 'cotizacion', function(){ limpiar_cotizacion();}, function(){ lista_tabla_cotizaciones(); }, function(){ console.log('Console Error'); });
+    crud_guardar_editar( e, '/dashboard/cotizacion/crear', 'cotizacion', function(){ limpiar_cotizacion();}, function(){ lista_tabla_cotizaciones(1); }, function(){ console.log('Console Error'); });
 }
 
-function lista_tabla_cotizaciones(){
+function lista_tabla_cotizaciones(page){
+
+    var filtro_cant = $('#filtro_cant').val();
+    var filtro_search    = $('#filtro_search').val();
+    var filtro_estado = $('#filtro_estado').val() ;
 
     $("#lista_tabla_cotizaciones").html('<div id="loader"></div>');
 
-    $.get('/dashboard/cotizaciones/lista', function (data){ $("#lista_tabla_cotizaciones").html(data); });
+    $.get(`/dashboard/cotizaciones/lista?page=${page}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function (data){ $("#lista_tabla_cotizaciones").html(data); });
 }
 
 function mostrar_one_cotizacion(idcotizacion){
@@ -82,11 +82,11 @@ function mostrar_one_cotizacion(idcotizacion){
 
 function desactivar(idcotizacion) {
 
-    crud_desactivar('/dashboard/cotizaciones/desactivar/' + idcotizacion , function(){ lista_tabla_cotizaciones(); }, function(){ console.log('Eror') });
+    crud_desactivar('/dashboard/cotizaciones/desactivar/' + idcotizacion , function(){ lista_tabla_cotizaciones(1); }, function(){ console.log('Eror') });
 }
 function activar(idcotizacion) {
 
-    crud_activar('/dashboard/cotizaciones/activar/' + idcotizacion , function(){ lista_tabla_cotizaciones(); }, function(){ console.log('Eror') });
+    crud_activar('/dashboard/cotizaciones/activar/' + idcotizacion , function(){ lista_tabla_cotizaciones(1); }, function(){ console.log('Eror') });
 }
 
 function validar_pdf(){
@@ -167,6 +167,32 @@ function ver_documento(idcotizacion) {
 
         $('#download_doc').html('<a href="/docs/'+data.ruta+'" download="'+data.nombre+'" class="btn btn-outline-success px-2 py-2"><i class="ni ni-cloud-download-95 align-middle"> </i> DESCARGAR</a>');
     });
+}
+
+function limpiar_cotizacion(){
+
+    $.get('/dashboard/cotizacion/generar', function(data){
+
+        data = JSON.parse(data);
+
+        $('#nombre_cotizacion').val(data);
+        // nombre_cotizacion.disabled = true; //deshabilitamos el campo para que no pueda modifiar el campo
+    });
+
+    $('.tooltip').removeClass("show").addClass("hidde"); // REMOVEMOS EL TOOTIP
+
+    $('.form-control').removeClass("is-invalid"); // REMOVEMOS LOS INPUT MARCADOS EN ROJO
+
+    $('#contenedor_de_errores_evento').html(''); // REMOVEMOS EL CONTENEDOR DE ERRORES
+
+    $('#titulo_modal').html('Agregar Cotizacion');
+    $('#btn_footer_modal').html('Guardar');
+
+    $('#idcotizaciones').val("");
+
+    $('#validez_cotizacion').val(7);
+
+    $('#ruta_cotizacion').val("");
 }
 
 init();

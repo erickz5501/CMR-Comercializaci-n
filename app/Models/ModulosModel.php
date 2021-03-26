@@ -14,4 +14,13 @@ class ModulosModel extends Model
     public function modulo_comercializacion(){
         return $this->belongsTo('App\Models\ModuloComercializacionModel', 'idmodulos');
     }
+
+    public function scopeActivos( $query)
+    {
+        return $query->where('estado', '=', '0');
+    }
+    public function scopeInactivos( $query)
+    {
+        return $query->where('estado', '=', '1');
+    }
 }

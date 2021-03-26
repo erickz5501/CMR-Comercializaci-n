@@ -16,8 +16,22 @@ class PersonalController extends Controller
         return view('configuracion.personal');
     }
 
-    public function indexLista(){
-        $personal = PersonalModel::get();
+    public function indexLista( Request $request  ){
+
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $personal = PersonalModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                                    ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                    ->where(function ($query) use ($filtro_search){
+                                        return $query->orWhere('nombres', 'like', "%{$filtro_search}%")
+                                                    ->orWhere('apellidos', 'like', "%{$filtro_search}%");
+                                    })
+                                    ->orderBy('idpersonal', 'DESC')
+                                    ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_personal', compact('personal'));
     }

@@ -1,6 +1,12 @@
 function init(){
 
-    lista_tabla_modulos();
+    lista_tabla_modulos(1);
+    // PAGINAMOS LA TABLA MODULOS
+    $(document).on("click",'.pagination a',function(e){
+        e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        lista_tabla_modulos(page);
+    });
 
     $("#guardar_registro").on('click', function(e){
         $("#formulario_modulos").submit();
@@ -28,30 +34,50 @@ function init(){
 
     // MOSTRAR DATOS
     $("#caracteristicas_modulo").summernote('code', '');
+
+    $('#filtro_estado').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Filtrar por estado',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#filtro_estado').val('').trigger('change');
 }
 
-function lista_tabla_modulos(){
+// BUCADOR
+var delay = (function(){ var timer = 0; return function(callback, ms){ clearTimeout (timer); timer = setTimeout(callback, ms); };})();
+
+$("#filtro_search").on("keyup", function () { // CAPTURA TEXTO BUSCADOR
+    delay(function(){ lista_tabla_modulos(1); }, 600 );
+});
+
+function lista_tabla_modulos(page){
+
+    var filtro_cant = $('#filtro_cant').val();
+    var filtro_search    = $('#filtro_search').val();
+    var filtro_estado = $('#filtro_estado').val() ;
 
     $("#lista_tabla_modulos").html('<div id="loader"></div>');
 
-    $.get('/dashboard/configuracion/modulos/lista', function (data){ $("#lista_tabla_modulos").html(data); });
+    $.get(`/dashboard/configuracion/modulos/lista?page=${page}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function (data){ $("#lista_tabla_modulos").html(data); });
 }
 
 function activar_modulos(idmodulos){
 
-    crud_activar('/dashboard/modulos/activar/' + idmodulos , function(){ lista_tabla_modulos(); }, function(){ console.log('Eror') });
+    crud_activar('/dashboard/modulos/activar/' + idmodulos , function(){ lista_tabla_modulos(1); }, function(){ console.log('Eror') });
 }
 
 function desactivar_modulos(idmodulos){
 
-    crud_desactivar('/dashboard/modulos/desactivar/' + idmodulos , function(){ lista_tabla_modulos(); }, function(){ console.log('Eror') });
+    crud_desactivar('/dashboard/modulos/desactivar/' + idmodulos , function(){ lista_tabla_modulos(1); }, function(){ console.log('Eror') });
 }
 
 function guardar_modulo(e){
 
     $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
 
-    crud_guardar_editar( e, '/dashboard/modulos/guardar', 'modulos', function(){ limpiar_form_modulos(); }, function(){ lista_tabla_modulos(); }, function(){ console.log('Console Error'); });
+    crud_guardar_editar( e, '/dashboard/modulos/guardar', 'modulos', function(){ limpiar_form_modulos(); }, function(){ lista_tabla_modulos(1); }, function(){ console.log('Console Error'); });
 }
 
 function mostrar_one_modulo(idmodulo){

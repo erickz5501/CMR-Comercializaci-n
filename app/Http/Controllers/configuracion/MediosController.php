@@ -20,8 +20,22 @@ class MediosController extends Controller
         return view('configuracion.medios');
     }
 
-    public function indexLista(){
-        $medios = MediosModel::get();
+    public function indexLista(Request $request ){
+
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $medios = MediosModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                            ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                            ->where(function ($query) use ($filtro_search){
+                                return $query->orWhere('nombre', 'like', "%{$filtro_search}%")
+                                            ->orWhere('updated_at', 'like', "%{$filtro_search}%");
+                            })
+                            ->orderBy('idmedios', 'DESC')
+                            ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_medios', compact('medios'));
     }

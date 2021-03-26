@@ -16,8 +16,22 @@ class GiroNegocioController extends Controller
         return view('configuracion.giro_negocio');
     }
 
-    public function indexLista(){
-        $negocios = GiroNegocioModel::get();
+    public function indexLista( Request $request ){
+
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $negocios = GiroNegocioModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                                    ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                    ->where(function ($query) use ($filtro_search){
+                                        return $query->orWhere('nombre', 'like', "%{$filtro_search}%")
+                                                    ->orWhere('created_at', 'like', "%{$filtro_search}%");
+                                    })
+                                    ->orderBy('idgiro_negocio', 'DESC')
+                                    ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_giro_negocio', compact('negocios'));
     }

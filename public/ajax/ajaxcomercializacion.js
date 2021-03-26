@@ -39,6 +39,10 @@ function init(){
     $("#guardar_registro_cotiza_comercia").on('click', function(e){ $("#formulario_cotizacion_comercializacion").submit(); });
     $("#formulario_cotizacion_comercializacion").on("submit", function(e){ agregar_cotizacion_comercializacion(e); });
 
+    // etiqueta
+    $("#guardar_registro_etiquetas").on('click', function(e){  $("#formulario_etiquetas").submit(); });
+    $("#formulario_etiquetas").on("submit", function(e) { guardar_editar_etiqueta(e); });
+
     $("#guardar_registro_seguimiento").on('click', function(e){ $("#formulario_comercializacion_seguimiento").submit(); });
     $("#formulario_comercializacion_seguimiento").on("submit", function(e) { guardar_registro_seguimiento(e); });
 
@@ -122,6 +126,13 @@ function init(){
         width: 'auto',
 		dropdownAutoWidth: true,
     });
+    $('#select_modal_etiquetas').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
 
     lista_comercializacion(1);
 
@@ -133,7 +144,7 @@ function init(){
     lista_select2('/dashboard/listas/clientes', 'clientes', null);
     lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
     lista_select2('/dashboard/listas/actividad', 'actividad', null);
-
+    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
 }
 //
 // PAGINAMOS LA TABLA COMERCIALIZACION
@@ -749,6 +760,29 @@ function guardar_giro_negocio(e){
 function limpiar_form_giro_negocio(){
     $('#idgiro_negocio').val("");
     $('#nombre_input').val("");
+}
+
+//  :::: GUARDAR Y EDITAR "ETIQUETA" ::::::
+function guardar_editar_etiqueta(e) {
+
+    $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
+
+    crud_guardar_modal(
+        e,
+        '/dashboard/configuracion/etiquetas/guardar-editar',
+        'etiquetas',
+        function(){ limpiar_form_etiqueta(); },
+        function(){ console.log('Console Error'); }
+    );
+}
+
+function limpiar_form_etiqueta(){ //Para limpIar los campos despues de registrar un interesado
+
+    $('#idetiquetas').val("");
+
+    $('#nombre_etiqueta').val("");
+
+    $('#descripcion_etiqueta').val("");
 }
 
 //Funciones para agregar los modulos con la cantidad de licencias xD

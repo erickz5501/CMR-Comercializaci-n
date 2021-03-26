@@ -23,13 +23,14 @@ class ClientesController extends Controller
         $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
         $filtro_estado = $request->filtro_estado;
         $filtro_tipo   = $request->filtro_tipo;
-
+        $filtro_etiqueta = ($request->filtro_etiqueta === "null")? '' : $request->filtro_etiqueta;
 
         $clientes = ClientesModel::
                       when( $filtro_tipo == '1' ,function ($query) { return $query->interesados();   })
                     ->when( $filtro_tipo == '2' ,function ($query) { return $query->clientes();   })
                     ->when($filtro_estado == '0' , function ($query) { return $query->activos();  })
                     ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                    ->when($filtro_etiqueta != '' , function ($query) use ($filtro_etiqueta) { return $query->etiquetas($filtro_etiqueta);  })
                     ->orderBy('idclientes', 'DESC')
                     ->where(function ($query) use ($filtro_search){
                         return $query->orWhere('nombres_razon_social', 'like', "%{$filtro_search}%")
@@ -106,6 +107,7 @@ class ClientesController extends Controller
 
         $select_modal_provincia     = $request->input('select_modal_provincia');
         $select_modal_grado_interes = $request->input('select_modal_grado_interes');
+        $select_modal_etiquetas = $request->input('select_modal_etiquetas');
         $select_modal_tamano_empresa= $request->input('select_modal_tamano_empresa');
         $select_modal_a_que_dedicas = $request->input('select_modal_a_que_dedicas');
         $InputCorreo2               = $request->input('InputCorreo2');
@@ -126,13 +128,13 @@ class ClientesController extends Controller
             [
                 'tipo_persona' => $tipoPersonaSelect,
                 'idgiro_negocio' => $GiroNegocioSelect,
-
                 'correo_1' => $InputCorreo1,
                 'telefono_empresa' => $number_empresa_input,
                 'direccion' => $direccion,
 
                 'provincia' => $select_modal_provincia,
                 'grado_interes' => $select_modal_grado_interes,
+                'idetiquetas'=> $select_modal_etiquetas,
                 'tamano_empresa' => $select_modal_tamano_empresa,
                 'a_que_dedicas' => $select_modal_a_que_dedicas,
                 'correo_2' => $InputCorreo2,
@@ -150,15 +152,21 @@ class ClientesController extends Controller
                 $interesado->nro_documento              = $nro_documento;
                 $interesado->nombres_razon_social       = $nombre_razon_social_input;
                 $interesado->apellidos_nombre_comercial = $nombre_comercial_input;
-                $interesado->direccion                  = $direccion;
+                $interesado->tipo_persona               = $tipoPersonaSelect;
+                $interesado->idgiro_negocio             = $GiroNegocioSelect;
                 $interesado->correo_1                   = $InputCorreo1;
+                $interesado->telefono_empresa           = $number_empresa_input;
+                $interesado->direccion                  = $direccion;
+
+                $interesado->provincia                  = $select_modal_provincia;
+                $interesado->grado_interes              = $select_modal_grado_interes;
+                $interesado->idetiquetas                = $select_modal_etiquetas;
+                $interesado->tamano_empresa             = $select_modal_tamano_empresa;
+                $interesado->a_que_dedicas              = $select_modal_a_que_dedicas;
                 $interesado->correo_2                   = $InputCorreo2;
                 $interesado->correo_3                   = $InputCorreo3;
-                $interesado->telefono_empresa           = $number_empresa_input;
                 $interesado->telefono_contacto          = $number_contacto_input;
                 $interesado->telefono_otro              = $number_otro_input;
-                $interesado->idgiro_negocio             = $GiroNegocioSelect;
-                $interesado->tipo_persona               = $tipoPersonaSelect;
                 $interesado->save();
 
             } catch(Exception $e){

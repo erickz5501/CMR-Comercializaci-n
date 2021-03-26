@@ -4,7 +4,7 @@ namespace App\Http\Controllers\configuracion;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\historial\UsersModel;
+use App\Models\UsersModel;
 use App\Http\Requests\UsersRequest;
 use Exception;
 
@@ -16,8 +16,24 @@ class UsersController extends Controller
         return view('configuracion.users');
     }
 
-    public function indexLista(){
-        $users = UsersModel::get();
+    public function indexLista( Request $request  ){
+
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $users = UsersModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                            ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                            ->where(function ($query) use ($filtro_search){
+                                return $query->orWhere('dni', 'like', "%{$filtro_search}%")
+                                            ->orWhere('nombres', 'like', "%{$filtro_search}%")
+                                            ->orWhere('apellidos', 'like', "%{$filtro_search}%")
+                                            ->orWhere('email', 'like', "%{$filtro_search}%");
+                            })
+                            ->orderBy('idusers', 'DESC')
+                            ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_users', compact('users'));
     }

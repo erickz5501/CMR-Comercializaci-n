@@ -1,15 +1,50 @@
 function init(){
 
-    $("#formulario_reclamo").on("submit", function(e) {
-        guardar_reclamo(e);
-    });
-
     lista_reclamos();
+
+    $("#guardar_registro").on('click', function(e){ $("#formulario_reclamo").submit(); });
+    $("#formulario_reclamo").on("submit", function(e) { guardar_reclamo(e); });
 
     lista_select2('/dashboard/listas/modulos', 'modulos', null);
     lista_select2('/dashboard/listas/medios', 'medios', null);
-    lista_select2('/dashboard/listas/personal', 'personal_responsable', null);
-    lista_select2('/dashboard/listas/cliente', 'clientes', null);
+    lista_select2('/dashboard/listas/personal', 'personal', null);
+    lista_select2('/dashboard/listas/clientes', 'clientes', null);
+    $('#select_modal_modulos').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Selecione modulo.',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#select_modal_medios').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Selecione medio contac.',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#select_modal_personal').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Selecione personal.',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#select_modal_clientes').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Selecione cliente.',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#filtro_estado').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Filtrar por estado',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
+    $('#filtro_estado').val('').trigger('change');
 }
 
 function guardar_reclamo(e) {
@@ -31,9 +66,9 @@ function detalle_reclamo(idreclamo){
         //$("#registroModalInteresado").modal('show');
         $.get('/dashboard/mostrar/reclamo/'+idreclamo , function (data){
             data = JSON.parse(data);
-            //console.log(data.cliente);  
+            //console.log(data.cliente);
             $('#idreclamos').val(data.reclamo['idreclamos']);
-            $('#persona_contacto_input').val(data.reclamo['persona_contacto']);
+            $('#persona_contacto').val(data.reclamo['persona_contacto']);
             $('#ruc_dni_input').val(data.reclamo['Ruc_nro_contrato']);
             $('#reclamoDetTextarea').val(data.reclamo['descripcion_reclamo']);
             $('#solucion_input').val(data.reclamo['tipo_solucion']);
@@ -47,7 +82,7 @@ function detalle_reclamo(idreclamo){
             $('#evidenciaTextarea').val(data.reclamo['evidencia']);
             $('#emite_correctivo_input').val(data.reclamo['emite_accion']);
 
-            
+
             if (data.reclamo['idclientes']) {
                 $('#select_modal_clientes').val(data.reclamo['idclientes']).trigger('change');
             }else{
@@ -67,13 +102,13 @@ function detalle_reclamo(idreclamo){
                 $('#select_modal_eventos').val(data.reclamo['ideventos']).trigger('change');
             }else{
                 $('#select_modal_eventos').val(null).trigger('change');
-            }    
+            }
             if (data.reclamo['idpersonal']) {
                 $('#select_modal_personal_responsable').val(data.reclamo['idpersonal']).trigger('change');
             }else{
                 $('#select_modal_personal_responsable').val(null).trigger('change');
             }
-            
+
         });
 }
 
@@ -109,4 +144,123 @@ function detalle_reclamo_ver(id){
     });
 }
 
+$('#select_modal_clientes').on('select2:select', function (e) { //ASIGNAMOS UN EL NOMBRE DEL CLIENTE AL INPUT "PERSONA DE CONTACTO"
+    $('#persona_contacto').val($('select[name="select_modal_clientes"] option:selected').text());
+});
+
+$("#btn_arriba_1").on('click', function () {
+    $('#guardar_registro').hide();
+    $('#sgt_form').show();
+    $('#ant_form').hide();
+
+    $('#tabs-icons-text-1').addClass('show active');
+    $('#tabs-icons-text-2').removeClass('show active');
+});
+
+$("#btn_arriba_2").on('click', function () {
+
+    if ($("#select_modal_clientes").val() == null || $("#select_modal_clientes").val() == '') {
+        $('#select_modal_clientes').addClass("is-invalid");
+    }else{
+        $('#select_modal_clientes').removeClass("is-invalid");
+    }
+
+    if ($("#persona_contacto").val() == null || $("#persona_contacto").val() == '') {
+        $('#persona_contacto').addClass("is-invalid");
+    }else{
+        $('#persona_contacto').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_medios").val() == "") {
+        $('#select_modal_medios').addClass("is-invalid");
+    }else{
+        $('#select_modal_medios').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_modulos").val() == null || $("#select_modal_modulos").val() == '') {
+        $('#select_modal_modulos').addClass("is-invalid");
+    }else{
+        $('#select_modal_modulos').removeClass("is-invalid");
+    }
+
+    if ($("#descripcion_reclamo").val() == null || $("#descripcion_reclamo").val() == '') {
+        $('#descripcion_reclamo').addClass("is-invalid");
+    }else{
+        $('#descripcion_reclamo').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_clientes").val() != null   && $("#persona_contacto").val() != '' && $("#select_modal_medios").val() !== null && $("#select_modal_modulos").val() != null && $("#descripcion_reclamo").val() != '') {
+        $('#guardar_registro').show();
+        $('#sgt_form').hide();
+        $('#ant_form').show();
+        $('#tabs-icons-text-1').removeClass('show active');
+        $('#tabs-icons-text-2').addClass('show active');
+
+    }else{
+        $('#btn_arriba_2').addClass('disabled');
+        sw_error('Selecione campos requeridos');
+    }
+});
+
+$("#sgt_form").on('click', function () {
+
+    if ($("#select_modal_clientes").val() == null || $("#select_modal_clientes").val() == '') {
+        $('#select_modal_clientes').addClass("is-invalid");
+    }else{
+        $('#select_modal_clientes').removeClass("is-invalid");
+    }
+
+    if ($("#persona_contacto").val() == null || $("#persona_contacto").val() == '') {
+        $('#persona_contacto').addClass("is-invalid");
+    }else{
+        $('#persona_contacto').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_medios").val() == "") {
+        $('#select_modal_medios').addClass("is-invalid");
+    }else{
+        $('#select_modal_medios').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_modulos").val() == null || $("#select_modal_modulos").val() == '') {
+        $('#select_modal_modulos').addClass("is-invalid");
+    }else{
+        $('#select_modal_modulos').removeClass("is-invalid");
+    }
+    if ($("#descripcion_reclamo").val() == null || $("#descripcion_reclamo").val() == '') {
+        $('#descripcion_reclamo').addClass("is-invalid");
+    }else{
+        $('#descripcion_reclamo').removeClass("is-invalid");
+    }
+
+    if ($("#select_modal_clientes").val() != null   && $("#persona_contacto").val() != null && $("#select_modal_medios").val() !== "" && $("#select_modal_modulos").val() != null && $("#descripcion_reclamo").val() != '') {
+
+        $('#guardar_registro_seguimiento').show();
+        $('#guardar_registro').show();
+        $('#sgt_form').hide();
+        $('#ant_form').show();
+        $('#btn_arriba_1').removeClass('active');
+        $('#btn_arriba_2').addClass("active");
+
+        $('#tabs-icons-text-1').removeClass('show active');
+        $('#tabs-icons-text-2').addClass('show active');
+
+        $('#btn_arriba_2').removeClass("disabled");
+
+    }else{
+        $('#btn_arriba_2').addClass('disabled');
+        sw_error('Escriba o selecione campos requeridos');
+    }
+});
+
+$("#ant_form").on('click', function () {
+    $('#guardar_registro').hide();
+    $('#sgt_form').show();
+    $('#ant_form').hide();
+    $('#btn_arriba_1').addClass('active');
+    $('#btn_arriba_2').removeClass("active");
+
+    $('#tabs-icons-text-1').addClass('show active');
+    $('#tabs-icons-text-2').removeClass('show active');
+});
 init();

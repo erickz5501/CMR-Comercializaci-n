@@ -14,5 +14,13 @@ class GiroNegocioModel extends Model
     public function ClientesModel(){
         return $this->belongsTo('App\Models\ClientesModel', 'idgiro_negocio');
     }
-    
+
+    public function scopeActivos( $query)
+    {
+        return $query->where('estado', '=', '0');
+    }
+    public function scopeInactivos( $query)
+    {
+        return $query->where('estado', '=', '1');
+    }
 }

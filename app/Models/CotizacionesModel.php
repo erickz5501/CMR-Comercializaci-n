@@ -17,4 +17,13 @@ class CotizacionesModel extends Model
     public function cotizacion_comercializacion(){
         return $this->belongsTo('App\Models\CotizacionComercializacionModel', 'idcotizaciones');
     }
+
+    public function scopeActivos( $query)
+   {
+       return $query->where('estado', '=', '0');
+   }
+   public function scopeInactivos( $query)
+   {
+       return $query->where('estado', '=', '1');
+   }
 }

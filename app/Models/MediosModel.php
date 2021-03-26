@@ -15,4 +15,13 @@ class MediosModel extends Model
         return $this->belongsTo('App\Models\ComercializacionModel', 'idmedios');
     }
 
+    public function scopeActivos( $query)
+   {
+       return $query->where('estado', '=', '0');
+   }
+   public function scopeInactivos( $query)
+   {
+       return $query->where('estado', '=', '1');
+   }
+
 }

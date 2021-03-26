@@ -35,6 +35,15 @@ class EtiquetaController extends Controller
         return view('componentes.etiqueta.tabla_etiqueta', compact('etiquetas'))->render();
     }
 
+    public function lista_select2_etiqueta(){
+
+        $etiquetas = ModelEtiqueta::select('idetiquetas as id','nombre')
+                                    ->where('estado', 0)
+                                    ->get();
+
+        return json_encode($etiquetas);
+    }
+
     public function crear_editar_etiqueta(EtiquetaRequest $request){ //CREA O EDITA UNA ETIQUETA
 
         $idetiquetas  = $request->input('idetiquetas');
@@ -45,12 +54,12 @@ class EtiquetaController extends Controller
 
         if ( empty( $idetiquetas ) ){
 
-            $usuario = ModelEtiqueta::firstOrCreate(
+            $etiqueta = ModelEtiqueta::firstOrCreate(
                 ['nombre' => $nombre],
                 ['descripcion' => $descripcion]
             );
 
-            return json_encode(['status' => true, 'message' => 'Se registró una etiqueta.', 'id' => $usuario->idclientes]);
+            return json_encode(['status' => true, 'message' => 'Se registró una etiqueta.', 'id' => $etiqueta->idetiquetas]);
 
         }else{
 

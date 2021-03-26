@@ -24,7 +24,7 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'dni_users' => 'required|min:8|max:45',
+            'dni_users' => 'max:12',
             'nombre_users' => 'required|min:3|max:250',
             'apellido_users' => 'required|min:3|max:250',
             'email_users' => 'required|min:4|max:100',
@@ -36,7 +36,6 @@ class UsersRequest extends FormRequest
     public function messages()
     {
         return [
-            'dni_users.required' => 'Asegurese de escribir el DNI.',
             'nombre_users.required' => 'Asegurese de escribir el NOMBRE.',
             'apellido_users.required' => 'Asegurese de escribir el APELLIDOS.',
             'email_users.required' => 'Asegurese de escribir el nombre.',

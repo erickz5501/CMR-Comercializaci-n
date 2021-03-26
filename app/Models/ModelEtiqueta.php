@@ -11,8 +11,8 @@ class ModelEtiqueta extends Model
     protected $primaryKey = 'idetiquetas';
     protected $fillable = ['nombre','descripcion', 'estado'];
 
-    public function ClientesModel(){
-        return $this->belongsTo('App\Models\ClientesModel', 'idgiro_negocio');
+    public function ModelClientes(){
+        return $this->hasMany('App\Models\ClientesModel', 'idetiquetas', 'idetiquetas');
     }
 
     public function scopeActivos( $query)

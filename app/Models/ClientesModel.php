@@ -9,7 +9,7 @@ class ClientesModel extends Model
 {
     protected $table = 'clientes';
     protected $primaryKey = 'idclientes';
-    protected $fillable = ['idgiro_negocio', 'tipo_documento', 'nro_documento', 'nombres_razon_social', 'apellidos_nombre_comercial', 'correo_1', 'correo_2',
+    protected $fillable = ['idgiro_negocio', 'idetiquetas','tipo_documento', 'nro_documento', 'nombres_razon_social', 'apellidos_nombre_comercial', 'correo_1', 'correo_2',
                             'correo_3', 'telefono_empresa', 'telefono_contacto', 'telefono_otro', 'tipo_persona','direccion','tamano_empresa',
                             'a_que_dedicas','grado_interes','provincia','estado'];
 
@@ -17,13 +17,17 @@ class ClientesModel extends Model
         return $this->hasOne('App\Models\GiroNegocioModel', 'idgiro_negocio', 'idgiro_negocio');
     }
 
+    public function ModeloEtiqueta(){
+        return $this->belongsTo('App\Models\ModelEtiqueta', 'idetiquetas', 'idetiquetas');
+   }
+
     // public function comercializacion(){
     //     return $this->belongsTo('App\Models\ComercializacionModel', 'idclientes');
     // }
 
     public function ModeloComercializaciones(){
         return $this->hasMany('App\Models\ComercializacionModel', 'idclientes', 'idclientes');
-   }
+    }
 
    // SCOPE
 
@@ -44,6 +48,11 @@ class ClientesModel extends Model
    public function scopeInactivos( $query)
    {
        return $query->where('estado', '=', '1');
+   }
+
+   public function scopeEtiquetas( $query,$filtro_etiqueta)
+   {
+       return $query->where('idetiquetas', '=', $filtro_etiqueta);
    }
 
 

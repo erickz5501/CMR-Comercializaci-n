@@ -8,16 +8,11 @@ use App\Http\Controllers\DashboardController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
+*/
 
-// Route::get('/', function () {
-//     return view('main');
-// });
-Route::get('/', "ComercializacionController@index");
+// Route::get('/', "ComercializacionController@mantenimiento"); // ::::::::::::::::: RUTA PARA MANTENIMINETO ::::::::::::::::::
+
+Route::get('/', "ComercializacionController@index"); // :::::::::::::::: RUTA PRINCIPAL :::::::::::
 
 Route::get('/index', function () {
     return view('login');
@@ -220,15 +215,11 @@ Route::get('/dashboard/listas/personal', "configuracion\PersonalController@index
 Route::get('/dashboard/listas/clientes', "clientes\ClientesController@lista_select2_clientes");
 Route::get('/dashboard/listas/interesado', "clientes\ClientesController@lista_select2_interesado");
 Route::get('/dashboard/listas/actividad', "configuracion\ActividadController@indexActvidad");
-// Route::get('/dashboard/listas/personal', "historial\HistorialController@indexPersonal");
+Route::get('/dashboard/listas/etiquetas', "configuracion\EtiquetaController@lista_select2_etiqueta");
+Route::get('/dashboard/listas/filtro_etiqueta', "configuracion\EtiquetaController@lista_select2_etiqueta");
 
 // ........... ::::: RUTA PARA CONSULTAS SUNAT :::::...............
 Route::get('/consultas/dni/{dni}', "consultas\ConsultasController@consultaDNISunat");
 Route::get('/consultas/ruc/{ruc}', "consultas\ConsultasController@consultaRUCSunat");
 
 
-// // ........... ::::: LISTAR TIPO PERSONA :::::...............
-// Route::get('/dashboard/listas/tipopersona', "GiroNegocioController@index");
-
-// // ........... ::::: LISTAR TIPO DOCUMENTO :::::...............
-// Route::get('/dashboard/listas/tipodoc', "GiroNegocioController@index");

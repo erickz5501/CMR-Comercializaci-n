@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ReclamosModel;
 use App\Http\Requests\ReclamosRequest;
+use Exception;
+
 class ReclamosController extends Controller
 {
     public function index(){
@@ -14,7 +16,7 @@ class ReclamosController extends Controller
 
     public function indexLista()
     {
-        $reclamos = ReclamosModel::with('clientes')->get();
+        $reclamos = ReclamosModel::with('clientes')->paginate(1);
         //return json_encode($comercio);
         return view('componentes.reclamos.tabla_reclamos', compact('reclamos'));
     }
@@ -25,7 +27,7 @@ class ReclamosController extends Controller
         $reclamo->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el reclamo']);
     }
-    
+
     public function desactivar($idreclamos){
         $reclamo = ReclamosModel::where('idreclamos', $idreclamos)->first();
         $reclamo->estado = 1;
@@ -34,36 +36,55 @@ class ReclamosController extends Controller
     }
 
     public function createReclamo(ReclamosRequest $request){
-        
-        $idreclamos                                 = $request->input('idreclamos');
-        $select_modal_clientes                      = $request->input('select_modal_clientes');
-        $persona_contacto_input                     = $request->input('persona_contacto_input');
-        $ruc_dni_input                              = $request->input('ruc_dni_input');
-        $select_modal_medios                        = $request->input('select_modal_medios');
-        $select_modal_modulos                       = $request->input('select_modal_modulos');
-        $reclamoDetTextarea                         = $request->input('reclamoDetTextarea');
-        $solucion_input                             = $request->input('solucion_input');
-        $causa_input                                = $request->input('causa_input');
-        $reclamo_procede                            = $request->input('reclamo_procede');
-        $accion_tomar_input                         = $request->input('accion_tomar_input');
-        $select_modal_personal_responsable          = $request->input('select_modal_personal_responsable');
-        $fecha_compromiso                           = $request->input('fecha_compromiso');
-        $fecha_solucion                             = $request->input('fecha_solucion');
-        $solucion_minutos_input                     = $request->input('solucion_minutos_input');
-        $solucion_dias_input                        = $request->input('solucion_dias_input');
-        $evidenciaTextarea                          = $request->input('evidenciaTextarea');
-        $emite_correctivo_input                     = $request->input('emite_correctivo_input');
 
+        $idreclamos                        = $request->input('idreclamos');
+        $select_modal_clientes             = $request->input('select_modal_clientes');
+        $persona_contacto                  = $request->input('persona_contacto');
+        $ruc_dni_input                     = $request->input('ruc_dni_input');
+        $select_modal_medios               = $request->input('select_modal_medios');
+        $select_modal_modulos              = $request->input('select_modal_modulos');
+        $descripcion_reclamo                = $request->input('descripcion_reclamo');
+        $solucion_input                    = $request->input('solucion_input');
+        $causa_input                       = $request->input('causa_input');
+        $reclamo_procede                   = $request->input('reclamo_procede');
+        $accion_tomar_input                = $request->input('accion_tomar_input');
+        $select_modal_personal_responsable = $request->input('select_modal_personal_responsable');
+        $fecha_compromiso                  = $request->input('fecha_compromiso');
+        $fecha_solucion                    = $request->input('fecha_solucion');
+        $solucion_minutos_input            = $request->input('solucion_minutos_input');
+        $solucion_dias_input               = $request->input('solucion_dias_input');
+        $evidenciaTextarea                 = $request->input('evidenciaTextarea');
+        $emite_correctivo_input            = $request->input('emite_correctivo_input');
+        $hola = [
+            'idclientes'               => $select_modal_clientes,
+            'persona_contacto'         => $persona_contacto,
+            'Ruc_nro_contrato'         => $ruc_dni_input,
+            'idmedios'                 => $select_modal_medios,
+            'idmodulos'                => $select_modal_modulos,
+            'descripcion_reclamo'      => $descripcion_reclamo,
+            'tipo_solucion'            => $solucion_input,
+            'causa'                    => $causa_input,
+            'procede'                  => $reclamo_procede,
+            'accion_tomar'             => $accion_tomar_input,
+            'idpersonal'               => $select_modal_personal_responsable,
+            'fecha_compromiso'         => $fecha_compromiso,
+            'fecha_solucion'           => $fecha_solucion,
+            'solucion_minutos'         => $solucion_minutos_input,
+            'solucion_dias'            => $solucion_dias_input,
+            'evidencia'                => $evidenciaTextarea,
+            'emite_accion'             => $emite_correctivo_input,
+        ];
+        return json_encode($hola);
         if ($idreclamos != "") {
             $registro = ReclamosModel::find($idreclamos);
 
             try{
                 $registro->idclientes               = $select_modal_clientes;
-                $registro->persona_contacto         = $persona_contacto_input;
+                $registro->persona_contacto         = $persona_contacto;
                 $registro->Ruc_nro_contrato         = $ruc_dni_input;
                 $registro->idmedios                 = $select_modal_medios;
                 $registro->idmodulos                = $select_modal_modulos;
-                $registro->descripcion_reclamo      = $reclamoDetTextarea;
+                $registro->descripcion_reclamo      = $descripcion_reclamo;
                 $registro->tipo_solucion            = $solucion_input;
                 $registro->causa                    = $causa_input;
                 $registro->procede                  = $reclamo_procede;
@@ -83,16 +104,16 @@ class ReclamosController extends Controller
             }
 
             return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el reclamo']);
-            
+
         } else {
             $registro = ReclamosModel::create(
                 [
                 'idclientes' => $select_modal_clientes,
-                'persona_contacto' => $persona_contacto_input,
+                'persona_contacto' => $persona_contacto,
                 'Ruc_nro_contrato' => $ruc_dni_input,
                 'idmedios' => $select_modal_medios,
                 'idmodulos' => $select_modal_modulos,
-                'descripcion_reclamo' => $reclamoDetTextarea,
+                'descripcion_reclamo' => $descripcion_reclamo,
                 'tipo_solucion' => $solucion_input,
                 'causa' => $causa_input,
                 'procede' => $reclamo_procede,
@@ -106,10 +127,10 @@ class ReclamosController extends Controller
                 'emite_accion' => $emite_correctivo_input
                 ]);
 
-            
+
             return json_encode(['status' => true, 'message' => 'Éxito se registro el reclamo']);
         }
-        
+
     }
 
     public function DetalleReclamo($idreclamo){

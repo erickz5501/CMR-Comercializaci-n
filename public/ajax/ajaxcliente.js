@@ -16,12 +16,17 @@ function init(){
     $("#guardar_registro_giro_negocio").on('click', function(e){ $("#formulario_giro_negocio").submit(); });
     $("#formulario_giro_negocio").on("submit", function(e){ guardar_giro_negocio(e); });
 
-    $("#formulario_registro_interesado").on("submit", function(e){ guardar_interesado(e); });
+    // etiqueta
+    $("#guardar_registro_etiquetas").on('click', function(e){  $("#formulario_etiquetas").submit(); });
+    $("#formulario_etiquetas").on("submit", function(e) { guardar_editar_etiqueta(e); });
+    // $("#formulario_registro_interesado").on("submit", function(e){ guardar_interesado(e); });
 
     lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
     lista_select2('/dashboard/listas/modulos', 'software', null);
     lista_select2('/dashboard/listas/actividad', 'actividad', null);
-    // lista_select2('/dashboard/listas/tipodoc', 'tipoDocumento', null);
+    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
+    lista_select2('/dashboard/listas/filtro_etiqueta', 'filtro_etiqueta', null);
+
     $('#select_modal_tipo_doc').select2({
         theme: 'bootstrap4',
         width: 'style',
@@ -38,13 +43,13 @@ function init(){
         overflow: 'scroll'
     });
 
-    // $('#select_modal_tipoPersona').select2({
-    //     theme: 'bootstrap4',
-    //     placeholder: 'Seleccione',
-    //     allowClear: true,
-    //     width: 'auto',
-	// 	dropdownAutoWidth: true,
-    // });
+    $('#select_modal_etiquetas').select2({
+        theme: 'bootstrap4',
+        placeholder: 'Seleccione',
+        allowClear: true,
+        width: 'auto',
+		dropdownAutoWidth: true,
+    });
 
     $('#select_modal_actividad').select2({
         theme: 'bootstrap4',
@@ -71,14 +76,14 @@ function init(){
         width: 'auto',
 		dropdownAutoWidth: true,
     });
-    $('#filtro_etiqueta').select2({
+    $('#select_modal_filtro_etiqueta').select2({
         theme: 'bootstrap4',
         placeholder: 'Filtrar por etiqueta',
         allowClear: true,
         width: 'auto',
 		dropdownAutoWidth: true,
     });
-    $('#filtro_estado').val('').trigger('change');
+
     $('#filtro_etiqueta').val('').trigger('change');
 }
 
@@ -105,10 +110,11 @@ function lista_tabla_clientes(page){
 
     var filtro_tipo = $('#filtro_tipo').val() ;
     var filtro_estado = $('#filtro_estado').val() ;
+    var filtro_etiqueta = $('#select_modal_filtro_etiqueta').val() ;
 
     $("#lista_tabla_clientes_interesados").html('<div id="loader"></div>');
 
-    $.get(`/dashboard/clientes-interesados/lista-tabla?page=${page}&filtro_tipo=${filtro_tipo}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}`, function (data){
+    $.get(`/dashboard/clientes-interesados/lista-tabla?page=${page}&filtro_tipo=${filtro_tipo}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}&filtro_etiqueta=${filtro_etiqueta}`, function (data){
         $("#lista_tabla_clientes_interesados").html(data);
     });
 }
@@ -236,7 +242,7 @@ function mostrar_one_cliente(idclientes){
     //$("#registroModalInteresado").modal('show');
     $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
         data = JSON.parse(data);
-        console.log(data);
+        // console.log(data);
         $('#cargando_edit_cliente').hide(); //oculto icon spiner
 
         $('#idclientes').val(data.idclientes);
@@ -257,6 +263,12 @@ function mostrar_one_cliente(idclientes){
         $('#InputCorreo3').val(data.correo_3);
         $('#number_contacto_input').val(data.telefono_contacto);
         $('#number_otro_input').val(data.telefono_otro);
+
+        if (data.idetiquetas) {
+            $('#select_modal_etiquetas').val(data.idetiquetas).trigger('change');
+        }else{
+            $('#select_modal_etiquetas').val('').trigger('change');
+        }
 
         if (data.idgiro_negocio) {
             $('#select_modal_giro_negocio').val(data.idgiro_negocio).trigger('change');
@@ -461,8 +473,29 @@ function limpiar_form_giro_negocio(){
     $('#idgiro_negocio').val("");
     $('#nombre_input').val("");
 }
+
+
+//  :::: GUARDAR Y EDITAR "ETIQUETA" ::::::
+function guardar_editar_etiqueta(e) {
+
+    $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
+
+    crud_guardar_modal(
+        e,
+        '/dashboard/configuracion/etiquetas/guardar-editar',
+        'etiquetas',
+        function(){ limpiar_form_etiqueta(); },
+        function(){ console.log('Console Error'); }
+    );
+}
+
+function limpiar_form_etiqueta(){ //Para limpIar los campos despues de registrar un interesado
+
+    $('#idetiquetas').val("");
+
+    $('#nombre_etiqueta').val("");
+
+    $('#descripcion_etiqueta').val("");
+}
 init();
 
-function eliminar_etiqueta() {
-    crud_eliminar('/dashboard/cliente/desactivar/' , function(){ lista_tabla_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
-}

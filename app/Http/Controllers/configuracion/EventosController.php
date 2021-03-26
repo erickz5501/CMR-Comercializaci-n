@@ -16,9 +16,22 @@ class EventosController extends Controller
         return view('configuracion.eventos');
     }
 
-    public function indexLista(){
+    public function indexLista( Request $request ){
 
-        $eventos = EventosModel::get();
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $eventos = EventosModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                                ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                ->where(function ($query) use ($filtro_search){
+                                    return $query->orWhere('nombre', 'like', "%{$filtro_search}%")
+                                                ->orWhere('descrripcion', 'like', "%{$filtro_search}%");
+                                })
+                                ->orderBy('ideventos', 'DESC')
+                                ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_eventos', compact('eventos'));
     }

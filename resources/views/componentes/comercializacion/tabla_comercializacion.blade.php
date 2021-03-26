@@ -8,7 +8,6 @@
             <th>GIRO DE NEGOCIO</th>
             <th>TELÉFONO</th>
             <th>CORREO</th>
-            <th>ESTADO</th>
             <th>OPCIONES</th>
         </tr>
     </thead>
@@ -19,17 +18,17 @@
             @foreach ($comercializaciones as $key => $comercializacion)
                 <tr>
                     <td class="align-middle">
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center">
-                                <div class="mx-3">
-                                    <span class="text-dark font-weight-600 text-sm">{{ $comercializacion->nro_documento}}</span>
-                                    <small class="d-block text-muted">
-                                        {{Str::limit($comercializacion->nombres_razon_social.' '.$comercializacion->apellidos_nombre_comercial, 25, '...')}}
 
-                                    </small>
-                                </div>
+                        <div class="d-flex align-items-center">
+                            <div class="mx-3">
+                                <span class="text-dark font-weight-600 text-sm">{{ $comercializacion->nro_documento}}</span>
+                                <small class="d-block text-muted text-sm">
+                                    {{Str::limit($comercializacion->nombres_razon_social.' '.$comercializacion->apellidos_nombre_comercial, 25, '...')}}
+
+                                </small>
                             </div>
                         </div>
+
                     </td>
 
                     <td class="align-middle">
@@ -48,14 +47,14 @@
                         @endif
                     </td>
 
-                    <td class="align-middle">
+                    {{-- <td class="align-middle">
                         @if ($comercializacion->estado == 0)
                             <span class="badge badge-success badge-lg">Activo</span>
                         @else
                             <span class="badge badge-danger badge-lg">Inactivo</span>
                         @endif
 
-                    </td>
+                    </td> --}}
 
                     <td class="align-middle">
                         <button disabled onclick="mostrar_docs_cotizacion( {{$comercializacion->idcomercializacion}} );" type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-original-title="Ver Docs. de Cotización">

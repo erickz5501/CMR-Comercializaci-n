@@ -39,8 +39,8 @@ $("#filtro_search").on("keyup", function () { // CAPTURA TEXTO BUSCADOR
 // ::::::: LISTAR TABLA ETIQUETA :::::::
 function lista_tabla_etiqueta(page){
 
-    var filtro_cant = $('#filtro_cant').val();
-    var filtro_search    = $('#filtro_search').val();
+    var filtro_cant   = $('#filtro_cant').val();
+    var filtro_search = $('#filtro_search').val();
     var filtro_estado = $('#filtro_estado').val() ;
 
     $("#lista_tabla_etiquetas").html('<div id="loader"></div>');
@@ -84,7 +84,7 @@ function mostrar_one_etiqueta(idetiquetas){
 
     $('#btn_footer_modal_etiqueta').html('ACTUALIZAR');
 
-    $('#cargando_edit').show();
+    $('#cargando_edit_etiqueta').show();
 
     $("#modal_etiqueta").modal('show');
 
@@ -92,7 +92,7 @@ function mostrar_one_etiqueta(idetiquetas){
 
         data = JSON.parse(data);
 
-        $('#cargando_edit').hide();
+        $('#cargando_edit_etiqueta').hide();
 
         $('#idetiquetas').val(data.idetiquetas);
 

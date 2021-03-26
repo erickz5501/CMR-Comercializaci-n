@@ -555,6 +555,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- ::::::::::: SELECT ETIQUETA ::::::::::::-->
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="select_modal_etiquetas">
+                                                        Etiqueta
+                                                    </label>
+                                                    <div class="input-group">
+
+                                                        <select  class="form-control" data-toggle="" id="select_modal_etiquetas" name="select_modal_etiquetas"  style="color: black !important; font-weight: bold !important;">
+                                                            {{-- AQUI VAN LOS "OPTIONS" --}}
+                                                        </select>
+                                                        <span class="input-group-addon input-group-append" data-toggle="tooltip" data-placement="top" title="Crear nueva etiqueta">
+                                                            <button class="btn btn-default" type="button"  onclick="" data-toggle="modal" data-target="#modal_etiquetas" >
+                                                                <i class="fas fa-plus-circle"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!-- ::::::::::: SELECT TAMAÑO DE EMPRESA ::::::::::::-->
                                             <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
                                                 <div class="form-group">
@@ -1113,6 +1132,80 @@
                     <button id="guardar_registro_cotiza_comercia" type="button" class="btn btn-outline-success" >
                         <i class="far fa-save"> </i>
                          Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!-- ::::::: MODAL ETIQUETAS -->
+     <div class="modal fade" id="modal_etiquetas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <!-- ::::::: MODAL HEADER ::::::: -->
+                <div class="modal-header" style="padding-bottom: 10px !important;">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                       Agregar Etiqueta
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>
+                    </button>
+                </div>
+                <!-- ::::::: MODAL BODY ::::::: -->
+                <div class="modal-body" style="padding-top: 0px !important; padding-bottom: 0px !important;  ">
+                    <form id="formulario_etiquetas" >
+                        @csrf
+                        <input type="hidden" id="idetiquetas" name="idetiquetas" />
+                        <div class="row">
+                            <!-- ::::::::::: INPUT APELLIDOS NOMBRE COMERCIAL ::::::::::::-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="nombre_etiqueta">
+                                        Nombre
+                                    </label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input  type="text" class="form-control" id="nombre_etiqueta" name="nombre_etiqueta" placeholder="Nombre"   style="color: black !important; font-weight: bold !important;" autocomplete="off" />
+                                        <div class="invalid-feedback">Por Favor escriba un nombre</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ::::::::::: INPUT APELLIDOS NOMBRE COMERCIAL ::::::::::::-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label class="form-control-label" for="descripcion_etiqueta">
+                                        Descripción
+                                    </label>
+                                    <div class="input-group">
+                                        <textarea type="text"  id="descripcion_etiqueta" name="descripcion_etiqueta" cols="30" rows="4" placeholder="Descripción"  class="form-control" style="color: black !important; font-weight: bold !important;" autocomplete="off"></textarea>
+                                        <div class="invalid-feedback">Por Favor escriba un nombre</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ::::::::::: BARRA DE PROGRESO :::::::::::::::::::-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <div class="progress" id="div_barra_progress_etiquetas" style="height: 12px !important;">
+                                        <div id="barra_progress_etiquetas" class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ::::::::::::::::  CONTENEDOR DE ERRORES ::::::::::-->
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div id="contenedor_de_errores_etiquetas"></div>
+                            </div>
+                        </div>
+                        <button type="submit" style="display: none;"></button>
+                    </form>
+                </div>
+
+                <!-- MODAL FOOTER -->
+                <div class="modal-footer" style="padding-top: 0px !important;">
+                    <button id="guardar_registro_etiquetas" type="button" class="btn btn-outline-primary px-3 py-2" >
+                        <i class="far fa-save"> </i>
+                         GUARDAR
                     </button>
                 </div>
             </div>

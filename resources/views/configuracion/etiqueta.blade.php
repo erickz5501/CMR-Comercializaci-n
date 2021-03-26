@@ -90,7 +90,7 @@
                 <div class="modal-header" style="padding-bottom: 10px !important;">
                     <h5 class="modal-title" id="exampleModalLabel">
                         <span id="titulo_modal_etiqueta"> Agregar Etiqueta </span>
-                        <i style="font-size: 20px !important; display: none;" class="fas fa-spinner fa-pulse" id="cargando_edit_cliente"></i>
+                        <i style="font-size: 20px !important; display: none;" class="fas fa-spinner fa-pulse" id="cargando_edit_etiqueta"></i>
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"> <i class="far fa-times-circle" style="color: red;"></i> </span>

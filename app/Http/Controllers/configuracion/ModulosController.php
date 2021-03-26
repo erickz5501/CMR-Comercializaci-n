@@ -16,8 +16,23 @@ class ModulosController extends Controller
         return view('configuracion.modulos');
     }
 
-    public function indexLista(){
-        $modulos = ModulosModel::get();
+    public function indexLista(Request $request){
+
+        $filtro_estado = $request->filtro_estado;
+
+        $filtro_cant   = $request->filtro_cant;
+
+        $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
+
+        $modulos = ModulosModel::when($filtro_estado == '0' , function ($query) { return $query->activos();  })
+                                ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                ->where(function ($query) use ($filtro_search){
+                                    return $query->orWhere('nombre', 'like', "%{$filtro_search}%")
+                                                ->orWhere('caracteristicas', 'like', "%{$filtro_search}%")
+                                                ->orWhere('created_at', 'like', "%{$filtro_search}%");
+                                })
+                                ->orderBy('idmodulos', 'DESC')
+                                ->paginate($filtro_cant);
         //return json_encode($eventos);
         return view('componentes.configuracion.tabla_modulos', compact('modulos'));
     }

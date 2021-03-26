@@ -17,6 +17,10 @@ use Exception;
 
 class ComercializacionController extends Controller
 {
+    public function mantenimiento(){
+        return view('errors.mantenimiento');
+    }
+
     public function index(){
         return view('comercializacion.comercializacion');
     }
@@ -27,8 +31,8 @@ class ComercializacionController extends Controller
         $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
 
         $comercializaciones = ClientesModel::with('ModeloComercializaciones','gironegocio')
-                                            ->where(function($query) use ($filtro_search){
-                                                    return $query->orWhereHas('ModeloComercializaciones', function ($query) use ($filtro_search){
+                                            ->where(function($query) {
+                                                    return $query->orWhereHas('ModeloComercializaciones', function ($query) {
                                                         return $query->where('idcomercializacion', '>', '0');
                                                     });
                                                 })
@@ -364,7 +368,7 @@ class ComercializacionController extends Controller
     }
 
     public function mostrar_one_comercializacion($idcomercializacion){//Para editar
-        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->orderBy('created_at', 'DESC')->first();
+        $det_registro = ComercializacionModel::where('idcomercializacion', $idcomercializacion)->first();
         $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', '=', $idcomercializacion)
                                                 ->where('estado', '=', 0)
                                                 ->orderBy('created_at', 'DESC')
@@ -376,7 +380,7 @@ class ComercializacionController extends Controller
     }
 
     public function detalle_registro($idcomercializacion){
-        $det_registro = ComercializacionModel::with('ModeloCliente', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
+        $det_registro = ComercializacionModel::with('ModeloCliente.ModeloEtiqueta', 'medio', 'evento', 'personal')->where('idcomercializacion', $idcomercializacion)->first();
         $det_modulo = ModuloComercializacionModel::with('modulo')->where('idcomercializacion', $idcomercializacion)->where('estado', '=', 0)->get();
         $cotizacion = CotizacionComercializacionModel::with('ModeloCotizacion')->where('idcomercializacion', $idcomercializacion)->first();
         $cant_modulos = \count($det_modulo);

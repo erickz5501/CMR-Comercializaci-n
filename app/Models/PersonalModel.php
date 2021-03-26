@@ -14,6 +14,13 @@ class PersonalModel extends Model
     public function comercializacion(){
         return $this->belongsTo('App\Models\ComercializacionModel', 'idpersonal');
     }
-
+    public function scopeActivos( $query)
+    {
+        return $query->where('estado', '=', '0');
+    }
+    public function scopeInactivos( $query)
+    {
+        return $query->where('estado', '=', '1');
+    }
 
 }
