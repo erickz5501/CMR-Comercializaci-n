@@ -1,8 +1,13 @@
 function init(){
 
+    lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
+    lista_select2('/dashboard/listas/modulos', 'software', null);
+    lista_select2('/dashboard/listas/actividad', 'actividad', null);
+    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
+    lista_select2('/dashboard/listas/filtro_etiqueta', 'filtro_etiqueta', null);
+
     lista_tabla_clientes(1);
-    // lista_interesados();
-    // PAGINAMOS LA TABLA CLIENTE
+
     $(document).on("click",'.pagination a',function(e){
         e.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
@@ -19,13 +24,6 @@ function init(){
     // etiqueta
     $("#guardar_registro_etiquetas").on('click', function(e){  $("#formulario_etiquetas").submit(); });
     $("#formulario_etiquetas").on("submit", function(e) { guardar_editar_etiqueta(e); });
-    // $("#formulario_registro_interesado").on("submit", function(e){ guardar_interesado(e); });
-
-    lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
-    lista_select2('/dashboard/listas/modulos', 'software', null);
-    lista_select2('/dashboard/listas/actividad', 'actividad', null);
-    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
-    lista_select2('/dashboard/listas/filtro_etiqueta', 'filtro_etiqueta', null);
 
     $('#select_modal_tipo_doc').select2({
         theme: 'bootstrap4',
@@ -59,8 +57,6 @@ function init(){
 		dropdownAutoWidth: true,
     });
 
-
-
     // FILTROS DE BUSQUEDA ........
     $('#filtro_estado').select2({
         theme: 'bootstrap4',
@@ -86,7 +82,7 @@ function init(){
 
     $('#filtro_etiqueta').val('').trigger('change');
 }
-
+init();
 // BUSCADOR
 var delay = (function(){
     var timer = 0;
@@ -497,5 +493,5 @@ function limpiar_form_etiqueta(){ //Para limpIar los campos despues de registrar
 
     $('#descripcion_etiqueta').val("");
 }
-init();
+
 

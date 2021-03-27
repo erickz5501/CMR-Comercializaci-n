@@ -33,4 +33,13 @@ class ReclamosModel extends Model
         return $this->hasOne('App\Models\ModulosModel', 'idmodulos', 'idmodulos');
     }
 
+    public function scopeActivos( $query)
+   {
+       return $query->where('estado', '=', '0');
+   }
+   public function scopeInactivos( $query)
+   {
+       return $query->where('estado', '=', '1');
+   }
+
 }

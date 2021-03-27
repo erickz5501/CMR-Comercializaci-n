@@ -195,12 +195,12 @@ Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
 // .......... :::::: RUTAS RECLAMOS :::: ................
 Route::group(['prefix' => 'dashboard', 'as' => 'dashboard'], function(){
     route::get('/reclamos', "ReclamosController@index");
-    Route::get('/reclamos/lista', "ReclamosController@indexLista");
-    Route::post('/reclamo/guardar', "ReclamosController@createReclamo");
+    Route::get('/reclamos/lista-tabla', "ReclamosController@lista_tabla");
+    Route::post('/reclamo/guardar-editar', "ReclamosController@crear_editar_reclamo");
     Route::get('/reclamos/desactivar/{idreclamos}', "ReclamosController@desactivar");
     Route::get('/reclamos/activar/{idreclamos}', "ReclamosController@activar");
-    Route::get('/mostrar/reclamo/{idreclamos}', "ReclamosController@DetalleReclamo");//Para editar el reclamo
-    Route::get('/lista/reclamo/{idreclamos}', "ReclamosController@detalle_reclamo");
+    Route::get('/reclamos/mostrar-one/{idreclamos}', "ReclamosController@ver_one_reclamo");//Para editar el reclamo
+    Route::get('/reclamos/ver-detalle/{idreclamos}', "ReclamosController@detalle_reclamo");
 
 });
 

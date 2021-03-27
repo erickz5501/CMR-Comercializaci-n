@@ -1,6 +1,16 @@
 var recordar_idcomercializacion = '';
 function init(){
 
+    lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
+    lista_select2('/dashboard/listas/modulos', 'modulos', null);
+    lista_select2('/dashboard/listas/medios', 'medios', null);
+    lista_select2('/dashboard/listas/evento', 'evento', null);
+    lista_select2('/dashboard/listas/personal', 'personal', null);
+    lista_select2('/dashboard/listas/clientes', 'clientes', null);
+    lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
+    lista_select2('/dashboard/listas/actividad', 'actividad', null);
+    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
+
     $('#guardar_registro').html('<i class="far fa-save"> Guardar registro');
     $('#guardar_registro_seguimiento').html('<i class="far fa-save"> Guardar registro');
     $('#migaja_de_pan').show();
@@ -136,16 +146,8 @@ function init(){
 
     lista_comercializacion(1);
 
-    lista_select2('/dashboard/listas/giro_negocio', 'giro_negocio', null);
-    lista_select2('/dashboard/listas/modulos', 'modulos', null);
-    lista_select2('/dashboard/listas/medios', 'medios', null);
-    lista_select2('/dashboard/listas/evento', 'evento', null);
-    lista_select2('/dashboard/listas/personal', 'personal', null);
-    lista_select2('/dashboard/listas/clientes', 'clientes', null);
-    lista_select2('/dashboard/listas/cotizacion', 'cotizacion', null);
-    lista_select2('/dashboard/listas/actividad', 'actividad', null);
-    lista_select2('/dashboard/listas/etiquetas', 'etiquetas', null);
 }
+init();
 //
 // PAGINAMOS LA TABLA COMERCIALIZACION
 $(document).on("click",'.pagination a',function(e){
@@ -1034,7 +1036,7 @@ function activar_cotizacion(idcotizacion) {
 
     crud_activar('/dashboard/cotizaciones/activar/' + idcotizacion , function(){ mostrar_docs_cotizacion(recordar_idcomercializacion); }, function(){ console.log('Eror') });
 }
-init();
+
 $("#agregar_comercializacion_seguimiento").on('click', function(e){
     $('#select_modal_clientes').val(sessionStorage.getItem('id_idclientes')).trigger('change');
 });

@@ -3,12 +3,13 @@
     <table class="table table-flush table-hover"  >
         <thead class="thead-light">
             <tr>
-                <th>Cliente</th>
+                <th>CLIENTE</th>
                 <th>Persona contacto</th>
                 <th>Fecha compromiso</th>
                 <th>Fecha solucion</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th>PROCEDE</th>
+                <th>ESTADO</th>
+                <th>OPCIONES</th>
             </tr>
         </thead>
         <tbody>
@@ -16,30 +17,51 @@
 
                 @foreach ($reclamos as $count => $reclamo)
                     <tr>
-                        <td>{{ $reclamo->clientes->nombres_razon_social}}</td>
-                        <td>{{ $reclamo->persona_contacto}}</td>
-                        <td>{{ $reclamo->fecha_compromiso}}</td>
-                        <td>{{ $reclamo->fecha_solucion}}</td>
-                        <td>
+                        <td class="align-middle" >
+                            {{ $reclamo->clientes->nombres_razon_social}} {{ $reclamo->clientes->apellidos_nombre_comercial}} {{$reclamo->idreclamos}}
+                        </td>
+                        <td class="align-middle">
+                            {{ $reclamo->persona_contacto}}
+                        </td>
+                        <td class="align-middle">
+                            {{ \Carbon\Carbon::parse($reclamo->fecha_compromiso)->format('Y-m-d / g:i a') }}
+                        </td>
+                        <td class="align-middle">
+                            {{ \Carbon\Carbon::parse($reclamo->fecha_solucion)->format('Y-m-d / g:i a') }}
+                        </td>
+                        <td class="align-middle">
+                             @if ($reclamo->procede == '0')
+                                <label class="custom-toggle custom-toggle-info">
+                                    <input type="checkbox"checked disabled>
+                                    <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Si" ></span>
+                                </label>
+                             @else
+                                <label class="custom-toggle" style="color: #081f35 !important;">
+                                    <input type="checkbox" disabled>
+                                    <span class="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Si" style="color: #081f35 !important;"></span>
+                                </label>
+                             @endif
+                        </td>
+                        <td class="align-middle">
                             @if ($reclamo->estado == 0)
-                                <span class="badge badge-success badge-lg">Activo</span>
+                                <span class="badge badge-success badge-lg">Terminado</span>
                             @else
-                                <span class="badge badge-danger badge-lg">Inactivo</span>
+                                <span class="badge badge-danger badge-lg">En proceso</span>
                             @endif
                         </td>
-                        <td>
-                            <button onclick="detalle_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
+                        <td class="align-middle">
+                            <button onclick="mostrar_one_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                            <button onclick="desactivar_reclamo( {{$reclamo->idreclamos}} );"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-original-title="Ver detalle">
+                            <button onclick="detalle_reclamo( {{$reclamo->idreclamos}} );"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-original-title="Ver detalle">
                                 <i class="fas fa-eye"></i>
                             </button>
                             @if ($reclamo->estado == 0)
-                                <button onclick="desactivar_reclamo({{ $reclamo->idreclamos}});" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Desactivar">
-                                    <i class="fas fa-trash-alt"></i>
+                                <button onclick="desactivar_reclamo({{ $reclamo->idreclamos}});" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Marcar en proceso">
+                                    <i class="fas fa-times"></i>
                                 </button>
                             @else
-                                <button  onclick="activar_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Activar">
+                                <button  onclick="activar_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Marcar terminado">
                                     <i class="fas fa-check"></i>
                                 </button>
                             @endif
