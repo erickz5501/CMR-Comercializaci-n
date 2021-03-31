@@ -41,8 +41,10 @@
                         </div>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-2" style="padding-bottom: 10px !important;">
                             <select  name="filtro_estado" id="filtro_estado" class="form-control" onchange="lista_tabla_reclamos(1);" data-minimum-results-for-search="Infinity"  >
-                                <option value="0">TERMINADO</option>
-                                <option value="1">EN PROCESO</option>
+                                <option value="3">TODOS</option>
+                                <option value="0">PENDIENTE</option>
+                                <option selected value="1">EN PROCESO</option>
+                                <option value="2">TERMINADO</option>
                             </select>
                         </div>
 
@@ -234,10 +236,10 @@
                                     <!-- :::: SELECT PERSONAL :::: -->
                                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-6">
                                         <div class="form-group">
-                                            <label for=""><sup class="text-danger font-weight-bold">*</sup> Personal responsable</label>
+                                            <label for=""> Personal responsable</label>
                                             <div class="input-group ">
                                                 <select class="form-control" id="select_modal_personal" name="select_modal_personal"  >
-                                                    <option>Personal Responsable</option>
+
                                                 </select>
                                                 <span class="input-group-addon input-group-append">
                                                     <button class="btn btn-default" type="button" onclick="abrir_modal_personal();" data-toggle="tooltip" data-html="true" title="Agregar un personal.">

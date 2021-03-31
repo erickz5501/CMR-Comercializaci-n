@@ -64,7 +64,7 @@
                 <ul class="navbar-nav">
                     <!-- ::::::::: COTIZACIONES ::::::: -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/dashboard/clientes-interesados') }}">
+                        <a class="nav-link" href="{{ route('ClienIntere') }}">
                             <i class="fas fa-file-pdf text-purple"></i>
                             <span class="nav-link-text">Clientes / Interesados</span>
                         </a>
@@ -143,7 +143,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{  url('/dashboard/configuracion/users') }}" class="nav-link">
+                                    <a href="{{ route('ConfigUsers') }}" class="nav-link">
                                         <span class="sidenav-mini-icon"> U </span>
                                         <span class="sidenav-normal"> <i class="fas fa-users-cog"></i> Users </span>
                                     </a>

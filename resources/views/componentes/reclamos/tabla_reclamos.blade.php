@@ -44,9 +44,13 @@
                         </td>
                         <td class="align-middle">
                             @if ($reclamo->estado == 0)
-                                <span class="badge badge-success badge-lg">Terminado</span>
+                                <span class="badge badge-danger badge-lg">Pendiente</span>
                             @else
-                                <span class="badge badge-danger badge-lg">En proceso</span>
+                                @if ($reclamo->estado == 1)
+                                    <span class="badge badge-warning badge-lg">En proceso</span>
+                                @else
+                                    <span class="badge badge-success badge-lg">Terminado</span>
+                                @endif
                             @endif
                         </td>
                         <td class="align-middle">
@@ -57,13 +61,19 @@
                                 <i class="fas fa-eye"></i>
                             </button>
                             @if ($reclamo->estado == 0)
-                                <button onclick="desactivar_reclamo({{ $reclamo->idreclamos}});" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Marcar en proceso">
+                                <button onclick="proceso_reclamo({{ $reclamo->idreclamos}});" type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Marcar en proceso">
                                     <i class="fas fa-times"></i>
                                 </button>
                             @else
-                                <button  onclick="activar_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Marcar terminado">
-                                    <i class="fas fa-check"></i>
-                                </button>
+                                @if ($reclamo->estado == 1)
+                                    <button  onclick="terminado_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Marcar terminado">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                @else
+                                    <button  onclick="pendiente_reclamo({{ $reclamo->idreclamos}})" type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Marcar pendiente">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                @endif
                             @endif
                         </td>
                     </tr>

@@ -8,8 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class UsersModel extends Model
 {
     protected $table = 'users';
-    protected $primaryKey = 'idusers';
-    protected $fillable = [ 'nombres','apellidos', 'email', 'email_verified_at', 'password', 'remember_token','codigo_confirmacion', 'codigo_recuperacion', 'fecha_recuperacion', 'estado'];
+    protected $primaryKey = 'id';
+    protected $fillable = [ 'idpersonal',
+                            'email',
+                            'avatar',
+                            'email_verified_at',
+                            'password',
+                            'remember_token',
+                            'codigo_confirmacion',
+                            'codigo_recuperacion',
+                            'fecha_recuperacion',
+                            'estado'
+                        ];
+
+    public function ModeloPersonal()
+    {
+        return $this->belongsTo('App\Models\PersonalModel', 'idpersonal', 'idpersonal');
+    }
 
     public function scopeActivos( $query)
     {

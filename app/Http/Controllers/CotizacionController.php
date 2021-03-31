@@ -79,11 +79,11 @@ class CotizacionController extends Controller
 
         $codigo                 = $request->input('nombre_cotizacion');
 
-        $validez_cotizacion                 = $request->input('validez_cotizacion');
+        $validez_cotizacion     = $request->input('validez_cotizacion');
 
         $doc_cotizacion_antiguo = $request->input('doc_cotizacion_antiguo');
 
-        $doc_cotizacion = $request->file('ruta_cotizacion');
+        $doc_cotizacion         = $request->file('ruta_cotizacion');
 
         if (!empty( $idcotizaciones)) {
 

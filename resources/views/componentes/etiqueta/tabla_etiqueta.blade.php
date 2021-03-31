@@ -17,7 +17,7 @@
 
                         <td class="align-middle">
                             <span class="text-dark font-weight-600 text-sm">
-                                {{Str::limit($etiqueta->nombre, 30, '...')}}
+                                {{Str::limit($etiqueta->nombre, 40, '...')}}
                             </span>
                         </td>
 

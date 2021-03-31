@@ -689,7 +689,7 @@ function limpiar_personal_comercializacion(){
 function guardar_interesado_comercializacion(e){
     crud_guardar_modal(
         e,
-        '/dashboard/guardar/clientes-interesados',
+        '/cmr/clientes-interesado-agregar-editar',
         'clientes',
         function(){ limpiar_interesado_comercializacion(); },
         function(){ console.log('Console Error'); }

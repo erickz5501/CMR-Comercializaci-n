@@ -24,10 +24,8 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'dni_users' => 'max:12',
-            'nombre_users' => 'required|min:3|max:250',
-            'apellido_users' => 'required|min:3|max:250',
-            'email_users' => 'required|min:4|max:100',
+            'select_modal_personal' => 'required|min:1',
+            'email'                 => "min:2|max:45|required|unique:users,email,". $this->id .",id",
             'password' => 'required|confirmed|min:8|max:16',
             'password_confirmation' => 'required|min:8|max:16'
         ];
@@ -36,9 +34,10 @@ class UsersRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre_users.required' => 'Asegurese de escribir el NOMBRE.',
-            'apellido_users.required' => 'Asegurese de escribir el APELLIDOS.',
-            'email_users.required' => 'Asegurese de escribir el nombre.',
+            'select_modal_personal.required'    => 'Asegurese de selecionar un personal.',
+            'email.required'              => 'Asegurese de escribir un correo.',
+            'email.min'                         => 'El campo correo electronico debe ser un correo valido.',
+            'email.max'                         => 'El campo correo electronico debe tener menos de 45 caracteres.',
             'password.required'                 => 'El campo clave no debe estar vacio.',
             'password.min'                      => 'El campo clave debe tener al menos 8 caracteres.',
             'password.max'                      => 'El campo clave debe tener menos de 16 caracteres.',

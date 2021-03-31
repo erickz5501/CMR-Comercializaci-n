@@ -25,6 +25,13 @@
                                     <li class="media pt-1 pb-2 border-bottom">
                                         <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
                                         <div class="media-body pl-3">
+                                            <span class="font-size-ms text-primary">Etiqueta:</span>
+                                            <span class="d-block text-heading font-size-sm">{{ $det_cliente->nombres_razon_social }}</span>
+                                        </div>
+                                    </li>
+                                    <li class="media pt-1 pb-2 border-bottom">
+                                        <i class="fas fa-signature font-size-lg mt-2 mb-0 text-primary"></i>
+                                        <div class="media-body pl-3">
                                             <span class="font-size-ms text-primary">Nombre:</span>
                                             <span class="d-block text-heading font-size-sm">{{ $det_cliente->nombres_razon_social }}</span>
                                         </div>

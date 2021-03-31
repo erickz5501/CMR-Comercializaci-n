@@ -19,7 +19,7 @@ class ClientesModel extends Model
 
     public function ModeloEtiqueta(){
         return $this->belongsTo('App\Models\ModelEtiqueta', 'idetiquetas', 'idetiquetas');
-   }
+    }
 
     // public function comercializacion(){
     //     return $this->belongsTo('App\Models\ComercializacionModel', 'idclientes');

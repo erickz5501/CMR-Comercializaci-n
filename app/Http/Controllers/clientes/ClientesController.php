@@ -17,7 +17,7 @@ class ClientesController extends Controller
         return view('listas.clientes');
     }
 
-    public function lista_tabla_clientes(Request $request){
+    public function index_lista_tabla(Request $request){
 
         $filtro_cant   = $request->filtro_cant;
         $filtro_search = ($request->filtro_search === "null")? '' : $request->filtro_search;
@@ -43,57 +43,14 @@ class ClientesController extends Controller
         return view('componentes.clientes.tabla_cliente', compact('clientes'))->render();
     }
 
-    public function lista_select2_clientes(){
+    public function mostrar_cliente_interesado_one($id_cliente){
 
-        $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT(  clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial ) AS nombre") ] )
-                                    ->where('estado', 0)
-                                    ->get();
-
-        return json_encode($clientes);
-    }
-
-    public function lista_select2_interesado(){
-
-        $interesados = ClientesModel::select('idclientes as id', 'nombres_razon_social as nombre')->where('tipo_persona', 1)->get();
-
-        return json_encode($interesados);
-    }
-
-    public function indexListaInteresado(){
-
-        $interesados = ClientesModel::where('tipo_persona', 1)->get();
-
-        return view('componentes.interesados.tabla_interesados', compact('interesados'));
-    }
-
-    public function detalle_cliente($id_cliente){
-        $det_cliente = ClientesModel::where('idclientes', $id_cliente)->first();
-        // $det_cliente->each(function($det_cliente){
-        //     $det_cliente->gironegocio;
-        // });
-
-        return view('componentes.clientes.modal_detalle_cliente', compact('det_cliente'));
-    }
-
-    public function detalle_cliente_one($id_cliente){
         $det_cliente = ClientesModel::where('idclientes', $id_cliente)->first();
 
         return json_encode($det_cliente);
     }
 
-    public function interesados(){
-        return view('listas.lista_interesados');
-    }
-
-    public function detalle_interesado($id_interesado){
-        $det_interesado = ClientesModel::with('gironegocio')->where('idclientes', $id_interesado)->first();
-
-        //return json_encode(['interesado'=>$det_interesado]);
-
-        return view('componentes.clientes.modal_detalle_interesado', compact('det_interesado'));
-    }
-
-    public function agregar_edit_cliente_interesado(InteresadoRequest $request){ //CREA UN REGISTRO DE INTERESADO
+    public function agregar_edit_cliente_interesado(InteresadoRequest $request){
         $idclientes                 = $request->input('idclientes');
         $tipoPersonaSelect          = $request->input('select_modal_tipoPersona');
         $tipoDocSelect              = $request->input('select_modal_tipo_doc');
@@ -178,53 +135,11 @@ class ClientesController extends Controller
         }
     }
 
-    public function editarCliente(InteresadoRequest $request){
-        $idclientes                     = $request->input('idclientes');
-        $nombre_razon_social_input      = $request->input('nombre_razon_social_input');
-        $nombre_comercial_input         = $request->input('nombre_comercial_input');
-        $GiroNegocioSelect              = $request->input('select_modal_giroNegocio');
-        $tipoPersonaSelect              = $request->input('select_modal_tipoPersona');
-        $tipoDocSelect                  = $request->input('select_modal_tipo_doc');
-        $nro_documento              = $request->input('nro_documento');
-        $InputCorreo1                   = $request->input('InputCorreo1');
-        $InputCorreo2                   = $request->input('InputCorreo2');
-        $InputCorreo3                   = $request->input('InputCorreo3');
-        $number_empresa_input           = $request->input('number_empresa_input');
-        $number_contacto_input          = $request->input('number_contacto_input');
-        $number_otro_input              = $request->input('number_otro_input');
+    public function detalle_cliente_interesado($id_cliente){
 
-        $usuario = ClientesModel::find($idclientes);
+        $cliente = ClientesModel::with('gironegocio','ModeloEtiqueta')->where('idclientes', $id_cliente)->first();
 
-        try {
-            $usuario->tipo_documento = $tipoDocSelect;
-            $usuario->nro_documento = $nro_documento;
-            $usuario->nombres_razon_social = $nombre_razon_social_input;
-            $usuario->apellidos_nombre_comercial = $nombre_comercial_input;
-            $usuario->correo_1 = $InputCorreo1;
-            $usuario->correo_2 = $InputCorreo2;
-            $usuario->correo_3 = $InputCorreo3;
-            $usuario->telefono_empresa = $number_empresa_input;
-            $usuario->telefono_contacto = $number_contacto_input;
-            $usuario->telefono_otro = $number_otro_input;
-            $usuario->idgiro_negocio = $GiroNegocioSelect;
-            $usuario->tipo_persona = $tipoPersonaSelect;
-
-            $usuario->save();
-        }
-        catch(Exception $e){
-            return json_encode($e->getMessage());
-        }
-
-
-        return json_encode(['status' => true, 'message' => 'Éxito se registro el cliente']);
-
-    }
-
-    public function editar_cliente($idcliente){
-        // $clientes = ClientesModel::where('tipo_persona', 2)->get();
-        $usuario = ClientesModel::where('idclientes', $idcliente)->first();
-        return json_encode(['cliente' => $usuario]);
-        // return json_encode(['horarios' => $horarios]);
+        return view('componentes.clientes.modal_detalle_interesado', compact('cliente'));
     }
 
     public function desactivar($idclientes)
@@ -244,16 +159,18 @@ class ClientesController extends Controller
 
     }
 
-    public function desactivarInteresado($idclientes)
-    {
-        $usuario = ClientesModel::where('idclientes', $idclientes)->first();
-        $usuario->estado = 1;
-        $usuario->save();
-        return json_encode(['status' => true, 'message' => 'Se ha desactivado el interesado']);
-    }
-
     public function historialInteresado(){
         return view('listas\interesados\detalle_historial_interesado');
+    }
+
+    public function lista_select2_clientes(){
+
+        $clientes = ClientesModel::select(['idclientes as id', DB::raw("CONCAT(  clientes.nombres_razon_social, ' ' ,clientes.apellidos_nombre_comercial ) AS nombre") ] )
+                                    ->where('estado', 0)
+                                    ->orderBy('idclientes', 'DESC')
+                                    ->get();
+
+        return json_encode($clientes);
     }
 
 }

@@ -31,22 +31,31 @@ class ReclamosController extends Controller
             $fecha_fin = \Carbon\Carbon::parse($request->fecha_fin)->format('Y-m-d H:i:s');
 
             $reclamos = ReclamosModel::with('clientes')
-                                    ->when($filtro_estado == '0' , function ($query) { return $query->activos();  })
-                                    ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                    ->when($filtro_estado == '0' , function ($query) { return $query->pendientes();  })
+                                    ->when($filtro_estado == '1' , function ($query) { return $query->procesos();  })
+                                    ->when($filtro_estado == '2' , function ($query) { return $query->terminados();  })
                                     ->whereBetween('created_at', [$fecha_inicio, $fecha_fin])
                                     ->where(function ($query) use ($filtro_search){
-                                        return $query->orWhere('causa', 'like', "%{$filtro_search}%")
-                                                    ->orWhere('procede', 'like', "%{$filtro_search}%");
+                                        return $query->orWhere('persona_contacto', 'like', "%{$filtro_search}%")
+                                                    ->orWhereHas('clientes', function ($query) use ($filtro_search){
+                                                        return $query->where('nombres_razon_social', 'like', "%{$filtro_search}%")
+                                                                    ->orwhere('apellidos_nombre_comercial', 'like', "%{$filtro_search}%");
+                                                    });
                                     })
+
                                     ->orderBy('idreclamos', 'DESC')
                                     ->paginate($filtro_cant);
         }else{
             $reclamos = ReclamosModel::with('clientes')
-                                    ->when($filtro_estado == '0' , function ($query) { return $query->activos();  })
-                                    ->when($filtro_estado == '1' , function ($query) { return $query->inactivos();  })
+                                    ->when($filtro_estado == '0' , function ($query) { return $query->pendientes();  })
+                                    ->when($filtro_estado == '1' , function ($query) { return $query->procesos();  })
+                                    ->when($filtro_estado == '2' , function ($query) { return $query->terminados();  })
                                     ->where(function ($query) use ($filtro_search){
-                                        return $query->orWhere('causa', 'like', "%{$filtro_search}%")
-                                                    ->orWhere('procede', 'like', "%{$filtro_search}%");
+                                        return $query->orWhere('persona_contacto', 'like', "%{$filtro_search}%")
+                                                    ->orWhereHas('clientes', function ($query) use ($filtro_search){
+                                                        return $query->where('nombres_razon_social', 'like', "%{$filtro_search}%")
+                                                                    ->orwhere('apellidos_nombre_comercial', 'like', "%{$filtro_search}%");
+                                                    });
                                     })
                                     ->orderBy('idreclamos', 'DESC')
                                     ->paginate($filtro_cant);
@@ -55,16 +64,23 @@ class ReclamosController extends Controller
         return view('componentes.reclamos.tabla_reclamos', compact('reclamos'));
     }
 
-    public function activar($idreclamos){
+    public function pendiente($idreclamos){
         $reclamo = ReclamosModel::where('idreclamos', $idreclamos)->first();
         $reclamo->estado = 0;
         $reclamo->save();
         return json_encode(['status' => true, 'message' => 'Se ah activado el reclamo']);
     }
 
-    public function desactivar($idreclamos){
+    public function proceso($idreclamos){
         $reclamo = ReclamosModel::where('idreclamos', $idreclamos)->first();
         $reclamo->estado = 1;
+        $reclamo->save();
+        return json_encode(['status' => true, 'message' => 'Se ah desactivado el reclamo']);
+    }
+
+    public function terminado($idreclamos){
+        $reclamo = ReclamosModel::where('idreclamos', $idreclamos)->first();
+        $reclamo->estado = 2;
         $reclamo->save();
         return json_encode(['status' => true, 'message' => 'Se ah desactivado el reclamo']);
     }
@@ -157,7 +173,7 @@ class ReclamosController extends Controller
 
     public function detalle_reclamo($idreclamo){ //muestra datos para vizualizar
 
-        $reclamo = ReclamosModel::with('clientes', 'medio', 'evento', 'personal', 'modulo')->where('idreclamos', $idreclamo)->first();
+        $reclamo = ReclamosModel::with('clientes.ModeloEtiqueta', 'medio', 'evento', 'personal', 'modulo')->where('idreclamos', $idreclamo)->first();
 
         return view('componentes.reclamos.detalle_reclamo', compact('reclamo'));
     }

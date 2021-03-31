@@ -55,7 +55,7 @@ function init(){
         width: 'auto',
 		dropdownAutoWidth: true,
     });
-    $('#filtro_estado').val('').trigger('change');
+
 }
 
 init();
@@ -64,7 +64,7 @@ init();
 var delay = (function(){ var timer = 0; return function(callback, ms){ clearTimeout (timer); timer = setTimeout(callback, ms); };})();
 
 $("#filtro_search").on("keyup", function () { // CAPTURA TEXTO BUSCADOR
-    delay(function(){ lista_tabla_users(1); }, 600 );
+    delay(function(){ lista_tabla_reclamos(1); }, 600 );
 });
 
 function lista_tabla_reclamos(page){
@@ -146,6 +146,10 @@ function mostrar_one_reclamo(idreclamo){
 
 function limpiar_form_reclamo(){
 
+    $('.form-control').removeClass("is-invalid"); // REMOVEMOS LOS INPUT MARCADOS EN ROJO
+
+    $('#contenedor_de_errores_reclamo').html(''); // REMOVEMOS EL CONTENEDOR DE ERRORES
+
     $('#sgt_form').show();
     $('#ant_form').hide();
     $('#contenedor_form_1').addClass('show active');
@@ -162,12 +166,25 @@ function limpiar_form_reclamo(){
     $('#formulario_reclamo select').val('').trigger("change"); //RESET EL FORM
 }
 
-function desactivar_reclamo(idreclamo){
-    crud_desactivar('/dashboard/reclamos/desactivar/' + idreclamo , function(){ lista_tabla_reclamos(1); }, function(){ console.log('Eror') });
+function pendiente_reclamo(idreclamo){
+
+    $('.tooltip').removeClass("show").addClass("hidde");
+
+    crud_desactivar('/dashboard/reclamos/estado/pendiente/' + idreclamo , function(){ lista_tabla_reclamos(1); }, function(){ console.log('Eror') });
 }
 
-function activar_reclamo(idreclamo){
-    crud_activar('/dashboard/reclamos/activar/' + idreclamo , function(){ lista_tabla_reclamos(1); }, function(){ console.log('Eror') });
+function proceso_reclamo(idreclamo){
+
+    $('.tooltip').removeClass("show").addClass("hidde");
+
+    crud_activar('/dashboard/reclamos/estado/en-proceso/' + idreclamo , function(){ lista_tabla_reclamos(1); }, function(){ console.log('Eror') });
+}
+
+function terminado_reclamo(idreclamo){
+
+    $('.tooltip').removeClass("show").addClass("hidde");
+
+    crud_activar('/dashboard/reclamos/estado/terminado/' + idreclamo , function(){ lista_tabla_reclamos(1); }, function(){ console.log('Eror') });
 }
 
 function detalle_reclamo(id){

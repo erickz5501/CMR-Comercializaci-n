@@ -344,6 +344,13 @@ function doSearch(){
     }
 }
 
+function reniciar_barra(nombre_modulo) {
+    $("#div_barra_progress_" + nombre_modulo).hide();
+    $("#barra_progress_" + nombre_modulo).css({
+        "width": '0%'
+    });
+    $("#barra_progress_" + nombre_modulo).text("0%");
+}
 
 /****************************************************** */
 /****************************************************** */

@@ -84,19 +84,8 @@ function init(){
 }
 init();
 // BUSCADOR
-var delay = (function(){
-    var timer = 0;
-    return function(callback, ms){
-        clearTimeout (timer);
-        timer = setTimeout(callback, ms);
-    };
-})();
-$("#filtro_search").on("keyup", function () {
-    delay(function(){
-        lista_tabla_clientes(1);
-    }, 600 );
-    console.log('searg');
-});
+var delay = (function(){ var timer = 0; return function(callback, ms){ clearTimeout (timer); timer = setTimeout(callback, ms); }; })();
+$("#filtro_search").on("keyup", function () { delay(function(){ lista_tabla_clientes(1); }, 600 ); console.log('search'); });
 
 // ::::::: LISTAR TABLA CLIENTES :::::::
 function lista_tabla_clientes(page){
@@ -110,55 +99,29 @@ function lista_tabla_clientes(page){
 
     $("#lista_tabla_clientes_interesados").html('<div id="loader"></div>');
 
-    $.get(`/dashboard/clientes-interesados/lista-tabla?page=${page}&filtro_tipo=${filtro_tipo}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}&filtro_etiqueta=${filtro_etiqueta}`, function (data){
+    $.get(`/cmr/clientes-interesados/lista-tabla?page=${page}&filtro_tipo=${filtro_tipo}&filtro_estado=${filtro_estado}&filtro_search=${filtro_search}&filtro_cant=${filtro_cant}&filtro_etiqueta=${filtro_etiqueta}`, function (data){
         $("#lista_tabla_clientes_interesados").html(data);
     });
 }
-
-$("#interesado").on('click', function(e){
-    limpiar_form_cliente();
-    $('#titulo_modal_cliente').html('Agregar Interesado');
-    $('#select_modal_tipoPersona').val('1');
-    $('#modal_cliente_interesado').modal('show');
-});
-
-$("#cliente").on('click', function(e){
-    limpiar_form_cliente();
-    $('#titulo_modal_cliente').html('Agregar Cliente');
-    $('#select_modal_tipoPersona').val('2');
-    $('#modal_cliente_interesado').modal('show');
-});
 
 //  :::: GUARDAR Y EDITAR "CLIENTE" ::::::
 function guardar_cliente(e) {
 
     $(".modal-body").animate({ scrollTop: $(document).height() }, 1000); // colocamos el scrol al final
 
-    crud_guardar_editar(
-        e,
-        '/dashboard/guardar/clientes-interesados',
-        'cliente_interesado',
-        function(){ limpiar_form_cliente(); },
+    crud_guardar_editar( e, '/cmr/clientes-interesado-agregar-editar', 'cliente_interesado', function(){ limpiar_form_cliente(); },
         function(){ lista_tabla_clientes(); },
         function(){ console.log('Console Error'); }
     );
 }
 
+function detalle_cliente_interesado(id){
 
-//  :::: Funciones para "mostar" los modals ::::
-function mostrar_modal(id){
-    $("#ModalDetalle").modal('show');
+    $("#modal_detalle_cliente_interesado").modal('show');
 
-    $.get('/dashboard/listas/clientes/'+id, function(data){ //Obtenemos la ruta con el id del registro
-        $("#cliente_modal").html(data); //Mostramos el CUERPO modal con los datos del registro
-    });
-}
+    $.get('/cmr/cliente-interesado-detalle/'+id, function(data){ //Obtenemos la ruta con el id del registro
 
-function mostrar_modal_interesado(id){
-    $("#ModalDetalleInteresado").modal('show');
-
-    $.get('/dashboard/listas/interesados/'+id, function(data){
-        $("#interesado_modal").html(data);
+        $("#detalle_cliente_interesado").html(data); //Mostramos el CUERPO modal con los datos del registro
     });
 }
 
@@ -200,31 +163,15 @@ function limpiar_form_cliente(){ //Para limpIar los campos despues de registrar 
     $('#select_modal_tipo_doc').val('').trigger('change');
 }
 
-function limpiar_form_interesado(){ //Para limpIar los campos despues de registrar un interesado
-    $('#idclientes').val("");
-    $('#nombre_razon_social_input').val("");
-    $('#nombre_comercial_input').val("");
-    $('#select_modal_tipo_doc').val("");
-    $('#InputCorreo1').val("");
-    $('#InputCorreo2').val("");
-    $('#InputCorreo3').val("");
-    $('#number_empresa_input').val("");
-    $('#number_contacto_input').val("");
-    $('#number_otro_input').val("");
-    //$('#select_modal_tipoPersona').val("2");
-    $('#select_modal_giroNegocio').val(null).trigger('change');
-    $('#select_modal_tipoDocumento').val("Seleccione").trigger('change');
-}
-
 function desactivar_cliente(idclientes) {
-        crud_desactivar('/dashboard/cliente/desactivar/' + idclientes , function(){ lista_tabla_clientes(); lista_interesados(); }, function(){ console.log('Eror') });
+        crud_desactivar('/cmr/cliente-interesado/desactivar/' + idclientes , function(){ lista_tabla_clientes();  }, function(){ console.log('Eror') });
 }
 
 function activar_cliente(idclientes) {
-    crud_activar('/dashboard/cliente/activar/' + idclientes , function(){ lista_tabla_clientes();lista_interesados(); }, function(){ console.log('Eror') });
+    crud_activar('/cmr/cliente-interesado/activar/' + idclientes , function(){ lista_tabla_clientes(); }, function(){ console.log('Eror') });
 }
 // .:::::::: LISTA UN DATOS PARA EDITAR CLIENTE ::::::.
-function mostrar_one_cliente(idclientes){
+function mostrar_one_cliente_interesado(idclientes){
 
     limpiar_form_cliente();
 
@@ -236,7 +183,7 @@ function mostrar_one_cliente(idclientes){
     $("#modal_cliente_interesado").modal('show');
 
     //$("#registroModalInteresado").modal('show');
-    $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
+    $.get('/cmr/clientes-interesado-mostrar-one/'+idclientes , function (data){
         data = JSON.parse(data);
         // console.log(data);
         $('#cargando_edit_cliente').hide(); //oculto icon spiner
@@ -280,51 +227,19 @@ function mostrar_one_cliente(idclientes){
     });
 }
 
-function mostrar_one_interesado(idclientes){
+$("#interesado").on('click', function(e){
+    limpiar_form_cliente();
+    $('#titulo_modal_cliente').html('Agregar Interesado');
+    $('#select_modal_tipoPersona').val('1');
+    $('#modal_cliente_interesado').modal('show');
+});
 
-    limpiar_form_interesado();
-
-    $("#modal_registro_interesado").modal('show');
-    $('#cargando_edit').show();
-    $.get('/dashboard/mostrar/clientes/'+idclientes , function (data){
-        data = JSON.parse(data);
-        $('#cargando_edit').hide();
-        //console.log(data.cliente);
-        $('#idclientes').val(data.cliente['idclientes']);
-        $('#nombre_razon_social_input').val(data.cliente['nombres_razon_social']);
-        $('#nombre_comercial_input').val(data.cliente['apellidos_nombre_comercial']);
-        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
-        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
-        $('#select_modal_tipo_doc').val(data.cliente['nro_documento']);
-        $('#InputCorreo1').val(data.cliente['correo_1']);
-        $('#InputCorreo2').val(data.cliente['correo_2']);
-        $('#InputCorreo3').val(data.cliente['correo_3']);
-        $('#number_empresa_input').val(data.cliente['telefono_empresa']);
-        $('#number_contacto_input').val(data.cliente['telefono_contacto']);
-        $('#number_otro_input').val(data.cliente['telefono_otro']);
-        $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']);
-        if (data.cliente['idgiro_negocio']) {
-            $('#select_modal_giroNegocio').val(data.cliente['idgiro_negocio']).trigger('change');
-        }else{
-            $('#select_modal_giroNegocio').val(null).trigger('change');
-        }
-
-        $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']);
-        if (data.cliente['tipo_persona']) {
-            $('#select_modal_tipoPersona').val(data.cliente['tipo_persona']).trigger('change');
-        }else{
-            $('#select_modal_tipoPersona').val(null).trigger('change');
-        }
-
-        $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']);
-        if (data.cliente['tipo_documento']) {
-            $('#select_modal_tipoDocumento').val(data.cliente['tipo_documento']).trigger('change');
-        }else{
-            $('#select_modal_tipoDocumento').val(null).trigger('change');
-        }
-
-    });
-}
+$("#cliente").on('click', function(e){
+    limpiar_form_cliente();
+    $('#titulo_modal_cliente').html('Agregar Cliente');
+    $('#select_modal_tipoPersona').val('2');
+    $('#modal_cliente_interesado').modal('show');
+});
 
 function añadirLicencia(idcliente){
     $("#ModalRegistroLicencia").modal('show');
@@ -428,7 +343,6 @@ function cunsulta_sunat(){
     $('.tooltip').removeClass("show").addClass("hidde");
     // alert('El id es:'+ id_documento + ', con nombre: ' + modulo_txt + ' y documento: '+ nro_document);
 }
-
 
 // ..:::: GUARDAR ACTIVIDAD ::::..
 function guardar_actividad(e){

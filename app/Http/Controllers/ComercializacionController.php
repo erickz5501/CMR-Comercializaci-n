@@ -14,11 +14,21 @@ use App\Http\Requests\ComercializacionRequest;
 use App\Http\Requests\CotizacionRequest;
 use App\Models\ModuloComercializacionModel;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class ComercializacionController extends Controller
 {
     public function mantenimiento(){
         return view('errors.mantenimiento');
+    }
+
+    public function login(){
+
+        // if (Auth::check()) {
+        //     return redirect('/cmr/comercializacion');
+        // }else{
+            return view('auth.login');
+        // }
     }
 
     public function index(){
@@ -120,7 +130,7 @@ class ComercializacionController extends Controller
     public function createComercio(ComercializacionRequest $request){
 
         $idcomercializacion             = $request->input('idcomercializacion');
-        $idusers                        = 1;
+        $users_id                        = 1;
         $select_modal_clientes          = $request->input('select_modal_clientes');
         $persona_contacto_input         = $request->input('persona_contacto_input');
         $actividad_input                = $request->input('select_modal_actividad');
@@ -157,7 +167,7 @@ class ComercializacionController extends Controller
             }
 
             try{
-                $registro->idusers              = $idusers;
+                $registro->users_id              = $users_id;
                 $registro->idclientes           = $select_modal_clientes;
                 $registro->persona_contacto     = $persona_contacto_input;
                 $registro->idactividad          = $actividad_input;
@@ -206,7 +216,7 @@ class ComercializacionController extends Controller
         } else {
             $registro = ComercializacionModel::create(
                 [
-                'idusers' => $idusers,
+                'users_id' => $users_id,
                 'idclientes' => $select_modal_clientes,
                 'persona_contacto' => $persona_contacto_input,
                 'idactividad' => $actividad_input,
@@ -254,7 +264,7 @@ class ComercializacionController extends Controller
 
     public function createComercioNuevo(ComercializacionRequest $request){
         //$idcomercializacion             = $request->input('idcomercializacion');
-        $idusers                        = 1;
+        $users_id                        = 1;
         $select_modal_clientes          = $request->input('select_modal_clientes');
         $persona_contacto_input         = $request->input('persona_contacto_input');
         $actividad_input                = $request->input('select_modal_actividad');
@@ -275,7 +285,7 @@ class ComercializacionController extends Controller
         $proxima_llamada          = \Carbon\Carbon::parse($request->input('proxima_llamada'))->format('Y-m-d h:i:s');
         $registro = ComercializacionModel::create(
             [
-            'idusers' => $idusers,
+            'users_id' => $users_id,
             'idclientes' => $select_modal_clientes,
             'persona_contacto' => $persona_contacto_input,
             'idactividad' => $actividad_input,

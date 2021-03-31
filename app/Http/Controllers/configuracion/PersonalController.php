@@ -8,6 +8,7 @@ use App\Http\Requests\PersonalRequest;
 use App\Models\PersonalModel;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PersonalController extends Controller
 {
@@ -38,7 +39,7 @@ class PersonalController extends Controller
 
     public function indexPersonal()
     {
-        $personal = PersonalModel::select(['idpersonal as id', DB::raw("CONCAT( personal.nombres, ' ' ,personal.apellidos) AS nombre")])->where('estado', 0)->get();
+        $personal = PersonalModel::select(['idpersonal as id', DB::raw("CONCAT( personal.nombres, ' ' ,personal.apellidos) AS nombre")])->where('estado', 0)->orderBy('idpersonal', 'DESC')->get();
 
         return json_encode($personal);
     }
@@ -58,35 +59,64 @@ class PersonalController extends Controller
     }
 
     public function createPersonal(PersonalRequest $request){
-        $idpersonal                 = $request->input('idpersonal');
-        $nombre_personal               = $request->input('nombre_personal');
-        $apellido_personal             = $request->input('apellido_personal');
+        $avatar_ruta = "";
+        $idpersonal             = $request->input('idpersonal');
+        $dni_personal           = $request->input('dni_personal');
+        $nombre_personal        = $request->input('nombre_personal');
+        $apellido_personal      = $request->input('apellido_personal');
+        $avatar_personal        = $request->file('avatar_personal');
+        $avatar_personal_antiguo= $request->input('avatar_personal_antiguo');
 
-        if ($idpersonal != "") {
-            $personal = PersonalModel::find($idpersonal);
+        if ( empty( $idpersonal ) ){
+
+            if (!empty($avatar_personal)) {
+                $avatar_personal_nombre =  $avatar_personal->getClientOriginalName() . '-' . rand() . '.' . $avatar_personal->getClientOriginalExtension();
+                $avatar_ruta = '/img_personal';
+                $avatar_ruta = Storage::disk('public')->put($avatar_ruta , $avatar_personal);
+            }
+
+            $personal = PersonalModel::firstOrCreate(
+                [
+                    'dni'=> $dni_personal,
+                    'nombres' => $nombre_personal,
+                    'apellidos' => $apellido_personal,
+                ],
+                [
+                    'avatar' => $avatar_ruta,
+                ]
+            );
+
+            return json_encode(['status' => true, 'message' => 'Éxito se registro el personal', 'id' => $personal->idpersonal]);
+
+        } else {
+
+            $personal_edit = PersonalModel::find($idpersonal);
+
+            if ($avatar_personal) {
+                // borramos doc
+                $ruta_delete = '/' . $personal_edit->avatar;
+                Storage::disk('public')->delete($ruta_delete);
+                // insetamos nuevo doc
+                $avatar_personal_nombre =  $avatar_personal->getClientOriginalName() . '-' . rand() . '.' . $avatar_personal->getClientOriginalExtension();
+                $avatar_ruta = '/img_personal';
+                $avatar_ruta = Storage::disk('public')->put($avatar_ruta ,  $avatar_personal);
+            }else{
+                $avatar_ruta = $avatar_personal_antiguo;
+            }
 
             try{
-                $personal->nombres = $nombre_personal;
-                $personal->apellidos = $apellido_personal;
-
-                $personal->save();
+                $personal_edit->dni = $dni_personal;
+                $personal_edit->nombres = $nombre_personal;
+                $personal_edit->apellidos = $apellido_personal;
+                $personal_edit->avatar = $avatar_ruta;
+                $personal_edit->save();
             }
             catch(Exception $e){
                 return json_encode($e->getMessage());
             }
 
-            return json_encode(['status' => true, 'message' => 'Éxito se actuasizo el personal']);
-
-        } else {
-            $personal = PersonalModel::create(
-                [
-                'nombres' => $nombre_personal,
-                'apellidos' => $apellido_personal,
-                ]);
-
-            return json_encode(['status' => true, 'message' => 'Éxito se registro el personal', 'id' => $personal->idpersonal]);
+            return json_encode(['status' => true, 'message' => 'Éxito se actualizo el personal']);
         }
-
     }
 
     public function DetallePersonal($idpersonal){

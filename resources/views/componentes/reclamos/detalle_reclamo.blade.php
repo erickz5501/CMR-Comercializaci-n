@@ -21,6 +21,20 @@
                     <div class="card-body">
                         <ul class="list-unstyled mb-0">
                             <li class="media pt-1 pb-2 border-bottom">
+                                <i class="fas fa-tag font-size-lg mt-2 mb-0 text-primary"></i>
+                                <div class="media-body pl-3">
+                                    <span class="font-size-ms text-primary">Etiqueta del cliente</span>
+                                    <span class="d-block text-heading font-size-sm">
+                                        @if ($reclamo->clientes->ModeloEtiqueta)
+                                            {{ $reclamo->clientes->ModeloEtiqueta->nombre }}
+                                        @else
+                                            -- no definido --
+                                        @endif
+
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="media pt-1 pb-2 border-bottom">
                                 <i class="fas fa-id-card font-size-lg mt-2 mb-0 text-primary"></i>
                                 <div class="media-body pl-3">
                                     <span class="font-size-ms text-primary">Cliente</span>

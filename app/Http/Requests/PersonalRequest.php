@@ -26,6 +26,7 @@ class PersonalRequest extends FormRequest
         return [
             'nombre_personal' => 'required|min:3|max:120',
             'apellido_personal' => 'required|min:3|max:120',
+            'avatar_personal' => 'max:100000',
         ];
     }
 
@@ -34,6 +35,7 @@ class PersonalRequest extends FormRequest
         return [
             'nombre_personal.required' => 'Asegurese de escribir el nombre.',
             'apellido_personal.required' => 'Asegurese de escribir el apellido',
+            'avatar_personal' => 'La foto no puede pesar mas de 100 Megabyte (mb)'
         ];
     }
 

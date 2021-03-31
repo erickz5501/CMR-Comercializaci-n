@@ -3,13 +3,11 @@ function init(){
     lista_tabla_personal(1);
 
     // PAGINAMOS LA TABLA PERSONAL
-    $(document).on("click",'.pagination a',function(e){
-        e.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
-        lista_tabla_personal(page);
+    $(document).on("click",'.pagination a',function(e){  e.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];  lista_tabla_personal(page);
     });
 
-    $("#guardar_registro").on('click', function(e){
+    $("#guardar_registro_personal").on('click', function(e){
         $("#formulario_personal").submit();
     });
 
@@ -27,12 +25,11 @@ function init(){
     $('#filtro_estado').val('').trigger('change');
 }
 
+init();
+
 // BUCADOR
 var delay = (function(){ var timer = 0; return function(callback, ms){ clearTimeout (timer); timer = setTimeout(callback, ms); };})();
-
-$("#filtro_search").on("keyup", function () { // CAPTURA TEXTO BUSCADOR
-    delay(function(){ lista_tabla_personal(1); }, 600 );
-});
+$("#filtro_search").on("keyup", function () { delay(function(){ lista_tabla_personal(1); }, 600 ); });  // CAPTURA TEXTO BUSCADOR
 
 function lista_tabla_personal(page){
 
@@ -81,9 +78,13 @@ function mostrar_one_personal(idpersonal){
 
         $('#idpersonal').val(data.idpersonal);
 
+        $('#dni_personal').val(data.dni);
+
         $('#nombre_personal').val(data.nombres);
 
         $('#apellido_personal').val(data.apellidos);
+
+        $('#avatar_personal_antiguo').val(data.avatar);
     });
 }
 
@@ -100,9 +101,52 @@ function limpiar_form_personal(){
 
     $('#idpersonal').val("");
 
-    $('#nombre_personal').val("");
+    $('#avatar_personal_antiguo').val("");
 
-    $('#apellido_personal').val("");
+    $("#formulario_personal").trigger("reset");
 }
 
-init();
+//:::: CONSULTAS RUC/DNI SUNAT ::::::
+function cunsulta_sunat(){
+
+    let nro_document = $('#dni_personal').val();
+
+    if (nro_document.length != 8) {
+
+        Swal.fire({
+            title: "Error",
+            text: "DNI Invalido, escriba 8 dígitos.",
+            timer: 2000,
+            icon: "error"
+        });
+
+    }else{
+        //Cunsolta DNI a la sunat
+        $('#cargado_sunat').hide();
+
+        $('#cargando_sunat').show();
+
+        $.get('/consultas/dni/'+nro_document, function(data){
+
+            data = JSON.parse(data);
+
+            $('#cargado_sunat').show();
+
+            $('#cargando_sunat').hide();
+
+            if (data['status'] == false) {
+                Swal.fire({
+                    title: "Error",
+                    text: "No se puede consultar este DNI",
+                    timer: 2000,
+                    icon: "error"
+                });
+            }else{
+                $('#nombre_personal').val(data.cliente['name']);
+                $('#apellido_personal').val(data.cliente['first_name'] + ' '+ data.cliente['last_name']);
+            }
+        });
+    }
+
+    $('.tooltip').removeClass("show").addClass("hidde");
+}

@@ -9,7 +9,7 @@ class PersonalModel extends Model
 {
     protected $table = 'personal';
     protected $primaryKey = 'idpersonal';
-    protected $fillable = ['nombres', 'apellidos', 'estado'];
+    protected $fillable = ['dni','nombres', 'apellidos','avatar', 'estado'];
 
     public function comercializacion(){
         return $this->belongsTo('App\Models\ComercializacionModel', 'idpersonal');

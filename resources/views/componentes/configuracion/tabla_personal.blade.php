@@ -13,7 +13,20 @@
             @if (count($personal) > 0)
                 @foreach ($personal as $count => $persona)
                     <tr>
-                        <td class="align-middle" >{{ $persona->nombres}} {{ $persona->apellidos}}</td>
+                        <td class="align-middle" >
+                            <div class="d-flex align-items-center">
+                                @if ($persona->avatar)
+                                    <img src="{{asset('/docs/' . $persona->avatar)}}" class="avatar rounded-circle" onerror="this.src=''" >
+                                @else
+                                    <img src="{{asset('/img/user-default.svg')}}" class="avatar rounded-circle " >
+                                @endif
+
+                                <div class="mx-3">
+                                    <a href="#" class="text-dark font-weight-600 text-sm">{{ $persona->nombres}} {{ $persona->apellidos}}</a>
+                                    <small class="d-block text-muted text-sm">{{ $persona->dni}}</small>
+                                </div>
+                            </div>
+                        </td>
 
                         <td class="align-middle">
                             @if ($persona->updated_at)

@@ -32,7 +32,6 @@ class ReclamosRequest extends FormRequest
             'descripcion_reclamo'   => 'required|min:4',
 
             'tipo_solucion'         => 'required_if:reclamo_procede,==,on',
-            'select_modal_personal' => 'required_if:reclamo_procede,==,on',
             'causa'                 => 'required_if:reclamo_procede,==,on',
             'accion_tomar'          => 'required_if:reclamo_procede,==,on',
             'fecha_solucion'        => 'required_if:reclamo_procede,==,on',
@@ -51,7 +50,6 @@ class ReclamosRequest extends FormRequest
             'descripcion_reclamo.required'  => 'Asegurese de escribir una descripcion del reclamo.',
 
             'tipo_solucion.required_if'     => 'Asegurese de escribir un tipo de solución.',
-            'select_modal_personal.required_if'=> 'Asegurese de selecionar un personal.',
             'causa.required_if'             => 'Asegurese de escribir una causa.',
             'accion_tomar.required_if'      => 'Asegurese de escribir una acción a tomar.',
             'fecha_solucion.required_if'    => 'Asegurese de selecionar una fecha de solucion.',

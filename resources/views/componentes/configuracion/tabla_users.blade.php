@@ -17,17 +17,18 @@
             @if (count($users) > 0)
                 @foreach ($users as $count => $user)
                     <tr>
-
                         <td class="align-middle">
                             <div class="d-flex align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <a href="#">
-                                        <img src="/argon/assets/img/theme/team-4.jpg" class="avatar">
-                                    </a>
-                                    <div class="mx-3">
-                                        <a href="#" class="text-dark font-weight-600 text-sm">{{ $user->nombres}} {{ $user->apellidos}}</a>
-                                        <small class="d-block text-muted text-sm">{{ $user->dni}}</small>
-                                    </div>
+
+                                @if ($user->ModeloPersonal->avatar)
+                                    <img src="{{asset('/docs/' . $user->ModeloPersonal->avatar)}}" class="avatar rounded-circle" onerror="this.src=''"  >
+                                @else
+                                    <img src="{{asset('/img/user-default.svg')}}" class="avatar rounded-circle " >
+                                @endif
+
+                                <div class="mx-3">
+                                    <a href="#" class="text-dark font-weight-600 text-sm">{{ $user->ModeloPersonal->nombres}} {{ $user->ModeloPersonal->apellidos}}</a>
+                                    <small class="d-block text-muted text-sm">{{ $user->ModeloPersonal->dni}}</small>
                                 </div>
                             </div>
                         </td>
@@ -51,15 +52,15 @@
                         </td>
 
                         <td class="align-middle">
-                            <button onclick="mostrar_one_user( {{$user->idusers}})"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
+                            <button onclick="mostrar_one_user( {{$user->id}})"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                             @if ($user->estado == 0)
-                                <button onclick="desactivar_user( {{$user->idusers}} );"  type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Desactivar">
+                                <button onclick="desactivar_user( {{$user->id}} );"  type="button" class="btn btn-outline-danger px-2 py-2" data-toggle="tooltip" data-original-title="Desactivar">
                                     <i class="far fa-trash-alt"></i>
                                 </button>
                             @else
-                                <button onclick="activar_user( {{$user->idusers}} );"  type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Activar">
+                                <button onclick="activar_user( {{$user->id}} );"  type="button" class="btn btn-outline-success px-2 py-2" data-toggle="tooltip" data-original-title="Activar">
                                     <i class="fas fa-check"></i>
                                 </button>
                             @endif

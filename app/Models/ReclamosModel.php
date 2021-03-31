@@ -33,13 +33,21 @@ class ReclamosModel extends Model
         return $this->hasOne('App\Models\ModulosModel', 'idmodulos', 'idmodulos');
     }
 
-    public function scopeActivos( $query)
-   {
-       return $query->where('estado', '=', '0');
-   }
-   public function scopeInactivos( $query)
-   {
-       return $query->where('estado', '=', '1');
-   }
+
+    // estado pediente
+    public function scopePendientes( $query)
+    {
+        return $query->where('estado', '=', '0');
+    }
+    // estado en proceso
+    public function scopeProcesos( $query)
+    {
+        return $query->where('estado', '=', '1');
+    }
+    // estado terminado
+    public function scopeTerminados( $query)
+    {
+        return $query->where('estado', '=', '2');
+    }
 
 }

@@ -55,11 +55,11 @@
                         @endif
                     </td>
                     <td class="align-middle">
-                        <button onclick="mostrar_one_cliente({{ $cliente->idclientes }})"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
+                        <button onclick="mostrar_one_cliente_interesado({{ $cliente->idclientes }})"  type="button" class="btn btn-outline-warning px-2 py-2" data-toggle="tooltip" data-original-title="Editar">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
 
-                        <button onclick="mostrar_modal({{ $cliente->idclientes }})"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-original-title="Ver detalle">
+                        <button onclick="detalle_cliente_interesado({{ $cliente->idclientes }})"  type="button" class="btn btn-outline-info px-2 py-2" data-toggle="tooltip" data-original-title="Ver detalle">
                             <i class="fas fa-eye"></i>
                         </button>
 

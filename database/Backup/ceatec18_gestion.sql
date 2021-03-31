@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-03-2021 a las 23:45:19
+-- Tiempo de generación: 31-03-2021 a las 16:22:40
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.3.25
 
@@ -58,6 +58,7 @@ INSERT INTO `actividad` (`idactividad`, `nombre`, `estado`, `created_at`, `updat
 
 CREATE TABLE `actualizaciones` (
   `idactualizaciones` int(11) NOT NULL,
+  `personal_idpersonal` int(11) DEFAULT NULL,
   `idcompras` int(11) NOT NULL,
   `tipo` varchar(45) DEFAULT NULL,
   `version` varchar(100) DEFAULT NULL,
@@ -121,11 +122,11 @@ INSERT INTO `clientes` (`idclientes`, `idgiro_negocio`, `idetiquetas`, `tipo_doc
 
 CREATE TABLE `comercializacion` (
   `idcomercializacion` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   `idclientes` int(11) NOT NULL,
   `persona_contacto` varchar(150) DEFAULT NULL,
   `idactividad` int(11) DEFAULT NULL,
   `idmedios` int(11) NOT NULL,
-  `idusers` int(11) NOT NULL,
   `detalla_llamada` text DEFAULT NULL,
   `ideventos` int(11) DEFAULT NULL,
   `fecha_evento` timestamp NULL DEFAULT NULL,
@@ -149,6 +150,7 @@ CREATE TABLE `comercializacion` (
 
 CREATE TABLE `compras` (
   `idcompras` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   `idclientes` int(11) NOT NULL,
   `idcotizaciones` int(11) NOT NULL,
   `fecha_cotizacion` timestamp NULL DEFAULT NULL,
@@ -310,7 +312,7 @@ CREATE TABLE `facturacion` (
 CREATE TABLE `giro_negocio` (
   `idgiro_negocio` int(11) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
-  `estado` char(1) DEFAULT NULL,
+  `estado` char(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -375,6 +377,13 @@ CREATE TABLE `model_has_roles` (
   `model_type` varchar(255) NOT NULL,
   `model_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\Models\\User', '1');
 
 -- --------------------------------------------------------
 
@@ -458,8 +467,10 @@ CREATE TABLE `permissions` (
 
 CREATE TABLE `personal` (
   `idpersonal` int(11) NOT NULL,
+  `dni` varchar(12) DEFAULT NULL,
   `nombres` varchar(120) DEFAULT NULL,
   `apellidos` varchar(120) DEFAULT NULL,
+  `avatar` varchar(500) DEFAULT NULL,
   `estado` char(1) NOT NULL DEFAULT '0' COMMENT '0 =  activo\n1 = inactivo',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -469,14 +480,8 @@ CREATE TABLE `personal` (
 -- Volcado de datos para la tabla `personal`
 --
 
-INSERT INTO `personal` (`idpersonal`, `nombres`, `apellidos`, `estado`, `created_at`, `updated_at`) VALUES
-(1, 'Jony', 'Juarez mendieta', '1', '2021-03-11 18:56:13', '2021-03-15 05:31:37'),
-(2, 'Pedro', 'Pinedo Dominguez', '0', '2021-03-12 02:34:59', '2021-03-12 02:34:59'),
-(3, 'Mariba', 'barriga fria', '0', '2021-03-12 05:27:30', '2021-03-12 05:27:30'),
-(4, 'KAROL HE', 'TAPULLIMA', '0', '2021-03-15 19:39:09', '2021-03-15 19:39:09'),
-(5, 'TADEO PEDRO', NULL, '0', '2021-03-15 22:09:24', '2021-03-15 22:09:24'),
-(6, 'TADEO PEDRO', 'CAPELLAN', '0', '2021-03-15 22:09:35', '2021-03-15 22:09:35'),
-(7, 'TADEO PEDRO', 'TAPULLIMA', '0', '2021-03-15 22:11:46', '2021-03-15 22:11:46');
+INSERT INTO `personal` (`idpersonal`, `dni`, `nombres`, `apellidos`, `avatar`, `estado`, `created_at`, `updated_at`) VALUES
+(1, '75867189', 'CEATEC', 'SOFT', NULL, '1', '2021-03-11 18:56:13', '2021-03-15 05:31:37');
 
 -- --------------------------------------------------------
 
@@ -486,6 +491,7 @@ INSERT INTO `personal` (`idpersonal`, `nombres`, `apellidos`, `estado`, `created
 
 CREATE TABLE `reclamos` (
   `idreclamos` int(11) NOT NULL,
+  `users_id` int(11) NOT NULL,
   `idclientes` int(11) NOT NULL,
   `persona_contacto` varchar(450) DEFAULT NULL,
   `Ruc_nro_contrato` varchar(100) DEFAULT NULL,
@@ -496,14 +502,14 @@ CREATE TABLE `reclamos` (
   `causa` varchar(250) DEFAULT NULL,
   `procede` char(1) DEFAULT NULL,
   `accion_tomar` text DEFAULT NULL,
-  `idpersonal` int(11) NOT NULL,
+  `idpersonal` int(11) DEFAULT NULL,
   `fecha_compromiso` timestamp NULL DEFAULT NULL,
   `fecha_solucion` timestamp NULL DEFAULT NULL,
   `solucion_minutos` int(11) DEFAULT NULL,
   `solucion_dias` double DEFAULT NULL,
   `evidencia` text DEFAULT NULL,
   `emite_accion` varchar(100) DEFAULT NULL,
-  `estado` char(1) DEFAULT '0',
+  `estado` char(1) DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -521,6 +527,14 @@ CREATE TABLE `roles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'administrador', 'web', '2021-03-31 00:56:32', '2021-03-31 00:56:32'),
+(2, 'personal', 'web', '2021-03-31 14:19:55', '2021-03-31 14:19:58');
 
 -- --------------------------------------------------------
 
@@ -540,10 +554,8 @@ CREATE TABLE `roles_has_permissions` (
 --
 
 CREATE TABLE `users` (
-  `idusers` int(11) NOT NULL,
-  `dni` varchar(12) DEFAULT NULL,
-  `nombres` varchar(250) DEFAULT NULL,
-  `apellidos` varchar(250) DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `idpersonal` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `avatar` varchar(100) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
@@ -561,8 +573,8 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`idusers`, `dni`, `nombres`, `apellidos`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `codigo_confirmacion`, `codigo_recuperacion`, `fecha_recuperacion`, `estado`, `created_at`, `updated_at`) VALUES
-(1, '75867189', 'ceatec', 'soft', 'ceatec@gmail.com', NULL, '2021-03-31 14:05:38', '123', '1213', '1213', '1213', '2021-03-24 14:05:38', '0', '2021-03-12 14:05:38', '2021-03-11 14:05:38');
+INSERT INTO `users` (`id`, `idpersonal`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `codigo_confirmacion`, `codigo_recuperacion`, `fecha_recuperacion`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 1, 'info@ceatec.com.pe', NULL, NULL, '$2y$10$MFdsijNVyGTOQwFZFQbOZ.ECbRdEN/f41dYXe5Nk5KB4bsZ1OM.GC', NULL, NULL, NULL, NULL, '0', '2021-03-12 14:05:38', '2021-03-11 14:05:38');
 
 --
 -- Índices para tablas volcadas
@@ -579,7 +591,8 @@ ALTER TABLE `actividad`
 --
 ALTER TABLE `actualizaciones`
   ADD PRIMARY KEY (`idactualizaciones`),
-  ADD KEY `fk_actualizaciones_compras1_idx` (`idcompras`);
+  ADD KEY `fk_actualizaciones_compras1_idx` (`idcompras`),
+  ADD KEY `fk_actualizaciones_personal1_idx` (`personal_idpersonal`);
 
 --
 -- Indices de la tabla `clientes`
@@ -595,11 +608,11 @@ ALTER TABLE `clientes`
 ALTER TABLE `comercializacion`
   ADD PRIMARY KEY (`idcomercializacion`),
   ADD KEY `fk_comercializacion_clientes2_idx` (`idclientes`),
-  ADD KEY `fk_comercializacion_users1_idx` (`idusers`),
   ADD KEY `fk_comercializacion_medios1_idx` (`idmedios`),
   ADD KEY `fk_comercializacion_eventos1_idx` (`ideventos`),
   ADD KEY `fk_comercializacion_personal1_idx` (`idpersonal`),
-  ADD KEY `fk_comercializacion_actividad1_idx` (`idactividad`);
+  ADD KEY `fk_comercializacion_actividad1_idx` (`idactividad`),
+  ADD KEY `fk_comercializacion_users1_idx` (`users_id`);
 
 --
 -- Indices de la tabla `compras`
@@ -607,7 +620,8 @@ ALTER TABLE `comercializacion`
 ALTER TABLE `compras`
   ADD PRIMARY KEY (`idcompras`),
   ADD KEY `fk_historial_cliente_clientes1_idx` (`idclientes`),
-  ADD KEY `fk_compras_cotizaciones1_idx` (`idcotizaciones`);
+  ADD KEY `fk_compras_cotizaciones1_idx` (`idcotizaciones`),
+  ADD KEY `fk_compras_users1_idx` (`users_id`);
 
 --
 -- Indices de la tabla `compra_modulos`
@@ -716,7 +730,8 @@ ALTER TABLE `reclamos`
   ADD KEY `fk_reclamos_clientes1_idx` (`idclientes`),
   ADD KEY `fk_reclamos_medios1_idx` (`idmedios`),
   ADD KEY `fk_reclamos_modulos1_idx` (`idmodulos`),
-  ADD KEY `fk_reclamos_personal1_idx` (`idpersonal`);
+  ADD KEY `fk_reclamos_personal1_idx` (`idpersonal`),
+  ADD KEY `fk_reclamos_users1_idx` (`users_id`);
 
 --
 -- Indices de la tabla `roles`
@@ -736,7 +751,9 @@ ALTER TABLE `roles_has_permissions`
 -- Indices de la tabla `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`idusers`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD KEY `fk_users_personal1_idx` (`idpersonal`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -842,7 +859,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idpersonal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
@@ -854,13 +871,13 @@ ALTER TABLE `reclamos`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `idusers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -870,7 +887,8 @@ ALTER TABLE `users`
 -- Filtros para la tabla `actualizaciones`
 --
 ALTER TABLE `actualizaciones`
-  ADD CONSTRAINT `fk_actualizaciones_compras1` FOREIGN KEY (`idcompras`) REFERENCES `compras` (`idcompras`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_actualizaciones_compras1` FOREIGN KEY (`idcompras`) REFERENCES `compras` (`idcompras`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_actualizaciones_personal1` FOREIGN KEY (`personal_idpersonal`) REFERENCES `personal` (`idpersonal`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `clientes`
@@ -888,13 +906,14 @@ ALTER TABLE `comercializacion`
   ADD CONSTRAINT `fk_comercializacion_eventos1` FOREIGN KEY (`ideventos`) REFERENCES `eventos` (`ideventos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_comercializacion_medios1` FOREIGN KEY (`idmedios`) REFERENCES `medios` (`idmedios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_comercializacion_personal1` FOREIGN KEY (`idpersonal`) REFERENCES `personal` (`idpersonal`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comercializacion_users1` FOREIGN KEY (`idusers`) REFERENCES `users` (`idusers`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_comercializacion_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `compras`
 --
 ALTER TABLE `compras`
   ADD CONSTRAINT `fk_compras_cotizaciones1` FOREIGN KEY (`idcotizaciones`) REFERENCES `cotizaciones` (`idcotizaciones`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_compras_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_historial_cliente_clientes1` FOREIGN KEY (`idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
@@ -943,7 +962,8 @@ ALTER TABLE `reclamos`
   ADD CONSTRAINT `fk_reclamos_clientes1` FOREIGN KEY (`idclientes`) REFERENCES `clientes` (`idclientes`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reclamos_medios1` FOREIGN KEY (`idmedios`) REFERENCES `medios` (`idmedios`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reclamos_modulos1` FOREIGN KEY (`idmodulos`) REFERENCES `modulos` (`idmodulos`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_reclamos_personal1` FOREIGN KEY (`idpersonal`) REFERENCES `personal` (`idpersonal`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_reclamos_personal1` FOREIGN KEY (`idpersonal`) REFERENCES `personal` (`idpersonal`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_reclamos_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `roles_has_permissions`
@@ -951,6 +971,12 @@ ALTER TABLE `reclamos`
 ALTER TABLE `roles_has_permissions`
   ADD CONSTRAINT `fk_roles_has_permissions_permissions1` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_roles_has_permissions_roles1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `fk_users_personal1` FOREIGN KEY (`idpersonal`) REFERENCES `personal` (`idpersonal`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
